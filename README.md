@@ -16,7 +16,7 @@ TIOJ INFOR Online Judge
 $ git clone https://github.com/joshua5201/tioj.git
 $ cd tioj
 $ npm install #install dependencies
-$ node app.js #start server, you can access "http://localhost:3000/" in your browser
+$ node app.js #start server, you can access "http://localhost:5000/" in your browser
 ```
 
 ##References
