@@ -1,9 +1,6 @@
-tioj
+TIOJ INFOR Online Judge
 ====
-
-TIOJ Infor Online Judge
-====
-#Stuffs we are planning to use
+##Stuffs we are planning to use
 
 1. Node.js
 
@@ -13,7 +10,16 @@ TIOJ Infor Online Judge
 
 4. Markdown (for README files and Problem Descriptions)
 
-#References
+##How To Test
+
+```bash
+$ git clone https://github.com/joshua5201/tioj.git
+$ cd tioj
+$ npm install #install dependencies
+$ node app.js #start server, you can access "http://localhost:3000/" in your browser
+```
+
+##References
   [ejs](http://robdodson.me/blog/2012/05/31/how-to-use-ejs-in-express/)
 
   [express](http://expressjs.com/)
@@ -21,6 +27,10 @@ TIOJ Infor Online Judge
   [node.js](http://nodejs.org/)
 
   [mongodb](http://www.mongodb.org/)
+  
+  [Mongoose](http://mongoosejs.com/)
+  
+  [Develop a RESTful API Using Node.js With Express and Mongoose](http://pixelhandler.com/blog/2012/02/09/develop-a-restful-api-using-node-js-with-express-and-mongoose/)
 
   [Markdown Basics](https://help.github.com/articles/markdown-basics)
 
