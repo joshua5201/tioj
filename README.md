@@ -10,6 +10,15 @@ TIOJ INFOR Online Judge
 
 4. Markdown (for README files and Problem Descriptions)
 
+##How To Test
+
+```bash
+$ git clone https://github.com/joshua5201/tioj.git
+$ cd tioj
+$ npm install #install dependencies
+$ node app.js #start server, you can access "http://localhost:3000/" in your browser
+```
+
 ##References
   [ejs](http://robdodson.me/blog/2012/05/31/how-to-use-ejs-in-express/)
 
