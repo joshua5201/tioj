@@ -20,6 +20,8 @@ TIOJ INFOR Online Judge
   [mongodb](http://www.mongodb.org/)
   
   [Mongoose](http://mongoosejs.com/)
+  
+  [Develop a RESTful API Using Node.js With Express and Mongoose](http://pixelhandler.com/blog/2012/02/09/develop-a-restful-api-using-node-js-with-express-and-mongoose/)
 
   [Markdown Basics](https://help.github.com/articles/markdown-basics)
 
