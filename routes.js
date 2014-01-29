@@ -4,4 +4,5 @@ module.exports = function(app) {
     res.render(index, {title: 'Home'});
   });
   require('./controllers/submissions.js')(app);
+  require('./controllers/problems.js')(app);
 }
