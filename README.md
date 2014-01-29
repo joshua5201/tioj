@@ -3,7 +3,7 @@ tioj
 
 TIOJ Infor Online Judge
 ====
-references<br>
-  http://blog.xebia.com/2011/06/24/getting-started-with-node-js-npm-coffeescript-express-jade-and-redis/<br>
-  http://expressjs.com/<br>
-  http://nodejs.org/<br>
+references
+  [ejs](http://robdodson.me/blog/2012/05/31/how-to-use-ejs-in-express/)
+  [express](http://expressjs.com/)
+  [node.js](http://nodejs.org/)
