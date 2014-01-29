@@ -1,4 +1,4 @@
-TIOJ Infor Online Judge
+TIOJ INFOR Online Judge
 ====
 ##Stuffs we are planning to use
 
@@ -18,6 +18,8 @@ TIOJ Infor Online Judge
   [node.js](http://nodejs.org/)
 
   [mongodb](http://www.mongodb.org/)
+  
+  [Mongoose](http://mongoosejs.com/)
 
   [Markdown Basics](https://help.github.com/articles/markdown-basics)
 
