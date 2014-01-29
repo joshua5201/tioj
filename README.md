@@ -1,9 +1,6 @@
-tioj
-====
-
 TIOJ Infor Online Judge
 ====
-#Stuffs we are planning to use
+##Stuffs we are planning to use
 
 1. Node.js
 
@@ -13,7 +10,7 @@ TIOJ Infor Online Judge
 
 4. Markdown (for README files and Problem Descriptions)
 
-#References
+##References
   [ejs](http://robdodson.me/blog/2012/05/31/how-to-use-ejs-in-express/)
 
   [express](http://expressjs.com/)
