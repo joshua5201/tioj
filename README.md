@@ -38,3 +38,4 @@ $ node app.js #start server, you can access "http://localhost:5000/" in your bro
 
   [Guide for Node.JS, Express, Jade, and MongoDB](http://cwbuecheler.com/web/tutorials/2013/node-express-mongo/)
 
+  [Passport User Authentication](http://passportjs.org/)
