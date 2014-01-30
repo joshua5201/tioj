@@ -6,9 +6,11 @@ TIOJ INFOR Online Judge
 
 2. Express Web Framework
 
-3. mongodb
+3. mongodb (mongoose for ORM)
 
 4. Markdown (for README files and Problem Descriptions)
+
+5. Passport.js user authentication
 
 ##How To Test
 
