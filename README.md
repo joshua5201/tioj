@@ -41,3 +41,26 @@ $ node app.js #start server, you can access "http://localhost:5000/" in your bro
   [Guide for Node.JS, Express, Jade, and MongoDB](http://cwbuecheler.com/web/tutorials/2013/node-express-mongo/)
 
   [Passport User Authentication](http://passportjs.org/)
+  
+##For Css
+Primary Color: 	
+003399
+	
+333399
+	
+003366
+	
+3366CC
+	
+6699CC
+
+Complementary Color: 	
+FF9900
+	
+CC9933
+
+996600
+
+FFCC33
+
+FFCC66 
