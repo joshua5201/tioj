@@ -4,20 +4,20 @@
 <title>TIOJ INFOR Online Judge - <%=title%></title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link rel="stylesheet" href="stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
-  <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print"> 
+  <link rel="stylesheet" href="stylesheets/blueprint/print.css" type="text/css" media="print"> 
   <!--[if lt IE 8]>
-    <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="stylesheets/blueprint/ie.css" type="text/css" media="screen, projection">
   <![endif]-->
 <meta charset="utf-8" />
 </head>
 <body>
 <div class="container">
-  	<div class="span-24">
+  	<div class="span-24 last">
   		<img src ="stylesheets/img/banner.jpg">
   	</div>
 	
-  	<div class="span-4">
-  		<div id=floatMenu>
+  	<div class="span-4" >
+		<div id=floatMenu>
         	<ul>
         	    <li><a href="/">Home</a></li>
         	    <li><a href="/problems">Problems</a></li>
@@ -27,16 +27,12 @@
         	    <li><a href="/user/login">Login</a></li>
         	</ul>
     		</div>
-  	</div>
+	</div>
   	<div class="span-16">
   		<%- body %>
   	</div>
   	<div class="span-4 last">
   		The last column
-  	</div>
-	
-  	<div class="span-24">
-  		The footer
   	</div>
   </div>
     

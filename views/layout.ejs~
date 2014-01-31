@@ -17,7 +17,7 @@
   	</div>
 	
   	<div class="span-4">
-  		<div id=floatMenu>
+		<div id=floatMenu>
         	<ul>
         	    <li><a href="/">Home</a></li>
         	    <li><a href="/problems">Problems</a></li>
@@ -27,18 +27,18 @@
         	    <li><a href="/user/login">Login</a></li>
         	</ul>
     		</div>
-  	</div>
+	</div>
   	<div class="span-16">
-  		The center column
+  		<%- body %>
   	</div>
   	<div class="span-4 last">
   		The last column
   	</div>
 	
   	<div class="span-24">
-  		The footer
+	<thead></thead>	
   	</div>
   </div>
-    <%- body %>
+    
 </body>
 </html>
