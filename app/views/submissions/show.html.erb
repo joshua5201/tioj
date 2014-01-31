@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @submission.code %>
+</p>
+
+<p>
+  <strong>Compiler:</strong>
+  <%= @submission.compiler %>
+</p>
+
+<p>
+  <strong>Result:</strong>
+  <%= @submission.result %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @submission.score %>
+</p>
+
+<%= link_to 'Edit', edit_submission_path(@submission) %> |
+<%= link_to 'Back', submissions_path %>

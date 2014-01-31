@@ -1,0 +1,31 @@
+<h1>Listing limits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Memory</th>
+      <th>Output</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @limits.each do |limit| %>
+      <tr>
+        <td><%= limit.time %></td>
+        <td><%= limit.memory %></td>
+        <td><%= limit.output %></td>
+        <td><%= link_to 'Show', limit %></td>
+        <td><%= link_to 'Edit', edit_limit_path(limit) %></td>
+        <td><%= link_to 'Destroy', limit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Limit', new_limit_path %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time: 1
+  memory: 1
+  output: 1
+
+two:
+  time: 1
+  memory: 1
+  output: 1

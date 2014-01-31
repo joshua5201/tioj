@@ -1,0 +1,29 @@
+<h1>Listing testdata</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>Answer</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @testdata.each do |testdatum| %>
+      <tr>
+        <td><%= testdatum.input %></td>
+        <td><%= testdatum.answer %></td>
+        <td><%= link_to 'Show', testdatum %></td>
+        <td><%= link_to 'Edit', edit_testdatum_path(testdatum) %></td>
+        <td><%= link_to 'Destroy', testdatum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Testdatum', new_testdatum_path %>
