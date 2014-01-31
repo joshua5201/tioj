@@ -9,6 +9,7 @@
     "express": "3.4.8",
     "ejs": "*",
     "ejs-locals": "*",
-    "markdown": "*"
+    "markdown": "*",
+    "mongoose": "*"
   }
 }
