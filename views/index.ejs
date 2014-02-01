@@ -1,67 +1,72 @@
 <!DOCTYPE html>
 <html style="height: 100%;">
 <head>
+<meta charset="utf-8" />
 <title>TIOJ INFOR Online Judge - <%=title%></title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link rel="stylesheet" href="stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
-  <link rel="stylesheet" href="stylesheets/blueprint/print.css" type="text/css" media="print"> 
-<link  rel="stylesheet" href="stylesheets/blueprint/login-box.css" type="text/css" media="screen"> 
- <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/blueprint/ie.css" type="text/css" media="screen, projection">
-  <![endif]-->
-<meta charset="utf-8" />
-<style type="text/css">
-</style>
+<link rel="stylesheet" href="stylesheets/bootstrap/css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="stylesheets/css/flat-ui.css" type="text/css">
+<link rel="stylesheet" href="stylesheets/css/demo.css" type="text/css">
+<link rel="shortcut icon" href="stylesheets/images/favicon.ico">
+ <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 <div class="container" >
-  	<div class="span-24 last">
-		<img src ="stylesheets/img/banner.jpg"></img>
-	</div>
-	<div class = "span-24">
-	<div class ="span-12  append-8">
-		<iframe width="420" height="315" src="//www.youtube.com/embed/_6-KspZegsE" frameborder="0" allowfullscreen></iframe>
-	</div>
-	<div class ="span-4 last" >
-		<div style="background: url(stylesheet/img/login-box-backg.png) no-repeat left top;"">
-		<div id="login-box">
-		<H2>Login</H2>
-		Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-		<br />
-		<br />
-		<div id="login-box-name" style="margin-top:20px;">Username or Email:</div><div id="login-box-field" style="margin-top:20px;"><input name="q" class="form-login" title="Username" value="" size="30" maxlength="2048" /></div>
-		<div id="login-box-name">Password:</div><div id="login-box-field"><input name="q" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" /></div>
-		<br />
-		<span class="login-box-options"><input type="checkbox" name="1" value="1"> Remember Me <a href="#" style="margin-left:30px;">Forgot password?</a></span>
-		<br />
-		<br />
-		<a href="#"><img src="stylesheets/img/login-btn.png" width="103" height="42" style="margin-left:90px;" /></a>
-		</div>
+	<div class ="row">
+		<div class="col-xs-12">
+			<img src="stylesheets/images/banner.jpg" alt="banner" class="img-rounded img-responsive" >
 		</div>
 	</div>
-	<div class = "span-24">
-		<div class = "span-6">
-			<div class = "mainPageButton"><a href="/problems">
-				Problems
-			</a></div>
-		</div>
-		<div class = "span-6">
-			<div class = "mainPageButton"><a href="/submissions">
-				Submissions
-			</a></div>
-		</div>
-		<div class = "span-6">
-			<div class = "mainPageButton"><a href="/ranklist">
-				Ranklist
-			</a></div>
-		</div>
-		<div class = "span-6 last">
-			<div class = "mainPageButton"><a href="/user/register">
-				Register
-			</a></div>
+	<br>
+	<div class="row">
+		<div class="col-xs-8 demo-video">
+			<!--[if !IE]> -->
+			<video class="video-js" controls preload="auto" width="620" height="349" poster="images/video/poster.jpg" data-setup="{}">
+			<source src="http://iurevych.github.com/Flat-UI-videos/big_buck_bunny.mp4" type="video/mp4">
+			<source src="http://iurevych.github.com/Flat-UI-videos/big_buck_bunny.webm" type="video/webm">
+			</video>
+			<!-- <![endif]-->
+
+			<!--[if IE]>
+			<video class="video-js" controls preload="auto" width="620" height="256" poster="http://video-js.zencoder.com/oceans-clip.jpg" data-setup="{}">
+			<source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4'/>
+			<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm'/>
+			</video>
+			<![endif]-->
+		</div> <!-- /video -->
+		<div class="col-xs-3 col-xs-offset-1">
+			<h3 class="demo-panel-title">Login</h3>
+			<h6>Username or Email:</h6>
+			<div class="form-group">
+				<input type="text" value="" placeholder="enter your username here" class="form-control" />
+			</div> 
+			<h6>Password:</h5>
+			<div class="form-group">
+				<input type="password" value="" placeholder="and password here" class="form-control" />
+			</div>
+			<a href="#fakelink" class="btn btn-block btn-lg btn-default">Login</a>
 		</div>
 	</div>
-	
+	<br>
+	<br>
+	<div class = "row">
+		 <div class="col-xs-3">
+			<a href="/problems" class="btn btn-block btn-lg btn-default">Problems</a>
+		</div>
+		<div class="col-xs-3">
+			<a href="/submissions" class="btn btn-block btn-lg btn-default">Submissions</a>
+		</div>
+		<div class="col-xs-3">
+			<a href="/ranklist" class="btn btn-block btn-lg btn-default">Ranklist</a>
+		</div>
+		<div class="col-xs-3">
+			<a href="/user/register" class="btn btn-block btn-lg btn-default">Register</a>
+		</div>
+	</div>
 </div>
     
 </body>
