@@ -5,46 +5,12 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link rel="stylesheet" href="stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="stylesheets/blueprint/print.css" type="text/css" media="print"> 
-  <!--[if lt IE 8]>
+<link  rel="stylesheet" href="stylesheets/blueprint/login-box.css" type="text/css" media="screen"> 
+ <!--[if lt IE 8]>
     <link rel="stylesheet" href="stylesheets/blueprint/ie.css" type="text/css" media="screen, projection">
   <![endif]-->
 <meta charset="utf-8" />
 <style type="text/css">
-
-.mainPageButton a {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #dbdbdb) );
-	background:-moz-linear-gradient( center top, #ffffff 5%, #dbdbdb 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dbdbdb');
-	background-color:#ffffff;
-	-webkit-border-top-left-radius:0px;
-	-moz-border-radius-topleft:0px;
-	border-top-left-radius:0px;
-	-webkit-border-top-right-radius:0px;
-	-moz-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	-webkit-border-bottom-right-radius:0px;
-	-moz-border-radius-bottomright:0px;
-	border-bottom-right-radius:0px;
-	-webkit-border-bottom-left-radius:0px;
-	-moz-border-radius-bottomleft:0px;
-	border-bottom-left-radius:0px;
-	text-indent:0px;
-	border:1px solid #c7c7c7;
-	border-top-style:solid;
-	border-top-color:#036;
-	border-top-width:medium;	
-	display:inline-block;
-	color:#000000;
-	font-family:Arial;
-	font-size:18px;
-	font-weight:normal;
-	font-style:normal;
-	height:100px;
-	line-height:100px;
-	width:200px;
-	text-decoration:none;
-	text-align:center;
-}
 </style>
 </head>
 <body>
@@ -56,9 +22,22 @@
 	<div class ="span-12  append-8">
 		<iframe width="420" height="315" src="//www.youtube.com/embed/_6-KspZegsE" frameborder="0" allowfullscreen></iframe>
 	</div>
-	<div class ="span-4 last">
-		username or email:<br>
-		password:<br>
+	<div class ="span-4 last" >
+		<div style="background: url(stylesheet/img/login-box-backg.png) no-repeat left top;"">
+		<div id="login-box">
+		<H2>Login</H2>
+		Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+		<br />
+		<br />
+		<div id="login-box-name" style="margin-top:20px;">Username or Email:</div><div id="login-box-field" style="margin-top:20px;"><input name="q" class="form-login" title="Username" value="" size="30" maxlength="2048" /></div>
+		<div id="login-box-name">Password:</div><div id="login-box-field"><input name="q" type="password" class="form-login" title="Password" value="" size="30" maxlength="2048" /></div>
+		<br />
+		<span class="login-box-options"><input type="checkbox" name="1" value="1"> Remember Me <a href="#" style="margin-left:30px;">Forgot password?</a></span>
+		<br />
+		<br />
+		<a href="#"><img src="stylesheets/img/login-btn.png" width="103" height="42" style="margin-left:90px;" /></a>
+		</div>
+		</div>
 	</div>
 	<div class = "span-24">
 		<div class = "span-6">
