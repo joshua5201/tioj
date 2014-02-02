@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="stylesheets/flatcss/bootstrap/css/bootstrap.css" type="text/css">
 <link rel="stylesheet" href="stylesheets/flatcss/css/flat-ui.css" type="text/css">
 <link rel="stylesheet" href="stylesheets/flatcss/css/demo.css" type="text/css">
+<link rel="stylesheet"  href="stylesheets/flatcss/css/menu_source/styles.css" type="text/css">
 <link rel="shortcut icon" href="stylesheets/flatcss/images/favicon.ico">
 
 
@@ -40,9 +41,11 @@
                 </ul>
             </div>
         </div>
-
+	<div class = "col-xs-9">
+		<%= yield %>
+	</div>
     </div>
-    <%= yield %>
+    
 </div>
 </body>
 </html>
