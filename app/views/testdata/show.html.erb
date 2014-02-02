@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Input:</strong>
+  <%= @testdatum.input %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @testdatum.answer %>
+</p>
+
+<%= link_to 'Edit', edit_testdatum_path(@testdatum) %> |
+<%= link_to 'Back', testdata_path %>

@@ -1,0 +1,37 @@
+<h1>Listing problems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Top Coder</th>
+      <th>AC Ratio(user)</th>
+      <th>AC Ratio(submission)</th>
+      <th>Created At</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @problems.each do |problem| %>
+        <tr>
+            <td><%= problem.id %></td>
+        <td><%= problem.name %></td>
+        <td>top rank</td>
+        <td>AC Ratio(user)</td>
+        <td>AC Ratio(submission)</td>
+        <td><%= problem.created_at %></td>
+        <td><%= link_to 'Show', problem %></td>
+        <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
+        <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Problem', new_problem_path %>
