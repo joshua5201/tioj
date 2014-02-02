@@ -15,17 +15,18 @@ class ProblemsController < ApplicationController
   # GET /problems/new
   def new
     @problem = Problem.new
+    @limit = @problem.create_limit( :time => 1000, :memory => 65536, :output => 65536)
   end
 
   # GET /problems/1/edit
   def edit
+    @limit = @problem.limit
   end
 
   # POST /problems
   # POST /problems.json
   def create
     @problem = Problem.new(problem_params)
-
     respond_to do |format|
       if @problem.save
         format.html { redirect_to @problem, notice: 'Problem was successfully created.' }
@@ -69,6 +70,6 @@ class ProblemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def problem_params
-      params.require(:problem).permit(:name, :description, :source)
+      params.require(:problem).permit(:id, :name, :description, :source, :limit, limit_attributes: [:id, :time, :memory, :output, :problem_id])
     end
 end
