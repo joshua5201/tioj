@@ -15,12 +15,12 @@ class ProblemsController < ApplicationController
   # GET /problems/new
   def new
     @problem = Problem.new
-    @limit = @problem.create_limit( :time => 1000, :memory => 65536, :output => 65536)
+#    @limit = @problem.create_limit( :time => 1000, :memory => 65536, :output => 65536)
   end
 
   # GET /problems/1/edit
   def edit
-    @limit = @problem.limit
+#    @limit = @problem.limit
   end
 
   # POST /problems
