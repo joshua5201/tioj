@@ -10,12 +10,14 @@ class ProblemsController < ApplicationController
   # GET /problems/1
   # GET /problems/1.json
   def show
+    @problem = Problem.find(params[:id])
+    @limit = @problem.limit
   end
 
   # GET /problems/new
   def new
     @problem = Problem.new
-#    @limit = @problem.create_limit( :time => 1000, :memory => 65536, :output => 65536)
+    @limit = @problem.build_limit
   end
 
   # GET /problems/1/edit
@@ -55,6 +57,7 @@ class ProblemsController < ApplicationController
   # DELETE /problems/1
   # DELETE /problems/1.json
   def destroy
+    @problem.limit.destroy
     @problem.destroy
     respond_to do |format|
       format.html { redirect_to problems_url }

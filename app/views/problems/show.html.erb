@@ -15,5 +15,20 @@
   <%= @problem.source %>
 </p>
 
+<p>
+  <strong>Time Limit:</strong>
+  <%= @limit.time %>
+</p>
+
+<p>
+  <strong>Memory Limit:</strong>
+  <%= @limit.memory %>
+</p>
+
+<p>
+  <strong>Time Limit:</strong>
+  <%= @limit.output %>
+</p>
+
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>
