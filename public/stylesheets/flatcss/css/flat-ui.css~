@@ -485,7 +485,7 @@ fieldset[disabled] .btn {
 }
 .btn-default {
   color: #ffffff;
-  background-color: #0047AB;
+  background-color: #003480;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -1052,25 +1052,25 @@ label {
   line-height: 2.4;
 }
 .form-control:-moz-placeholder {
-  color: #b2bcc5;
+  color: #0047AB;
   opacity: 1;
 }
 .form-control::-moz-placeholder {
-  color: #b2bcc5;
+  color: #0047AB;
   opacity: 1;
 }
 .form-control:-ms-input-placeholder {
-  color: #b2bcc5;
+  color: #0047AB;
 }
 .form-control::-webkit-input-placeholder {
-  color: #b2bcc5;
+  color: #0047AB;
 }
 .form-control.placeholder {
-  color: #b2bcc5;
+  color: #0047AB;
 }
 .form-control {
   border: 2px solid #bdc3c7;
-  color: #34495e;
+  color: #0047AB;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.467;
@@ -1085,7 +1085,7 @@ label {
 }
 .form-group.focus .form-control,
 .form-control:focus {
-  border-color: #1abc9c;
+  border-color: #0047AB;
   outline: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
