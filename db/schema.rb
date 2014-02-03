@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140201174405) do
+ActiveRecord::Schema.define(version: 20140203101934) do
 
   create_table "limits", force: true do |t|
-    t.integer  "time"
-    t.integer  "memory"
-    t.integer  "output"
+    t.integer  "time",       default: 1000
+    t.integer  "memory",     default: 65536
+    t.integer  "output",     default: 65536
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "problem_id"
@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 20140201174405) do
     t.text     "source"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "input"
+    t.text     "output"
+    t.text     "example_input"
+    t.text     "example_output"
+    t.text     "hint"
   end
 
   create_table "submissions", force: true do |t|
