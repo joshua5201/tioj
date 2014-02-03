@@ -1,40 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<h3>
-  <%= @problem.id%>:<%= @problem.name %>
-</h3>
+<p>
+  <strong>Name:</strong>
+  <%= @problem.name %>
+</p>
 
 <p>
-  <h5>Description</h5>
+  <strong>Description:</strong>
   <%= @problem.description %>
 </p>
 
 <p>
-  <h5>Input</h5>
+  <strong>Input:</strong>
   <%= @problem.input %>
 </p>
 <p>
-  <h5>Output</h5>
+  <strong>Output:</strong>
   <%= @problem.output %>
 </p>
 <p>
-  <h5>Sample Input</h5>
+  <strong>Example Input:</strong>
   <%= @problem.example_input %>
 </p>
 <p>
-  <h5>Sample Output</h5>
+  <strong>Example Output:</strong>
   <%= @problem.example_output %>
 </p>
 <p>
-  <h5>Hint</h5>
+  <strong>Hint:</strong>
   <%= @problem.hint %>
 </p>
 <p>
-  <dfn>Source:
-  <strong><%= @problem.source %></strong></dfn>
+  <strong>Source:</strong>
+  <%= @problem.source %>
 </p>
 
 
+<p>
+  <strong>Time Limit:</strong>
+  <%= @limit.output %>
+</p>
 
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>
