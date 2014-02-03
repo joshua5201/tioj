@@ -1,45 +1,42 @@
-<p id="notice"><%= notice %></p>
-
+<h3>
+  <%= @problem.id%>:<%= @problem.name %>
+</h3>
+<dfn>
+Time Limit:<%= @limit.time%>ms<br/>
+Memory Limit:<%= @limit.memory%>KB<br/>
+Output Limit:<%= @limit.output%>KB<br/>
+</dfn>
 <p>
-  <strong>Name:</strong>
-  <%= @problem.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
+  <h5>Description</h5>
   <%= @problem.description %>
 </p>
-
+<p id="notice"><%= notice %></p>
 <p>
-  <strong>Input:</strong>
+  <h5>Input</h5>
   <%= @problem.input %>
 </p>
 <p>
-  <strong>Output:</strong>
+  <h5>Output</h5>
   <%= @problem.output %>
 </p>
 <p>
-  <strong>Example Input:</strong>
+  <h5>Sample Input</h5>
   <%= @problem.example_input %>
 </p>
 <p>
-  <strong>Example Output:</strong>
+  <h5>Sample Output</h5>
   <%= @problem.example_output %>
 </p>
 <p>
-  <strong>Hint:</strong>
+  <h5>Hint</h5>
   <%= @problem.hint %>
 </p>
 <p>
-  <strong>Source:</strong>
-  <%= @problem.source %>
+  <dfn>Source:
+  <strong><%= @problem.source %></strong></dfn>
 </p>
 
 
-<p>
-  <strong>Time Limit:</strong>
-  <%= @limit.output %>
-</p>
 
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>

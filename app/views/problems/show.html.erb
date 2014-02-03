@@ -1,14 +1,15 @@
-<p id="notice"><%= notice %></p>
-
 <h3>
   <%= @problem.id%>:<%= @problem.name %>
 </h3>
-
+<dfn>
+Time Limit:<%= @limit.time%>ms<br/>
+Memory Limit:<%= @limit.memory%>KB<br/>
+Output Limit:<%= @limit.output%>KB<br/>
+</dfn>
 <p>
   <h5>Description</h5>
   <%= @problem.description %>
 </p>
-
 <p>
   <h5>Input</h5>
   <%= @problem.input %>
