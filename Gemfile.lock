@@ -81,6 +81,7 @@ GEM
     rake (10.1.1)
     rdoc (4.1.1)
       json (~> 1.4)
+    redcarpet (3.0.0)
     ref (1.0.5)
     sass (3.2.14)
     sass-rails (4.0.1)
@@ -128,6 +129,7 @@ DEPENDENCIES
   less-rails
   less-rails-bootstrap
   rails (= 4.0.2)
+  redcarpet
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3

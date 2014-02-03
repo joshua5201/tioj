@@ -7,32 +7,32 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @problem.description %>
+  <%= markdown(@problem.description) %>
 </p>
 
 <p>
   <strong>Input:</strong>
-  <%= @problem.input %>
+  <%= markdown(@problem.input) %>
 </p>
 <p>
   <strong>Output:</strong>
-  <%= @problem.output %>
+  <%= markdown(@problem.output) %>
 </p>
 <p>
   <strong>Example Input:</strong>
-  <%= @problem.example_input %>
+  <%= markdown(@problem.example_input) %>
 </p>
 <p>
   <strong>Example Output:</strong>
-  <%= @problem.example_output %>
+  <%= markdown(@problem.example_output) %>
 </p>
 <p>
   <strong>Hint:</strong>
-  <%= @problem.hint %>
+  <%= markdown(@problem.hint) %>
 </p>
 <p>
   <strong>Source:</strong>
-  <%= @problem.source %>
+  <%= markdown(@problem.source) %>
 </p>
 
 <p>

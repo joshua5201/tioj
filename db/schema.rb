@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203101934) do
+ActiveRecord::Schema.define(version: 20140203111940) do
 
   create_table "limits", force: true do |t|
     t.integer  "time",       default: 1000
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140203101934) do
     t.text     "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "problem_id"
   end
 
 end

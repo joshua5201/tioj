@@ -10,7 +10,6 @@ class ProblemsController < ApplicationController
   # GET /problems/1
   # GET /problems/1.json
   def show
-    @problem = Problem.find(params[:id])
     @limit = @problem.limit
   end
 
