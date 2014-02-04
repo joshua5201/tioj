@@ -84,12 +84,20 @@ class ProblemsController < ApplicationController
         :source, 
         :limit, 
         limit_attributes: 
-          [
+        [
             :id, 
             :time, 
             :memory, 
             :output, 
             :problem_id
+        ],
+        testdata_attributes:
+        [
+            :id,
+            :input,
+            :answer,
+            :problem_id,
+            :_destroy
         ]
       )
     end
