@@ -1,0 +1,42 @@
+<h3>
+  <%= @problem.id%>:<%= @problem.name %>
+</h3>
+<dfn>
+Time Limit:<%= @limit.time%>ms<br/>
+Memory Limit:<%= @limit.memory%>KB<br/>
+Output Limit:<%= @limit.output%>KB<br/>
+</dfn>
+<p>
+  <h5>Description</h5>
+  <%= @problem.description %>
+</p>
+<p id="notice"><%= notice %></p>
+<p>
+  <h5>Input</h5>
+  <%= @problem.input %>
+</p>
+<p>
+  <h5>Output</h5>
+  <%= @problem.output %>
+</p>
+<p>
+  <h5>Sample Input</h5>
+  <%= @problem.example_input %>
+</p>
+<p>
+  <h5>Sample Output</h5>
+  <%= @problem.example_output %>
+</p>
+<p>
+  <h5>Hint</h5>
+  <%= @problem.hint %>
+</p>
+<p>
+  <dfn>Source:
+  <strong><%= @problem.source %></strong></dfn>
+</p>
+
+
+
+<%= link_to 'Edit', edit_problem_path(@problem) %> |
+<%= link_to 'Back', problems_path %>

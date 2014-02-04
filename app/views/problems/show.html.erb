@@ -1,54 +1,56 @@
-<p id="notice"><%= notice %></p>
-
+<h3>
+  <%= @problem.id%>:<%= @problem.name %>
+</h3>
+<dfn>
+Time Limit:<%= @limit.time%>ms<br/>
+Memory Limit:<%= @limit.memory%>KB<br/>
+Output Limit:<%= @limit.output%>KB<br/>
+</dfn>
 <p>
-  <strong>Name:</strong>
-  <%= @problem.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= markdown(@problem.description) %>
-</p>
-
-<p>
-  <strong>Input:</strong>
-  <%= markdown(@problem.input) %>
+  <h5>Description</h5>
+  <%= @problem.description %>
 </p>
 <p>
-  <strong>Output:</strong>
-  <%= markdown(@problem.output) %>
+  <h5>Input</h5>
+  <%= @problem.input %>
 </p>
 <p>
-  <strong>Example Input:</strong>
-  <%= markdown(@problem.example_input) %>
+  <h5>Output</h5>
+  <%= @problem.output %>
 </p>
 <p>
-  <strong>Example Output:</strong>
-  <%= markdown(@problem.example_output) %>
+  <h5>Sample Input</h5>
+  <%= @problem.example_input %>
 </p>
 <p>
-  <strong>Hint:</strong>
-  <%= markdown(@problem.hint) %>
+  <h5>Sample Output</h5>
+  <%= @problem.example_output %>
 </p>
 <p>
-  <strong>Source:</strong>
-  <%= markdown(@problem.source) %>
+  <h5>Hint</h5>
+  <%= @problem.hint %>
 </p>
-
 <p>
-  <strong>Time Limit:</strong>
-  <%= @limit.time %>
+  <dfn>Source:
+  <strong><%= @problem.source %></strong></dfn>
 </p>
-
-<p>
-  <strong>Memory Limit:</strong>
-  <%= @limit.memory %>
-</p>
-
-<p>
-  <strong>Time Limit:</strong>
-  <%= @limit.output %>
-</p>
-
+<div class = "navbar navbar-embossed navbar-fixed-bottom " role ="navigation" style="background-color:#003365;">
+	<div class = "row-fluid">
+		<div class="collapse navbar-collapse" id="navbar-collapse-01" style="padding-right:50px;">
+			<ul class="nav navbar-nav navbar-right">           
+				<li><a href="#">Submit</a></li>
+				<li><a href="#">Status</a></li>
+				<li><a href="#">Discuss</a></li>
+				<li><a href="#">Ranklist</a></li>
+				<li><a href="#">Fold</a></li>
+			</ul>
+	       </div>
+	</div>
+</div>
+<div class = "navbar navbar-embossed navbar-fixed-bottom " role ="navigation" style="background-color:transparent;">
+<ul class="nav navbar-nav navbar-right">
+	<a href="#fakelink" class="btn btn-default" style="padding-right:50px;"><strong>Unfold</strong></a>
+</ul>
+</div>
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>
