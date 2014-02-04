@@ -8,35 +8,35 @@ Output Limit:<%= @limit.output%>KB<br/>
 </dfn>
 <p>
   <h5>Description</h5>
-  <%= @problem.description %>
+  <%= markdown(@problem.description) %>
 </p>
 <p>
   <h5>Input</h5>
-  <%= @problem.input %>
+  <%= markdown(@problem.input) %>
 </p>
 <p>
   <h5>Output</h5>
-  <%= @problem.output %>
+  <%= markdown(@problem.output) %>
 </p>
 <p>
   <h5>Sample Input</h5>
-  <%= @problem.example_input %>
+  <%= markdown(@problem.example_input) %>
 </p>
 <p>
   <h5>Sample Output</h5>
-  <%= @problem.example_output %>
+  <%= markdown(@problem.example_output) %>
 </p>
 <p>
   <h5>Hint</h5>
-  <%= @problem.hint %>
+  <%= markdown(@problem.hint) %>
 </p>
 <p>
   <dfn>Source:
   <strong><%= @problem.source %></strong></dfn>
 </p>
-<div class="navbar navbar-embossed navbar-fixed-bottom navbar-inverse" role="navigation" style="background-color:#003365;" id="lmenu">
-	<div class = "row-fluid">
-		<div class="collapse navbar-collapse" id="navbar-collapse-01" style="padding-right:50px;">
+<div class="navbar navbar-embossed navbar-fixed-bottom navbar-inverse" role="navigation" style="background-color:transparent;" id="menu">
+	<div class = "row-fluid" id="lmenu">
+		<div class="collapse navbar-collapse" id="navbar-collapse-01" style="padding-right:50px;background-color:#003365;">
 			<ul class="nav navbar-nav navbar-right">           
                 <li><a href="#">Submit</a></li>
 				<li><a href="#">Status</a></li>
@@ -46,11 +46,13 @@ Output Limit:<%= @limit.output%>KB<br/>
 			</ul>
 	    </div>
 	</div>
-</div>
-<div class = "navbar navbar-embossed navbar-fixed-bottom" role="navigation" style="background-color:transparent;" id="unfold">
-<ul class="nav navbar-nav navbar-right">
-    <a href="#" class="btn btn-default" style="padding-right:50px;"><strong>Unfold</strong></a>
-</ul>
+	<div class = "row-fluid" id="smenu">
+		<div class="collapse navbar-collapse" id="navbar-collapse-01">
+			<ul class="nav navbar-nav navbar-right" style="background-color:#003365;">           
+                <li><a href="#" class="btn btn-default" style="padding-right:50px;" id="unfold">Menu</a></li>
+			</ul>
+	    </div>
+	</div>
 </div>
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>
