@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
+# Bottom menu in Problems#Show
     $('#lmenu').hide()
     $('#unfold').click -> 
         $('#unfold').hide()
