@@ -1,10 +1,9 @@
 Tioj::Application.routes.draw do
-  get "welcome/index"
   resources :limits
 
   resources :testdata
 
-  resources :problems
+  resources :problems  
 
   resources :submissions
 
