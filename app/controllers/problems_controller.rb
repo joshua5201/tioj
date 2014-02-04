@@ -90,14 +90,6 @@ class ProblemsController < ApplicationController
             :memory, 
             :output, 
             :problem_id
-        ],
-        testdata_attributes:
-        [
-            :id,
-            :input,
-            :answer,
-            :problem_id,
-            :_destroy
         ]
       )
     end

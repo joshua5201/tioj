@@ -57,21 +57,6 @@
     <%= ff.text_field :output %>
 </div>
   <% end %>
-  <div id="testdata">
-      Testdata: <% count = 0 %>
-      <%= f.fields_for :testdata do |ff| %>
-          <div class="field">
-              <% count += 1 %>
-              Testdata #<%= count %>
-              <%= ff.label :input, "Input" %>
-              <%= ff.text_area :input %>
-              <%= ff.label :answer, "Answer" %>
-              <%= ff.text_area :answer %>
-              <%= check_box :_destroy, "Destroy?"%>
-          </div>
-      <% end %>
-      <button type="button">Add</button>
-  </div>
 <div class="actions">
     <%= f.submit %>
 </div>

@@ -34,22 +34,22 @@ Output Limit:<%= @limit.output%>KB<br/>
   <dfn>Source:
   <strong><%= @problem.source %></strong></dfn>
 </p>
-<div class = "navbar navbar-embossed navbar-fixed-bottom " role ="navigation" style="background-color:#003365;">
+<div class="navbar navbar-embossed navbar-fixed-bottom navbar-inverse" role="navigation" style="background-color:#003365;" id="lmenu">
 	<div class = "row-fluid">
 		<div class="collapse navbar-collapse" id="navbar-collapse-01" style="padding-right:50px;">
 			<ul class="nav navbar-nav navbar-right">           
-				<li><a href="#">Submit</a></li>
+                <li><a href="#">Submit</a></li>
 				<li><a href="#">Status</a></li>
 				<li><a href="#">Discuss</a></li>
 				<li><a href="#">Ranklist</a></li>
-				<li><a href="#">Fold</a></li>
+                <li><a href="#" id="fold">Fold</a></li>
 			</ul>
-	       </div>
+	    </div>
 	</div>
 </div>
-<div class = "navbar navbar-embossed navbar-fixed-bottom " role ="navigation" style="background-color:transparent;">
+<div class = "navbar navbar-embossed navbar-fixed-bottom" role="navigation" style="background-color:transparent;" id="unfold">
 <ul class="nav navbar-nav navbar-right">
-	<a href="#fakelink" class="btn btn-default" style="padding-right:50px;"><strong>Unfold</strong></a>
+    <a href="#" class="btn btn-default" style="padding-right:50px;"><strong>Unfold</strong></a>
 </ul>
 </div>
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
