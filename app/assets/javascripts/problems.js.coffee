@@ -2,13 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-jQuery ->
 # Bottom menu in Problems#Show
+jQuery ->
     $('#lmenu').hide()
-    $('#unfold').click -> 
+    $('#unfold').click ->
         $('#unfold').hide()
         $('#lmenu').show()
     $('#fold').click ->
-        $('#lmenu').hide()
+        $('#lmenu').hide() 
         $('#unfold').show()
 
