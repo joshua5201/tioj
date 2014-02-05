@@ -1,9 +1,8 @@
 Tioj::Application.routes.draw do
   resources :limits
-
-  resources :testdata
-
-  resources :problems  
+  resources :problems do
+    resources :testdata
+  end
 
   resources :submissions
 

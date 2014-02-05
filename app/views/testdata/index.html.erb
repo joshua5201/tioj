@@ -2,7 +2,8 @@
 
 <table>
   <thead>
-    <tr>
+      <tr>
+          <th>ID</th>
       <th>Input</th>
       <th>Answer</th>
       <th></th>
@@ -12,18 +13,21 @@
   </thead>
 
   <tbody>
+  <% if @testdata.present? %>
     <% @testdata.each do |testdatum| %>
       <tr>
+        <td><%= testdatum.id %></td>
         <td><%= testdatum.input %></td>
         <td><%= testdatum.answer %></td>
-        <td><%= link_to 'Show', testdatum %></td>
-        <td><%= link_to 'Edit', edit_testdatum_path(testdatum) %></td>
-        <td><%= link_to 'Destroy', testdatum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', problem_testdatum_path(@problem, testdatum) %></td>
+        <td><%= link_to 'Edit', edit_problem_testdatum_path(@problem, testdatum) %></td>
+        <td><%= link_to 'Destroy', problem_testdatum_path(@problem, testdatum), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Testdatum', new_testdatum_path %>
+<%= link_to 'New Testdatum', new_problem_testdatum_path %>
