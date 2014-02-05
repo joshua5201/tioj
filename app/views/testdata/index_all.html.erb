@@ -1,0 +1,30 @@
+<h1>Listing testdata</h1>
+
+<table>
+  <thead>
+      <tr>
+          <th>ID</th>
+      <th>Input</th>
+      <th>Answer</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @testdata.each do |testdatum| %>
+      <tr>
+        <td><%= testdatum.id %></td>
+        <td><%= testdatum.input %></td>
+        <td><%= testdatum.answer %></td>
+        <td><%= link_to 'Show', problem_testdatum_path(testdatum.problem, testdatum, :index_all => '1') %></td>
+        <td><%= link_to 'Edit', edit_problem_testdatum_path(testdatum.problem, testdatum, :index_all => '1') %></td>
+        <td><%= link_to 'Destroy', problem_testdatum_path(testdatum.problem, testdatum, :index_all => '1'), method: :delete, data: { confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

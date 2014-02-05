@@ -1,31 +1,26 @@
 class TestdataController < ApplicationController
+  before_action :find_problem, except: [:index_all]
   before_action :set_testdatum, only: [:show, :edit, :update, :destroy]
-  before_action :find_problem
 
-  # GET /testdata
-  # GET /testdata.json
   def index
     @testdata = @problem.testdata
   end
 
-  # GET /testdata/1
-  # GET /testdata/1.json
+  def index_all
+    @testdata = Testdatum.all
+  end
   def show
   end
 
-  # GET /testdata/new
   def new
     @testdatum = @problem.testdata.build 
   end
 
-  # GET /testdata/1/edit
   def edit
   end
 
-  # POST /testdata
-  # POST /testdata.json
   def create
-    @testdatum = Testdatum.new(testdatum_params)
+    @testdatum = @problem.testdata.build(testdatum_params)
 
     respond_to do |format|
       if @testdatum.save
@@ -38,8 +33,6 @@ class TestdataController < ApplicationController
     end
   end
 
-  # PATCH/PUT /testdata/1
-  # PATCH/PUT /testdata/1.json
   def update
     respond_to do |format|
       if @testdatum.update(testdatum_params)
@@ -52,18 +45,19 @@ class TestdataController < ApplicationController
     end
   end
 
-  # DELETE /testdata/1
-  # DELETE /testdata/1.json
   def destroy
     @testdatum.destroy
     respond_to do |format|
-      format.html { redirect_to testdata_url }
+      if params[:index_all] == '1'
+        format.html {redirect_to '/testdata' }
+      else
+        format.html { redirect_to problem_testdatum_path(@problem) }
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_testdatum
       @testdatum = Testdatum.find(params[:id])
     end
