@@ -1,31 +1,22 @@
 class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
-  # GET /problems
-  # GET /problems.json
   def index
     @problems = Problem.all
   end
 
-  # GET /problems/1
-  # GET /problems/1.json
   def show
     @limit = @problem.limit
   end
 
-  # GET /problems/new
   def new
     @problem = Problem.new
     @limit = @problem.build_limit
   end
 
-  # GET /problems/1/edit
   def edit
-#    @limit = @problem.limit
   end
 
-  # POST /problems
-  # POST /problems.json
   def create
     @problem = Problem.new(problem_params)
     respond_to do |format|
@@ -39,8 +30,6 @@ class ProblemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /problems/1
-  # PATCH/PUT /problems/1.json
   def update
     respond_to do |format|
       if @problem.update(problem_params)
@@ -53,8 +42,6 @@ class ProblemsController < ApplicationController
     end
   end
 
-  # DELETE /problems/1
-  # DELETE /problems/1.json
   def destroy
     @problem.limit.destroy
     @problem.destroy
@@ -65,7 +52,6 @@ class ProblemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_problem
       @problem = Problem.find(params[:id])
     end
