@@ -16,7 +16,7 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <td><%= submission.code %></td>
+        <td><%= submission.problem_id %></td>
         <td><%= submission.compiler %></td>
         <td><%= submission.result %></td>
         <td><%= submission.score %></td>
@@ -30,4 +30,7 @@
 
 <br>
 
-<%= link_to 'New Submission', new_problem_submission_path(@problem) %>
+<div>
+    Quick Submit to Problem <input id="quick_prob_id" type="text" size="4" /> 
+    <button type="submit" id="quick_submit">Submit</button>
+</div>

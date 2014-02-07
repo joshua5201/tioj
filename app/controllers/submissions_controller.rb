@@ -2,21 +2,28 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
   def index
-    @submissions = Submission.all
+    @problem = Problem.find(params[:problem_id])
+    @submissions = @problem.submissions.reverse
+  end
+
+  def index_all
+    @submissions = Submission.all.reverse
   end
 
   def show
   end
 
   def new
-    @submission = Submission.new
+    @problem = Problem.find(params[:problem_id])
+    @submission = @problem.submissions.build
   end
 
   def edit
   end
 
   def create
-    @submission = Submission.new(submission_params)
+    @problem = Problem.find(params[:problem_id])
+    @submission = @problem.submissions.build(submission_params)
 
     respond_to do |format|
       if @submission.save
@@ -56,6 +63,6 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:code, :compiler, :result, :score)
+      params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id)
     end
 end

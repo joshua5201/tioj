@@ -1,4 +1,4 @@
-<%= form_for(@submission) do |f| %>
+<%= form_for [@problem, @submission] do |f| %>
   <% if @submission.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this submission from being saved:</h2>

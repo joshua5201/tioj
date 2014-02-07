@@ -34,15 +34,15 @@ Output Limit:<%= @limit.output%>KB<br/>
   <dfn>Source:
   <strong><%= @problem.source %></strong></dfn>
 </p>
-<div data-no-turbolinks class="navbar navbar-embossed navbar-fixed-bottom navbar-inverse" role="navigation" style="background-color:transparent;" id="menu">
+<div data-no-turbolinks class="navbar navbar-embossed navbar-fixed-bottom navbar-inverse" role="navigation" style="background-color:transparent;" id="menu" >
 	<div class = "row-fluid" id="lmenu">
 		<div class="collapse navbar-collapse" id="navbar-collapse-01" style="padding-right:50px;background-color:#003365;">
 			<ul class="nav navbar-nav navbar-right">           
                 <li><%= link_to 'Edit', edit_problem_path(@problem) %></li>
                 <li><%= link_to 'Back', problems_path %></li>
-                <li><a href="#">Submit</a></li>
-				<li><a href="#">Status</a></li>
-				<li><a href="#">Discuss</a></li>
+                <li><%= link_to 'Submit', new_problem_submission_path(@problem)%></li>
+                <li><%= link_to 'Status', problem_submissions_path(@problem)%></li>
+                <li><%= link_to 'Discuss', posts_path %></li>
 				<li><a href="#">Ranklist</a></li>
                 <li><a href="#" id="fold">Fold</a></li>
 			</ul>
