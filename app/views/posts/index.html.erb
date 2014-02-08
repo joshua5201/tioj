@@ -1,47 +1,64 @@
+
+
 <% if @problem %> 
-    <h1>Listing posts of Problem #<%= @problem.id %></h1>
+    <h1 class="page-header">Discuss <small>Problem #<%= @problem.id %></small></h1>
 <% else %>
-    <h1>Listing posts</h1>
+    <h1 class="page-header">Discuss</h1>
 <% end %>
 
+<div class="actions">
+<% if @problem != nil %>
+    <%= link_to "New Post", new_problem_post_path(@problem), :class => "btn btn-default" %>
+<% else %>
+    <%= link_to "New Post", new_post_path, :class => "btn btn-default"%>
+<% end %>
+</div>
+<br />
 <div id="posts">
+    <div class="media post well well-lg" style="background-color: rgb(240, 240, 240)">
     <% @posts.each do |post| %>
-        <div class="post_title">
-            <span class="post_title"><%= post.title %></span> 
+        <div class="media-body">
+        <div class="post_title media-heading">
+            <h3 class="post_title media-heading"><%= post.title %></h3>
             <% if post.problem_id != nil %>
-                <span class="title_problem_id"> -- Problem #<%= post.problem_id %></span>
+                <small class="title_problem_id"> Problem #<%= post.problem_id %></small>
             <% end %>
         </div>
         </br >
         <div class="post_content">
             <%= markdown(post.content) %>
         </div>
-        <div class="delete_post">
-<span class="destroy"><%= link_to "Delete Post", post, method: :delete, data: {confirm: "Are you sure?"} %> </span>
-        </div>
+<%= link_to "Edit Post", edit_post_path(post), :class=>'btn btn-primary btn-xs' %>
+<%= link_to "Delete Post", post, method: :delete, data:{confirm:"Sure?"}, :class=>'btn btn-danger btn-xs' %>
         <% if post.comments %>
-        <div class="comments">
+            <div class="comments">
+                <h5>Comments: </h5>
             <% comments = post.comments %>
+            <% count = 0;%>
             <% comments.each do |comment| %>
-            <div class="comment_title">
-                <%= comment.title %>
-            </div>
+                <% count += 1 %>
+                <div class="media comment well">
+                    <div class="media-body">
+            <h4 class="comment_title media-heading">
+                #<%=count %> <%= comment.title %>
+            </h4>
             <div class="comment_content" >
                 <%= markdown(comment.content) %>
             </div>
+<%= link_to "Edit", edit_post_comment_path(post, comment), :class=>'btn btn-primary btn-xs' %>
+<%= link_to "Delete", post_comment_path(post, comment), :method => :delete, data:{confirm:"Sure?"}, :class=>'btn btn-danger btn-xs' %>
+        </div>
+        </div> <!--media -->
         <% end %><!-- comments.each -->
         </div>
     <% end %> <!-- if post.comments -->
     <div class="new_comment">
+        <h5>New Comment:</h5>
         <%= render partial: 'comment_form', :locals => {:post => post}  %>
     </div>
         <hr />
-<% end %>
+    <% end %>
+</div> <!-- media body -->
+</div> <!-- post div -->
 </div>
-<div class="actions">
-<% if @problem != nil %>
-    <%= link_to "New Post", new_problem_post_path(@problem) %>
-<% else %>
-    <%= link_to "New Post", new_post_path %>
-<% end %>
-</div>
+

@@ -2,14 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-span.post_title {
-    font-size: 20pt;
-    font-style: italic;
+.post {
+//    border: solid;
+//    padding: 20px;
 }
-span.title_problem_id {
-    font-size:16pt;
-};
-.comment_title {
-    font-size: 18pt;
-    font-style: italic;
+//span.post_title {
+//    font-size: 20pt;
+//    font-style: italic;
+//}
+.title_problem_id {
+    font-color: black;
 }
+//.comment_title {
+//    font-size: 18pt;
+ //   font-style: italic;
+//}

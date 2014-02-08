@@ -1,6 +1,7 @@
-<h3>
-  <%= @problem.id%>:<%= @problem.name %>
-</h3>
+<h1 class="page-header">
+  <%= @problem.id%> : <%= @problem.name %>
+</h1>
+<div class="well well-lg">
 <dfn>
 Time Limit:<%= @limit.time%>ms<br/>
 Memory Limit:<%= @limit.memory%>KB<br/>
@@ -55,4 +56,5 @@ Output Limit:<%= @limit.output%>KB<br/>
 			</ul>
 	    </div>
 	</div>
+</div>
 </div>

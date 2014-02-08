@@ -11,3 +11,13 @@
  *= require_self
  *= require_tree .
  */
+
+#container {
+    padding: 30px;
+}
+.comment {
+    padding-left: 30px;
+}
+.well-lg {
+    background-color: rgb(255, 255, 255);
+}
