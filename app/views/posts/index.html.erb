@@ -1,33 +1,47 @@
-<h1>Listing posts</h1>
+<% if @problem %> 
+    <h1>Listing posts of Problem #<%= @problem.id %></h1>
+<% else %>
+    <h1>Listing posts</h1>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>User</th>
-      <th>Problem</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div id="posts">
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= post.user_id %></td>
-        <td><%= post.problem_id %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+        <div class="post_title">
+            <span class="post_title"><%= post.title %></span> 
+            <% if post.problem_id != nil %>
+                <span class="title_problem_id"> -- Problem #<%= post.problem_id %></span>
+            <% end %>
+        </div>
+        </br >
+        <div class="post_content">
+            <%= markdown(post.content) %>
+        </div>
+        <div class="delete_post">
+<span class="destroy"><%= link_to "Delete Post", post, method: :delete, data: {confirm: "Are you sure?"} %> </span>
+        </div>
+        <% if post.comments %>
+        <div class="comments">
+            <% comments = post.comments %>
+            <% comments.each do |comment| %>
+            <div class="comment_title">
+                <%= comment.title %>
+            </div>
+            <div class="comment_content" >
+                <%= markdown(comment.content) %>
+            </div>
+        <% end %><!-- comments.each -->
+        </div>
+    <% end %> <!-- if post.comments -->
+    <div class="new_comment">
+        <%= render partial: 'comment_form', :locals => {:post => post}  %>
+    </div>
+        <hr />
+<% end %>
+</div>
+<div class="actions">
+<% if @problem != nil %>
+    <%= link_to "New Post", new_problem_post_path(@problem) %>
+<% else %>
+    <%= link_to "New Post", new_post_path %>
+<% end %>
+</div>

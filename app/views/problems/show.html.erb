@@ -42,7 +42,7 @@ Output Limit:<%= @limit.output%>KB<br/>
                 <li><%= link_to 'Back', problems_path %></li>
                 <li><%= link_to 'Submit', new_problem_submission_path(@problem)%></li>
                 <li><%= link_to 'Status', problem_submissions_path(@problem)%></li>
-                <li><%= link_to 'Discuss', posts_path %></li>
+                <li><%= link_to 'Discuss', problem_posts_path(@problem) %></li>
 				<li><a href="#">Ranklist</a></li>
                 <li><a href="#" id="fold">Fold</a></li>
 			</ul>

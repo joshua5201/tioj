@@ -35,11 +35,12 @@ body{
 		<div class = "row-fluid">
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav navbar-left">           
-				<li><a href="/">Home</a></li>
-				<li><a href="/problems">Problems</a></li>
-				<li><a href="/submissions">Submissions</a></li>
-				<li><a href="/ranklist">Ranklist</a></li>
-				<li><a href="/user/userfile">Userfile</a></li>
+                <li><%= link_to "Home", root_path %></li>
+                <li><%= link_to "Problems", problems_path %></li>
+                <li><%= link_to "Submissions", submissions_path %></li>
+                <li><%= link_to "Discuss", posts_path %></li>
+				<li><a href="#ranklist">Ranklist</a></li>
+				<li><a href="#userfile">Userfile</a></li>
 				<li><a>Login</a></li>
 			</ul>
 	       </div>

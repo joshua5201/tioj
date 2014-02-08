@@ -1,4 +1,4 @@
-<h1>Listing submissions</h1>
+<h1>Listing submissions for Problem <%= @problem.id%></h1>
 
 <table>
   <thead>
@@ -16,7 +16,7 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <td><%= submission.code %></td>
+        <td><%= submission.problem_id %></td>
         <td><%= submission.compiler %></td>
         <td><%= submission.result %></td>
         <td><%= submission.score %></td>

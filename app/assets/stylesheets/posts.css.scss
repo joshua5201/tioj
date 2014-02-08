@@ -1,3 +1,15 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+span.post_title {
+    font-size: 20pt;
+    font-style: italic;
+}
+span.title_problem_id {
+    font-size:16pt;
+};
+.comment_title {
+    font-size: 18pt;
+    font-style: italic;
+}

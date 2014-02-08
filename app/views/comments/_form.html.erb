@@ -1,12 +1,26 @@
-<%= semantic_form_for @comment do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :title %>
-    <%= f.input :content %>
-    <%= f.input :user_id %>
-    <%= f.input :post_id %>
-  <% end %>
+<%= form_for(@comment) do |f| %>
+    <% if @post.errors.any? %>
+    <div id="error_explanation">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this problem from being saved:</h2>
 
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :input %>
-  <% end %>
-<% end %>
+    <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+    <% end %>
+    </ul>
+</div>
+        <% end %>
+
+<div class="field">
+    <%= f.label :title, "Title:"%> <br />
+    <%= f.text_field :title %>
+</div>
+<div class="field"> 
+    <%= f.label :content, "Content:" %> <br />
+    <%= f.text_area :content %>
+</div>
+<div class="actions">
+    <%= f.submit %>
+</div>
+        <% end %>
+

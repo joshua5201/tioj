@@ -43,7 +43,6 @@ class ProblemsController < ApplicationController
   end
 
   def destroy
-    @problem.limit.destroy
     @problem.destroy
     respond_to do |format|
       format.html { redirect_to problems_url }
