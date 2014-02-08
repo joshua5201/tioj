@@ -14,12 +14,11 @@
 <% end %>
 </div>
 <br />
-<div id="posts">
-    <div class="media post well well-lg" style="background-color: rgb(240, 240, 240)">
+<div class="posts" >
     <% @posts.each do |post| %>
-        <div class="media-body">
-        <div class="post_title media-heading">
-            <h3 class="post_title media-heading"><%= post.title %></h3>
+    <div class="post well well-lg" style="background-color: rgb(240, 240, 240); margin-top:10px; margin-bottom:10px;">
+        <div class="post_title">
+            <h3 class="post_title"><%= post.title %></h3>
             <% if post.problem_id != nil %>
                 <small class="title_problem_id"> Problem #<%= post.problem_id %></small>
             <% end %>
@@ -30,16 +29,15 @@
         </div>
 <%= link_to "Edit Post", edit_post_path(post), :class=>'btn btn-primary btn-xs' %>
 <%= link_to "Delete Post", post, method: :delete, data:{confirm:"Sure?"}, :class=>'btn btn-danger btn-xs' %>
-        <% if post.comments %>
+    <% if post.comments.size > 0 %>
             <div class="comments">
                 <h5>Comments: </h5>
             <% comments = post.comments %>
             <% count = 0;%>
             <% comments.each do |comment| %>
                 <% count += 1 %>
-                <div class="media comment well">
-                    <div class="media-body">
-            <h4 class="comment_title media-heading">
+                <div class="comment well" style="background-color:rgb(250, 250, 250)">
+            <h4 class="comment_title">
                 #<%=count %> <%= comment.title %>
             </h4>
             <div class="comment_content" >
@@ -47,18 +45,18 @@
             </div>
 <%= link_to "Edit", edit_post_comment_path(post, comment), :class=>'btn btn-primary btn-xs' %>
 <%= link_to "Delete", post_comment_path(post, comment), :method => :delete, data:{confirm:"Sure?"}, :class=>'btn btn-danger btn-xs' %>
-        </div>
-        </div> <!--media -->
+        </div> <!--comment -->
         <% end %><!-- comments.each -->
-        </div>
+        </div> <!-- comments -->
     <% end %> <!-- if post.comments -->
-    <div class="new_comment">
-        <h5>New Comment:</h5>
+    <div class="new_comment" style="display:inline">
+    <button class="new_comment btn btn-info btn-xs">New Comment</button>
+    <br /> <br />
+    <div class="new_comment_form">
         <%= render partial: 'comment_form', :locals => {:post => post}  %>
-    </div>
-        <hr />
+    </div> <!-- new_comment_form -->
+    </div> <!-- new_comment -->
+</div> <!-- post -->
+<br />
     <% end %>
-</div> <!-- media body -->
-</div> <!-- post div -->
-</div>
-
+</div> <!-- posts div -->
