@@ -3,7 +3,7 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
   def index
-    @submissions = @submissions.order("updated_at DESC")
+    @submissions = @submissions.order("updated_at DESC").page(params[:page])
   end
 
   def show
@@ -62,6 +62,6 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id)
+      params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id, :page)
     end
 end

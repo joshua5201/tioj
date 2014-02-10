@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = @posts.order("updated_at DESC")
+    @posts = @posts.order("updated_at DESC").page(params[:page])
   end
 
   # GET /posts/1
@@ -79,6 +79,7 @@ class PostsController < ApplicationController
       :content, 
       :user_id, 
       :problem_id,
+      :page,
       comments_attributes: [
         :id,
         :title,
