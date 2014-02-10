@@ -19,12 +19,12 @@ body{
     <div class="row-fluid">
         <div class="col-xs-12">
 		<div class="row-fluid">
-			<img src="/images/banner_2.jpg">
+			<%= link_to image_tag("banner_2.jpg"), root_path %>
 		</div>
 		<div class = "row-fluid">
 		<div class="collapse navbar-collapse" id="navbar-collapse-01">
 			<ul class="nav navbar-nav navbar-left">           
-				<li><%= link_to "Home", root_path %></li>
+				<li><%= link_to "About", about_url %></li>
 				<li><%= link_to "Problems", problems_path %></li>
 				<li><%= link_to "Submissions", submissions_path %></li>
 				<li><%= link_to "Discuss", posts_path %></li>
