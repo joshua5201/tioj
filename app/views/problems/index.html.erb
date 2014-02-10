@@ -1,5 +1,6 @@
 <h1 class="page-header">Problems</h1>
 
+<%= paginate @problems %>
 <table class="table">
   <thead>
     <tr>
@@ -36,6 +37,6 @@
   </tbody>
 </table>
 
-<br>
-
+<%= paginate @problems %>
+<br />
 <%= link_to 'New Problem', new_problem_path %>

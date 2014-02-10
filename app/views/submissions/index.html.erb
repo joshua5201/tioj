@@ -35,9 +35,8 @@
   </tbody>
 </table>
 
-<br>
-
 <%= paginate @submissions %>
+<br />
 <% if @problem %>
   <%= link_to 'New Submission', new_problem_submission_path(@problem) %>
 <% else %>
