@@ -1,6 +1,6 @@
-<h1>Listing problems</h1>
+<h1>Problems</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>ID</th>
@@ -9,6 +9,7 @@
       <th>AC Ratio(user)</th>
       <th>AC Ratio(submission)</th>
       <th>Created At</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -29,6 +30,7 @@
         <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
         <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Manage Testdata', problem_testdata_path(problem) %></td>
+        <td><%= link_to 'Submit', new_problem_submission_path(problem) %></td>
       </tr>
     <% end %>
   </tbody>

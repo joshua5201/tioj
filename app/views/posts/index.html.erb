@@ -27,7 +27,7 @@
     <div class="post_content">
       <%= markdown(post.content) %>
     </div>
-    <%= link_to "Edit Post", edit_post_path(post), :class=>'btn btn-primary btn-xs' %>
+    <%= link_to "Edit Post", edit_post_path(post), :class=>'btn btn-primary btn-xs'%>
     <%= link_to "Delete Post", post, method: :delete, data:{confirm:"Sure?"}, :class=>'btn btn-danger btn-xs' %>
     <% if post.comments.size > 0 %>
       <div class="comments">
