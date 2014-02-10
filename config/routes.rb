@@ -3,15 +3,16 @@ Tioj::Application.routes.draw do
   resources :limits
   resources :problems do
     resources :testdata
-    resources :submissions, shallow: true
+    resources :submissions
     resources :posts 
   end
+
+  resources :submissions
 
   resources :posts do 
     resources :comments
   end
   get 'testdata' => 'testdata#index_all'
-  get 'submissions' => 'submissions#index_all'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

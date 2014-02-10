@@ -1,12 +1,17 @@
-<h1>Listing submissions for Problem <%= @problem.id%></h1>
+<% if @problem %>
+  <h1>Submissions of Problem #<%= @problem.id%></h1>
+<% else %>
+  <h1>Submissions</h1>
+<% end %>
 
-<table>
+<table class='table'>
   <thead>
     <tr>
       <th>Problem ID</th>
       <th>Compiler</th>
       <th>Result</th>
       <th>Score</th>
+      <th>Updated At</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,13 +21,14 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <td><%= submission.problem_id %></td>
+        <td><%= link_to submission.problem_id, problem_path(submission.problem) %></td>
         <td><%= submission.compiler %></td>
         <td><%= submission.result %></td>
         <td><%= submission.score %></td>
-        <td><%= link_to 'Show', submission %></td>
-        <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
-        <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= time_ago_in_words(submission.updated_at) %> ago</td>
+        <td><%= link_to 'Show', submission, :class => 'btn btn-xs btn-primary'%></td>
+        <td><%= link_to 'Edit', edit_submission_path(submission), :class => 'btn btn-info btn-xs' %></td>
+        <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +36,12 @@
 
 <br>
 
-<%= link_to 'New Submission', new_problem_submission_path(@problem) %>
+<% if @problem %>
+  <%= link_to 'New Submission', new_problem_submission_path(@problem) %>
+<% else %>
+  <div>
+      Quick Submit to Problem <input id="quick_prob_id" type="text" size="4" /> 
+      <button type="submit" id="quick_submit" class="btn btn-xs btn-default">Submit</button>
+    </div>
+
+<% end %>
