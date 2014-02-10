@@ -10,6 +10,10 @@
  *
  *= require_self
  *= require_tree .
+ *= require bootstrap.min
+ *= require flat-ui
+ *= require flat-ui-demo
+ *= require flat-ui-docs
  */
 
 #container {
