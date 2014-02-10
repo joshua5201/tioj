@@ -1,9 +1,10 @@
 <% if @problem %>
-  <h1>Submissions of Problem #<%= @problem.id%></h1>
+  <h1 class="page-header">Submissions <small>Problem #<%= @problem.id%></small></h1>
 <% else %>
-  <h1>Submissions</h1>
+  <h1 class="page-header">Submissions</h1>
 <% end %>
 
+<%= paginate @submissions %>
 <table class='table'>
   <thead>
     <tr>
@@ -34,8 +35,8 @@
   </tbody>
 </table>
 
-<br>
-
+<%= paginate @submissions %>
+<br />
 <% if @problem %>
   <%= link_to 'New Submission', new_problem_submission_path(@problem) %>
 <% else %>

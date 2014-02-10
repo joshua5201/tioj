@@ -2,7 +2,7 @@ class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
   def index
-    @problems = Problem.all
+    @problems = Problem.all.page(params[:page])
   end
 
   def show
@@ -68,6 +68,7 @@ class ProblemsController < ApplicationController
         :hint, 
         :source, 
         :limit, 
+        :page,
         limit_attributes: 
         [
             :id, 

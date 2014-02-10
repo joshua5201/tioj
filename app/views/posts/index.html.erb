@@ -12,8 +12,7 @@
 <% end %>
 </div>
 
-<br />
-
+<%= paginate @posts %>
 <div class="posts">
   <% @posts.each do |post| %>
     <div class="post well well-lg">
@@ -60,3 +59,4 @@
   <br />
 <% end %>
 </div> <!-- posts div -->
+<%= paginate @posts%>
