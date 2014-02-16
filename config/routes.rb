@@ -14,6 +14,7 @@ Tioj::Application.routes.draw do
   end
   get 'testdata' => 'testdata#index_all'
   get 'about' => 'about#index', as: :about
+  get 'userfile' => 'userfile#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
