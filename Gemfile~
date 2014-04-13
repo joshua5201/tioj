@@ -11,10 +11,8 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'less'
 gem 'less-rails'
 gem 'less-rails-bootstrap'
-# user
+# devise
 gem 'devise', '~> 3.2.4'
-gem 'omniauth'
-gem 'omniauth-facebook'
 # Use Redcarpet to render Markdown
 gem 'redcarpet'
 

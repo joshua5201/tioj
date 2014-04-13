@@ -28,15 +28,25 @@ body{
                 <li><%= link_to "Problems", problems_path %></li>
                 <li><%= link_to "Submissions", submissions_path %></li>
                 <li><%= link_to "Discuss", posts_path %></li>
-				<li><a href="/userfile">Userfile</a></li>
 				<li><a href="#ranklist">Ranklist</a></li>
-		 <li><% if current_user %>
-       <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
-     <li><%= link_to('Edit password', edit_registration_path(:user)) %></li>
+				<li><a href="/userfile">Userfile</a></li>
+		 <><% if current_user %>
+       <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+     <%= link_to('修改密碼', edit_registration_path(:user)) %>
    <% else %>
-   	  <li><%= link_to('Login', new_session_path(:user)) %> </li>
-        <li><%= link_to('Sign up', new_registration_path(:user)) %>
-   <% end %></li>
+   	  <%= link_to('註冊', new_registration_path(:user)) %> |
+        <%= link_to('登入', new_session_path(:user)) %>
+   <% end %>
+				<li class="dropdown" id="menuLogin">
+					<a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
+					<div class="dropdown-menu" style="padding:17px;">
+						<form class="form" id="formLogin"> 
+						<input name="username" id="username" placeholder="Username" type="text"> 
+						<input name="password" id="password" placeholder="Password" type="password"><br>
+						<button type="button" id="btnLogin" class="btn">Login</button>
+						</form>
+					</div>
+				</li>
 			</ul>
 	       </div>
 	       </div>

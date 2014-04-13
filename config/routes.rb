@@ -1,5 +1,6 @@
 Tioj::Application.routes.draw do
 
+  devise_for :users
   resources :limits
   resources :problems do
     resources :testdata
