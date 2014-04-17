@@ -1,0 +1,2 @@
+class UserfilesController < ApplicationController
+end

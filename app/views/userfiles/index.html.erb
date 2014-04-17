@@ -1,0 +1,23 @@
+ <h1 class = "page-header">Ranklist</h1>
+ 
+ <%= paginate @users %>
+ <table class ="table">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Email</th>
+			<th>Nickname</th>
+			<th>Accepted</th>
+	</thead>
+	
+	<tbody>
+		<% @users.each do |user| %>
+		<tr>
+			<td><img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail"></td>
+			<td><%=user.email%></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<%end%>
+	</tbody>
+</table>
