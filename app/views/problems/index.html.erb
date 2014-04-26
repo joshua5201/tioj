@@ -10,11 +10,11 @@
       <th>AC Ratio(user)</th>
       <th>AC Ratio(submission)</th>
       <th>Created At</th>
+	<th></th>
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
-      <th></th>
+      
     </tr>
   </thead>
 
@@ -22,12 +22,11 @@
     <% @problems.each do |problem| %>
         <tr>
             <td><%= problem.id %></td>
-        <td><%= problem.name %></td>
+        <td><%= link_to problem.name, problem %></td>
         <td><img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail">TopCoder</td>
         <td>AC Ratio(user)</td>
         <td>AC Ratio(submission)</td>
         <td><%= problem.created_at %></td>
-        <td><%= link_to 'Show', problem %></td>
         <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
         <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Manage Testdata', problem_testdata_path(problem) %></td>
