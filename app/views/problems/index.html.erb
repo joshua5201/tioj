@@ -10,9 +10,11 @@
       <th>AC Ratio(user)</th>
       <th>AC Ratio(submission)</th>
       <th>Created At</th>
+      <% if user_signed_in? && current_user.admin == true %>
 	<th></th>
       <th></th>
       <th></th>
+      <% end %>
       <th></th>
       
     </tr>
@@ -27,9 +29,11 @@
         <td>AC Ratio(user)</td>
         <td>AC Ratio(submission)</td>
         <td><%= problem.created_at %></td>
+        <% if user_signed_in? && current_user.admin == true %>
         <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
         <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Manage Testdata', problem_testdata_path(problem) %></td>
+        <% end %>
         <td><%= link_to 'Submit', new_problem_submission_path(problem) %></td>
       </tr>
     <% end %>
