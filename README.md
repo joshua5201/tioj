@@ -19,6 +19,7 @@ TIOJ INFOR Online Judge
 $ git clone https://github.com/joshua5201/tioj.git
 $ bundle install
 $ bundle exec rake db:create
+$ bundle exec rake db:migrate
 $ rails s
 ```
 ## Dump SQL
