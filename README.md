@@ -12,10 +12,22 @@ TIOJ INFOR Online Judge
 
 [Ruby on Rails 實戰聖經](http://ihower.tw/rails3/index.html)
 
+###Remember to start mysql server before starting rails
+
 ## Test
 ```bash
 $ git clone https://github.com/joshua5201/tioj.git
 $ bundle install
-$ rake db:migrate
+$ bundle exec rake db:create
+$ bundle exec rake db:migrate
 $ rails s
+```
+## Dump SQL
+```bash
+$ mysqldump tioj_dev -u root -p --opt > tioj_dev00.sql
+```
+
+## Restore SQL
+```bash
+$ mysql -u root -p < tioj_dev.sql
 ```
