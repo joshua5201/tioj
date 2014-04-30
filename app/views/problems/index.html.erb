@@ -39,7 +39,8 @@
     <% end %>
   </tbody>
 </table>
-
+<% if user_signed_in? && current_user.admin == true %>
 <%= paginate @problems %>
 <br />
 <%= link_to 'New Problem', new_problem_path %>
+<%end%>
