@@ -5,10 +5,12 @@
 <% end %>
 
 <div class="actions">
+  <% if user_signed_in? %>
   <% if @problem != nil %>
     <%= link_to "New Post", new_problem_post_path(@problem), :class => "btn btn-default" %>
 <% else %>
     <%= link_to "New Post", new_post_path, :class => "btn btn-default"%>
+<% end %>
 <% end %>
 </div>
 
