@@ -1,5 +1,24 @@
+<%= javascript_include_tag 	"/stylesheets/prism.js" %>
+<%= stylesheet_link_tag 	"/stylesheets/prism.css" %>
 <h1>New submission</h1>
+<%= form_for [@problem, @submission] do |f| %>
+<% if @submission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
 
-<%= render 'form' %>
-
+      <ul>
+      <% @submission.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_area :code %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <%= link_to 'Back', submissions_path %>
+<% end %>
