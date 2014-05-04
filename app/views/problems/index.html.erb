@@ -15,7 +15,7 @@
       <th></th>
       <th></th>
       <% end %>
-      <th></th>
+      <% if user_signed_in? %><th></th> <%end%>
       
     </tr>
   </thead>
@@ -34,7 +34,7 @@
         <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Manage Testdata', problem_testdata_path(problem) %></td>
         <% end %>
-        <td><%= link_to 'Submit', new_problem_submission_path(problem) %></td>
+        <% if user_signed_in? %><td><%= link_to 'Submit', new_problem_submission_path(problem) %></td><%end%>
       </tr>
     <% end %>
   </tbody>

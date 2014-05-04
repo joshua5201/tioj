@@ -10,15 +10,26 @@ class ProblemsController < ApplicationController
   end
 
   def new
+		authenticate_user!
+		if current_user.admin == false 
+			redirect_to action:'index'
+		end
 		@problem = Problem.new
 		@limit = @problem.build_limit
   end
 
   def edit
-	
+	authenticate_user!
+	if current_user.admin == false 
+		redirect_to action:'index'	
+	end
   end
 
   def create
+	authenticate_user!
+	if current_user.admin == false 
+		redirect_to action:'index'	
+	end
     @problem = Problem.new(problem_params)
     respond_to do |format|
       if @problem.save
@@ -32,6 +43,10 @@ class ProblemsController < ApplicationController
   end
 
   def update
+	authenticate_user!
+	if current_user.admin == false 
+		redirect_to action:'index', notice: 'Insufficient User Permissions.'	
+	end
     respond_to do |format|
       if @problem.update(problem_params)
         format.html { redirect_to @problem, notice: 'Problem was successfully updated.' }
@@ -44,6 +59,10 @@ class ProblemsController < ApplicationController
   end
 
   def destroy
+	authenticate_user!
+	if current_user.admin == false 
+		redirect_to action:'index'	
+	end
     @problem.destroy
     respond_to do |format|
       format.html { redirect_to problems_url }
