@@ -1,9 +1,10 @@
+<%= javascript_include_tag 	"/stylesheets/prism.js" %>
+<%= stylesheet_link_tag 	"/stylesheets/prism.css" %>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Code:</strong>
-  <%= @submission.code %>
-</p>
+<strong>Code:</strong>
+<pre class = "line-numbers"><code class="language-c-like">
+  <%=@submission.code %>
+</code></pre>
 
 <p>
   <strong>Compiler:</strong>
