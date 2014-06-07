@@ -68,7 +68,7 @@ CREATE TABLE `limits` (
 
 LOCK TABLES `limits` WRITE;
 /*!40000 ALTER TABLE `limits` DISABLE KEYS */;
-INSERT INTO `limits` VALUES (1,1000,65536,65536,'2014-04-29 09:07:27','2014-04-29 09:07:27',1),(2,1000,65536,65536,'2014-04-29 09:13:24','2014-04-29 09:13:24',2);
+INSERT INTO `limits` VALUES (1,1000,65536,65536,'2014-04-29 09:07:27','2014-05-20 08:11:59',1),(2,1000,65536,65536,'2014-04-29 09:13:24','2014-04-29 09:13:24',2);
 /*!40000 ALTER TABLE `limits` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +174,7 @@ CREATE TABLE `submissions` (
   `problem_id` int(11) DEFAULT '0',
   `user_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +183,7 @@ CREATE TABLE `submissions` (
 
 LOCK TABLES `submissions` WRITE;
 /*!40000 ALTER TABLE `submissions` DISABLE KEYS */;
-INSERT INTO `submissions` VALUES (1,'#include<iostream>\r\nusing namespace std;\r\nint main()\r\n{\r\nint n;\r\ncin >> n;\r\nint res = 0;\r\nwhile(n--){\r\nint a;\r\ncin >> a;\r\nres += a;\r\n}\r\ncout << res << endl;\r\nreturn 0;\r\n}','c++','Accepted',NULL,'2014-04-29 12:24:37','2014-05-01 14:25:17',1,NULL),(2,'#include<iostream>\r\nusing namespace std;\r\nint main()\r\n{\r\ncout << 12;\r\nreturn 0;\r\n}','c++','Wrong Answer',0,'2014-05-01 14:13:53','2014-05-01 14:25:13',1,0);
+INSERT INTO `submissions` VALUES (1,'#include<iostream>\r\nusing namespace std;\r\nint main()\r\n{\r\nint n;\r\ncin >> n;\r\nint res = 0;\r\nwhile(n--){\r\nint a;\r\ncin >> a;\r\nres += a;\r\n}\r\ncout << res << endl << endl;\r\nreturn 0;\r\n}','c++','Accepted',0,'2014-04-29 12:24:37','2014-05-20 08:24:33',1,NULL),(2,'#include<iostream>\r\nusing namespace std;\r\nint main()\r\n{\r\ncout << 12;\r\nreturn 0;\r\n}','c++','Wrong Answer',0,'2014-05-01 14:13:53','2014-05-20 08:26:22',1,0),(3,'#include<iostream>\r\n#include<algorithm>\r\n#include<cstdio>\r\n\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n   int n;\r\n   cin >> n;\r\n   n *= 0;\r\n   cout << 15 / n;\r\n   \r\n   return 0;\r\n}\r\n','c++','Runtime Error (exited with nonzero status)',0,'2014-05-02 12:35:06','2014-05-20 08:25:57',1,0),(4,'#include<cstdio>\r\nint main()\r\n{\r\n   puts(\"12\");\r\n   while(true);\r\n   \r\n   return 0;\r\n}','c++','Time Limit Exceeded',0,'2014-05-02 12:35:34','2014-05-20 08:23:04',1,0),(5,'\r\nint main()\r\n{\r\n   \r\n   return 0;\r\n}\r\n','c++','Wrong Answer',0,'2014-05-02 12:35:47','2014-05-20 08:26:15',1,0),(6,'#include<iostream>\r\n#include<algorithm>\r\n#include<cstdio>\r\n\r\nusing namespace std;\r\n\r\nconst int SZ = 1;\r\nint a[SZ];\r\n\r\nint main()\r\n{\r\n   for(int i = 0; i < SZ; ++i)\r\na[i] = i*i;\r\n   return 0;\r\n}\r\n','c++','Wrong Answer',0,'2014-05-02 13:59:22','2014-05-20 08:26:09',1,0);
 /*!40000 ALTER TABLE `submissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,4 +264,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-01 22:32:34
+-- Dump completed on 2014-06-07 15:06:46
