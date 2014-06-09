@@ -8,6 +8,7 @@
 <table class='table'>
   <thead>
     <tr>
+      <th>Submission ID</th>
       <th>Problem ID</th>
       <th>Compiler</th>
       <th>Result</th>
@@ -22,6 +23,7 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
+        <td><%= submission.id %></td>
         <td><%= link_to submission.problem_id, problem_path(submission.problem) %></td>
         <td><%= submission.compiler %></td>
         <td><%= submission.result %></td>

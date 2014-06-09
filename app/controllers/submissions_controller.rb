@@ -3,7 +3,8 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
 
   def index
-    @submissions = @submissions.order("updated_at DESC").page(params[:page])
+    #@submissions = @submissions.order("updated_at DESC").page(params[:page])
+    @submissions = @submissions.order("id DESC").page(params[:page])
   end
 
   def show
