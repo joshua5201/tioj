@@ -11,13 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430011011) do
+ActiveRecord::Schema.define(version: 20140617135637) do
 
   create_table "comments", force: true do |t|
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contest_problem_joints", force: true do |t|
+    t.integer  "contest_id"
+    t.integer  "problem_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contest_tasks", force: true do |t|
+    t.integer  "contest_id"
+    t.integer  "problem_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contests", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "contest_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "get_submissions", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,6 +80,7 @@ ActiveRecord::Schema.define(version: 20140430011011) do
     t.text     "example_input"
     t.text     "example_output"
     t.text     "hint"
+    t.string   "created_by"
   end
 
   create_table "submissions", force: true do |t|

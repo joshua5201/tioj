@@ -1,0 +1,48 @@
+<h1 class="page-header">Contests</h1>
+
+<%= paginate @contests %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Contest Type</th>
+      <th>Status</th>
+      <% if user_signed_in? && current_user.admin == true %>
+	<th></th>
+	<th></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contests.each do |contest| %>
+      <tr>
+        <td><%= contest.id %></td>
+        <td><%= link_to contest.title, contest %></td>
+        <td><%= contest.start_time %></td>
+        <td><%= contest.end_time %></td>
+        <td><%= contest.contest_type %></td>
+        <% if Time.now > contest.end_time %>
+	  <td>Ended</td>
+        <% elsif Time.now > contest.start_time %>
+	  <td>On the go</td>
+	<% else %>
+	  <td>Not yet started</td>
+        <% end %>
+        <% if user_signed_in? && current_user.admin == true %>
+	  <td><%= link_to 'Edit', edit_contest_path(contest) %></td>
+	  <td><%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if user_signed_in? && current_user.admin == true %>
+  <%= paginate @contests %>
+  <br />
+  <%= link_to 'New Contest', new_contest_path %>
+<%end%>

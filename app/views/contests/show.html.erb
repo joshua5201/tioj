@@ -1,0 +1,33 @@
+<h1 class='page-header'>
+  <%= @contest.id %> : <%= @contest.title %>
+</h1>
+<div class="well well-lg">
+<p>
+  <h5>Description</h5>
+  <%= markdown(@contest.description) %>
+</p>
+<p>
+  <h5>Start Time</h5>
+  <%= markdown(@contest.start_time.to_formatted_s(:db)) %>
+</p>
+<p>
+  <h5>End Time</h5>
+  <%= markdown(@contest.end_time.to_formatted_s(:db)) %>
+</p>
+<p>
+  <h5>Contest Type</h5>
+  <%= markdown(@contest.contest_type.to_s) %>
+</p>
+<div class = "row-fluid">
+	<div class="btn-group dropup pull-right">
+  		<button type="button" class="btn btn-default">Menu</button>
+  		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    	<span class="caret"></span>
+    	<span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu pull-right" style="border-width:1px;border-width-color:#0047AB;">
+    <li><%= link_to 'Edit', edit_contest_path(@contest) %></li>
+    <li><%= link_to 'Back', contests_path %></li>
+  </ul>
+</div>
+</div>
