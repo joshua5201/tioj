@@ -43,6 +43,15 @@
     <%= f.label :source %><br>
     <%= f.text_area :source %>
 </div>
+<div class="field">
+    <%= f.radio_button :visible_state, 0 %>
+    <%= f.label :visible_state, "Public" %><br>
+    <%= f.radio_button :visible_state, 1 %>
+    <%= f.label :visible_state, "Public during contest" %><br>
+    <%= f.radio_button :visible_state, 2 %>
+    <%= f.label :visible_state, "Invisible" %><br>
+</div>
+
     <%= f.fields_for :limit do |ff| %>
 <div class="field">
         <%= ff.label :time, "Time Limit"%>

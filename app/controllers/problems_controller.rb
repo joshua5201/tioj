@@ -2,10 +2,26 @@ class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
   def index
-    @problems = Problem.all.page(params[:page])
+    @problems = Problem.all.order("id ASC").page(params[:page]).per(100)
   end
 
   def show
+    if user_signed_in? && current_user.admin == true
+    elsif @problem.visible_state == 0 
+    elsif @problem.visible_state == 1 
+      @contests = @problem.contests.all
+      @during_contest = false
+      @contests.each do |c|
+	if Time.now >= c.start_time && Time.now <= c.end_time
+	  @during_contest = true
+	end
+      end
+      if @during_contest == false
+	redirect_to action:'index'
+      end
+    else
+      redirect_to action:'index'
+    end
     @limit = @problem.limit
   end
 
@@ -59,13 +75,14 @@ class ProblemsController < ApplicationController
   end
 
   def destroy
+    
 	authenticate_user!
 	if current_user.admin == false 
 		redirect_to action:'index'	
 	end
-    @problem.destroy
+    #@problem.destroy
     respond_to do |format|
-      format.html { redirect_to problems_url }
+      format.html { redirect_to problems_url, notice: 'Deletion of problem may cause unwanted paginate behavior.' }
       format.json { head :no_content }
     end
   end
@@ -89,6 +106,7 @@ class ProblemsController < ApplicationController
         :source, 
         :limit, 
         :page,
+	:visible_state,
         limit_attributes: 
         [
             :id, 

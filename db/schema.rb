@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617135637) do
+ActiveRecord::Schema.define(version: 20140618103628) do
 
   create_table "comments", force: true do |t|
     t.string   "title"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20140617135637) do
     t.text     "example_output"
     t.text     "hint"
     t.string   "created_by"
+    t.integer  "visible_state",  default: 0
   end
 
   create_table "submissions", force: true do |t|

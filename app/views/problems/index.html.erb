@@ -9,11 +9,11 @@
       <th>Top Coder</th>
       <th>AC Ratio(user)</th>
       <th>AC Ratio(submission)</th>
-      <th>Created At</th>
       <% if user_signed_in? && current_user.admin == true %>
+	<th>Visible State</th>
 	<th></th>
-      <th></th>
-      <th></th>
+	<th></th>
+	<th></th>
       <% end %>
       <% if user_signed_in? %><th></th> <%end%>
       
@@ -22,25 +22,15 @@
 
   <tbody>
     <% @problems.each do |problem| %>
-        <tr>
-            <td><%= problem.id %></td>
-        <td><%= link_to problem.name, problem %></td>
-        <td><img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail">TopCoder</td>
-        <td>AC Ratio(user)</td>
-        <td>AC Ratio(submission)</td>
-        <td><%= problem.created_at %></td>
-        <% if user_signed_in? && current_user.admin == true %>
-        <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
-        <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Manage Testdata', problem_testdata_path(problem) %></td>
-        <% end %>
-        <% if user_signed_in? %><td><%= link_to 'Submit', new_problem_submission_path(problem) %></td><%end%>
-      </tr>
+      <% if user_signed_in? && current_user.admin == true %>
+	<%= render 'problem_list_column', :problem => problem %>
+      <% elsif problem.visible_state == 0 %>
+	<%= render 'problem_list_column', :problem => problem %>
+      <%end%>
     <% end %>
   </tbody>
 </table>
+<%= paginate @problems %><br />
 <% if user_signed_in? && current_user.admin == true %>
-<%= paginate @problems %>
-<br />
-<%= link_to 'New Problem', new_problem_path %>
+  <%= link_to 'New Problem', new_problem_path %>
 <%end%>

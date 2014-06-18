@@ -22,7 +22,11 @@
 <p>
   <h5>Tasks</h5>
   <% for task in @contest.contest_problem_joints %>
-    <%= link_to (task.problem_id.to_s.rjust(4, '0') + '  ' + Problem.find(task.problem_id).name), problem_path(task.problem_id) %>
+    <% if Problem.find_by_id(task.problem_id).nil? %>
+      <%= task.problem_id.to_s.rjust(4, '0') + '  ' + 'Nil' %>
+    <% else %>
+      <%= link_to (task.problem_id.to_s.rjust(4, '0') + '  ' + Problem.find(task.problem_id).name), problem_path(task.problem_id) %>
+    <% end %>
     <br>
   <% end %>
 </p>
