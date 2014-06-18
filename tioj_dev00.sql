@@ -57,7 +57,7 @@ CREATE TABLE `contest_problem_joints` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +66,7 @@ CREATE TABLE `contest_problem_joints` (
 
 LOCK TABLES `contest_problem_joints` WRITE;
 /*!40000 ALTER TABLE `contest_problem_joints` DISABLE KEYS */;
+INSERT INTO `contest_problem_joints` VALUES (9,20,1,'2014-06-18 08:35:02','2014-06-18 08:35:02'),(10,20,2,'2014-06-18 08:35:02','2014-06-18 09:00:56'),(11,20,8,'2014-06-18 08:35:02','2014-06-18 09:00:56'),(12,21,1,'2014-06-18 09:11:27','2014-06-18 09:11:27'),(13,21,2,'2014-06-18 09:11:27','2014-06-18 09:11:27');
 /*!40000 ALTER TABLE `contest_problem_joints` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +87,7 @@ CREATE TABLE `contests` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +96,7 @@ CREATE TABLE `contests` (
 
 LOCK TABLES `contests` WRITE;
 /*!40000 ALTER TABLE `contests` DISABLE KEYS */;
-INSERT INTO `contests` VALUES (2,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:28:26','2014-06-17 13:28:26'),(3,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:28:39','2014-06-17 13:28:39'),(4,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:32:16','2014-06-17 13:32:16'),(5,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:33:49','2014-06-17 13:33:49'),(7,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:34:58','2014-06-17 13:34:58'),(9,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:38:33','2014-06-17 13:38:33'),(10,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-07-01 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:47:56','2014-06-17 13:47:56'),(12,'past contest','jizz','2014-04-17 14:00:48','2014-05-17 14:00:48',1,'2014-06-17 14:01:05','2014-06-17 14:01:05'),(13,'present contest','jizz','2014-04-17 14:00:48','2020-08-17 14:00:48',1,'2014-06-17 14:01:22','2014-06-17 14:01:22'),(14,'future contest','jizz','2020-04-17 14:00:48','2050-08-17 14:00:48',1,'2014-06-17 14:01:41','2014-06-17 14:01:41'),(15,'future contest','jizz','2020-04-17 14:00:48','2050-08-17 14:00:48',1,'2014-06-17 14:01:59','2014-06-17 14:01:59');
+INSERT INTO `contests` VALUES (2,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:28:26','2014-06-17 13:28:26'),(3,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:28:39','2014-06-17 13:28:39'),(4,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:32:16','2014-06-17 13:32:16'),(5,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:33:49','2014-06-17 13:33:49'),(7,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:34:58','2014-06-17 13:34:58'),(9,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:38:33','2014-06-17 13:38:33'),(10,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-07-01 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:47:56','2014-06-17 13:47:56'),(12,'past contest','jizz','2014-04-17 14:00:48','2014-05-17 14:00:48',1,'2014-06-17 14:01:05','2014-06-17 14:01:05'),(13,'present contest','jizz','2014-04-17 14:00:48','2020-08-17 14:00:48',1,'2014-06-17 14:01:22','2014-06-17 14:01:22'),(14,'future contest','jizz','2020-04-17 14:00:48','2050-08-17 14:00:48',1,'2014-06-17 14:01:41','2014-06-17 14:01:41'),(15,'future contest','jizz','2020-04-17 14:00:48','2050-08-17 14:00:48',1,'2014-06-17 14:01:59','2014-06-17 14:01:59'),(18,'222','333','2014-06-18 03:59:05','2014-06-18 03:59:05',1,'2014-06-18 03:22:19','2014-06-18 03:59:13'),(19,'jjj','jjj','2014-06-18 04:12:51','2014-06-18 04:12:51',1,'2014-06-18 03:59:26','2014-06-18 04:12:59'),(20,'333','333','2014-06-18 09:00:45','2014-06-18 09:00:45',1,'2014-06-18 03:59:35','2014-06-18 09:00:56'),(21,'ah ha!','eureka!','2014-05-18 09:00:00','2019-06-18 15:59:00',1,'2014-06-18 09:11:27','2014-06-18 09:13:14');
 /*!40000 ALTER TABLE `contests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +333,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'big2632@gmail.com','$2a$10$kG9B4/oKGyraEoz/rxodMeb1lVNQ91iIccctAFdc0Y5pLlFAWH.e6',NULL,NULL,NULL,3,'2014-06-08 12:56:52','2014-06-08 12:55:59','127.0.0.1','127.0.0.1','2014-04-29 09:15:45','2014-06-08 12:56:52',NULL,NULL,1);
+INSERT INTO `users` VALUES (1,'big2632@gmail.com','$2a$10$kG9B4/oKGyraEoz/rxodMeb1lVNQ91iIccctAFdc0Y5pLlFAWH.e6','f018d9cd4391e6d38042398c50120af57fe401af60353cf02eacaeba6a4ff10d','2014-06-18 08:38:30',NULL,4,'2014-06-18 08:39:37','2014-06-08 12:56:52','127.0.0.1','127.0.0.1','2014-04-29 09:15:45','2014-06-18 08:39:37',NULL,NULL,1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -345,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-06-17 22:03:44
+-- Dump completed on 2014-06-18 17:15:37

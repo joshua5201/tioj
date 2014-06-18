@@ -29,13 +29,6 @@ ActiveRecord::Schema.define(version: 20140617135637) do
     t.datetime "updated_at"
   end
 
-  create_table "contest_tasks", force: true do |t|
-    t.integer  "contest_id"
-    t.integer  "problem_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "contests", force: true do |t|
     t.string   "title"
     t.text     "description"

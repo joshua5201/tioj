@@ -8,16 +8,32 @@
 </p>
 <p>
   <h5>Start Time</h5>
-  <%= markdown(@contest.start_time.to_formatted_s(:db)) %>
+  <%= @contest.start_time %>
 </p>
 <p>
   <h5>End Time</h5>
-  <%= markdown(@contest.end_time.to_formatted_s(:db)) %>
+  <%= @contest.end_time %>
 </p>
 <p>
   <h5>Contest Type</h5>
   <%= markdown(@contest.contest_type.to_s) %>
 </p>
+
+<p>
+  <h5>Tasks</h5>
+  <% for task in @contest.contest_problem_joints %>
+    <%= link_to (task.problem_id.to_s.rjust(4, '0') + '  ' + Problem.find(task.problem_id).name), problem_path(task.problem_id) %>
+    <br>
+  <% end %>
+</p>
+<% if user_signed_in? && current_user.admin == true %>
+  <p>
+    <%= link_to 'Dashboard', edit_contest_path(@contest) %>
+    <%= link_to 'Edit', edit_contest_path(@contest) %>
+    <%= link_to 'Edit', edit_contest_path(@contest) %>
+  </p>
+<% end %>
+
 <div class = "row-fluid">
 	<div class="btn-group dropup pull-right">
   		<button type="button" class="btn btn-default">Menu</button>

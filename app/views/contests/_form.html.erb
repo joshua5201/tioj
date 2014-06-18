@@ -1,38 +1,45 @@
-<%= form_for(@contest) do |f| %>
-    <% if @contest.errors.any? %>
-    <div id="error_explanation">
-    <h2><%= pluralize(@contest.errors.count, "error") %> prohibited this contest from being saved:</h2>
+<%= nested_form_for(@contest) do |f| %>
+   <% if @contest.errors.any? %>
+       <div id="error_explanation">
+       <h2><%= pluralize(@contest.errors.count, "error") %> prohibited this contest from being saved:</h2>
 
-    <ul>
-        <% @contest.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-    <% end %>
-    </ul>
-    </div>
-<% end %>
+       <ul>
+          <% @contest.errors.full_messages.each do |msg| %>
+               <li><%= msg %></li>
+          <% end %>
+       </ul>
+       </div>
+   <% end %>
 
-<div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-</div>
-<div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-</div>
-<div class="field">
-    <%= f.label :start_time %><br>
-    <%= f.text_field :start_time, :value => Time.now.to_formatted_s(:db) %>
-</div>
-<div class="field">
-    <%= f.label :end_time %><br>
-    <%= f.text_field :end_time, :value => Time.now.to_formatted_s(:db) %>
-</div>
-<div class="field">
-    <%= f.label :contest_type %><br>
-    <%= f.text_field :contest_type, :value => '1' %>
-</div>
-
-<div class="actions">
-    <%= f.submit %>
-</div>
+   <div class="field">
+       <%= f.label :title %><br>
+       <%= f.text_field :title %>
+   </div>
+   <div class="field">
+       <%= f.label :description %><br>
+       <%= f.text_area :description %>
+   </div>
+   <div class="field">
+       <%= f.label :start_time %><br>
+       <%= f.datetime_select :start_time %>
+   </div>
+   <div class="field">
+       <%= f.label :end_time %><br>
+       <%= f.datetime_select :end_time %>
+   </div>
+   <div class="field">
+       <%= f.label :contest_type %><br>
+       <%= f.text_field :contest_type, :value => '1' %>
+   </div>
+   <%= f.fields_for :contest_problem_joints do |t| %>
+     <div class="field">
+       <%= t.label :task %>
+       <%= t.text_field :problem_id %>
+       <%= t.link_to_remove "Remove this task" %>
+     </div>
+   <% end %>
+   <p><%= f.link_to_add "Add a task", :contest_problem_joints %></p>
+   <div class="actions">
+       <%= f.submit %>
+   </div>
 <% end %>

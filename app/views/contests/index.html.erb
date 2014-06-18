@@ -21,7 +21,7 @@
     <% @contests.each do |contest| %>
       <tr>
         <td><%= contest.id %></td>
-        <td><%= link_to contest.title, contest %></td>
+        <td><%= contest.title %></td>
         <td><%= contest.start_time %></td>
         <td><%= contest.end_time %></td>
         <td><%= contest.contest_type %></td>
@@ -31,6 +31,9 @@
 	  <td>On the go</td>
 	<% else %>
 	  <td>Not yet started</td>
+        <% end %>
+        <% if user_signed_in? %>
+	  <td><%= link_to 'Particapate contest', contest %></td>
         <% end %>
         <% if user_signed_in? && current_user.admin == true %>
 	  <td><%= link_to 'Edit', edit_contest_path(contest) %></td>

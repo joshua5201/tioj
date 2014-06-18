@@ -15,6 +15,7 @@ class ContestsController < ApplicationController
 			redirect_to action:'index'
 		end
 		@contest = Contest.new
+		3.times { @contest.contest_problem_joints.build }
   end
 
   def edit
@@ -83,7 +84,13 @@ class ContestsController < ApplicationController
       	:start_time,
 	:end_time,
 	:contest_type,
-        :page
+        :page,
+	contest_problem_joints_attributes: 
+        [
+	    :id,
+            :problem_id,
+	    :_destroy
+        ]
       )
     end
 end
