@@ -1,15 +1,21 @@
 <h1 class="page-header">Contests</h1>
 
 <%= paginate @contests %>
+
+<% if user_signed_in? && current_user.admin == true %>
+  <br><%= link_to 'New Contest', new_contest_path, :class => 'btn btn-info btn-xs' %>
+<% end %>
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
       <th>Title</th>
+      <th>Status</th>
+      <% if user_signed_in? %>
+	<th></th>
+      <% end %>
       <th>Start Time</th>
       <th>End Time</th>
       <th>Contest Type</th>
-      <th>Status</th>
       <% if user_signed_in? && current_user.admin == true %>
 	<th></th>
 	<th></th>
@@ -20,21 +26,28 @@
   <tbody>
     <% @contests.each do |contest| %>
       <tr>
-        <td><%= contest.id %></td>
         <td><%= contest.title %></td>
-        <td><%= contest.start_time %></td>
-        <td><%= contest.end_time %></td>
-        <td><%= contest.contest_type %></td>
         <% if Time.now > contest.end_time %>
 	  <td>Ended</td>
         <% elsif Time.now > contest.start_time %>
-	  <td>On the go</td>
+	  <td>Ready</td>
 	<% else %>
 	  <td>Not yet started</td>
         <% end %>
         <% if user_signed_in? %>
-	  <td><%= link_to 'Particapate contest', contest %></td>
+	  <td><%= link_to 'Particapate', contest, :class => 'btn btn-xs btn-primary' %></td>
         <% end %>
+        <td><%= contest.start_time.to_s(:clean) %></td>
+        <td><%= contest.end_time.to_s(:clean) %></td>
+        <% if contest.contest_type == 0 %>
+	  <td>gcj style</td>
+	<% elsif contest.contest_type == 1 %>
+	  <td>ioi style</td>
+	<% elsif contest.contest_type == 2 %>
+	  <td>acm style</td>
+	<% else %>
+	  <td>wtf</td>
+	<% end %>
         <% if user_signed_in? && current_user.admin == true %>
 	  <td><%= link_to 'Edit', edit_contest_path(contest) %></td>
 	  <td><%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -43,9 +56,4 @@
     <% end %>
   </tbody>
 </table>
-
-<% if user_signed_in? && current_user.admin == true %>
-  <%= paginate @contests %>
-  <br />
-  <%= link_to 'New Contest', new_contest_path %>
-<%end%>
+<%= paginate @contests %>

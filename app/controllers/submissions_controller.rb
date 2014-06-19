@@ -17,8 +17,9 @@ class SubmissionsController < ApplicationController
   end
 
   def create
+    authenticate_user!
     @submission = @submissions.build(submission_params)
-
+    @submission.user_id = current_user.id
     respond_to do |format|
       if @submission.save
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }

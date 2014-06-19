@@ -1,6 +1,9 @@
 <h1 class="page-header">Problems</h1>
 
 <%= paginate @problems %>
+<% if user_signed_in? && current_user.admin == true %>
+  <br><%= link_to 'New Problem', new_problem_path, :class => 'btn btn-info btn-xs' %>
+<% end %>
 <table class="table">
   <thead>
     <tr>
@@ -30,7 +33,4 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @problems %><br />
-<% if user_signed_in? && current_user.admin == true %>
-  <%= link_to 'New Problem', new_problem_path %>
-<%end%>
+<%= paginate @problems %>

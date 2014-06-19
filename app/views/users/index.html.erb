@@ -5,6 +5,7 @@
 	<thead>
 		<tr>
 			<th></th>
+			<th>ID</th>
 			<th>Email</th>
 			<th>Nickname</th>
 			<th>Accepted</th>
@@ -14,6 +15,7 @@
 		<% @users.each do |user| %>
 		<tr>
 			<td><img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail"></td>
+			<td><%=user.id%></td>
 			<td><%=user.email%></td>
 			<td></td>
 			<td></td>

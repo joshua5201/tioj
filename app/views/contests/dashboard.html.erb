@@ -1,0 +1,28 @@
+<h1 class='page-header'>
+  Dashboard : <%= @contest.title %>
+</h1>
+<div class="well well-lg">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>ID</th>
+      <% @tasks.each_with_index do |task, index| %>
+	<th><%= link_to ('p' + (65+index).chr), problem_path(task) %></th>
+      <% end %>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @scores.each_with_index do |s, index| %>
+      <tr>
+	<td><%= index+1 %></td>
+	<td><%= s[0] %></td>
+	<% s[1].each do |t|%>
+	  <td><%= t %></td>
+	<% end %>
+	<td><%= s[1].sum %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

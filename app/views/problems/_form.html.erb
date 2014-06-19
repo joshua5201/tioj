@@ -12,6 +12,11 @@
 <% end %>
 
 <div class="field">
+    <%= f.label :visible_state %><br>
+    <%= f.select :visible_state, [["[0]Public", "0"],
+    ["[1]Public during contest", "1"], ["[2]Invisible", "2"]] %>
+</div>
+<div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
 </div>
@@ -43,27 +48,19 @@
     <%= f.label :source %><br>
     <%= f.text_area :source %>
 </div>
-<div class="field">
-    <%= f.radio_button :visible_state, 0 %>
-    <%= f.label :visible_state, "Public" %><br>
-    <%= f.radio_button :visible_state, 1 %>
-    <%= f.label :visible_state, "Public during contest" %><br>
-    <%= f.radio_button :visible_state, 2 %>
-    <%= f.label :visible_state, "Invisible" %><br>
-</div>
 
     <%= f.fields_for :limit do |ff| %>
 <div class="field">
         <%= ff.label :time, "Time Limit"%>
-    <%= ff.text_field :time %>
+    <%= ff.number_field :time %>
 </div>
 <div class="field">
     <%= ff.label :memory, "Memory Limit" %>
-    <%= ff.text_field :memory %>
+    <%= ff.number_field :memory %>
 </div>
 <div class="field">
     <%= ff.label :output, "Output Limit" %>
-    <%= ff.text_field :output %>
+    <%= ff.number_field :output %>
 </div>
   <% end %>
 <div class="actions">

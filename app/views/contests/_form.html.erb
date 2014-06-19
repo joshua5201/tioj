@@ -28,8 +28,7 @@
        <%= f.datetime_select :end_time %>
    </div>
    <div class="field">
-       <%= f.label :contest_type %><br>
-       <%= f.text_field :contest_type, :value => '1' %>
+       <%= render 'contest_type_chooser', :f => f %>
    </div>
    <%= f.fields_for :contest_problem_joints do |t| %>
      <div class="field">

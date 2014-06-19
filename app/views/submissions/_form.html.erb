@@ -16,8 +16,7 @@
     <%= f.text_area :code %>
   </div>
   <div class="field">
-    <%= f.label :compiler %><br>
-    <%= f.text_field :compiler %>
+    <%= render 'compiler_chooser', :f => f %>
   </div>
   <div class="field">
     <%= f.label :result %><br>

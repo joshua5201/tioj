@@ -1,6 +1,30 @@
 class ContestsController < ApplicationController
-  before_action :set_contest, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
+  
+  def dashboard
+    @tasks = @contest.problems.order("id ASC")
+    @c_submissions = Submission.where("created_at >= ? AND created_at <= ?", @contest.start_time, @contest.end_time)
+    @submissions = []
+    @participants = []
+    @tasks.each_with_index do |task, index|
+      @submissions << @c_submissions.select{|a| a.problem_id == task.id}
+      @participants = @participants | @submissions[index].map{|e| e.user_id}
+    end
+    @scores = []
+    @participants.each do |u|
+      @t = []
+      (0..(@tasks.size-1)).each do |index|
+	if @submissions[index].select{|a| a.user_id == u}.empty?
+	  @t << 0
+	else
+	  @t << @submissions[index].select{|a| a.user_id == u}.max_by{|a| a.score}.score
+	end
+      end
+      @scores << [u, @t]
+    end
+    @scores = @scores.sort_by{|a| -a[1].sum}
+  end
+  
   def index
     @contests = Contest.all.order("id DESC").page(params[:page])
   end

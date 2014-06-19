@@ -8,12 +8,13 @@
 <table class='table'>
   <thead>
     <tr>
-      <th>Submission ID</th>
+      <th>ID</th>
       <th>Problem ID</th>
+      <th>Submitter</th>
       <th>Compiler</th>
       <th>Result</th>
       <th>Score</th>
-      <th>Updated At</th>
+      <th>Submit Date</th>
       <th></th>
       <th></th>
       <th></th>
@@ -25,10 +26,11 @@
       <tr>
         <td><%= submission.id %></td>
         <td><%= link_to submission.problem_id, problem_path(submission.problem) %></td>
+        <td><%= link_to submission.user_id, user_path(submission.user_id) %></td>
         <td><%= submission.compiler %></td>
         <td><%= submission.result %></td>
         <td><%= submission.score %></td>
-        <td><%= time_ago_in_words(submission.updated_at) %> ago</td>
+        <td><%= submission.created_at.to_s(:clean) %></td>
         <td><%= link_to 'Show', submission, :class => 'btn btn-xs btn-primary'%></td>
         <td><%= link_to 'Edit', edit_submission_path(submission), :class => 'btn btn-info btn-xs' %></td>
         <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
