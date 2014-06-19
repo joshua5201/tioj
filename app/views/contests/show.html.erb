@@ -19,7 +19,7 @@
       <% elsif @contest.contest_type == 1 %>
 	<td>ioi style (partial/no dashboard)</td>
       <% elsif @contest.contest_type == 2 %>
-	<td>acm style (no partial/no dashboard)</td>
+	<td>acm style (no partial/dashboard)</td>
       <% else %>
 	<td>wtf</td>
       <% end %>
@@ -44,7 +44,7 @@
 </p>
 
 <p>
-  <% if @contest.contest_type == 0 %>
+  <% if @contest.contest_type == 0 || @contest.contest_type == 2 %>
     <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-primary'} %>
   <% elsif user_signed_in? && current_user.admin == true %>
     <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-primary'} %>
