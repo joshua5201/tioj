@@ -1,6 +1,6 @@
 Tioj::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations"}
   resources :limits
   resources :problems do
     resources :testdata
