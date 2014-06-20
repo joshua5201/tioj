@@ -4,11 +4,11 @@ class RegistrationsController < Devise::RegistrationsController
 	end
 
 	def create
+		super
 		agent = Mechanize.new
 		agent.pluggable_parser.default = Mechanize::Download
 		f = agent.get('http://avatar.3sd.me/100')
-		f.save('public/images/avatar/it_should_be_users_id.png')
-		super
+		f.save("public/images/avatar/#{resource.id}.png")
 	end
 
 	def update

@@ -1,7 +1,7 @@
 <tr>
         <td><%= link_to problem.id, problem %></td>
         <td><%= link_to problem.name, problem %></td>
-        <td><img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail">TopCoder</td>
+        <td><%= image_tag("avatar/nobody.gif",:class=>"img-rounded img-responsive ", :size => "25x25") %>Nobody</td>
         <td>AC Ratio(user)</td>
         <td>AC Ratio(submission)</td>
         <% if user_signed_in? && current_user.admin == true %>
