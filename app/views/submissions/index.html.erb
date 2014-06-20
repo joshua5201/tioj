@@ -38,7 +38,7 @@
         <td></td>
         <td></td>
          <% if user_signed_in? && current_user.admin == true %>
-	   <!--<td><%= link_to 'Show', submission, :class => 'btn btn-xs btn-primary'%></td>-->
+	   <td><%= link_to 'Rejudge', {:controller => :submissions, :action => :rejudge, :id => submission.id, :page => @submissions.current_page} , :class => 'btn btn-xs btn-primary'%></td>
            <td><%= link_to 'Edit', edit_submission_path(submission), :class => 'btn btn-info btn-xs' %></td>
            <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
          <% end %>
@@ -51,7 +51,7 @@
         <td><%= submission.score %></td>
         <td><%= submission.created_at.to_s(:clean) %></td>
          <% if user_signed_in? && current_user.admin == true %>
-	   <!--<td><%= link_to 'Show', submission, :class => 'btn btn-xs btn-primary'%></td>-->
+	   <td><%= link_to 'Rejudge', {:controller => :submissions, :action => :rejudge, :id => submission.id, :page => @submissions.current_page} , :class => 'btn btn-xs btn-primary'%></td>
            <td><%= link_to 'Edit', edit_submission_path(submission), :class => 'btn btn-info btn-xs' %></td>
            <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
          <% end %>

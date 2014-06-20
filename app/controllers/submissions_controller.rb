@@ -1,7 +1,23 @@
 class SubmissionsController < ApplicationController
   before_action :set_submissions
-  before_action :set_submission, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_submission, only: [:rejudge, :show, :edit, :update, :destroy]
+  
+  def rejudge
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'
+      return
+    end
+    @submission.update(:result => "queued")
+    if params[:page]
+      redirect_to :action => :index, :page => params[:page]
+      return
+    else
+      redirect_to :action => :show
+      return
+    end
+  end
+  
   def index
     @submissions = @submissions.order("id DESC").page(params[:page])
     if (not user_signed_in?) || (user_signed_in? && current_user.admin == false)
@@ -74,7 +90,8 @@ class SubmissionsController < ApplicationController
   def update
     authenticate_user!
     if current_user.admin == false 
-      redirect_to action:'index'	
+      redirect_to action:'index'
+      return
     end
     respond_to do |format|
       if @submission.update(submission_params)

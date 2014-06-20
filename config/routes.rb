@@ -21,6 +21,9 @@ Tioj::Application.routes.draw do
   resources :contest_problem_joints
   
   get 'contests/:id/dashboard' => 'contests#dashboard'
+  get 'fetch/submission' => 'fetch#submission'
+  get 'submissions/:id/rejudge' => 'submissions#rejudge'
+  
   get 'testdata' => 'testdata#index_all'
   get 'about' => 'about#index', as: :about
   # The priority is based upon order of creation: first created -> highest priority.
