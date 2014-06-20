@@ -4,22 +4,62 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = @submissions.order("id DESC").page(params[:page])
+    if (not user_signed_in?) || (user_signed_in? && current_user.admin == false)
+      @submissions.each do |s|
+        if (user_signed_in? && current_user.id != s.user_id) && s.contest && Time.now >= s.contest.start_time && Time.now <= s.contest.end_time
+	  s.id = 0
+	end
+      end
+    end
   end
 
   def show
+    if (user_signed_in? && current_user.id != @submission.user_id) && 
+	@submission.contest && 
+	Time.now >= @submission.contest.start_time && Time.now <= @submission.contest.end_time
+      redirect_to action:'index'
+    end
   end
 
   def new
-    @submission = @submissions.build
+    authenticate_user!
+    if not params[:problem_id]
+      redirect_to action:'index'
+    end
+    authenticate_user!
+    if current_user.admin == false 
+      if @problem.visible_state == 2
+        redirect_to action:'index'
+      elsif @problem.visible_state == 1
+	@during_contest = false
+	@problem.contests.each do |c|
+	  if Time.now >= c.start_time && Time.now <= c.end_time
+	    @during_contest = true
+	  end
+	end
+	if @during_contest == false
+	  redirect_to action:'index'
+	end
+      end
+    end
+    #@submission = @submissions.build
+    @submission = Submission.new
+    @contest_id = params[:contest_id]
   end
 
   def edit
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
   end
 
   def create
     authenticate_user!
-    @submission = @submissions.build(submission_params)
+    #@submission = @submissions.build(submission_params)
+    @submission = Submission.new(submission_params)
     @submission.user_id = current_user.id
+    @submission.problem_id = params[:problem_id]
     respond_to do |format|
       if @submission.save
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
@@ -32,6 +72,10 @@ class SubmissionsController < ApplicationController
   end
 
   def update
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     respond_to do |format|
       if @submission.update(submission_params)
         format.html { redirect_to @submission, notice: 'Submission was successfully updated.' }
@@ -44,6 +88,10 @@ class SubmissionsController < ApplicationController
   end
 
   def destroy
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @submission.destroy
     respond_to do |format|
       format.html { redirect_to submissions_url }
@@ -54,7 +102,14 @@ class SubmissionsController < ApplicationController
   private
     def set_submissions
       @problem = Problem.find(params[:problem_id]) if params[:problem_id]
-      @submissions = @problem ? @problem.submissions : Submission.all
+      @contest = Contest.find(params[:contest_id]) if params[:contest_id]
+      if @problem
+	@submissions = @problem.submissions
+      elsif @contest
+	@submissions = @contest.submissions
+      else
+	@submissions = Submission.all
+      end
     end
     
     def set_submission
@@ -63,6 +118,6 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id, :page)
+      params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id, :page, :contest_id)
     end
 end

@@ -2,6 +2,12 @@ class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
   
   def dashboard
+    if @contest.contest_type == 1
+      authenticate_user!
+      if current_user.admin == false
+	redirect_to action:'index'
+      end
+    end
     @tasks = @contest.problems.order("id ASC")
     @c_submissions = Submission.where("created_at >= ? AND created_at <= ?", @contest.start_time, @contest.end_time)
     @submissions = []

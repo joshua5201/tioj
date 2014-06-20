@@ -1,8 +1,12 @@
-<% if @problem %>
-  <h1 class="page-header">Submissions <small>Problem #<%= @problem.id%></small></h1>
-<% else %>
-  <h1 class="page-header">Submissions</h1>
-<% end %>
+<h4 class="page-header">
+  Submissions 
+  <% if @problem %>
+    <small>Problem #<%= @problem.id%></small>
+  <% end %>
+  <% if @contest %>
+    <small>Contest #<%= @contest.id%></small>
+  <% end %>
+</h4>
 
 <%= paginate @submissions %>
 <table class='table'>
@@ -15,25 +19,43 @@
       <th>Result</th>
       <th>Score</th>
       <th>Submit Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <% if user_signed_in? && current_user.admin == true %>
+         <th></th>
+         <th></th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-        <td><%= submission.id %></td>
+      <% if submission.id == 0 %>
+	<td></td>
+        <td></td>
+        <td>censored</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+         <% if user_signed_in? && current_user.admin == true %>
+	   <!--<td><%= link_to 'Show', submission, :class => 'btn btn-xs btn-primary'%></td>-->
+           <td><%= link_to 'Edit', edit_submission_path(submission), :class => 'btn btn-info btn-xs' %></td>
+           <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
+         <% end %>
+      <% else %>
+        <td><%= link_to submission.id, submission_path(submission) %></td>
         <td><%= link_to submission.problem_id, problem_path(submission.problem) %></td>
         <td><%= link_to submission.user_id, user_path(submission.user_id) %></td>
         <td><%= submission.compiler %></td>
         <td><%= submission.result %></td>
         <td><%= submission.score %></td>
         <td><%= submission.created_at.to_s(:clean) %></td>
-        <td><%= link_to 'Show', submission, :class => 'btn btn-xs btn-primary'%></td>
-        <td><%= link_to 'Edit', edit_submission_path(submission), :class => 'btn btn-info btn-xs' %></td>
-        <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
+         <% if user_signed_in? && current_user.admin == true %>
+	   <!--<td><%= link_to 'Show', submission, :class => 'btn btn-xs btn-primary'%></td>-->
+           <td><%= link_to 'Edit', edit_submission_path(submission), :class => 'btn btn-info btn-xs' %></td>
+           <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
+         <% end %>
+      <% end %>
       </tr>
     <% end %>
   </tbody>

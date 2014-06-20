@@ -1,7 +1,7 @@
 Tioj::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => "registrations"}
-  resources :limits
+  #resources :limits
   resources :problems do
     resources :testdata
     resources :submissions
@@ -14,7 +14,10 @@ Tioj::Application.routes.draw do
     resources :comments
   end
   
-  resources :contests
+  resources :contests do
+    resources :submissions
+    resources :problems
+  end
   resources :contest_problem_joints
   
   get 'contests/:id/dashboard' => 'contests#dashboard'

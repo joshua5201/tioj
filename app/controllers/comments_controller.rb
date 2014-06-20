@@ -20,6 +20,10 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
   end
 
   # POST /comments
@@ -41,6 +45,10 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to posts_path, notice: 'Comment was successfully updated.' }
@@ -55,6 +63,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to posts_path }

@@ -1,6 +1,6 @@
-<h1 class="page-header">
+<h4 class="page-header">
   <%= @problem.id%> : <%= @problem.name %>
-</h1>
+</h4>
 <div class="well well-lg">
 <dfn>
 Time Limit:<%= @limit.time%>ms<br/>
@@ -35,6 +35,7 @@ Output Limit:<%= @limit.output%>KB<br/>
   <dfn>Source:
   <strong><%= @problem.source %></strong></dfn>
 </p>
+<%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, {:class => 'btn btn-info btn-xs'} %>
 <div class = "row-fluid">
 	<div class="btn-group dropup pull-right">
   		<button type="button" class="btn btn-default">Menu</button>
@@ -45,7 +46,6 @@ Output Limit:<%= @limit.output%>KB<br/>
   <ul class="dropdown-menu pull-right" style="border-width:1px;border-width-color:#0047AB;">
     <li><%= link_to 'Edit', edit_problem_path(@problem) %></li>
     <li><%= link_to 'Back', problems_path %></li>
-    <li><%= link_to 'Submit', new_problem_submission_path(@problem)%></li>
     <li><%= link_to 'Status', problem_submissions_path(@problem)%></li>
     <li><%= link_to 'Discuss', problem_posts_path(@problem) %></li>
 	<li><a href="#">Ranklist</a></li>

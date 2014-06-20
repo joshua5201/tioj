@@ -3,23 +3,47 @@ class TestdataController < ApplicationController
   before_action :set_testdatum, only: [:show, :edit, :update, :destroy]
 
   def index
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @testdata = @problem.testdata
   end
 
   def index_all
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @testdata = Testdatum.all
   end
   def show
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
   end
 
   def new
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @testdatum = @problem.testdata.build 
   end
 
   def edit
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
   end
 
   def create
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @testdatum = @problem.testdata.build(testdatum_params)
 
     respond_to do |format|
@@ -34,6 +58,10 @@ class TestdataController < ApplicationController
   end
 
   def update
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     respond_to do |format|
       if @testdatum.update(testdatum_params)
         format.html { redirect_to prob_td_path(@problem, @testdatum), notice: 'Testdatum was successfully updated.' }
@@ -46,6 +74,10 @@ class TestdataController < ApplicationController
   end
 
   def destroy
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @testdatum.destroy
     respond_to do |format|
       if params[:index_all] == '1'

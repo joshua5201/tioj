@@ -1,6 +1,6 @@
-<h1 class='page-header'>
+<h4 class='page-header'>
   Contest Name : <%= @contest.title %>
-</h1>
+</h4>
 <div class="well well-lg">
 <table class="table">
   <tbody>
@@ -37,7 +37,7 @@
     <% if Problem.find_by_id(task.problem_id).nil? %>
       <%= task.problem_id.to_s.rjust(4, '0') + '  ' + 'Nil' %>
     <% else %>
-      <%= link_to (task.problem_id.to_s.rjust(4, '0') + '  ' + Problem.find(task.problem_id).name), problem_path(task.problem_id) %>
+      <%= link_to (task.problem_id.to_s.rjust(4, '0') + '  ' + Problem.find(task.problem_id).name), contest_problem_path(@contest, task.problem_id) %>
     <% end %>
     <br>
   <% end %>
@@ -46,8 +46,10 @@
 <p>
   <% if @contest.contest_type == 0 || @contest.contest_type == 2 %>
     <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-primary'} %>
+    <%= link_to 'Submissions', contest_submissions_path(@contest), :class => 'btn btn-info btn-xs' %>
   <% elsif user_signed_in? && current_user.admin == true %>
     <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-primary'} %>
+    <%= link_to 'Submissions', contest_submissions_path(@contest), :class => 'btn btn-info btn-xs' %>
   <% end %>
   <% if user_signed_in? && current_user.admin == true %>
     <%= link_to 'Edit', edit_contest_path(@contest), :class => 'btn btn-info btn-xs' %>

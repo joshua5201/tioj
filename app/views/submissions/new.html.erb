@@ -1,6 +1,6 @@
 <%= javascript_include_tag 	"/stylesheets/prism.js" %>
 <%= stylesheet_link_tag 	"/stylesheets/prism.css" %>
-<h1>New submission</h1>
+<h4 class="page-header">New submission: <%= @problem.id %>. <%= @problem.name %></h4>
 <%= form_for [@problem, @submission] do |f| %>
 <% if @submission.errors.any? %>
     <div id="error_explanation">
@@ -21,6 +21,10 @@
   <div class="field">
     <%= f.label :code %><br>
     <%= f.text_area :code, :cols => "80", :rows => "15" %>
+  </div>
+  
+  <div class="field">
+    <%= f.hidden_field :contest_id, :value => @contest_id%>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -22,6 +22,7 @@ class ProblemsController < ApplicationController
     else
       redirect_to action:'index'
     end
+    @contest_id = params[:contest_id]
     @limit = @problem.limit
   end
 
@@ -75,7 +76,7 @@ class ProblemsController < ApplicationController
   end
 
   def destroy
-    
+    redirect_to action:'index'
 	authenticate_user!
 	if current_user.admin == false 
 		redirect_to action:'index'	

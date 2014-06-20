@@ -20,13 +20,17 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @post = @posts.find(params[:id])
   end
 
   # POST /posts
   # POST /posts.json
   def create
-      @post = @posts.build(post_params)
+    @post = @posts.build(post_params)
 
     respond_to do |format|
       if @post.save
@@ -42,6 +46,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @post = @posts.find(params[:id])
     respond_to do |format|
       if @post.update(post_params)
@@ -57,6 +65,10 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @post = @posts.find(params[:id])
     @post.destroy
     respond_to do |format|
