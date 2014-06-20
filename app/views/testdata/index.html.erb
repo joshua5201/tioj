@@ -17,8 +17,8 @@
     <% @testdata.each do |testdatum| %>
       <tr>
         <td><%= testdatum.id %></td>
-        <td><%= testdatum.input %></td>
-        <td><%= testdatum.answer %></td>
+        <td><%= testdatum.test_input %></td>
+        <td><%= testdatum.test_output %></td>
         <td><%= link_to 'Show', problem_testdatum_path(@problem, testdatum), :class=>'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Edit', edit_problem_testdatum_path(@problem, testdatum) %></td>
         <td><%= link_to 'Destroy', problem_testdatum_path(@problem, testdatum), method: :delete, data: { confirm: 'Are you sure?' } %></td>

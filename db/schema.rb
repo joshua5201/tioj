@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619162501) do
+ActiveRecord::Schema.define(version: 20140620152508) do
 
   create_table "comments", force: true do |t|
     t.string   "title"
@@ -90,11 +90,11 @@ ActiveRecord::Schema.define(version: 20140619162501) do
   end
 
   create_table "testdata", force: true do |t|
-    t.text     "input"
-    t.text     "answer"
+    t.integer  "problem_id"
+    t.string   "test_input"
+    t.string   "test_output"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "problem_id"
   end
 
   create_table "users", force: true do |t|

@@ -103,6 +103,6 @@ class TestdataController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def testdatum_params
-      params.require(:testdatum).permit(:input, :answer, :problem_id)
+      params.require(:testdatum).permit(:problem_id, :test_input, :test_output)
     end
 end

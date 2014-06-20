@@ -21,8 +21,10 @@ Tioj::Application.routes.draw do
   resources :contest_problem_joints
   
   get 'contests/:id/dashboard' => 'contests#dashboard'
-  get 'fetch/submission' => 'fetch#submission'
   get 'submissions/:id/rejudge' => 'submissions#rejudge'
+  
+  get 'fetch/testdata' => 'fetch#testdata'
+  get 'fetch/submission' => 'fetch#submission'
   
   get 'testdata' => 'testdata#index_all'
   get 'about' => 'about#index', as: :about
