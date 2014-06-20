@@ -13,10 +13,12 @@
 
 <div class="field">
     <%= f.label :test_input, "input testdata" %><br>
+    <%= @testdatum.test_input %><br>
     <%= f.file_field :test_input %>
 </div>
 <div class="field">
     <%= f.label :test_output, "output testdata" %><br>
+    <%= @testdatum.test_output %><br>
     <%= f.file_field :test_output %>
 </div>
 <div class="dummy-placeholder">
