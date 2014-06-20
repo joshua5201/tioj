@@ -3,7 +3,22 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   after_filter :store_location
-
+  before_action :set_verdict_hash
+private
+  def set_verdict_hash
+    @verdict = {"AC" => "Accepted",
+               "WA" => "Wrong Answer",
+               "TLE" => "Time Limit Exceeded",
+               "MLE" => "Segmentation Fault",
+               "OLE" => "Output Limit Exceeded",
+               "RE" => "Runtime Error (exited with nonzero status)",
+               "SIG" => "Runtime Error (exited with signal)",
+               "CE" => "Compile Error",
+               "CO" => "Compilation Timed Out",
+               "ER" => "WTF!"
+               }
+  end
+public
   	def store_location
   		if (request.fullpath != "/users/sign_in" &&
   			request.fullpath != "/users/sign_out"&&
