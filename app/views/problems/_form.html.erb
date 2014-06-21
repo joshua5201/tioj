@@ -1,4 +1,4 @@
-<%= form_for(@problem) do |f| %>
+<%= nested_form_for(@problem) do |f| %>
     <% if @problem.errors.any? %>
     <div id="error_explanation">
     <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
@@ -48,6 +48,19 @@
     <%= f.label :source %><br>
     <%= f.text_area :source %>
 </div>
+<%= f.label :testdata_sets, "Testdata Sets (testdata no. starts from 0)" %><br>
+<%= f.fields_for :testdata_sets do |t| %>
+    <div class="field">
+       <%= t.label :from %>
+       <%= t.number_field :from, :in => 0...999 %>
+       <%= t.label :to %>
+       <%= t.number_field :to, :in => 0...999 %>
+       <%= t.label :score %>
+       <%= t.number_field :score, :in => 0...100 %>
+       <%= t.link_to_remove "Remove this range" %>
+    </div>
+<% end %>
+<p><%= f.link_to_add "Add a range", :testdata_sets %></p>
 
 <div class="actions">
     <%= f.submit %>

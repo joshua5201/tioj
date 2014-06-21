@@ -1,5 +1,5 @@
 class TestdataController < ApplicationController
-  before_action :find_problem, except: [:index_all]
+  before_action :find_problem
   before_action :set_testdatum, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -10,13 +10,6 @@ class TestdataController < ApplicationController
     @testdata = @problem.testdata
   end
 
-  def index_all
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
-    @testdata = Testdatum.all
-  end
   def show
     authenticate_user!
     if current_user.admin == false 

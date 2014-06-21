@@ -107,7 +107,15 @@ class ProblemsController < ApplicationController
         :source, 
         :limit, 
         :page,
-	:visible_state
+	:visible_state,
+	testdata_sets_attributes:
+	[
+	  :id,
+	  :from,
+	  :to,
+	  :score,
+	  :_destroy
+        ]
       )
     end
 end

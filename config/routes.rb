@@ -26,7 +26,6 @@ Tioj::Application.routes.draw do
   get 'fetch/testdata' => 'fetch#testdata'
   get 'fetch/submission' => 'fetch#submission'
   
-  get 'testdata' => 'testdata#index_all'
   get 'about' => 'about#index', as: :about
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

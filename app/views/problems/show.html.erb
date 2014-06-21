@@ -25,6 +25,9 @@
 <p>
   <h5>Hint</h5>
   <%= markdown(@problem.hint) %>
+  <% @problem.testdata_sets.each do |s| %>
+    For testdata: <%= s.from %> ~ <%= s.to %>, score: <%= s.score %><br>
+  <% end %>
 </p>
 <p>
   <dfn>Source:

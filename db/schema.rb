@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621065138) do
+ActiveRecord::Schema.define(version: 20140621074737) do
 
   create_table "comments", force: true do |t|
     t.string   "title"
@@ -93,6 +93,15 @@ ActiveRecord::Schema.define(version: 20140621065138) do
     t.integer  "problem_id"
     t.string   "test_input"
     t.string   "test_output"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "testdata_sets", force: true do |t|
+    t.integer  "problem_id"
+    t.integer  "from"
+    t.integer  "to"
+    t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
