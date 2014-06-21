@@ -25,6 +25,10 @@ Tioj::Application.routes.draw do
   
   get 'fetch/testdata' => 'fetch#testdata'
   get 'fetch/submission' => 'fetch#submission'
+  get 'fetch/write_result' => 'fetch#write_result'
+  get 'fetch/testdata_limit' => 'fetch#testdata_limit'
+  get 'fetch/testdata_meta' => 'fetch#testdata_meta'
+  
   
   get 'about' => 'about#index', as: :about
   # The priority is based upon order of creation: first created -> highest priority.

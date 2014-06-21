@@ -8,7 +8,8 @@ class SubmissionsController < ApplicationController
       redirect_to action:'index'
       return
     end
-    @submission.update(:result => "queued")
+    @submission.update(:result => "queued", :score => 0, :_result => "")
+    
     if params[:page]
       redirect_to :action => :index, :page => params[:page]
       return
@@ -35,6 +36,7 @@ class SubmissionsController < ApplicationController
 	Time.now >= @submission.contest.start_time && Time.now <= @submission.contest.end_time
       redirect_to action:'index'
     end
+    @_result = @submission._result.split("/")
   end
 
   def new

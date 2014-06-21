@@ -17,6 +17,28 @@ private
                "CO" => "Compilation Timed Out",
                "ER" => "WTF!"
                }
+    @v2i = {"AC" => 0,
+               "WA" => 1,
+               "TLE" => 2,
+               "MLE" => 3,
+               "OLE" => 4,
+               "RE" => 5,
+               "SIG" => 6,
+               "CE" => 7,
+               "CO" => 8,
+               "ER" => 9
+               }
+    @i2v = {0 => "AC",
+              1 => "WA",
+              2 => "TLE",
+              3 => "MLE",
+              4 => "OLE",
+              5 => "RE",
+              6 => "SIG",
+              7 => "CE",
+              8 => "CO",
+              9 => "ER"
+               }
   end
 public
   	def store_location
