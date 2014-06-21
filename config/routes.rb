@@ -20,6 +20,8 @@ Tioj::Application.routes.draw do
   end
   resources :contest_problem_joints
   
+  resources :articles
+  
   get 'contests/:id/dashboard' => 'contests#dashboard'
   get 'submissions/:id/rejudge' => 'submissions#rejudge'
   
@@ -29,6 +31,7 @@ Tioj::Application.routes.draw do
   get 'fetch/testdata_limit' => 'fetch#testdata_limit'
   get 'fetch/testdata_meta' => 'fetch#testdata_meta'
   
+  mathjax 'mathjax'
   
   get 'about' => 'about#index', as: :about
   # The priority is based upon order of creation: first created -> highest priority.

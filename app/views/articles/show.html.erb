@@ -1,0 +1,24 @@
+<h4 class="page-header"><%= @article.title %></h4>
+
+<div class="well well-lg">
+<p>
+  <%= markdown(@article.content) %>
+</p>
+
+<% if not @article.attachments.blank? %>
+<p>
+  <strong>Attachments: </strong><br>
+  <% @article.attachments.each do |a| %>
+    <%= link_to (a.path.to_s.split("/").last + " (" + number_to_human_size(a.path.file.size).to_s + ")"), a.path.to_s %><br>
+  <% end %>
+</p>
+<% end %>
+
+<p>
+  <dfn>
+    Last arthured by: <%= @article.arthur_id %>, <%= @article.updated_at.to_s(:clean) %>
+  </dfn>
+</p>
+
+<%= link_to 'Back', articles_path, :class => 'btn btn-xs btn-primary' %>
+<%= link_to 'Edit', edit_article_path(@article), :class => 'btn btn-info btn-xs' %>

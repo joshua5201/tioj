@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class TestdataUploader < CarrierWave::Uploader::Base
+class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -13,13 +13,7 @@ class TestdataUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    #"uploads/td/#{model.problem.id}"
-    "#{Rails.root}/td/#{model.problem.id}"
-  end
-  
-  def cache_dir
-    '/tmp/tioj_testdata_uploader_cache'
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
   def move_to_cache
@@ -29,16 +23,7 @@ class TestdataUploader < CarrierWave::Uploader::Base
   def move_to_store
     true
   end
-  
-  def filename
-     "#{secure_token}" if original_filename.present?
-  end
 
-  protected
-  def secure_token
-    var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
-  end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:

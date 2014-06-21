@@ -1,0 +1,34 @@
+<h4 class="page-header">Announcements</h4>
+
+<%= paginate @articles %>
+<% if user_signed_in? && current_user.admin == true %>
+  <br><%= link_to 'New Article', new_article_path %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Arthur</th>
+      <th>Time</th>
+      <% if user_signed_in? && current_user.admin == true %>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |a| %>
+      <tr>
+        <td><%= link_to a.title, article_path(a) %></td>
+        <td><%= link_to a.arthur_id, user_path(a.arthur_id) %></td>
+        <td><%= a.created_at.to_s(:clean) %></td>
+        <% if user_signed_in? && current_user.admin == true %>
+          <td><%= link_to 'Edit', edit_article_path(a), :class => 'btn btn-info btn-xs' %></td>
+          <td><%= link_to 'Destroy', a, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @articles %>

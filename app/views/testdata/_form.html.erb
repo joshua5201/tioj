@@ -18,7 +18,7 @@
 </div>
 <div class="field">
     <%= f.label :test_output, "output testdata" %><br>
-    <%= @testdatum.test_output.to_s.split("/").last(3).join("/") if  @testdatum.test_output%><br>
+    <%= @testdatum.test_output.to_s.split("/").last(3).join("/") if  @testdatum.test_output %><br>
     <%= f.file_field :test_output %>
 </div>
 <br>
