@@ -52,9 +52,9 @@
 <%= f.fields_for :testdata_sets do |t| %>
     <div class="field">
        <%= t.label :from %>
-       <%= t.number_field :from, :in => 0...999 %>
+       <%= t.number_field :from, :min => 0, :max => @problem.testdata.size - 1 %>
        <%= t.label :to %>
-       <%= t.number_field :to, :in => 0...999 %>
+       <%= t.number_field :to, :min => 0, :max => @problem.testdata.size - 1 %>
        <%= t.label :score %>
        <%= t.number_field :score, :in => 0...100 %>
        <%= t.link_to_remove "Remove this range" %>
