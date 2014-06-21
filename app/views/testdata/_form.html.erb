@@ -13,14 +13,30 @@
 
 <div class="field">
     <%= f.label :test_input, "input testdata" %><br>
-    <%= @testdatum.test_input %><br>
+    <%= @testdatum.test_input.to_s.split("/").last(3).join("/") if @testdatum.test_input %><br>
     <%= f.file_field :test_input %>
 </div>
 <div class="field">
     <%= f.label :test_output, "output testdata" %><br>
-    <%= @testdatum.test_output %><br>
+    <%= @testdatum.test_output.to_s.split("/").last(3).join("/") if  @testdatum.test_output%><br>
     <%= f.file_field :test_output %>
 </div>
+<br>
+<%= f.fields_for :limit do |t| %>
+  <div class="field">
+    <%= t.label :time, "Time Limit" %>
+    <%= t.number_field :time %>
+  </div>
+  <div class="field">
+    <%= t.label :memory, "Memory Limit" %>
+    <%= t.number_field :memory %>
+  </div>
+  <div class="field">
+    <%= t.label :output, "Output Limit" %>
+    <%= t.number_field :output %>
+  </div>
+<% end %>
+
 <div class="dummy-placeholder">
     <%= f.hidden_field :problem_id %>
 </div>

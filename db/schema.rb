@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620152508) do
+ActiveRecord::Schema.define(version: 20140621065138) do
 
   create_table "comments", force: true do |t|
     t.string   "title"
@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 20140620152508) do
   end
 
   create_table "limits", force: true do |t|
-    t.integer  "time",       default: 1000
-    t.integer  "memory",     default: 65536
-    t.integer  "output",     default: 65536
+    t.integer  "time",         default: 1000
+    t.integer  "memory",       default: 65536
+    t.integer  "output",       default: 65536
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "problem_id"
+    t.integer  "testdatum_id"
   end
 
   create_table "posts", force: true do |t|

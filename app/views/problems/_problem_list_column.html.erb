@@ -12,9 +12,8 @@
 	  <% else %>
 	    <td>Invisible</td>
 	  <% end %>
-	  <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
-	  <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	  <td><%= link_to 'Manage Testdata', problem_testdata_path(problem) %></td>
+	  <td><%= link_to 'Edit', edit_problem_path(problem), :class => 'btn btn-info btn-xs' %></td>
+	  <!--<td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
         <% end %>
         <% if user_signed_in? %><td><%= link_to 'Submit', new_problem_submission_path(problem) %></td><%end%>
       </tr>

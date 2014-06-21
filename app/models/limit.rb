@@ -1,3 +1,3 @@
 class Limit < ActiveRecord::Base
-  belongs_to :problem
+  belongs_to :testdatum
 end

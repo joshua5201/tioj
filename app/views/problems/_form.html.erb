@@ -49,20 +49,6 @@
     <%= f.text_area :source %>
 </div>
 
-    <%= f.fields_for :limit do |ff| %>
-<div class="field">
-        <%= ff.label :time, "Time Limit"%>
-    <%= ff.number_field :time %>
-</div>
-<div class="field">
-    <%= ff.label :memory, "Memory Limit" %>
-    <%= ff.number_field :memory %>
-</div>
-<div class="field">
-    <%= ff.label :output, "Output Limit" %>
-    <%= ff.number_field :output %>
-</div>
-  <% end %>
 <div class="actions">
     <%= f.submit %>
 </div>

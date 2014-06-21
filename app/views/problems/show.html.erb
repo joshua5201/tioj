@@ -2,11 +2,6 @@
   <%= @problem.id%> : <%= @problem.name %>
 </h4>
 <div class="well well-lg">
-<dfn>
-Time Limit:<%= @limit.time%>ms<br/>
-Memory Limit:<%= @limit.memory%>KB<br/>
-Output Limit:<%= @limit.output%>KB<br/>
-</dfn>
 <p>
   <h5>Description</h5>
   <%= markdown(@problem.description) %>
@@ -35,7 +30,33 @@ Output Limit:<%= @limit.output%>KB<br/>
   <dfn>Source:
   <strong><%= @problem.source %></strong></dfn>
 </p>
-<%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, {:class => 'btn btn-info btn-xs'} %>
+
+<dfn>
+<table class="table">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Time Limit (ms)</th>
+      <th>Memory Limit (KiB)</th>
+      <th>Output Limit (KiB)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @problem.testdata.each_with_index do |testdatum, index| %>
+      <tr>
+	<td><%= index %></td>
+	<td><%= testdatum.limit.time.blank? ? "Nil" : testdatum.limit.time %></td>
+        <td><%= testdatum.limit.memory.blank? ? "Nil" : testdatum.limit.memory %></td>
+        <td><%= testdatum.limit.output.blank? ? "Nil" : testdatum.limit.output %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</dfn>
+
+<%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-xs btn-primary' } %>
+<%= link_to 'Manage Testdata', problem_testdata_path(@problem), :class => 'btn btn-info btn-xs' %>
+
 <div class = "row-fluid">
 	<div class="btn-group dropup pull-right">
   		<button type="button" class="btn btn-default">Menu</button>
