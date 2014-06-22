@@ -1,21 +1,24 @@
-<h4 class="page-header">Announcements</h4>
+<h4 class="page-header">Bulletin</h4>
+
+<%= select_tag :era_select, options_for_select([[2014,2014],[2013,2013],[2012,2012]], params[:era]) %>
+<br>
 
 <% if user_signed_in? && current_user.admin == true %>
-  <br><%= link_to 'New Article', new_article_path(:era => params[:era]) %>
+  <%= link_to 'New Announcement', new_article_path(:era => params[:era], :catagory => 0) %><br>
 <% end %>
-
-<%= select_tag :era_select, options_for_select([[2014,2014],[2013,2013]], params[:era]) %>
 
 <script>
   $('#era_select').bind('change', function() { window.location.href = '<%= articles_path.to_s + "?era=" %>' + $(this).val() });
 </script>
 
+<strong>Announcements</strong>
 <table class="table">
   <thead>
     <tr>
+      <th></th>
       <th>Title</th>
-      <th>Arthur</th>
       <th>Time</th>
+      <th>Arthur</th>
       <% if user_signed_in? && current_user.admin == true %>
         <th></th>
         <th></th>
@@ -25,9 +28,44 @@
   <tbody>
     <% @articles.each do |a| %>
       <tr>
+        <td><%= image_tag("DrawingPin1_Blue.png", size: "20x20") if a.pinned and a.pinned == true %></td>
         <td><%= link_to a.title, article_path(a) %></td>
-        <td><%= link_to a.arthur_id, user_path(a.arthur_id) %></td>
         <td><%= a.created_at.to_s(:clean) %></td>
+        <td><%= link_to a.arthur_id, user_path(a.arthur_id) %></td>
+        <% if user_signed_in? && current_user.admin == true %>
+          <td><%= link_to 'Edit', edit_article_path(a), :class => 'btn btn-info btn-xs' %></td>
+          <td><%= link_to 'Destroy', a, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if user_signed_in? && current_user.admin == true %>
+  <%= link_to 'New Course Material', new_article_path(:era => params[:era], :catagory => 1) %><br>
+<% end %>
+
+<strong>Course Materials</strong>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Time</th>
+      <th>Arthur</th>
+      <% if user_signed_in? && current_user.admin == true %>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |a| %>
+      <tr>
+        <td><%= image_tag("DrawingPin1_Blue.png", size: "20x20") if a.pinned and a.pinned == true %></td>
+        <td><%= link_to a.title, article_path(a) %></td>
+        <td><%= a.created_at.to_s(:clean) %></td>
+        <td><%= link_to a.arthur_id, user_path(a.arthur_id) %></td>
         <% if user_signed_in? && current_user.admin == true %>
           <td><%= link_to 'Edit', edit_article_path(a), :class => 'btn btn-info btn-xs' %></td>
           <td><%= link_to 'Destroy', a, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>

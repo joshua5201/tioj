@@ -1,4 +1,6 @@
 class Problem < ActiveRecord::Base
+  default_scope order('id ASC')
+  
   has_many :submissions, dependent: :destroy
   has_many :testdata, dependent: :destroy
   has_many :posts, dependent: :destroy
