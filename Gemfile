@@ -48,6 +48,9 @@ gem "carrierwave"
 # Mathjax, can render latex equation: https://github.com/pmq20/mathjax-rails
 gem "mathjax-rails"
 
+# tagging feature: https://github.com/mbleigh/acts-as-taggable-on
+gem 'acts-as-taggable-on'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

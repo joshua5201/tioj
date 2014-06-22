@@ -48,6 +48,12 @@
     <%= f.label :source %><br>
     <%= f.text_area :source %>
 </div>
+
+<div class="field">
+  <%= f.label :tag_list, "Tags (saperate by commas)" %><br>
+  <%= f.text_field :tag_list %>
+</div>
+
 <%= f.label :testdata_sets, "Testdata Sets (testdata no. starts from 0)" %><br>
 <%= f.fields_for :testdata_sets do |t| %>
     <div class="field">
