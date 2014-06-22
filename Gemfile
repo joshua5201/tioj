@@ -51,6 +51,9 @@ gem "mathjax-rails"
 # tagging feature: https://github.com/mbleigh/acts-as-taggable-on
 gem 'acts-as-taggable-on'
 
+# Active Admin, db admin tool: https://github.com/gregbell/active_admin
+gem 'activeadmin', github: 'gregbell/active_admin'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

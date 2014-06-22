@@ -23,7 +23,11 @@ class ContestsController < ApplicationController
 	if @submissions[index].select{|a| a.user_id == u}.empty?
 	  @t << 0
 	else
-	  @t << @submissions[index].select{|a| a.user_id == u}.max_by{|a| a.score}.score
+          if @contest.contest_type == 2
+            @t << ( @submissions[index].select{|a| a.user_id == u and a.result == 'AC'}.blank? ? 0 : 100 )
+          else
+            @t << @submissions[index].select{|a| a.user_id == u}.max_by{|a| a.score}.score
+          end
 	end
       end
       @scores << [u, @t]
