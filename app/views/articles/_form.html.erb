@@ -28,6 +28,7 @@
   <% end %>
   <%= f.link_to_add "Add a attachment", :attachments %>
   
+  <%= hidden_field_tag :era, params[:era] %>
   <div class="actions">
     <%= f.submit %>
   </div>

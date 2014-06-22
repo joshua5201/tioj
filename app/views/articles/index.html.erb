@@ -1,9 +1,14 @@
 <h4 class="page-header">Announcements</h4>
 
-<%= paginate @articles %>
 <% if user_signed_in? && current_user.admin == true %>
-  <br><%= link_to 'New Article', new_article_path %>
+  <br><%= link_to 'New Article', new_article_path(:era => params[:era]) %>
 <% end %>
+
+<%= select_tag :era_select, options_for_select([[2014,2014],[2013,2013]], params[:era]) %>
+
+<script>
+  $('#era_select').bind('change', function() { window.location.href = '<%= articles_path.to_s + "?era=" %>' + $(this).val() });
+</script>
 
 <table class="table">
   <thead>
@@ -31,4 +36,3 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @articles %>

@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   
   def index
-    @articles = Article.all.order("id DESC").page(params[:page])
+    @articles = Article.where("era = ?", get_era).order("id DESC").page(params[:page])
   end
   
   def create
@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
     end
     @article = Article.new(article_params)
     @article.arthur_id = current_user.id
+    @article.era = get_era
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
@@ -65,6 +66,10 @@ class ArticlesController < ApplicationController
   end
   
 private
+
+  def get_era
+     params[:era] ? params[:era] : 2014
+  end
   
   def set_article
     @article = Article.find(params[:id])

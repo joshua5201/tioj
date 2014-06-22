@@ -36,7 +36,7 @@ class SubmissionsController < ApplicationController
 	Time.now >= @submission.contest.start_time && Time.now <= @submission.contest.end_time
       redirect_to action:'index'
     end
-    @_result = @submission._result.split("/")
+    @_result = @submission._result.to_s.split("/")
   end
 
   def new
