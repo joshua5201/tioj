@@ -57,7 +57,7 @@ CREATE TABLE `contest_problem_joints` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,6 @@ CREATE TABLE `contest_problem_joints` (
 
 LOCK TABLES `contest_problem_joints` WRITE;
 /*!40000 ALTER TABLE `contest_problem_joints` DISABLE KEYS */;
-INSERT INTO `contest_problem_joints` VALUES (9,20,1,'2014-06-18 08:35:02','2014-06-18 08:35:02'),(10,20,2,'2014-06-18 08:35:02','2014-06-18 09:00:56'),(11,20,8,'2014-06-18 08:35:02','2014-06-18 09:00:56'),(13,21,2,'2014-06-18 09:11:27','2014-06-18 09:11:27'),(14,20,3,'2014-06-18 10:09:38','2014-06-18 10:09:38'),(15,23,1,'2014-06-18 14:52:54','2014-06-18 14:52:54'),(16,23,2,'2014-06-18 14:52:54','2014-06-18 14:52:54');
 /*!40000 ALTER TABLE `contest_problem_joints` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +86,7 @@ CREATE TABLE `contests` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +95,6 @@ CREATE TABLE `contests` (
 
 LOCK TABLES `contests` WRITE;
 /*!40000 ALTER TABLE `contests` DISABLE KEYS */;
-INSERT INTO `contests` VALUES (2,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:28:26','2014-06-17 13:28:26'),(3,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:28:39','2014-06-17 13:28:39'),(4,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:32:16','2014-06-17 13:32:16'),(5,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:33:49','2014-06-17 13:33:49'),(7,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:34:58','2014-06-17 13:34:58'),(9,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-06-17 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:38:33','2014-06-17 13:38:33'),(10,'first contest','jizz\r\nizz\r\nzz\r\nz','2014-07-01 12:25:56','2014-07-01 13:25:56',1,'2014-06-17 13:47:56','2014-06-17 13:47:56'),(12,'past contest','jizz','2014-04-17 14:00:48','2014-05-17 14:00:48',1,'2014-06-17 14:01:05','2014-06-17 14:01:05'),(13,'present contest','jizz','2014-04-17 14:00:48','2020-08-17 14:00:48',1,'2014-06-17 14:01:22','2014-06-17 14:01:22'),(14,'future contest','jizz','2020-04-17 14:00:48','2050-08-17 14:00:48',1,'2014-06-17 14:01:41','2014-06-17 14:01:41'),(15,'future contest','jizz','2020-04-17 14:00:48','2050-08-17 14:00:48',1,'2014-06-17 14:01:59','2014-06-17 14:01:59'),(18,'222','333','2014-06-18 03:59:05','2014-06-18 03:59:05',1,'2014-06-18 03:22:19','2014-06-18 03:59:13'),(19,'jjj','jjj','2014-06-18 04:12:51','2014-06-18 04:12:51',1,'2014-06-18 03:59:26','2014-06-18 04:12:59'),(20,'333','333','2014-06-18 09:00:00','2014-06-18 09:00:00',1,'2014-06-18 03:59:35','2014-06-18 10:09:38'),(21,'ah ha!','eureka!','2014-05-18 09:00:00','2019-06-18 15:59:00',1,'2014-06-18 09:11:27','2014-06-18 09:13:14'),(22,'','','2014-06-18 10:19:00','2014-06-18 10:19:00',1,'2014-06-18 10:20:00','2014-06-18 10:20:00'),(23,'test','test','2014-06-19 02:52:00','2015-06-18 14:52:00',0,'2014-06-18 14:52:54','2014-06-19 11:26:27');
 /*!40000 ALTER TABLE `contests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +138,7 @@ CREATE TABLE `limits` (
   `updated_at` datetime DEFAULT NULL,
   `problem_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +147,7 @@ CREATE TABLE `limits` (
 
 LOCK TABLES `limits` WRITE;
 /*!40000 ALTER TABLE `limits` DISABLE KEYS */;
-INSERT INTO `limits` VALUES (1,1000,65536,65536,'2014-04-29 09:07:27','2014-05-20 08:11:59',1),(2,1000,65536,65536,'2014-04-29 09:13:24','2014-04-29 09:13:24',2),(9,1000,65536,65536,'2014-06-09 14:17:31','2014-06-09 14:17:31',9),(10,1000,65536,65536,'2014-06-09 14:22:27','2014-06-09 14:22:27',10),(11,1000,65536,65536,'2014-06-09 14:24:30','2014-06-09 14:24:30',11),(12,1000,65536,65536,'2014-06-17 13:00:48','2014-06-17 13:00:48',12),(13,1000,65536,65536,'2014-06-18 11:07:28','2014-06-18 11:07:28',13),(14,1000,65536,65536,'2014-06-18 11:07:35','2014-06-18 11:07:35',14),(15,1000,65536,65536,'2014-06-18 11:07:40','2014-06-18 11:07:40',15),(16,1000,65536,65536,'2014-06-18 11:07:44','2014-06-18 11:07:44',16),(17,1000,65536,65536,'2014-06-18 12:53:58','2014-06-18 12:53:58',17),(18,1000,65536,65536,'2014-06-18 12:54:04','2014-06-18 12:54:04',18);
+INSERT INTO `limits` VALUES (1,1000,65536,65536,'2014-06-20 15:40:13','2014-06-20 15:40:13',1);
 /*!40000 ALTER TABLE `limits` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +167,7 @@ CREATE TABLE `posts` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +176,6 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,'test/','test?\r\ntesttest??',NULL,NULL,'2014-06-19 08:19:26','2014-06-19 08:19:26');
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +201,7 @@ CREATE TABLE `problems` (
   `created_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `visible_state` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +210,7 @@ CREATE TABLE `problems` (
 
 LOCK TABLES `problems` WRITE;
 /*!40000 ALTER TABLE `problems` DISABLE KEYS */;
-INSERT INTO `problems` VALUES (1,'sum','sum up all the numbers','original','2014-04-29 09:07:27','2014-06-18 16:18:47','','','3\r\n1 2 3','6','while loop',NULL,1),(2,'sort','sort the numbers','original','2014-04-29 09:13:24','2014-04-29 09:13:24','','','5\r\n1 5 4 2 3','1 2 3 4 5','STL',NULL,0),(9,'','','','2014-06-09 14:17:31','2014-06-18 14:09:30','','','','','',NULL,1),(10,'','','','2014-06-09 14:22:27','2014-06-18 14:09:37','','','','','',NULL,2),(11,'','','','2014-06-09 14:24:30','2014-06-09 14:24:30','','','','','',NULL,0),(12,'','','','2014-06-17 13:00:48','2014-06-17 13:00:48','','','','','',NULL,0),(13,'','','','2014-06-18 11:07:28','2014-06-18 11:07:28','','','','','',NULL,0),(14,'','','','2014-06-18 11:07:35','2014-06-18 11:07:35','','','','','',NULL,0),(15,'','','','2014-06-18 11:07:40','2014-06-18 11:07:40','','','','','',NULL,0),(16,'','','','2014-06-18 11:07:44','2014-06-18 11:07:44','','','','','',NULL,0),(17,'','','','2014-06-18 12:53:58','2014-06-18 12:53:58','','','','','',NULL,0),(18,'','','','2014-06-18 12:54:04','2014-06-18 12:54:04','','','','','',NULL,0);
+INSERT INTO `problems` VALUES (1,'0129 爆搜題','輸入第1行有一個正整數k 代表有幾組測資\r\n第2行有一個正整數n\r\n接著第3+n*(i-1)行到第2+n*(i)行是第i組測資\r\n每組測資有三個n x n的方陣 A , B , C, \r\n如果 A x B = C 則輸出 \"I need wrestling !!\", 否則輸出\"QAQQQQQQQQQQ\"','classic','2014-06-20 15:40:13','2014-06-20 15:41:06','','','2\r\n2\r\n1 2\r\n2 1\r\n0 0\r\n0 0\r\n7 1\r\n2 2\r\n1 2\r\n2 1\r\n0 0\r\n0 0\r\n0 0\r\n0 0','QAQQQQQQQQQQ\r\nI need wrestling !!','',NULL,0);
 /*!40000 ALTER TABLE `problems` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,7 +233,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20140131174639'),('20140131175010'),('20140131175102'),('20140131175153'),('20140201174405'),('20140203101504'),('20140203101934'),('20140203111940'),('20140206093208'),('20140206100424'),('20140206100458'),('20140413143616'),('20140418045046'),('20140426061543'),('20140430011011'),('20140607103418'),('20140609132824'),('20140613154934'),('20140614102332'),('20140617121220'),('20140617122408'),('20140617135637'),('20140618103628');
+INSERT INTO `schema_migrations` VALUES ('20140131174639'),('20140131175010'),('20140131175102'),('20140131175153'),('20140201174405'),('20140203101504'),('20140203101934'),('20140203111940'),('20140206093208'),('20140206100424'),('20140206100458'),('20140413143616'),('20140418045046'),('20140426061543'),('20140430011011'),('20140607103418'),('20140609132824'),('20140613154934'),('20140614102332'),('20140617121220'),('20140617122408'),('20140617135637'),('20140618103628'),('20140619162501'),('20140620140855'),('20140620151303'),('20140620152237'),('20140620152508');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,8 +254,9 @@ CREATE TABLE `submissions` (
   `updated_at` datetime DEFAULT NULL,
   `problem_id` int(11) DEFAULT '0',
   `user_id` int(11) DEFAULT '0',
+  `contest_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +265,7 @@ CREATE TABLE `submissions` (
 
 LOCK TABLES `submissions` WRITE;
 /*!40000 ALTER TABLE `submissions` DISABLE KEYS */;
-INSERT INTO `submissions` VALUES (1,'#include<iostream>\r\nusing namespace std;\r\nint main()\r\n{\r\nint n;\r\ncin >> n;\r\nint res = 0;\r\nwhile(n--){\r\nint a;\r\ncin >> a;\r\nres += a;\r\n}\r\ncout << res << endl << endl;\r\nreturn 0;\r\n}','c++','Accepted',0,'2014-04-29 12:24:37','2014-05-20 08:24:33',1,NULL),(2,'#include<iostream>\r\nusing namespace std;\r\nint main()\r\n{\r\ncout << 12;\r\nreturn 0;\r\n}','c++','Wrong Answer',0,'2014-05-01 14:13:53','2014-05-20 08:26:22',1,0),(3,'#include<iostream>\r\n#include<algorithm>\r\n#include<cstdio>\r\n\r\nusing namespace std;\r\n\r\nint main()\r\n{\r\n   int n;\r\n   cin >> n;\r\n   n *= 0;\r\n   cout << 15 / n;\r\n   \r\n   return 0;\r\n}\r\n','c++','Runtime Error (exited with nonzero status)',0,'2014-05-02 12:35:06','2014-05-20 08:25:57',1,0),(4,'#include<cstdio>\r\nint main()\r\n{\r\n   puts(\"12\");\r\n   while(true);\r\n   \r\n   return 0;\r\n}','c++','Time Limit Exceeded',0,'2014-05-02 12:35:34','2014-05-20 08:23:04',1,0),(5,'\r\nint main()\r\n{\r\n   \r\n   return 0;\r\n}\r\n','c++','Wrong Answer',0,'2014-05-02 12:35:47','2014-05-20 08:26:15',1,0),(6,'#include<iostream>\r\n#include<algorithm>\r\n#include<cstdio>\r\n\r\nusing namespace std;\r\n\r\nconst int SZ = 1;\r\nint a[SZ];\r\n\r\nint main()\r\n{\r\n   for(int i = 0; i < SZ; ++i)\r\na[i] = i*i;\r\n   return 0;\r\n}\r\n','c++','Wrong Answer',0,'2014-05-02 13:59:22','2014-05-20 08:26:09',1,0),(7,'jizz','','queued',0,'2014-06-18 14:21:35','2014-06-18 14:21:35',1,0),(8,'','','queued',0,'2014-06-19 04:15:45','2014-06-19 04:15:45',1,0),(9,'','c++11','queued',0,'2014-06-19 07:56:10','2014-06-19 07:56:10',1,0),(10,'','c++11','queued',10,'2014-06-19 11:23:08','2014-06-19 11:27:21',1,0),(11,'','c++11','queued',20,'2014-06-19 11:26:48','2014-06-19 11:27:29',2,0),(12,'','c++11','queued',100,'2014-06-19 11:26:56','2014-06-19 11:27:36',1,0),(13,'','c++11','queued',7,'2014-06-19 11:27:01','2014-06-19 11:27:43',2,0),(14,'','c++11','queued',0,'2014-06-19 11:57:11','2014-06-19 11:57:11',1,0),(15,'','c++11','queued',0,'2014-06-19 11:57:29','2014-06-19 11:57:29',2,0),(16,'','c++11','queued',0,'2014-06-19 12:06:59','2014-06-19 12:06:59',11,0),(17,'','c++11','queued',0,'2014-06-19 12:17:31','2014-06-19 12:17:31',11,2),(18,'','c++11','queued',50,'2014-06-19 12:17:47','2014-06-19 12:20:24',2,2),(19,'','c++11','queued',100,'2014-06-19 12:17:58','2014-06-19 12:20:12',1,1),(20,'','c++11','queued',100,'2014-06-19 12:18:03','2014-06-19 12:20:06',2,1),(21,'','c++11','queued',0,'2014-06-19 12:25:09','2014-06-19 12:25:09',1,2);
+INSERT INTO `submissions` VALUES (1,'#include<iostream>\r\n#include<algorithm>\r\n#include<cstdio>\r\n#include<cstdlib>\r\n#include<ctime>\r\n \r\nusing namespace std;\r\n \r\nint n;\r\nvoid in(int A[1000][1000])\r\n{\r\n   for(int i = 0; i < n; ++i)\r\n      for(int j = 0; j < n; ++j)\r\n         scanf(\"%d\", &A[i][j]);\r\n}\r\n \r\nvoid mul(int A[1000][1000], int r[1000])\r\n{\r\n   int s[1000] = {0};\r\n   for(int i = 0; i < n; ++i)\r\n      for(int k = 0; k < n; ++k)\r\n         s[i] += A[i][k] * r[k];\r\n   for(int i = 0; i < n; ++i)\r\n      r[i] = s[i];\r\n}\r\n \r\nbool test(int A[1000][1000], int B[1000][1000], int C[1000][1000])\r\n{\r\n   int r[1000], l[1000];\r\n   for(int i = 0; i < n; ++i)\r\n      r[i] = l[i] = rand() % 255;\r\n \r\n   mul(C, l);\r\n   mul(B, r);\r\n   mul(A, r);\r\n \r\n   for(int i = 0; i < n; ++i)\r\n      if(r[i] != l[i])\r\n         return false;\r\n \r\n   return true;\r\n}\r\n \r\nint A[1000][1000], B[1000][1000], C[1000][1000];\r\n \r\nint main()\r\n{\r\n   srand(time(NULL));\r\n   scanf(\"%d\", &n);\r\n \r\n   in(A); in(B); in(C);\r\n   bool flag = true;\r\n   for(int i = 0; i < 10 && flag; ++i){\r\n      if(test(A, B, C) == false){\r\n         printf(\"QAQQQQQQQQQQ\");\r\n         flag = false;\r\n      }\r\n   }\r\n   if(flag)\r\n      printf(\"I need wrestling !!\");\r\n   return 0;\r\n}','c++11','AC',0,'2014-06-20 16:00:48','2014-06-20 17:19:14',1,1,NULL);
 /*!40000 ALTER TABLE `submissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,13 +278,13 @@ DROP TABLE IF EXISTS `testdata`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `testdata` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `input` text COLLATE utf8_unicode_ci,
-  `answer` text COLLATE utf8_unicode_ci,
+  `problem_id` int(11) DEFAULT NULL,
+  `test_input` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `test_output` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `problem_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +293,7 @@ CREATE TABLE `testdata` (
 
 LOCK TABLES `testdata` WRITE;
 /*!40000 ALTER TABLE `testdata` DISABLE KEYS */;
-INSERT INTO `testdata` VALUES (1,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-04-29 09:18:49','2014-04-29 09:18:49',1),(2,'10\r\n10 20 30 40 50 60 70 80 90 100','550','2014-04-29 09:19:16','2014-04-29 09:19:16',1),(3,'10\r\n4 3 7 8 0 5 2 1 6 9 ','0 1 2 3 4 5 6 7 8 9','2014-04-29 09:19:52','2014-04-29 09:19:52',2),(4,'10\r\n40 30 70 80 00 50 20 10 60 90 ','0 10 20 30 40 50 60 70 80 90','2014-04-29 09:20:46','2014-04-29 09:20:46',2),(5,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:03','2014-05-01 14:24:03',1),(6,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:09','2014-05-01 14:24:09',1),(7,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:15','2014-05-01 14:24:15',1),(8,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:21','2014-05-01 14:24:21',1),(9,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:27','2014-05-01 14:24:27',1),(10,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:33','2014-05-01 14:24:33',1),(11,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:38','2014-05-01 14:24:38',1),(12,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:44','2014-05-01 14:24:44',1),(13,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:49','2014-05-01 14:24:49',1),(14,'10\r\n1 2 3 4 5 6 7 8 9 10','55','2014-05-01 14:24:54','2014-05-01 14:24:54',1);
+INSERT INTO `testdata` VALUES (12,1,'8adac75d-a4c8-4fb4-8c32-84a8a7034a4c','b1f439e0-39b2-4fa1-ab6e-1896d498e91a','2014-06-20 17:17:50','2014-06-20 17:17:50'),(13,1,'10e1ff33-2d55-4e83-9100-ce1fa399a8a0','b0fdb4ba-3e42-4911-baeb-fe54b86735a5','2014-06-20 17:18:01','2014-06-20 17:18:01'),(14,1,'d6491e5c-1dd4-4afa-8d9c-848c0dbee7e2','b673d093-f502-4929-a52f-f5a90ce68ae9','2014-06-20 17:18:17','2014-06-20 17:18:17'),(15,1,'3a3ba492-7be7-45d9-a325-6b095f06d768','42727146-8640-4686-ba9a-2a4f2bfaea19','2014-06-20 17:18:57','2014-06-20 17:18:57'),(16,1,'4beeac02-c65b-4759-b61b-688242b34e67','4ea4724b-5415-441a-b42a-9980d499383e','2014-06-20 17:19:08','2014-06-20 17:19:08');
 /*!40000 ALTER TABLE `testdata` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +324,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +333,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'big2632@gmail.com','$2a$10$kG9B4/oKGyraEoz/rxodMeb1lVNQ91iIccctAFdc0Y5pLlFAWH.e6','f018d9cd4391e6d38042398c50120af57fe401af60353cf02eacaeba6a4ff10d','2014-06-18 08:38:30',NULL,4,'2014-06-18 08:39:37','2014-06-08 12:56:52','127.0.0.1','127.0.0.1','2014-04-29 09:15:45','2014-06-18 08:39:37',NULL,NULL,1),(2,'jizz@gmail.com','$2a$10$mLmHwhuQvEVhAooScs4E0.zzdV0xjpsYal2PkALoh0UjA0JCbokmC',NULL,NULL,'2014-06-19 11:56:57',2,'2014-06-19 11:56:57','2014-06-18 14:53:37','127.0.0.1','127.0.0.1','2014-06-18 14:53:37','2014-06-19 11:56:57',NULL,NULL,0);
+INSERT INTO `users` VALUES (1,'big2632@gmail.com','$2a$10$kG9B4/oKGyraEoz/rxodMeb1lVNQ91iIccctAFdc0Y5pLlFAWH.e6','f018d9cd4391e6d38042398c50120af57fe401af60353cf02eacaeba6a4ff10d','2014-06-18 08:38:30',NULL,6,'2014-06-20 15:37:11','2014-06-19 13:07:18','127.0.0.1','127.0.0.1','2014-04-29 09:15:45','2014-06-20 15:37:11',NULL,NULL,1),(2,'jizz@gmail.com','$2a$10$mLmHwhuQvEVhAooScs4E0.zzdV0xjpsYal2PkALoh0UjA0JCbokmC',NULL,NULL,NULL,3,'2014-06-19 15:15:22','2014-06-19 11:56:57','127.0.0.1','127.0.0.1','2014-06-18 14:53:37','2014-06-20 03:59:11',NULL,NULL,0),(3,'jizzjizz@jizz.jizz','$2a$10$WXpHmZyRVjJYQZi3WQFGFe1W4229AvPO78HVr7XXLt6pk4QJ2GGz.',NULL,NULL,NULL,1,'2014-06-20 03:59:30','2014-06-20 03:59:30','127.0.0.1','127.0.0.1','2014-06-20 03:59:30','2014-06-20 03:59:30',NULL,NULL,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -348,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-06-19 20:31:08
+-- Dump completed on 2014-06-21  1:20:25

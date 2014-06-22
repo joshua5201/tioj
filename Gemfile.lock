@@ -29,6 +29,11 @@ GEM
     atomic (1.1.14)
     bcrypt (3.1.7)
     builder (3.1.4)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -77,6 +82,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mathjax-rails (2.3.0)
+      railties (>= 3.0)
     mechanize (2.7.2)
       domain_name (~> 0.5, >= 0.5.1)
       http-cookie (~> 1.0.0)
@@ -180,6 +187,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  carrierwave
   coffee-rails (~> 4.0.0)
   devise (~> 3.2.4)
   jbuilder (~> 1.2)
@@ -188,6 +196,7 @@ DEPENDENCIES
   less
   less-rails
   less-rails-bootstrap
+  mathjax-rails
   mechanize
   mysql2
   nested_form

@@ -2,7 +2,7 @@
 
 <%= paginate @problems %>
 <% if user_signed_in? && current_user.admin == true %>
-  <br><%= link_to 'New Problem', new_problem_path, :class => 'btn btn-info btn-xs' %>
+  <br><%= link_to 'New Problem', new_problem_path %>
 <% end %>
 <table class="table">
   <thead>
@@ -14,8 +14,6 @@
       <th>AC Ratio(submission)</th>
       <% if user_signed_in? && current_user.admin == true %>
 	<th>Visible State</th>
-	<th></th>
-	<th></th>
 	<th></th>
       <% end %>
       <% if user_signed_in? %><th></th> <%end%>

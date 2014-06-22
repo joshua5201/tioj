@@ -2,8 +2,86 @@ class FetchController < ApplicationController
   before_action :authenticate
   layout false
   
+  def testdata_meta
+    @problem = Problem.find(params[:pid])
+    @result = @problem.testdata.size.to_s + " "
+    @problem.testdata.each do |t|
+      @result += t.id.to_s + " "
+      @result += t.updated_at.to_i.to_s + "\n"
+    end
+    render text: @result
+  end
+  
+  def testdata_limit
+    @problem = Problem.find(params[:pid])
+    @result = ""
+    @problem.testdata.each do |t|
+      @result += t.limit.time.to_s + " "
+      @result += t.limit.memory.to_s + "\n"
+    end
+    render text: @result
+  end
+  
+  def write_result
+    @_result = params[:result]
+    @submission = Submission.find(params[:sid])
+    @submission.update(:_result => @_result)
+    if @_result == "CE"
+      @submission.update(:result => "CE", :score => 0)
+    else
+      update_verdict
+    end
+    render :nothing => true
+  end
+  
+  def update_verdict
+    #score
+    @_result = @_result.split("/")
+    @score = 0
+    @problem = @submission.problem
+    @problem.testdata_sets.each do |s|
+      @correct = true
+      Range.new(s.from, s.to).each do |i|
+	if @_result[i*3] != "AC"
+	  @correct = false
+	end
+      end
+      if @correct == true
+	@score += s.score
+      end
+    end
+    @submission.update(:score => @score)
+    
+    #verdict
+    @tdcount = @problem.testdata.size
+    if @_result.size < @tdcount * 3
+      @submission.update(:result => "Validating")
+    else
+      @result = 0
+      Range.new(0, @tdcount-1).each do |i|
+	if @v2i[@_result[i*3]]
+	  @result = @result > @v2i[@_result[i*3]] ? @result : @v2i[@_result[i*3]]
+	else
+	  @result = 9
+	end
+      end
+      @submission.update(:result => @i2v[@result])
+    end
+    
+  end
+  
+  def testdata
+    @testdata = Testdatum.find(params[:tid])
+    if params[:input]
+      @path = @testdata.test_input
+    else
+      @path = @testdata.test_output
+    end
+    send_file(@path.to_s)
+  end
+  
   def submission
-    @submission = Submission.where("`result` = 'queued' OR `result` = ''").first
+    @submission = Submission.where("`result` = 'queued'").first
     if @submission
       @result = @submission.id.to_s
       @result += "\n"

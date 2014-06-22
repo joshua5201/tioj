@@ -23,7 +23,6 @@ class ProblemsController < ApplicationController
       redirect_to action:'index'
     end
     @contest_id = params[:contest_id]
-    @limit = @problem.limit
   end
 
   def new
@@ -32,7 +31,6 @@ class ProblemsController < ApplicationController
 			redirect_to action:'index'
 		end
 		@problem = Problem.new
-		@limit = @problem.build_limit
   end
 
   def edit
@@ -77,6 +75,8 @@ class ProblemsController < ApplicationController
 
   def destroy
     redirect_to action:'index'
+    # 'Deletion of problem may cause unwanted paginate behavior.'
+    
 	authenticate_user!
 	if current_user.admin == false 
 		redirect_to action:'index'	
@@ -108,13 +108,13 @@ class ProblemsController < ApplicationController
         :limit, 
         :page,
 	:visible_state,
-        limit_attributes: 
-        [
-            :id, 
-            :time, 
-            :memory, 
-            :output, 
-            :problem_id
+	testdata_sets_attributes:
+	[
+	  :id,
+	  :from,
+	  :to,
+	  :score,
+	  :_destroy
         ]
       )
     end

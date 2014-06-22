@@ -9,7 +9,7 @@ class ContestsController < ApplicationController
       end
     end
     @tasks = @contest.problems.order("id ASC")
-    @c_submissions = Submission.where("created_at >= ? AND created_at <= ?", @contest.start_time, @contest.end_time)
+    @c_submissions = Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|

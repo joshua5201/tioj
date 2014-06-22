@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619162501) do
+ActiveRecord::Schema.define(version: 20140622041407) do
+
+  create_table "articles", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "arthur_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "era"
+  end
+
+  create_table "attachments", force: true do |t|
+    t.integer  "article_id"
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.string   "title"
@@ -45,12 +61,12 @@ ActiveRecord::Schema.define(version: 20140619162501) do
   end
 
   create_table "limits", force: true do |t|
-    t.integer  "time",       default: 1000
-    t.integer  "memory",     default: 65536
-    t.integer  "output",     default: 65536
+    t.integer  "time",         default: 1000
+    t.integer  "memory",       default: 65536
+    t.integer  "output",       default: 65536
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "problem_id"
+    t.integer  "testdatum_id"
   end
 
   create_table "posts", force: true do |t|
@@ -87,14 +103,24 @@ ActiveRecord::Schema.define(version: 20140619162501) do
     t.integer  "problem_id", default: 0
     t.integer  "user_id",    default: 0
     t.integer  "contest_id"
+    t.string   "_result"
   end
 
   create_table "testdata", force: true do |t|
-    t.text     "input"
-    t.text     "answer"
+    t.integer  "problem_id"
+    t.string   "test_input"
+    t.string   "test_output"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "testdata_sets", force: true do |t|
     t.integer  "problem_id"
+    t.integer  "from"
+    t.integer  "to"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

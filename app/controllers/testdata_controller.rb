@@ -1,5 +1,5 @@
 class TestdataController < ApplicationController
-  before_action :find_problem, except: [:index_all]
+  before_action :find_problem
   before_action :set_testdatum, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -10,13 +10,6 @@ class TestdataController < ApplicationController
     @testdata = @problem.testdata
   end
 
-  def index_all
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
-    @testdata = Testdatum.all
-  end
   def show
     authenticate_user!
     if current_user.admin == false 
@@ -29,13 +22,17 @@ class TestdataController < ApplicationController
     if current_user.admin == false 
       redirect_to action:'index'	
     end
-    @testdatum = @problem.testdata.build 
+    @testdatum = @problem.testdata.build
+    @testdatum.build_limit
   end
 
   def edit
     authenticate_user!
     if current_user.admin == false 
       redirect_to action:'index'	
+    end
+    if not @testdatum.limit
+      @testdatum.build_limit
     end
   end
 
@@ -48,7 +45,7 @@ class TestdataController < ApplicationController
 
     respond_to do |format|
       if @testdatum.save
-        format.html { redirect_to prob_td_path(@problem, @testdatum), notice: 'Testdatum was successfully created.' }
+        format.html { redirect_to problem_testdata_path(@problem), notice: 'Testdatum was successfully created.' }
         format.json { render action: 'show', status: :created, location: prob_td_path(@problem, @testdatum) }
       else
         format.html { render action: 'new' }
@@ -64,7 +61,7 @@ class TestdataController < ApplicationController
     end
     respond_to do |format|
       if @testdatum.update(testdatum_params)
-        format.html { redirect_to prob_td_path(@problem, @testdatum), notice: 'Testdatum was successfully updated.' }
+        format.html { redirect_to problem_testdata_path(@problem), notice: 'Testdatum was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -83,7 +80,7 @@ class TestdataController < ApplicationController
       if params[:index_all] == '1'
         format.html {redirect_to '/testdata' }
       else
-        format.html { redirect_to problem_testdatum_path(@problem) }
+        format.html { redirect_to problem_testdata_path(@problem) }
       end
       format.json { head :no_content }
     end
@@ -103,6 +100,15 @@ class TestdataController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def testdatum_params
-      params.require(:testdatum).permit(:input, :answer, :problem_id)
+      params.require(:testdatum).permit(:problem_id, :test_input, :test_output, 
+        limit_attributes: 
+        [
+            :id, 
+            :time, 
+            :memory, 
+            :output, 
+	    :problem_id,
+            :testdatum_id
+        ])
     end
 end

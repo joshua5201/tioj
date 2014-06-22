@@ -17,3 +17,6 @@
 
 # Ignore secret token file
 #/config/initializers/secret_token.rb
+
+# Ignore all the testdata
+/td

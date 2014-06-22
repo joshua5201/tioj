@@ -20,11 +20,19 @@ Tioj::Application.routes.draw do
   end
   resources :contest_problem_joints
   
+  resources :articles
+  
   get 'contests/:id/dashboard' => 'contests#dashboard'
-  get 'fetch/submission' => 'fetch#submission'
   get 'submissions/:id/rejudge' => 'submissions#rejudge'
   
-  get 'testdata' => 'testdata#index_all'
+  get 'fetch/testdata' => 'fetch#testdata'
+  get 'fetch/submission' => 'fetch#submission'
+  get 'fetch/write_result' => 'fetch#write_result'
+  get 'fetch/testdata_limit' => 'fetch#testdata_limit'
+  get 'fetch/testdata_meta' => 'fetch#testdata_meta'
+  
+  mathjax 'mathjax'
+  
   get 'about' => 'about#index', as: :about
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
