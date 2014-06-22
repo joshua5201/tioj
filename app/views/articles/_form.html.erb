@@ -11,6 +11,18 @@
   <% end %>
   
   <div class="field">
+    <%= f.check_box :pinned %><%= f.label :pinned, "Pin to top" %>
+  </div>
+  
+  <div>
+  <%= f.label :catagory %><br>
+  <%= f.select :catagory, options_for_select([
+  ["Announcements", 0], 
+  ["Course Materials", 1]
+  ], params[:catagory]) %>
+  </div>
+  
+  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>

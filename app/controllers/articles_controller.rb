@@ -2,7 +2,10 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   
   def index
-    @articles = Article.where("era = ?", get_era).order("id DESC").page(params[:page])
+    @articles = Article.where("catagory = 0 AND pinned = true AND era = ?", get_era).order("id DESC")
+    @articles += Article.where("catagory = 0 AND pinned != true AND era = ?", get_era).order("id DESC")
+    @courses = Article.where("catagory = 1 AND pinned = true AND era = ?", get_era).order("id DESC")
+    @courses += Article.where("catagory = 1 AND pinned != true AND era = ?", get_era).order("id DESC")
   end
   
   def create
@@ -81,6 +84,8 @@ private
       :title,
       :content,
       :page,
+      :pinned,
+      :catagory,
       attachments_attributes:
       [
         :id,
