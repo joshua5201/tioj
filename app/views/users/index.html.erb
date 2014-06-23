@@ -9,15 +9,16 @@
 			<th>Email</th>
 			<th>Nickname</th>
 			<th>Accepted</th>
+			</tr>
 	</thead>
 	
 	<tbody>
 		<% @users.each do |user| %>
 		<tr>
-			<td><img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail"></td>
+			<td><%= image_tag("avatar/#{user.id}.png", :class=>"img-rounded img-responsive ", :size => "25x25") %></td>
 			<td><%=user.id%></td>
 			<td><%=user.email%></td>
-			<td></td>
+			<td><%=user.nickname%></td>
 			<td></td>
 		</tr>
 		<%end%>

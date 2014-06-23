@@ -1,0 +1,19 @@
+<tr>
+        <td><%= link_to problem.id, problem %></td>
+        <td><%= link_to problem.name, problem %></td>
+        <td><%= image_tag("avatar/nobody.gif",:class=>"img-rounded img-responsive ", :size => "25x25") %>Nobody</td>
+        <td>AC Ratio(user)</td>
+        <td>AC Ratio(submission)</td>
+        <% if user_signed_in? && current_user.admin == true %>
+	  <% if problem.visible_state == 0 %>
+	    <td>Public</td>
+	  <% elsif problem.visible_state == 1 %>
+	    <td>Public during contest</td>
+	  <% else %>
+	    <td>Invisible</td>
+	  <% end %>
+	  <td><%= link_to 'Edit', edit_problem_path(problem), :class => 'btn btn-info btn-xs' %></td>
+	  <!--<td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+        <% end %>
+        <% if user_signed_in? %><td><%= link_to 'Submit', new_problem_submission_path(problem) %></td><%end%>
+      </tr>

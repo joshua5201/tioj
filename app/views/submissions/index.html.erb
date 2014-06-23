@@ -45,7 +45,7 @@
       <% else %>
         <td><%= link_to submission.id, submission_path(submission) %></td>
         <td><%= link_to submission.problem_id, problem_path(submission.problem) %></td>
-        <td><%= link_to submission.user_id, user_path(submission.user_id) %></td>
+        <td><%= link_to submission.user_id, user_path(submission.user) %></td>
         <td><%= submission.compiler %></td>
         <td><%= submission.result %></td>
         <td><%= submission.score %></td>
