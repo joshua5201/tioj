@@ -9,6 +9,7 @@
 			<th>Email</th>
 			<th>Nickname</th>
 			<th>Accepted</th>
+			</tr>
 	</thead>
 	
 	<tbody>
@@ -17,7 +18,7 @@
 			<td><%= image_tag("avatar/#{user.id}.png", :class=>"img-rounded img-responsive ", :size => "25x25") %></td>
 			<td><%=user.id%></td>
 			<td><%=user.email%></td>
-			<td></td>
+			<td><%=user.nickname%></td>
 			<td></td>
 		</tr>
 		<%end%>

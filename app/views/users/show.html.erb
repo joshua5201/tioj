@@ -1,0 +1,13 @@
+ <h4 class = "page-header">User</h4>
+ <div class="row-fluid">
+ <div class="col-xs-3">
+ 	<%= image_tag("avatar/#{@user.id}.png",:class=>"img-rounded img-responsive ", :size=>"150x150") %><br/>
+ 	<h6><%=@user.nickname%></h6>
+ 	<%=@user.email%><br/>
+
+ </div>
+ <div class="col-xs-9">
+ 	<table class="table">
+ 	</table>
+ </div>
+ </div>
