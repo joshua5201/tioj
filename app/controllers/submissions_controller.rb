@@ -78,6 +78,10 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
     @submission.user_id = current_user.id
     @submission.problem_id = params[:problem_id]
+    @contest = Contest.find(params[:contest_id])
+    if @contest.problem_ids.include?(@submission.problem_id) and Time.now >= @contest.start_time and Time.now <= @contest.end_time
+      @submission.contest_id = @contest.id
+    end
     respond_to do |format|
       if @submission.save
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
@@ -137,6 +141,6 @@ class SubmissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def submission_params
-      params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id, :page, :contest_id)
+      params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id, :page)
     end
 end

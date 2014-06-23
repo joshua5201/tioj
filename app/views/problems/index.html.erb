@@ -4,7 +4,8 @@
     <small>tagged with <%= params[:tag] %></small>
   <% end %>
 </h4>
-
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <%= paginate @problems %>
 <% if user_signed_in? && current_user.admin == true %>
   <br><%= link_to 'New Problem', new_problem_path %>

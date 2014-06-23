@@ -44,6 +44,9 @@
                   <% if current_user %>
                      <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
                      <li><%= link_to('Edit password', edit_registration_path(:user)) %></li>
+                     <% if current_user.admin = true %>
+                        <li><%= link_to 'Admin', admin_root_path, :target => "_blank" %></li>
+                     <% end %>
                   <% else %>
                      <li><%= link_to('Login', new_session_path(:user)) %> </li>
                      <li><%= link_to('Sign up', new_registration_path(:user)) %></li>
