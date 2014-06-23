@@ -2,7 +2,11 @@ class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
 
   def index
-    @problems = Problem.all.order("id ASC").page(params[:page]).per(100)
+    if params[:tag]
+      @problems = Problem.tagged_with(params[:tag]).order("id ASC").page(params[:page]).per(100)
+    else
+      @problems = Problem.all.order("id ASC").page(params[:page]).per(100)
+    end
   end
 
   def show
@@ -108,6 +112,7 @@ class ProblemsController < ApplicationController
         :limit, 
         :page,
 	:visible_state,
+        :tag_list,
 	testdata_sets_attributes:
 	[
 	  :id,

@@ -1,5 +1,7 @@
 Tioj::Application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users, :controllers => {:registrations => "registrations"}
   #resources :limits
   resources :problems do
@@ -21,6 +23,8 @@ Tioj::Application.routes.draw do
   resources :contest_problem_joints
   
   resources :articles
+  
+  get 'problems/tag/:tag' => 'problems#index', as: :problems_tag
   
   get 'contests/:id/dashboard' => 'contests#dashboard'
   get 'submissions/:id/rejudge' => 'submissions#rejudge'

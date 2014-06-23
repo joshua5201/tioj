@@ -19,7 +19,7 @@ class TestdataUploader < CarrierWave::Uploader::Base
   end
   
   def cache_dir
-    '/tmp/tioj_testdata_uploader_cache'
+    '#{Rails.root}/td/cache'
   end
   
   def move_to_cache

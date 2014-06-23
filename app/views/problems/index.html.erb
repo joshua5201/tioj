@@ -1,5 +1,11 @@
-<h4 class="page-header">Problems</h4>
-
+<h4 class="page-header">
+  Problems
+  <% if params[:tag] %>
+    <small>tagged with <%= params[:tag] %></small>
+  <% end %>
+</h4>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <%= paginate @problems %>
 <% if user_signed_in? && current_user.admin == true %>
   <br><%= link_to 'New Problem', new_problem_path %>
@@ -23,10 +29,28 @@
 
   <tbody>
     <% @problems.each do |problem| %>
-      <% if user_signed_in? && current_user.admin == true %>
-	<%= render 'problem_list_column', :problem => problem %>
-      <% elsif problem.visible_state == 0 %>
-	<%= render 'problem_list_column', :problem => problem %>
+      <% if (user_signed_in? and current_user.admin == true) or (problem.visible_state == 0) %>
+        <tr>
+          <td><%= link_to problem.id, problem %></td>
+          <td>
+            <div style="float:left"><%= link_to problem.name, problem %></div>
+            <div style="float:right"><%= raw problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs' }.join(" ") %></div>
+          </td>
+          <td><img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail" >TopCoder</td>
+          <td>AC Ratio(user)</td>
+          <td>AC Ratio(submission)</td>
+          <% if user_signed_in? && current_user.admin == true %>
+            <% if problem.visible_state == 0 %>
+              <td>Public</td>
+            <% elsif problem.visible_state == 1 %>
+              <td>Public during contest</td>
+            <% else %>
+              <td>Invisible</td>
+            <% end %>
+            <td><%= link_to 'Edit', edit_problem_path(problem), :class => 'btn btn-info btn-xs' %></td>
+          <% end %>
+          <% if user_signed_in? %><td><%= link_to 'Submit', new_problem_submission_path(problem) %></td><%end%>
+        </tr>
       <%end%>
     <% end %>
   </tbody>

@@ -33,7 +33,7 @@
    <%= f.fields_for :contest_problem_joints do |t| %>
      <div class="field">
        <%= t.label :task %>
-       <%= t.text_field :problem_id %>
+       <%= t.number_field :problem_id %>
        <%= t.link_to_remove "Remove this task" %>
      </div>
    <% end %>

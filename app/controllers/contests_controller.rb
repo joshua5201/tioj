@@ -9,7 +9,7 @@ class ContestsController < ApplicationController
       end
     end
     @tasks = @contest.problems.order("id ASC")
-    @c_submissions = Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
+    @c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|
@@ -23,7 +23,11 @@ class ContestsController < ApplicationController
 	if @submissions[index].select{|a| a.user_id == u}.empty?
 	  @t << 0
 	else
-	  @t << @submissions[index].select{|a| a.user_id == u}.max_by{|a| a.score}.score
+          if @contest.contest_type == 2
+            @t << ( @submissions[index].select{|a| a.user_id == u and a.result == 'AC'}.blank? ? 0 : 100 )
+          else
+            @t << @submissions[index].select{|a| a.user_id == u}.max_by{|a| a.score}.score
+          end
 	end
       end
       @scores << [u, @t]

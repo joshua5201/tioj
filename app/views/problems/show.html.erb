@@ -30,8 +30,12 @@
   <% end %>
 </p>
 <p>
-  <dfn>Source:
-  <strong><%= @problem.source %></strong></dfn>
+  <dfn>
+    <strong>Source: </strong><%= @problem.source %>
+  </dfn>
+</p>
+<p>
+  <strong>Tags: </strong><%= raw @problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs' }.join(" ") %>
 </p>
 
 <dfn>
