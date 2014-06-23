@@ -54,9 +54,10 @@ class FetchController < ApplicationController
     
     #verdict
     @tdcount = @problem.testdata.size
-    if @_result.size < @tdcount * 3
-      @submission.update(:result => "Validating")
-    else
+    #if @_result.size < @tdcount * 3
+    #  @submission.update(:result => "Validating")
+    #else
+    if params[:status] == "OK"
       @result = 0
       Range.new(0, @tdcount-1).each do |i|
 	if @v2i[@_result[i*3]]
@@ -80,12 +81,23 @@ class FetchController < ApplicationController
     send_file(@path.to_s)
   end
   
+  def validating
+    @submission = Submission.find(params[:sid])
+    @submission.update(:result => "Validating")
+    render :nothing => true
+  end
+  
   def submission
-    @submission = Submission.where("`result` = 'queued'").first
+    @submission = Submission.where("`result` = 'queued' AND `contest_id` IS NOT NULL").first
+    if not @submission
+      @submission = Submission.where("`result` = 'queued'").first
+    end
     if @submission
       @result = @submission.id.to_s
       @result += "\n"
       @result += @submission.problem_id.to_s
+      @result += "\n"
+      @result += @submission.problem_type.to_s
       @result += "\n"
       @result += @submission.user_id.to_s
       @result += "\n"

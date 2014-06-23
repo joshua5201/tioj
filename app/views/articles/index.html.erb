@@ -1,17 +1,12 @@
 <h4 class="page-header">Bulletin</h4>
 
-<%= select_tag :era_select, options_for_select([[2014,2014],[2013,2013],[2012,2012]], params[:era]) %>
-<br>
-
 <% if user_signed_in? && current_user.admin == true %>
   <%= link_to 'New Announcement', new_article_path(:era => params[:era], :catagory => 0) %><br>
 <% end %>
 
-<script>
-  $('#era_select').bind('change', function() { window.location.href = '<%= articles_path.to_s + "?era=" %>' + $(this).val() });
-</script>
-
 <strong>Announcements</strong>
+<%= select_tag :era_select, options_for_select([[2014,2014],[2013,2013],[2012,2012],[2011,2011],[2010,2010],
+[2009,2009],[2008,2008],[2007,2007],[2006,2006],[2005,2005]], params[:era]), :style => "float:right" %>
 <table class="table">
   <thead>
     <tr>
@@ -74,3 +69,7 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+  $('#era_select').bind('change', function() { window.location.href = '<%= articles_path.to_s + "?era=" %>' + $(this).val() });
+</script>

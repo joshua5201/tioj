@@ -1,6 +1,4 @@
 class Problem < ActiveRecord::Base
-  default_scope order('id ASC')
-  
   acts_as_taggable_on :tags
   
   has_many :submissions, dependent: :destroy

@@ -31,6 +31,7 @@ Tioj::Application.routes.draw do
   
   get 'fetch/testdata' => 'fetch#testdata'
   get 'fetch/submission' => 'fetch#submission'
+  get 'fetch/validating' => 'fetch#validating'
   get 'fetch/write_result' => 'fetch#write_result'
   get 'fetch/testdata_limit' => 'fetch#testdata_limit'
   get 'fetch/testdata_meta' => 'fetch#testdata_meta'

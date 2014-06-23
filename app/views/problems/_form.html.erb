@@ -17,6 +17,11 @@
     ["[1]Public during contest", "1"], ["[2]Invisible", "2"]] %>
 </div>
 <div class="field">
+    <%= f.label :problem_type %><br>
+    <%= f.select :problem_type, [["[0]Batch Judge", "0"],
+    ["[1]Special Judge", "1"], ["[2]Interactive", "2"]] %>
+</div>
+<div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
 </div>

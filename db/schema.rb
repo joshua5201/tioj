@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622151731) do
+ActiveRecord::Schema.define(version: 20140623163219) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20140622151731) do
     t.text     "hint"
     t.string   "created_by"
     t.integer  "visible_state",  default: 0
+    t.integer  "problem_type"
   end
 
   create_table "submissions", force: true do |t|

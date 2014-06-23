@@ -113,6 +113,7 @@ class ProblemsController < ApplicationController
         :page,
 	:visible_state,
         :tag_list,
+        :problem_type,
 	testdata_sets_attributes:
 	[
 	  :id,
