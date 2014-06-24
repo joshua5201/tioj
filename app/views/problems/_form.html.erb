@@ -51,7 +51,7 @@
 </div>
 <% if @problem.problem_type == 1 %>
   <div class="field">
-    <%= f.label :sjcode, "Special Judge Code" %><br>
+    <%= f.label :sjcode, "Special Judge Code (argv[1]: testee output, argv[2]: testdata input, argv[3]: testdata output)" %><br>
     <%= f.text_area :sjcode %>
   </div>
 <% elsif @problem.problem_type == 2 %>
