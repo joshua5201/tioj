@@ -8,7 +8,7 @@ class SubmissionsController < ApplicationController
       redirect_to action:'index'
       return
     end
-    @submission.update(:result => "queued", :score => 0, :_result => "")
+    @submission.update(:result => "queued", :score => 0, :_result => "", :total_time => nil, :total_memory => nil)
     
     if params[:page]
       redirect_to :action => :index, :page => params[:page]
@@ -128,13 +128,17 @@ class SubmissionsController < ApplicationController
     def set_submissions
       @problem = Problem.find(params[:problem_id]) if params[:problem_id]
       @contest = Contest.find(params[:contest_id]) if params[:contest_id]
-      if @problem
-	@submissions = @problem.submissions
-      elsif @contest
-	@submissions = @contest.submissions
-      else
-	@submissions = Submission.all
-      end
+      @submissions = Submission.all
+      @submissions = @submissions.where("problem_id = ?", params[:problem_id]) if params[:problem_id]
+      @submissions = @submissions.where("contest_id = ?", params[:contest_id]) if params[:contest_id]
+      @submissions = @submissions.where("result = ?", params[:qresult]) if params[:qresult]
+      #if @problem
+	#@submissions = @problem.submissions
+      #elsif @contest
+	#@submissions = @contest.submissions
+      #else
+	#@submissions = Submission.all
+      #end
     end
     
     def set_submission

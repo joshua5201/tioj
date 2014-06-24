@@ -1,6 +1,11 @@
 class ProblemsController < ApplicationController
-  before_action :set_problem, only: [:show, :edit, :update, :destroy]
+  before_action :set_problem, only: [:show, :edit, :update, :destroy, :ranklist]
 
+  def ranklist
+    @users = User.joins(:submissions).select("users.id, MIN(submissions.total_time)")
+    .where("submissions.problem_id = ? AND submissions.result = ?", @problem.id, "AC").group("users.id")
+  end
+  
   def index
     if params[:tag]
       @problems = Problem.tagged_with(params[:tag]).order("id ASC").page(params[:page]).per(100)
@@ -96,7 +101,7 @@ class ProblemsController < ApplicationController
     def set_problem
       @problem = Problem.find(params[:id])
     end
-
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def problem_params
       params.require(:problem).permit(

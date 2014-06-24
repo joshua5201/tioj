@@ -16,6 +16,8 @@
       <th>Problem ID</th>
       <th>Submitter</th>
       <th>Compiler</th>
+      <th>Time (ms)</th>
+      <th>Memory (KiB)</th>
       <th>Result</th>
       <th>Score</th>
       <th>Submit Date</th>
@@ -47,6 +49,8 @@
         <td><%= link_to submission.problem_id, problem_path(submission.problem) %></td>
         <td><%= link_to submission.user_id, user_path(submission.user) %></td>
         <td><%= submission.compiler %></td>
+        <td><%= submission.total_time %></td>
+        <td><%= submission.total_memory %></td>
         <td><%= submission.result %></td>
         <td><%= submission.score %></td>
         <td><%= submission.created_at.to_s(:clean) %></td>

@@ -1,0 +1,18 @@
+<h4 class="page-header">Ranklist<small> Problem #<%= @problem.id %></small></h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>User ID</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each_with_index do |user, index| %>
+      <tr>
+        <td><%= index+1 %></td>
+        <td><%= user.id %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -73,20 +73,21 @@ class FetchController < ApplicationController
     @submission.update(:score => @score)
     
     #verdict
-    @tdcount = @problem.testdata.size
-    #if @_result.size < @tdcount * 3
-    #  @submission.update(:result => "Validating")
-    #else
     if params[:status] == "OK"
+      @tdcount = @problem.testdata.size
       @result = 0
-      (0..@tdcount-1).each do |i|
+      ttime = 0
+      tmem = 0
+      (0..(@tdcount-1)).each do |i|
 	if @v2i[@_result[i*3]]
 	  @result = @result > @v2i[@_result[i*3]] ? @result : @v2i[@_result[i*3]]
 	else
 	  @result = 9
 	end
+        ttime += @_result[i*3+1].to_i
+        tmem = @_result[i*3+2].to_i > tmem ? @_result[i*3+2].to_i : tmem
       end
-      @submission.update(:result => @i2v[@result])
+      @submission.update(:result => @i2v[@result], :total_time => ttime, :total_memory => tmem)
     end
     
   end

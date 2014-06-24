@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624070514) do
+ActiveRecord::Schema.define(version: 20140624102813) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -133,15 +133,17 @@ ActiveRecord::Schema.define(version: 20140624070514) do
 
   create_table "submissions", force: true do |t|
     t.text     "code"
-    t.string   "compiler",   default: ""
-    t.string   "result",     default: "queued"
-    t.integer  "score",      default: 0
+    t.string   "compiler",     default: ""
+    t.string   "result",       default: "queued"
+    t.integer  "score",        default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "problem_id", default: 0
-    t.integer  "user_id",    default: 0
+    t.integer  "problem_id",   default: 0
+    t.integer  "user_id",      default: 0
     t.integer  "contest_id"
     t.string   "_result"
+    t.integer  "total_time"
+    t.integer  "total_memory"
   end
 
   create_table "taggings", force: true do |t|
