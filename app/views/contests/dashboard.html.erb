@@ -8,7 +8,7 @@
       <th>Rank</th>
       <th>ID</th>
       <% @tasks.each_with_index do |task, index| %>
-	<th><%= link_to ('p' + (65+index).chr), problem_path(task) %></th>
+	<th><%= link_to ('p' + (65+index).chr), contest_problem_path(@contest, task) %></th>
       <% end %>
       <th>Score</th>
     </tr>

@@ -8,12 +8,21 @@ class ContestsController < ApplicationController
 	redirect_to action:'index'
       end
     end
-    @tasks = @contest.problems.order("id ASC")
+    @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
+    @c_submissions = @contest.submissions
+    #####
+    
+    
+    
+    
+    
+    
+    #####
     @c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|
-      @submissions << @c_submissions.select{|a| a.problem_id == task.id}
+      @submissions << @c_submissions.where("problem_id = ?", task.id)#select{|a| a.problem_id == task.id}
       @participants = @participants | @submissions[index].map{|e| e.user_id}
     end
     @scores = []
