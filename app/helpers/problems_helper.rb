@@ -1,4 +1,10 @@
 module ProblemsHelper
+  def topcoder(problem)
+    submission = problem.submissions.select("user_id").where("result = ? ", "AC").order("total_time DESC").first
+    return User.find_by_id(submission.user_id) if submission
+    return nil if not submission
+  end
+  
   def users_ac_ratio(problem)
     all = User.joins(:submissions).uniq.where("submissions.problem_id = ?", problem.id)
     ac = all.where("submissions.result = ?", "AC")

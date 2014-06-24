@@ -36,7 +36,15 @@
             <div style="float:left"><%= link_to problem.name, problem %></div>
             <div style="float:right"><%= raw problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs' }.join(" ") %></div>
           </td>
-          <td><img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail" >TopCoder</td>
+          <td>
+            <% begin %>
+              <% tcoder = topcoder(problem) %>
+              <% if tcoder %>
+                <img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail" >
+                <%= link_to tcoder.id, user_path(tcoder) %>
+              <% end %>
+            <% end %>
+          </td>
           <td><%= users_ac_ratio(problem) %></td>
           <td><%= submissions_ac_ratio(problem) %></td>
           <% if user_signed_in? && current_user.admin == true %>
