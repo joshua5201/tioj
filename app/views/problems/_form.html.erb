@@ -49,6 +49,17 @@
     <%= f.label :hint %><br>
     <%= f.text_area :hint %>
 </div>
+<% if @problem.problem_type == 1 %>
+  <div class="field">
+    <%= f.label :sjcode, "Special Judge Code" %><br>
+    <%= f.text_area :sjcode %>
+  </div>
+<% elsif @problem.problem_type == 2 %>
+  <div class="field">
+    <%= f.label :interlib, 'Interactive Library ( #include "lib' + @problem.id.to_s.rjust(4, '0') + '.h" )' %><br>
+    <%= f.text_area :interlib %>
+  </div>
+<% end %>
 <div class="field">
     <%= f.label :source %><br>
     <%= f.text_area :source %>
@@ -67,7 +78,7 @@
        <%= t.label :to %>
        <%= t.number_field :to, :min => 0, :max => @problem.testdata.size - 1 %>
        <%= t.label :score %>
-       <%= t.number_field :score, :in => 0...100 %>
+       <%= t.number_field :score, :in => 0..100 %>
        <%= t.link_to_remove "Remove this range" %>
     </div>
 <% end %>

@@ -4,6 +4,9 @@
 <div class="well well-lg">
 <p>
   <h5>Description</h5>
+  <% if @problem.problem_type == 2 %>
+    <%= markdown('`' + 'This is a interactive problem, please remember #include "lib' + @problem.id.to_s.rjust(4, '0') + '.h"' +'`') %>
+  <% end %>
   <%= markdown(@problem.description) %>
 </p>
 <p>

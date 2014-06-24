@@ -29,6 +29,9 @@ Tioj::Application.routes.draw do
   get 'contests/:id/dashboard' => 'contests#dashboard'
   get 'submissions/:id/rejudge' => 'submissions#rejudge'
   
+  get 'fetch/sjcode' => 'fetch#sjcode'
+  get 'fetch/code' => 'fetch#code'
+  get 'fetch/interlib' => 'fetch#interlib'
   get 'fetch/testdata' => 'fetch#testdata'
   get 'fetch/submission' => 'fetch#submission'
   get 'fetch/validating' => 'fetch#validating'

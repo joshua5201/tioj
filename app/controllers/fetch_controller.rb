@@ -2,6 +2,24 @@ class FetchController < ApplicationController
   before_action :authenticate
   layout false
   
+  def interlib
+    @problem = Problem.find(params[:pid])
+    @interlib = @problem.interlib.to_s + "\n"
+    render text: @interlib
+  end
+  
+  def sjcode
+    @problem = Problem.find(params[:pid])
+    @sjcode = @problem.sjcode.to_s + "\n"
+    render text: @sjcode
+  end
+  
+  def code
+    @submission = Submission.find(params[:sid])
+    @code = @submission.code.to_s + "\n"
+    render text: @code
+  end
+  
   def testdata_meta
     @problem = Problem.find(params[:pid])
     @result = @problem.testdata.size.to_s + " "
@@ -28,6 +46,8 @@ class FetchController < ApplicationController
     @submission.update(:_result => @_result)
     if @_result == "CE"
       @submission.update(:result => "CE", :score => 0)
+    elsif @_result == "ER"
+      @submission.update(:result => "ER", :score => 0)
     else
       update_verdict
     end
@@ -59,7 +79,7 @@ class FetchController < ApplicationController
     #else
     if params[:status] == "OK"
       @result = 0
-      Range.new(0, @tdcount-1).each do |i|
+      (0..@tdcount-1).each do |i|
 	if @v2i[@_result[i*3]]
 	  @result = @result > @v2i[@_result[i*3]] ? @result : @v2i[@_result[i*3]]
 	else
@@ -97,13 +117,11 @@ class FetchController < ApplicationController
       @result += "\n"
       @result += @submission.problem_id.to_s
       @result += "\n"
-      @result += @submission.problem_type.to_s
+      @result += @submission.problem.problem_type.to_s
       @result += "\n"
       @result += @submission.user_id.to_s
       @result += "\n"
       @result += @submission.compiler.to_s
-      @result += "\n"
-      @result += @submission.code.to_s
       @result += "\n"
     else
       @result = "-1\n"

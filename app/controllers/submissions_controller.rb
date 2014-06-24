@@ -78,9 +78,11 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(submission_params)
     @submission.user_id = current_user.id
     @submission.problem_id = params[:problem_id]
-    @contest = Contest.find(params[:contest_id])
-    if @contest.problem_ids.include?(@submission.problem_id) and Time.now >= @contest.start_time and Time.now <= @contest.end_time
-      @submission.contest_id = @contest.id
+    if params[:contest_id]
+      @contest = Contest.find(params[:contest_id]) 
+      if @contest.problem_ids.include?(@submission.problem_id) and Time.now >= @contest.start_time and Time.now <= @contest.end_time
+        @submission.contest_id = @contest.id
+      end
     end
     respond_to do |format|
       if @submission.save

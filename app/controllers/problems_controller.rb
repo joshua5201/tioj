@@ -114,6 +114,8 @@ class ProblemsController < ApplicationController
 	:visible_state,
         :tag_list,
         :problem_type,
+        :sjcode,
+        :interlib,
 	testdata_sets_attributes:
 	[
 	  :id,

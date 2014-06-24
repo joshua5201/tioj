@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623163219) do
+ActiveRecord::Schema.define(version: 20140624070514) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -90,6 +90,11 @@ ActiveRecord::Schema.define(version: 20140623163219) do
     t.datetime "updated_at"
   end
 
+  create_table "get_submissions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "limits", force: true do |t|
     t.integer  "time",         default: 1000
     t.integer  "memory",       default: 65536
@@ -119,8 +124,11 @@ ActiveRecord::Schema.define(version: 20140623163219) do
     t.text     "example_input"
     t.text     "example_output"
     t.text     "hint"
+    t.string   "created_by"
     t.integer  "visible_state",  default: 0
     t.integer  "problem_type"
+    t.text     "sjcode"
+    t.text     "interlib"
   end
 
   create_table "submissions", force: true do |t|
