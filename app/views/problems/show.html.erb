@@ -6,6 +6,12 @@
 Users' AC Ratio: <%= users_ac_ratio(@problem) %><br>
 Submissions' AC Ratio: <%= submissions_ac_ratio(@problem) %>
 </p>
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert"><%= alert %></p>
+<% end %>
 <p>
   <h5>Description</h5>
   <% if @problem.problem_type == 2 %>
@@ -74,23 +80,25 @@ Submissions' AC Ratio: <%= submissions_ac_ratio(@problem) %>
   <%= link_to 'Manage Testdata', problem_testdata_path(@problem), :class => 'btn btn-info btn-xs' %>
   <%= link_to 'Edit', edit_problem_path(@problem), :class => 'btn btn-info btn-xs' %>
 <% end %>
-<div class = "row-fluid">
-	<div class="btn-group dropup pull-right">
-  		<button type="button" class="btn btn-default">Menu</button>
-  		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    	<span class="caret"></span>
-    	<span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu pull-right" style="border-width:1px;border-width-color:#0047AB;">
-    <li><%= link_to 'Edit', edit_problem_path(@problem) %></li>
-    <li><%= link_to 'Back', problems_path %></li>
-    <li><%= link_to 'Status', problem_submissions_path(@problem)%></li>
-    <li><%= link_to 'Discuss', problem_posts_path(@problem) %></li>
-	<li><a href="#">Ranklist</a></li>
-    <li><a href="#" id="fold">Fold</a></li>
-  </ul>
+
+<div class="row-fluid">
+  <div class="btn-group dropup pull-right">
+    <button type="button" class="btn btn-default">Menu</button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu pull-right" style="border-width:1px;border-width-color:#0047AB;">
+      <li><%= link_to 'Edit', edit_problem_path(@problem) %></li>
+      <li><%= link_to 'Back', problems_path %></li>
+      <li><%= link_to 'Status', problem_submissions_path(@problem)%></li>
+      <li><%= link_to 'Discuss', problem_posts_path(@problem) %></li>
+      <li><a href="#">Ranklist</a></li>
+      <li><a href="#" id="fold">Fold</a></li>
+    </ul>
+  </div>
 </div>
-</div>
+
 <!--<div data-no-turbolinks class="navbar navbar-embossed navbar-fixed-bottom navbar-inverse" role="navigation" style="background-color:transparent;" id="menu" >
 	<div class = "row-fluid" id="lmenu">
 		<div class="collapse navbar-collapse" id="navbar-collapse-01" style="padding-right:50px;background-color:#003365;">
@@ -112,6 +120,6 @@ Submissions' AC Ratio: <%= submissions_ac_ratio(@problem) %>
 			</ul>
 	    </div>
 	</div>
-</div>
-
 </div>-->
+
+</div>

@@ -17,53 +17,44 @@
    <%= mathjax_tag %>
 <link rel="shortcut icon" href="/images/favicon.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-   body{
-      padding-top:30px;
-   }
-</style>
 </head>
+<style>
+  #page-content{ padding-left: 40px; }
+  .page-header{ margin: 10px 0 15px; }
+</style>
 
 <body>
-<div class="navbar navbar-inverse navbar-embossed navbar-fixed-top" role="navigation" style="background-color:#003365">    
-   <div class="row-fluid">
-      <div class="col-xs-12">
-         <div class="row-fluid">
-            <%= link_to image_tag("banner_" + (Time.now.min % 4).to_s + ".jpg"), root_path %>
-         </div>
-         <div class = "row-fluid">
-            <div class="collapse navbar-collapse" id="navbar-collapse-01">
-               <ul class="nav navbar-nav navbar-left">           
-                  <li><%= link_to "About", about_url %></li>
-                  <li><%= link_to "Bulletin", articles_path %></li>
-                  <li><%= link_to "Problems", problems_path %></li>
-                  <li><%= link_to "Submissions", submissions_path %></li>
-                  <li><%= link_to "Contests", contests_path %></li>
-                  <li><%= link_to "Discuss", posts_path %></li>
-                  <li><%= link_to "Users", users_path %></li>
-                  <% if current_user %>
-                     <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
-                     <li><%= link_to('Edit password', edit_registration_path(:user)) %></li>
-                     <% if current_user.admin = true %>
-                        <li><%= link_to 'Admin', admin_root_path, :target => "_blank" %></li>
-                     <% end %>
-                  <% else %>
-                     <li><%= link_to('Login', new_session_path(:user)) %> </li>
-                     <li><%= link_to('Sign up', new_registration_path(:user)) %></li>
-                  <% end %>
-               </ul>
-            </div>
-         </div>
+<nav class="navbar navbar-inverse navbar-embossed navbar-static-top" role="navigation" style="background-color:#003365">    
+   <div class="container-fluid">
+      <div class="navbar-header">
+         <%= link_to image_tag("banner_" + (Time.now.min % 4).to_s + ".jpg"), root_path %>
       </div>
-<!-- /.navbar-collapse -->
-   </div>
-</div> <!-- /navbar -->
-<div class="container-fluid" id="container">
-   <div class="row-fluid">
-      <div class = "col-xs-12">
-         <%= yield %>
-      </div>
-   </div>
+          <div class="collapse navbar-collapse" id="navbar-collapse-01">
+             <ul class="nav navbar-nav navbar-left">           
+                <li><%= link_to "About", about_url %></li>
+                <li><%= link_to "Bulletin", articles_path %></li>
+                <li><%= link_to "Problems", problems_path %></li>
+                <li><%= link_to "Submissions", submissions_path %></li>
+                <li><%= link_to "Contests", contests_path %></li>
+                <li><%= link_to "Discuss", posts_path %></li>
+                <li><%= link_to "Users", users_path %></li>
+                <% if current_user %>
+                   <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+                   <li><%= link_to('Edit password', edit_registration_path(:user)) %></li>
+                   <% if current_user.admin = true %>
+                      <li><%= link_to 'Admin', admin_root_path, :target => "_blank" %></li>
+                   <% end %>
+                <% else %>
+                   <li><%= link_to('Login', new_session_path(:user)) %> </li>
+                   <li><%= link_to('Sign up', new_registration_path(:user)) %></li>
+                <% end %>
+             </ul>
+          </div>
+   </div><!-- /.navbar-collapse -->
+</nav><!-- /navbar -->
+
+<div class="container-fluid" id="page-content">
+  <%= yield %>
 </div>
 </body>
 </html>

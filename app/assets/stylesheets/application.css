@@ -8,15 +8,16 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require_tree .
  *= require bootstrap
  *= require flat-ui
+ *= require_self
  */
 
+/*
 #container {
     padding: 20px;
-}/*
+}
 td{
 	font-size: 15px;
 }
