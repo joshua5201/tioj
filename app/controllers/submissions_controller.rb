@@ -21,13 +21,6 @@ class SubmissionsController < ApplicationController
   
   def index
     @submissions = @submissions.order("id DESC").page(params[:page])
-    if (not user_signed_in?) || (user_signed_in? && current_user.admin == false)
-      @submissions.each do |s|
-        if (user_signed_in? && current_user.id != s.user_id) && s.contest && Time.now >= s.contest.start_time && Time.now <= s.contest.end_time
-	  s.id = 0
-	end
-      end
-    end
   end
 
   def show

@@ -9,7 +9,7 @@
 </h4>
 
 <%= paginate @submissions %>
-<table class='table'>
+<table class='table table-hover table-striped'>
   <thead>
     <tr>
       <th>ID</th>
@@ -31,19 +31,16 @@
   <tbody>
     <% @submissions.each do |submission| %>
       <tr>
-      <% if submission.id == 0 %>
+      <% if censored(submission) %>
 	<td></td>
         <td></td>
-        <td>censored</td>
+        <td><code>censored</code></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-         <% if user_signed_in? && current_user.admin == true %>
-	   <td><%= link_to 'Rejudge', {:controller => :submissions, :action => :rejudge, :id => submission.id, :page => @submissions.current_page} , :class => 'btn btn-xs btn-primary'%></td>
-           <td><%= link_to 'Edit', edit_submission_path(submission), :class => 'btn btn-info btn-xs' %></td>
-           <td><%= link_to 'Destroy', submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
-         <% end %>
+        <td></td>
+        <td></td>
       <% else %>
         <td><%= link_to submission.id, submission_path(submission) %></td>
         <td><%= link_to submission.problem_id, problem_path(submission.problem) %></td>

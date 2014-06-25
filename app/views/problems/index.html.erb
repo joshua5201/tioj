@@ -1,16 +1,21 @@
 <h4 class="page-header">
-  Problems
+  Problems 
   <% if params[:tag] %>
     <small>tagged with <%= params[:tag] %></small>
   <% end %>
 </h4>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert"><%= alert %></p>
+<% end %>
+
 <%= paginate @problems %>
 <% if user_signed_in? && current_user.admin == true %>
   <br><%= link_to 'New Problem', new_problem_path %>
 <% end %>
-<table class="table">
+<table class="table table-hover table-condensed">
   <thead>
     <tr>
       <th>ID</th>
@@ -34,13 +39,13 @@
           <td><%= link_to problem.id, problem %></td>
           <td>
             <div style="float:left"><%= link_to problem.name, problem %></div>
-            <div style="float:right"><%= raw problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs' }.join(" ") %></div>
+            <div style="float:right"><%= raw problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs btn-default' }.join(" ") %></div>
           </td>
           <td>
             <% begin %>
               <% tcoder = topcoder(problem) %>
               <% if tcoder %>
-                <img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail" >
+                <img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail" width="20" >
                 <%= link_to tcoder.id, user_path(tcoder) %>
               <% end %>
             <% end %>

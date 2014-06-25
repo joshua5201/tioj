@@ -9,7 +9,7 @@ Submissions' AC Ratio: <%= submissions_ac_ratio(@problem) %>
 <p>
   <h5>Description</h5>
   <% if @problem.problem_type == 2 %>
-    <%= markdown('`' + 'This is a interactive problem, please remember #include "lib' + @problem.id.to_s.rjust(4, '0') + '.h"' +'`') %>
+    <code><%= 'This is a interactive problem, please remember #include "lib' + @problem.id.to_s.rjust(4, '0') + '.h"' %></code>
   <% end %>
   <%= markdown(@problem.description) %>
 </p>

@@ -10,15 +10,14 @@
  *
  *= require_self
  *= require_tree .
- *= require bootstrap.min
+ *= require bootstrap
  *= require flat-ui
- *= require flat-ui-demo
- *= require flat-ui-docs
  */
 
 #container {
-    padding: 30px;
-}
+    padding: 20px;
+}/*
 td{
 	font-size: 15px;
 }
+/*

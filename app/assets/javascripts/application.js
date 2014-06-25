@@ -13,7 +13,6 @@
 //=require jquery
 //require jquery.turbolinks
 //=require jquery_ujs
-//=require bootstrap.min
 //require turbolinks
 //=require_tree .
 //=require  jquery_nested_form

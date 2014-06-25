@@ -1,6 +1,10 @@
 <%= javascript_include_tag 	"/stylesheets/prism.js" %>
 <%= stylesheet_link_tag 	"/stylesheets/prism.css" %>
 <p id="notice"><%= notice %></p>
+<% if censored(@submission) %>
+  <h4 class="page-header">Results of submission #<code>censored</code></h4>
+  <code>censored</code>
+<% else %>
 <h4 class="page-header">Results of submission #<%= @submission.id %></h4>
 
 <p>
@@ -51,9 +55,11 @@
 
 <strong>Code:</strong>
 <pre class = "line-numbers"><code class="language-c-like">
-  <%=@submission.code %>
+  <%= @submission.code %>
 </code></pre>
 
-<%= link_to 'Edit', edit_submission_path(@submission) %> |
-<%= link_to 'Back', submissions_path %> |
+<%= link_to 'Back', submissions_path %>
+<% if user_signed_in? and current_user.admin? %>
 <%= link_to 'Rejudge', {:controller => :submissions, :action => :rejudge, :id => @submission.id} %>
+<% end %>
+<% end %>
