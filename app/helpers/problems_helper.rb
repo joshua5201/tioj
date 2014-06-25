@@ -11,7 +11,7 @@ module ProblemsHelper
     all = all.size
     ac = ac.size
     ratio = "%.1f%%" % (100.0 * ac / all)
-    ranklist_page = link_to ac.to_s + "/" + all.to_s, problems_ranklist_path(problem.id)
+    ranklist_page = link_to ac.to_s + "/" + all.to_s, problem_ranklist_path(problem.id)
     return raw ( ratio + " (" + ranklist_page + ")" )
   end
   

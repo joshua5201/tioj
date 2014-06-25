@@ -11,10 +11,10 @@
   <p class="alert"><%= alert %></p>
 <% end %>
 
-<%= paginate @problems %>
 <% if user_signed_in? && current_user.admin == true %>
-  <br><%= link_to 'New Problem', new_problem_path %>
+  <%= link_to 'New Problem', new_problem_path, :class => 'btn btn-primary' %><br>
 <% end %>
+<%= paginate @problems %>
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
@@ -45,7 +45,7 @@
             <% begin %>
               <% tcoder = topcoder(problem) %>
               <% if tcoder %>
-                <img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail" width="20" >
+                <img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail" width="30" >
                 <%= link_to tcoder.id, user_path(tcoder) %>
               <% end %>
             <% end %>
@@ -62,7 +62,7 @@
             <% end %>
             <td><%= link_to 'Edit', edit_problem_path(problem), :class => 'btn btn-info btn-xs' %></td>
           <% end %>
-          <% if user_signed_in? %><td><%= link_to 'Submit', new_problem_submission_path(problem) %></td><%end%>
+          <% if user_signed_in? %><td><%= link_to 'Submit', new_problem_submission_path(problem), :class => 'btn btn-success btn-xs' %></td><%end%>
         </tr>
       <%end%>
     <% end %>

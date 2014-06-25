@@ -1,125 +1,207 @@
-<h4 class="page-header">
-  <%= @problem.id %> : <%= @problem.name %>
-</h4>
-<div class="well well-lg">
-<p>
-Users' AC Ratio: <%= users_ac_ratio(@problem) %><br>
-Submissions' AC Ratio: <%= submissions_ac_ratio(@problem) %>
-</p>
 <% if notice %>
   <p class="notice"><%= notice %></p>
 <% end %>
 <% if alert %>
   <p class="alert"><%= alert %></p>
 <% end %>
-<p>
-  <h5>Description</h5>
-  <% if @problem.problem_type == 2 %>
-    <code><%= 'This is a interactive problem, please remember #include "lib' + @problem.id.to_s.rjust(4, '0') + '.h"' %></code>
+
+<h4 class="page-header">
+  <%= @problem.id %> : <%= @problem.name %>
+</h4>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-success btn-xs btn-block' } %>
+  </div>
+  <div class="col-md-2">
+    <%= link_to 'Status', problem_submissions_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>
+  </div>
+  <div class="col-md-2">
+    <%= link_to 'Ranklist', problem_ranklist_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>
+  </div>
+  <% if current_user and current_user.admin? %>
+    <div class="col-md-2">
+      <%= link_to 'Edit', edit_problem_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>
+    </div>
+    <div class="col-md-2">
+      <%= link_to 'Manage Testdata', problem_testdata_path(@problem), :class => 'btn btn-warning btn-xs btn-block' %>
+    </div>
   <% end %>
-  <%= markdown(@problem.description) %>
-</p>
-<p>
-  <h5>Input</h5>
-  <%= markdown(@problem.input) %>
-</p>
-<p>
-  <h5>Output</h5>
-  <%= markdown(@problem.output) %>
-</p>
-<p>
-  <h5>Sample Input</h5>
-  <%= markdown(@problem.example_input) %>
-</p>
-<p>
-  <h5>Sample Output</h5>
-  <%= markdown(@problem.example_output) %>
-</p>
-<p>
-  <h5>Hint</h5>
-  <%= markdown(@problem.hint) %>
-  <% @problem.testdata_sets.each do |s| %>
-    For testdata: <%= s.from %> ~ <%= s.to %>, score: <%= s.score %><br>
-  <% end %>
-</p>
-<p>
-  <dfn>
-    <strong>Source: </strong><%= @problem.source %>
-  </dfn>
-</p>
-<p>
-  <strong>Tags: </strong><%= raw @problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs' }.join(" ") %>
-</p>
+</div>
 
-<dfn>
-<table class="table">
-  <thead>
-    <tr>
-      <th>No.</th>
-      <th>Time Limit (ms)</th>
-      <th>Memory Limit (KiB)</th>
-      <th>Output Limit (KiB)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @problem.testdata.each_with_index do |testdatum, index| %>
-      <tr>
-	<td><%= index %></td>
-	<td><%= testdatum.limit.time.blank? ? "Nil" : testdatum.limit.time %></td>
-        <td><%= testdatum.limit.memory.blank? ? "Nil" : testdatum.limit.memory %></td>
-        <td><%= testdatum.limit.output.blank? ? "Nil" : testdatum.limit.output %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</dfn>
+<br>
 
-<%= link_to 'Back', problems_path %>
-<%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-xs btn-primary' } %>
-<% if current_user and current_user.admin? %>
-  <%= link_to 'Manage Testdata', problem_testdata_path(@problem), :class => 'btn btn-info btn-xs' %>
-  <%= link_to 'Edit', edit_problem_path(@problem), :class => 'btn btn-info btn-xs' %>
-<% end %>
-
-<div class="row-fluid">
-  <div class="btn-group dropup pull-right">
-    <button type="button" class="btn btn-default">Menu</button>
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      <span class="caret"></span>
-      <span class="sr-only">Toggle Dropdown</span>
-    </button>
-    <ul class="dropdown-menu pull-right" style="border-width:1px;border-width-color:#0047AB;">
-      <li><%= link_to 'Edit', edit_problem_path(@problem) %></li>
-      <li><%= link_to 'Back', problems_path %></li>
-      <li><%= link_to 'Status', problem_submissions_path(@problem)%></li>
-      <li><%= link_to 'Discuss', problem_posts_path(@problem) %></li>
-      <li><a href="#">Ranklist</a></li>
-      <li><a href="#" id="fold">Fold</a></li>
-    </ul>
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Topcoder</h1>
+      </div>
+      <div class="panel-body">
+        <%= topcoder(@problem).id %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">User's AC Ratio</h1>
+      </div>
+      <div class="panel-body">
+        <%= users_ac_ratio(@problem) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Submission's AC Ratio</h1>
+      </div>
+      <div class="panel-body">
+        <%= submissions_ac_ratio(@problem) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Tags</h1>
+      </div>
+      <div class="panel-body">
+        <%= raw @problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs btn-default' }.join(" ") %>
+      </div>
+    </div>
   </div>
 </div>
 
-<!--<div data-no-turbolinks class="navbar navbar-embossed navbar-fixed-bottom navbar-inverse" role="navigation" style="background-color:transparent;" id="menu" >
-	<div class = "row-fluid" id="lmenu">
-		<div class="collapse navbar-collapse" id="navbar-collapse-01" style="padding-right:50px;background-color:#003365;">
-			<ul class="nav navbar-nav navbar-right">           
-                <li><%= link_to 'Edit', edit_problem_path(@problem) %></li>
-                <li><%= link_to 'Back', problems_path %></li>
-                <li><%= link_to 'Submit', new_problem_submission_path(@problem)%></li>
-                <li><%= link_to 'Status', problem_submissions_path(@problem)%></li>
-                <li><%= link_to 'Discuss', problem_posts_path(@problem) %></li>
-				<li><a href="#">Ranklist</a></li>
-                <li><a href="#" id="fold">Fold</a></li>
-			</ul>
-	    </div>
-	</div>
-	<div class = "row-fluid" id="smenu">
-		<div class="collapse navbar-collapse" id="navbar-collapse-01">
-			<ul class="nav navbar-nav navbar-right" style="background-color:#003365;">           
-                <li><a href="#" class="btn btn-default" style="padding-right:50px;" id="unfold">Menu</a></li>
-			</ul>
-	    </div>
-	</div>
-</div>-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Description</h1>
+  </div>
+  <div class="panel-body">
+    <%= markdown(@problem.description) %>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Input Format</h1>
+      </div>
+      <div class="panel-body">
+        <%= markdown(@problem.input) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Output Format</h1>
+      </div>
+      <div class="panel-body">
+        <%= markdown(@problem.output) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Sample Input</h1>
+      </div>
+      <div class="panel-body">
+        <%= markdown(@problem.example_input) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Sample Output</h1>
+      </div>
+      <div class="panel-body">
+        <%= markdown(@problem.example_output) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Hints</h1>
+      </div>
+      <div class="panel-body">
+        <%= markdown(@problem.hint) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Source</h1>
+      </div>
+      <div class="panel-body">
+        <%= markdown(@problem.source) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Subtasks</h1>
+  </div>
+  <div class="panel-body">
+    <% @problem.testdata_sets.each do |s| %>
+      For Testdata: <%= s.from %> ~ <%= s.to %>, Score: <%= s.score %><br>
+    <% end %>
+  </div>
+  <table class="table table-hover table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Time Limit (ms)</th>
+        <th>Memory Limit (KiB)</th>
+        <th>Output Limit (KiB)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @problem.testdata.each_with_index do |testdatum, index| %>
+        <tr>
+          <td><%= index %></td>
+          <td><%= testdatum.limit.time.blank? ? "Nil" : testdatum.limit.time %></td>
+          <td><%= testdatum.limit.memory.blank? ? "Nil" : testdatum.limit.memory %></td>
+          <td><%= testdatum.limit.output.blank? ? "Nil" : testdatum.limit.output %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-success btn-xs btn-block' } %>
+  </div>
+  <div class="col-md-2">
+    <%= link_to 'Status', problem_submissions_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>
+  </div>
+  <div class="col-md-2">
+    <%= link_to 'Ranklist', problem_ranklist_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>
+  </div>
+  <% if current_user and current_user.admin? %>
+    <div class="col-md-2">
+      <%= link_to 'Edit', edit_problem_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>
+    </div>
+    <div class="col-md-2">
+      <%= link_to 'Manage Testdata', problem_testdata_path(@problem), :class => 'btn btn-warning btn-xs btn-block' %>
+    </div>
+  <% end %>
+  <div class="col-md-2">
+    <%= link_to 'Back to Top', '#', :class => 'btn btn-default btn-xs btn-block' %>
+  </div>
 </div>

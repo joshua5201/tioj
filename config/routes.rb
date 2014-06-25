@@ -25,7 +25,7 @@ Tioj::Application.routes.draw do
   resources :articles
   
   get 'problems/tag/:tag' => 'problems#index', as: :problems_tag
-  get 'problems/:id/ranklist' => 'problems#ranklist', as: :problems_ranklist
+  get 'problems/:id/ranklist' => 'problems#ranklist', as: :problem_ranklist
   
   get 'contests/:id/dashboard' => 'contests#dashboard'
   get 'submissions/:id/rejudge' => 'submissions#rejudge'
