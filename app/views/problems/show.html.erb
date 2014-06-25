@@ -68,9 +68,12 @@ Submissions' AC Ratio: <%= submissions_ac_ratio(@problem) %>
 </table>
 </dfn>
 
+<%= link_to 'Back', problems_path %>
 <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-xs btn-primary' } %>
-<%= link_to 'Manage Testdata', problem_testdata_path(@problem), :class => 'btn btn-info btn-xs' %>
-
+<% if current_user and current_user.admin? %>
+  <%= link_to 'Manage Testdata', problem_testdata_path(@problem), :class => 'btn btn-info btn-xs' %>
+  <%= link_to 'Edit', edit_problem_path(@problem), :class => 'btn btn-info btn-xs' %>
+<% end %>
 <div class = "row-fluid">
 	<div class="btn-group dropup pull-right">
   		<button type="button" class="btn btn-default">Menu</button>

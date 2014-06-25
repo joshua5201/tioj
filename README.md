@@ -29,5 +29,5 @@ $ mysqldump tioj_dev -u root -p --opt > tioj_dev00.sql
 
 ## Restore SQL
 ```bash
-$ mysql -u root -p < tioj_dev.sql
+$ mysql -u root -p tioj_dev < tioj_dev.sql
 ```

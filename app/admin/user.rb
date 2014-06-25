@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
-
+  permit_params :email, :nickname, :admin, :avatar_url
+  
   preserve_default_filters!
   filter :id
   # See permitted parameters documentation:

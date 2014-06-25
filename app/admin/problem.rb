@@ -1,5 +1,7 @@
 ActiveAdmin.register Problem do
-
+  permit_params :name, :description, :source, :input, :output, :example_input, :example_output, :hint, :visible_state, 
+      :problem_type, :sjcode, :interlib
+  
   preserve_default_filters!
   filter :id
   

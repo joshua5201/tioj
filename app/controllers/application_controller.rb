@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   after_filter :store_location
   before_action :set_verdict_hash
-private
+  
   def set_verdict_hash
     @verdict = {"AC" => "Accepted",
                "WA" => "Wrong Answer",
@@ -40,7 +40,7 @@ private
               9 => "ER"
                }
   end
-public
+  
   	def store_location
   		if (request.fullpath != "/users/sign_in" &&
   			request.fullpath != "/users/sign_out"&&
