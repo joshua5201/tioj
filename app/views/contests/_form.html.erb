@@ -11,34 +11,51 @@
        </div>
    <% end %>
 
-   <div class="field">
-       <%= f.label :title %><br>
-       <%= f.text_field :title %>
-   </div>
-   <div class="field">
-       <%= f.label :description %><br>
-       <%= f.text_area :description %>
-   </div>
-   <div class="field">
-       <%= f.label :start_time %><br>
-       <%= f.datetime_select :start_time %>
-   </div>
-   <div class="field">
-       <%= f.label :end_time %><br>
-       <%= f.datetime_select :end_time %>
-   </div>
-   <div class="field">
+   <div class="form-group">
        <%= render 'contest_type_chooser', :f => f %>
    </div>
+   
+   <div class="form-group">
+       <%= f.label :title %>
+       <%= f.text_field :title, :class => 'form-control flat' %>
+   </div>
+   
+   <div class="form-group">
+       <%= f.label :description %>
+       <%= f.text_area :description, :class => 'form-control flat', :rows => "9" %>
+   </div>
+   
+   <div class="form-group">
+       <%= f.label :start_time %>
+       <%= f.datetime_local_field :start_time, :class => 'form-control flat', :type => 'datetime-local' %>
+   </div>
+   
+   <div class="form-group">
+       <%= f.label :end_time %>
+       <%= f.datetime_local_field :end_time, :class => 'form-control flat', :type => 'datetime-local' %>
+   </div>
+   
    <%= f.fields_for :contest_problem_joints do |t| %>
-     <div class="field">
-       <%= t.label :task %>
-       <%= t.number_field :problem_id %>
-       <%= t.link_to_remove "Remove this task" %>
+     <div class="form-group">
+       <div class="row">
+         <div class="col-md-1">
+          <%= t.label :task %>
+         </div>
+         <div class="col-md-2">
+          <%= t.number_field :problem_id, :class => 'form-control flat' %>
+         </div>
+         <div class="col-md-3">
+          <%= t.link_to_remove "Remove this task", :class => "btn btn-danger" %>
+         </div>
+       
+       </div>
      </div>
    <% end %>
-   <p><%= f.link_to_add "Add a task", :contest_problem_joints %></p>
+   <%= f.link_to_add "Add a task", :contest_problem_joints, :class => "btn btn-warning" %>
+   
+   <hr>
+   
    <div class="actions">
-       <%= f.submit %>
+       <%= f.submit :class => "btn btn-success btn-lg"%>
    </div>
 <% end %>
