@@ -1,6 +1,6 @@
-<h4 class="page-header">Editing problem</h4>
+<h4 class="page-header">Editing problem <small>#<%= @problem.id %></small></h4>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @problem %> |
-<%= link_to 'Back', problems_path %>
+<%= link_to 'Show Problem', @problem, :class => 'btn btn-primary btn-xs' %>
+<%= link_to 'Back to Problems List', problems_path, :class => 'btn btn-default btn-xs' %>

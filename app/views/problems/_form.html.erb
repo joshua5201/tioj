@@ -1,90 +1,137 @@
-<%= nested_form_for(@problem) do |f| %>
-    <% if @problem.errors.any? %>
+<%= nested_form_for @problem, :html => {:class => 'form'} do |f| %>
+  <% if @problem.errors.any? %>
     <div id="error_explanation">
-    <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
-
-    <ul>
+      <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+      <ul>
         <% @problem.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-    <% end %>
-    </ul>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
-<% end %>
-
-<div class="field">
-    <%= f.label :visible_state %><br>
-    <%= f.select :visible_state, [["[0]Public", "0"],
-    ["[1]Public during contest", "1"], ["[2]Invisible", "2"]] %>
-</div>
-<div class="field">
-    <%= f.label :problem_type %><br>
-    <%= f.select :problem_type, [["[0]Batch Judge", "0"],
-    ["[1]Special Judge", "1"], ["[2]Interactive", "2"]] %>
-</div>
-<div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-</div>
-<div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-</div>
-<div class="field">
-    <%= f.label :input %><br>
-    <%= f.text_area :input %>
-</div>
-<div class="field">
-    <%= f.label :output %><br>
-    <%= f.text_area :output %>
-</div>
-<div class="field">
-    <%= f.label :example_input %><br>
-    <%= f.text_area :example_input %>
-</div>
-<div class="field">
-    <%= f.label :example_output %><br>
-    <%= f.text_area :example_output %>
-</div>
-<div class="field">
-    <%= f.label :hint %><br>
-    <%= f.text_area :hint %>
-</div>
-<% if @problem.problem_type == 1 %>
-  <div class="field">
-    <%= f.label :sjcode, "Special Judge Code (argv[1]: testee output, argv[2]: testdata input, argv[3]: testdata output)" %><br>
-    <%= f.text_area :sjcode %>
-  </div>
-<% elsif @problem.problem_type == 2 %>
-  <div class="field">
-    <%= f.label :interlib, 'Interactive Library ( #include "lib' + @problem.id.to_s.rjust(4, '0') + '.h" )' %><br>
-    <%= f.text_area :interlib %>
-  </div>
-<% end %>
-<div class="field">
-    <%= f.label :source %><br>
-    <%= f.text_area :source %>
-</div>
-
-<div class="field">
-  <%= f.label :tag_list, "Tags (saperate by commas)" %><br>
-  <%= f.text_field :tag_list %>
-</div>
-
-<%= f.label :testdata_sets, "Testdata Sets (testdata no. starts from 0)" %><br>
-<%= f.fields_for :testdata_sets do |t| %>
-    <div class="field">
-       <%= t.label :from %>
-       <%= t.number_field :from, :min => 0, :max => @problem.testdata.size - 1 %>
-       <%= t.label :to %>
-       <%= t.number_field :to, :min => 0, :max => @problem.testdata.size - 1 %>
-       <%= t.label :score %>
-       <%= t.number_field :score, :in => 0..100 %>
-       <%= t.link_to_remove "Remove this range" %>
+  <% end %>
+  
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, :class => 'form-control flat' %>
+      </div>
     </div>
-<% end %>
-<p><%= f.link_to_add "Add a range", :testdata_sets %></p>
-
-<div class="actions">
-    <%= f.submit %>
-</div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.label :tag_list, "Tags (saperate by commas)" %>
+        <%= f.text_field :tag_list, :class => 'form-control flat' %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.label :visible_state %>
+        <%= f.select :visible_state, [["[0]Public", "0"],
+        ["[1]Public during contest", "1"], ["[2]Invisible", "2"]], {}, {:class => 'form-control flat'} %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.label :problem_type %>
+        <%= f.select :problem_type, [["[0]Batch Judge", "0"],
+        ["[1]Special Judge", "1"], ["[2]Interactive", "2"]], {}, {:class => 'form-control flat'} %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :description %>
+        <%= f.text_area :description, :class => 'form-control flat', :rows => '9' %>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :input, "Input Format" %>
+        <%= f.text_area :input, :class => 'form-control flat', :rows => '7' %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :output, "Output Format" %>
+        <%= f.text_area :output, :class => 'form-control flat', :rows => '7' %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :example_input, "Sample Input" %>
+        <%= f.text_area :example_input, :class => 'form-control flat', :rows => '7' %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :example_output, "Sample Output" %>
+        <%= f.text_area :example_output, :class => 'form-control flat', :rows => '7' %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :hint, "Hints" %>
+        <%= f.text_area :hint, :class => 'form-control flat', :rows => '3' %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :source, "Problem Source" %>
+        <%= f.text_area :source, :class => 'form-control flat', :rows => '3' %>
+      </div>
+    </div>
+  </div>
+  
+  <% if @problem.problem_type == 1 %>
+    <div class="form-group">
+      <%= f.label :sjcode, raw('Special Judge Code ( <code>argv[1]: testee output, argv[2]: testdata input, argv[3]: testdata output</code> )') %>
+      <%= f.text_area :sjcode, :class => 'form-control flat', :rows => '7' %>
+    </div>
+  <% elsif @problem.problem_type == 2 %>
+    <div class="form-group">
+      <%= f.label :interlib, raw('Interactive Library ( <code>#include "lib' + @problem.id.to_s.rjust(4, '0') + '.h"</code> )') %>
+      <%= f.text_area :interlib, :class => 'form-control flat', :rows => '7' %>
+    </div>
+  <% end %>
+  
+  <%= f.label nil, "Testdata Sets (testdata no. starts from 0)" %><br>
+  <%= f.fields_for :testdata_sets do |t| %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-1">
+          <%= t.label :from, "From:" %>
+          </div>
+        <div class="col-md-1">
+          <%= t.number_field :from, :min => 0, :max => @problem.testdata.size - 1, :class => 'form-control flat' %>
+        </div>
+        <div class="col-md-1">
+          <%= t.label :to, "To:" %>
+        </div>
+        <div class="col-md-1">
+          <%= t.number_field :to, :min => 0, :max => @problem.testdata.size - 1, :class => 'form-control flat' %>
+        </div>
+        <div class="col-md-1">
+          <%= t.label :score, "Score:" %>
+        </div>
+        <div class="col-md-1">
+          <%= t.number_field :score, :in => 0..100, :class => 'form-control flat' %>
+        </div>
+        <div class="col-md-1">
+          <%= t.link_to_remove "Remove this range", :class => 'btn btn-danger' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= f.link_to_add "Add a Range", :testdata_sets, :class => 'btn btn-warning' %>
+  <hr>
+  <div class="actions">
+    <%= f.submit :class => 'btn btn-success btn-lg' %>
+  </div>
 <% end %>

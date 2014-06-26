@@ -10,9 +10,9 @@
  *
  *= require_tree .
  * require twitter/bootstrap
+ *= require_self
  *= require bootstrap
  *= require flat-ui
- *= require_self
  */
 
 /*
