@@ -41,7 +41,10 @@
         <h1 class="panel-title">Topcoder</h1>
       </div>
       <div class="panel-body">
-        <%= topcoder(@problem).id %>
+        <% tcoder = topcoder(@problem) %>
+        <% if tcoder %>
+          <%= tcoder.id %>
+        <% end %>
       </div>
     </div>
   </div>

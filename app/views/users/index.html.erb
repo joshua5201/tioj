@@ -18,8 +18,8 @@
 			<td><%= image_tag("avatar/#{user.id}.png", :class=>"img-rounded img-responsive ", :size => "25x25") %></td>
 			<td><%=user.id%></td>
 			<td><%=user.email%></td>
-			<td><%=user.nickname%></td>
-			<td></td>
+			<td><%= link_to user.nickname, user_path(user) %></td>
+			<td><%= user_ac_count(user) %></td>
 		</tr>
 		<%end%>
 	</tbody>

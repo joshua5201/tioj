@@ -18,17 +18,15 @@
 <table class="table table-hover table-condensed table-striped">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>#</th>
       <th>Name</th>
       <th>Top Coder</th>
       <th>AC Ratio(user)</th>
       <th>AC Ratio(submission)</th>
       <% if user_signed_in? && current_user.admin == true %>
 	<th>Visible State</th>
-	<th></th>
       <% end %>
-      <% if user_signed_in? %><th></th> <%end%>
-      
+      <% if user_signed_in? %><th></th><% end %>
     </tr>
   </thead>
 
@@ -52,7 +50,7 @@
           </td>
           <td><%= users_ac_ratio(problem) %></td>
           <td><%= submissions_ac_ratio(problem) %></td>
-          <% if user_signed_in? && current_user.admin == true %>
+          <% if user_signed_in? && current_user.admin? %>
             <% if problem.visible_state == 0 %>
               <td>Public</td>
             <% elsif problem.visible_state == 1 %>
@@ -60,9 +58,15 @@
             <% else %>
               <td>Invisible</td>
             <% end %>
-            <td><%= link_to 'Edit', edit_problem_path(problem), :class => 'btn btn-info btn-xs' %></td>
           <% end %>
-          <% if user_signed_in? %><td><%= link_to 'Submit', new_problem_submission_path(problem), :class => 'btn btn-success btn-xs' %></td><%end%>
+          <% if user_signed_in? %>
+            <td>
+              <% if current_user.admin? %>
+                <%= link_to 'Edit', edit_problem_path(problem), :class => 'btn btn-info btn-xs' %>
+              <% end %>
+              <%= link_to 'Submit', new_problem_submission_path(problem), :class => 'btn btn-success btn-xs' %>
+            </td>
+          <% end %>
         </tr>
       <%end%>
     <% end %>

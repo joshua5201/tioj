@@ -1,0 +1,27 @@
+<table class="table table-hover table-condensed table-striped">
+  <thead>
+    <tr>
+      <th class="col-md-5"><%= pin_glyph %> Title</th>
+      <th class="col-md-3">Time</th>
+      <th class="col-md-3">Arthur</th>
+      <th class="col-md-1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% articles.each do |a| %>
+      <tr>
+        <td>
+          <%= pin_glyph if a.pinned? %> <%= link_to a.title, article_path(a) %>
+        </td>
+        <td><%= a.created_at.to_s(:clean) %></td>
+        <td><%= link_to User.find(a.arthur_id).nickname, user_path(a.arthur_id) %></td>
+        <% if user_signed_in? && current_user.admin == true %>
+          <td>
+            <%= link_to edit_glyph, edit_article_path(a) %>
+            <%= link_to destroy_glyph, a, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,6 +1,6 @@
 <h4 class="page-header"><%= @article.title %></h4>
 
-<div class="well well-lg">
+<div class="well">
 
 <p>
   <%= markdown(@article.content) %>
@@ -17,9 +17,11 @@
 
 <p>
   <dfn>
-    Last arthured by: <%= @article.arthur_id %>, <%= @article.updated_at.to_s(:clean) %>
+    Last arthured by: <%= link_to User.find(@article.arthur_id).nickname, user_path(@article.arthur_id) %>, <%= @article.updated_at.to_s(:clean) %>
   </dfn>
 </p>
 
-<%= link_to 'Back', articles_path, :class => 'btn btn-xs btn-primary' %>
-<%= link_to 'Edit', edit_article_path(@article), :class => 'btn btn-info btn-xs' %>
+<%= link_to 'Back to Bulletin', articles_path, :class => 'btn btn-xs btn-default' %>
+<% if user_signed_in? and current_user.admin? %>
+  <%= link_to 'Edit', edit_article_path(@article), :class => 'btn btn-info btn-xs' %>
+<% end %>
