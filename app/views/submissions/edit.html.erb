@@ -1,6 +1,6 @@
-<h4 class="page-header">Editing submission</h4>
+<h4 class="page-header">Editing submission <small>#<%= @submission.id %></small></h4>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @submission %> |
-<%= link_to 'Back', submissions_path %>
+<%= link_to 'Show Submission', @submission, :class => 'btn btn-primary btn-xs' %>
+<%= link_to 'Back to Submissions List', submissions_path, :class => 'btn btn-default btn-xs' %>
