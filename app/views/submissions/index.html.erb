@@ -13,9 +13,11 @@
   <br>
 <% else %>
   <div class="form-inline">
+    <div class="form-group">
       <label for="quick_prob_id">Quick Submit to Problem</label>
-      <input id="quick_prob_id" type="number" class="form-control" min="1" max="99999"/>
-    <button type="submit" id="quick_submit" class="btn btn-success">Submit</button>
+      <input id="quick_prob_id" type="number" class="form-control flat" min="1" max="99999"/>
+    </div>
+    <button type="submit" id="quick_submit" class="btn btn-success btn-sm">Submit</button>
   </div>
 <% end %>
 

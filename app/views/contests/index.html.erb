@@ -1,11 +1,11 @@
 <h4 class="page-header">Contests</h4>
 
-<%= paginate @contests %>
-
 <% if user_signed_in? && current_user.admin == true %>
-  <br><%= link_to 'New Contest', new_contest_path, :class => 'btn btn-info btn-xs' %>
+  <%= link_to 'New Contest', new_contest_path, :class => 'btn btn-success btn-sm' %>
+  <br>
 <% end %>
-<table class="table">
+<%= paginate @contests %>
+<table class="table table-hover table-condensed table-striped">
   <thead>
     <tr>
       <th>Title</th>
@@ -17,7 +17,6 @@
       <th>End Time</th>
       <th>Contest Type</th>
       <% if user_signed_in? && current_user.admin == true %>
-	<th></th>
 	<th></th>
       <% end %>
     </tr>
@@ -32,7 +31,7 @@
         <% elsif Time.now > contest.start_time %>
 	  <td>Ready</td>
 	<% else %>
-	  <td>Not yet started</td>
+	  <td>Not yet</td>
         <% end %>
         <% if user_signed_in? %>
 	  <td><%= link_to 'Particapate', contest, :class => 'btn btn-xs btn-primary' %></td>
@@ -49,8 +48,10 @@
 	  <td>wtf</td>
 	<% end %>
         <% if user_signed_in? && current_user.admin == true %>
-	  <td><%= link_to 'Edit', edit_contest_path(contest) %></td>
-	  <td><%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  <td>
+            <%= link_to 'Edit', edit_contest_path(contest), :class => 'btn btn-info btn-xs' %>
+            <%= link_to 'Destroy', contest, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-xs' %>
+          </td>
         <% end %>
       </tr>
     <% end %>

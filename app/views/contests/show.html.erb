@@ -1,70 +1,77 @@
 <h4 class='page-header'>
   Contest Name : <%= @contest.title %>
 </h4>
-<div class="well well-lg">
-<table class="table">
-  <tbody>
-    <tr>
-      <td>Starts at:</td>
-      <td><%= @contest.start_time.to_s(:clean) %></td>
-    </tr>
-    <tr>
-      <td>Ends at:</td>
-      <td><%= @contest.end_time.to_s(:clean) %></td>
-    </tr>
-    <tr>
-      <td>Contest Type:</td>
-      <% if @contest.contest_type == 0 %>
-	<td>gcj style (partial/dashboard)</td>
-      <% elsif @contest.contest_type == 1 %>
-	<td>ioi style (partial/no dashboard)</td>
-      <% elsif @contest.contest_type == 2 %>
-	<td>acm style (no partial/dashboard)</td>
-      <% else %>
-	<td>wtf</td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
-<p>
-  <h5>Description</h5>
-  <%= markdown(@contest.description) %>
-</p>
 
-<p>
-  <h5>Tasks</h5>
-  <% for task in @contest.contest_problem_joints %>
-    <% if Problem.find_by_id(task.problem_id).nil? %>
-      <%= task.problem_id.to_s.rjust(4, '0') + '  ' + 'Nil' %>
-    <% else %>
-      <%= link_to (task.problem_id.to_s.rjust(4, '0') + '  ' + Problem.find(task.problem_id).name), contest_problem_path(@contest, task.problem_id) %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Starts at</h1>
+      </div>
+      <div class="panel-body">
+        <%= @contest.start_time.to_s(:clean) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Ends at</h1>
+      </div>
+      <div class="panel-body">
+        <%= @contest.end_time.to_s(:clean) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Contest Type</h1>
+      </div>
+      <div class="panel-body">
+        <% case @contest.contest_type %>
+        <% when 0 %>
+          gcj style (partial/dashboard)
+        <% when 1 %>
+          ioi style (partial/no dashboard)
+        <% when 2 %>
+          acm style (no partial/dashboard)
+        <% else %>
+          wtf
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Description</h1>
+  </div>
+  <div class="panel-body">
+    <%= markdown(@contest.description) %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Tasks</h1>
+  </div>
+  <div class="panel-body">
+    <% @contest.contest_problem_joints.each_with_index do |task, index| %>
+      <%= link_to ('p' + (65+index).chr + ' ' + task.problem_id.to_s + '. ' + Problem.find(task.problem_id).name), contest_problem_path(@contest, task.problem_id) %>
+      <br>
     <% end %>
-    <br>
-  <% end %>
-</p>
+  </div>
+</div>
 
 <p>
-  <% if @contest.contest_type == 0 || @contest.contest_type == 2 %>
-    <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-primary'} %>
-    <%= link_to 'Submissions', contest_submissions_path(@contest), :class => 'btn btn-info btn-xs' %>
-  <% elsif user_signed_in? && current_user.admin == true %>
-    <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-primary'} %>
+  <% if @contest.contest_type != 1 or (user_signed_in? and current_user.admin?) %>
+    <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-warning'} %>
     <%= link_to 'Submissions', contest_submissions_path(@contest), :class => 'btn btn-info btn-xs' %>
   <% end %>
-  <% if user_signed_in? && current_user.admin == true %>
+  <% if user_signed_in? and current_user.admin? %>
     <%= link_to 'Edit', edit_contest_path(@contest), :class => 'btn btn-info btn-xs' %>
   <% end %>
+  <%= link_to 'Back to Contests List', contests_path, :class => 'btn btn-default btn-xs' %>
 </p>
-<div class = "row-fluid">
-	<div class="btn-group dropup pull-right">
-  		<button type="button" class="btn btn-default">Menu</button>
-  		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    	<span class="caret"></span>
-    	<span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu pull-right" style="border-width:1px;border-width-color:#0047AB;">
-    <li><%= link_to 'Edit', edit_contest_path(@contest) %></li>
-    <li><%= link_to 'Back', contests_path %></li>
-  </ul>
-</div>
-</div>
