@@ -19,8 +19,11 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <%= f.label :tag_list, "Tags (saperate by commas)" %>
-        <%= f.text_field :tag_list, :class => 'form-control flat' %>
+        <%= f.label :tag_list, "Tags" %>
+        <%= f.text_field :tag_list, :class => 'tagsinput ', :id => 'tagsinput' %>
+        <script>
+          $('.tagsinput').tagsInput();
+        </script>
       </div>
     </div>
     <div class="col-md-3">

@@ -1,18 +1,49 @@
-<h4 class="page-header">Ranklist<small> Problem #<%= @problem.id %></small></h4>
-<table class="table">
+<h4 class="page-header">Ranklist <small>Problem #<%= @problem.id %></small></h4>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to 'Back to Problem', problem_path(@problem), :class => 'btn btn-default btn-xs btn-block' %>
+  </div>
+</div>
+
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Rank</th>
       <th>User ID</th>
-      
+      <th>Nickname</th>
+      <th>Compiler</th>
+      <th>Time (ms)</th>
+      <th>Memory (KiB)</th>
+      <th>Date</th>
     </tr>
   </thead>
   <tbody>
-    <% @users.each_with_index do |user, index| %>
-      <tr>
-        <td><%= index+1 %></td>
-        <td><%= user.id %></td>
+    <% @submissions.each_with_index do |submission, index| %>
+      <% case index+1 %>
+        <% when 1 %>
+          <tr class="warning">
+        <% when 2..3 %>
+          <tr class="success">
+        <% when 6..7 %>
+          <tr class="info">
+        <% else %>
+          <tr>
+      <% end %>
+        <td><%= link_to index+1, submission_path(submission) %></td>
+        <td><%= link_to submission.user_id, user_path(submission.user_id) %></td>
+        <td><%= link_to submission.user.nickname, user_path(submission.user_id) %></td>
+        <td><%= submission.compiler %></td>
+        <td><%= submission.total_time %></td>
+        <td><%= submission.total_memory %></td>
+        <td><%= submission.created_at.to_s(:clean) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to 'Back to Top', '#', :class => 'btn btn-default btn-xs btn-block' %>
+  </div>
+</div>

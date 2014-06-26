@@ -2,8 +2,11 @@ class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :edit, :update, :destroy, :ranklist]
 
   def ranklist
-    @users = User.joins(:submissions).select("users.id, MIN(submissions.total_time)")
-    .where("submissions.problem_id = ? AND submissions.result = ?", @problem.id, "AC").group("users.id")
+    #@users = User.joins(:submissions).select("users.id, MIN(submissions.total_time)")
+    #.where("submissions.problem_id = ? AND submissions.result = ?", @problem.id, "AC").group("users.id")
+    submissions_id = Submission.select("id, MIN(submissions.total_time)")
+      .where("problem_id = ? AND result = ?", @problem.id, "AC").group("user_id")
+    @submissions = Submission.find(submissions_id.map{|a| a.id}).sort_by{|a| a.total_time}
   end
   
   def index
