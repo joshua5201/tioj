@@ -1,65 +1,122 @@
 <%= javascript_include_tag 	"/stylesheets/prism.js" %>
 <%= stylesheet_link_tag 	"/stylesheets/prism.css" %>
-<p id="notice"><%= notice %></p>
+
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert"><%= alert %></p>
+<% end %>
+
 <% if censored(@submission) %>
   <h4 class="page-header">Results of submission #<code>censored</code></h4>
   <code>censored</code>
 <% else %>
+
 <h4 class="page-header">Results of submission #<%= @submission.id %></h4>
 
 <p>
-  <strong>Problem:</strong>
-  <%= link_to @submission.problem.id.to_s + " " + @submission.problem.name, problem_path(@submission.problem) %>
-</p>
-<p>
-  <strong>Compiler:</strong>
-  <%= @submission.compiler %>
-</p><p>
-  <strong>Total Time:</strong>
-  <%= @submission.total_time %>
-</p><p>
-  <strong>Max Memory:</strong>
-  <%= @submission.total_memory %>
-</p>
-<p>
-  <strong>Verdict:</strong>
-  <%= @verdict[@submission.result] %>
-</p>
-<p>
-  <strong>Score:</strong>
-  <%= @submission.score %>
-</p>
-
-<p>
-<table class="table">
-<thead>
-  <tr>
-    <th>Testdata no.</th>
-    <th>Time (ms)</th>
-    <th>Memory (Kib)</th>
-    <th>Verdict</th>
-  </tr>
-</thead>
-<tbody>
-  <% Range.new(0, @submission.problem.testdata.size - 1).each do |i| %>
-    <tr>
-      <td><%= i %></td>
-      <td><%= @_result[i*3+1] %></td>
-      <td><%= @_result[i*3+2] %></td>
-      <td><%= @verdict[@_result[i*3]] %></td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
-</p>
-
-<strong>Code:</strong>
-<pre class = "line-numbers"><code class="language-c-like">
-  <%= @submission.code %>
-</code></pre>
-
-<%= link_to 'Back', submissions_path %>
+<%= link_to 'Back to Submissions List', submissions_path, :class => 'btn btn-default btn-xs' %>
 <% if user_signed_in? and current_user.admin? %>
-<%= link_to 'Rejudge', {:controller => :submissions, :action => :rejudge, :id => @submission.id} %>
+  <%= link_to 'Rejudge', { :controller => :submissions, :action => :rejudge, :id => @submission.id }, :class => 'btn btn-xs btn-primary' %>
 <% end %>
+</p>
+
+<% case @submission.result %>
+  <% when "WA" %>
+    <div class="panel panel-danger">
+  <% when "TLE" %>
+    <div class="panel panel-info">
+  <% when "MLE" %>
+    <div class="panel panel-warning">
+  <% when "RE" %>
+    <div class="panel panel-warning">
+  <% when "AC" %>
+    <div class="panel panel-success">
+  <% else %>
+    <div class="panel panel-default">
+<% end %>
+  <div class="panel-heading">
+  <div class="row">
+    <div class="col-md-3">
+      <h1 class="panel-title">Problem</h1>
+    </div>
+    <div class="col-md-2">
+      <h1 class="panel-title">Total Time (ms)</h1>
+    </div>
+    <div class="col-md-2">
+      <h1 class="panel-title">Max Memory (KiB)</h1>
+    </div>
+    <div class="col-md-3">
+      <h1 class="panel-title">Verdict</h1>
+    </div>
+    <div class="col-md-2">
+      <h1 class="panel-title">Score</h1>
+    </div>
+  </div>
+  </div>
+  <div class="panel-body">
+  <div class="row">
+    <div class="col-md-3">
+      <%= link_to @submission.problem.id.to_s + ". " + @submission.problem.name, problem_path(@submission.problem) %>
+    </div>
+    <div class="col-md-2">
+      <%= @submission.total_time %>
+    </div>
+    <div class="col-md-2">
+      <%= @submission.total_memory %>
+    </div>
+    <div class="col-md-3">
+      <%= @verdict[@submission.result] %>
+    </div>
+    <div class="col-md-2">
+      <%= @submission.score %>
+    </div>
+  </div>
+  </div>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Testdata no.</th>
+        <th>Time (ms)</th>
+        <th>Memory (Kib)</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Range.new(0, @submission.problem.testdata.size - 1).each do |i| %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= @_result[i*3+1] %></td>
+          <td><%= @_result[i*3+2] %></td>
+          <td><%= @verdict[@_result[i*3]] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="well well-sm">
+  <div class="row">
+    <div class="col-md-1">
+      <strong>Compiler:</strong>
+    </div>
+    <div class="col-md-2">
+      <%= @submission.compiler %>
+    </div>
+  </div>
+</div>
+
+<style>
+  code{ margin-left: -15px;}
+</style>
+<pre class="line-numbers">
+  <code class="language-c-like">
+    <%= @submission.code %>
+  </code>
+</pre>
+
+<%= link_to 'Back to Top', '#', :class => 'btn btn-default btn-xs' %>
+
 <% end %>
