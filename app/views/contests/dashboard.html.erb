@@ -1,8 +1,14 @@
 <h4 class="page-header">
-  Dashboard : <%= @contest.title %>
+  Dashboard <small><%= @contest.title %></small>
 </h4>
-<div class="well well-lg">
-<table class="table">
+
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to 'Back to Contest', contest_path(@contest), :class => 'btn btn-default btn-xs btn-block' %>
+  </div>
+</div>
+
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Rank</th>
@@ -17,7 +23,7 @@
     <% @scores.each_with_index do |s, index| %>
       <tr>
 	<td><%= index+1 %></td>
-	<td><%= s[0] %></td>
+	<td><%= link_to User.find(s[0]).nickname, user_path(s[0]) %></td>
 	<% s[1].each do |t|%>
 	  <td><%= t %></td>
 	<% end %>
@@ -26,3 +32,10 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to 'Back to Contest', contest_path(@contest), :class => 'btn btn-default btn-xs btn-block' %>
+  </div>
+</div>
+
