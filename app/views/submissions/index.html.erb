@@ -65,11 +65,11 @@
 <%= paginate @submissions %>
 <br />
 <% if @problem %>
-  <%= link_to 'New Submission', new_problem_submission_path(@problem) %>
+  <%= link_to 'Submit to Problem', new_problem_submission_path(@problem), :class => "btn btn-success" %>
 <% else %>
-  <div>
-      Quick Submit to Problem <input id="quick_prob_id" type="text" size="4" /> 
-      <button type="submit" id="quick_submit" class="btn btn-xs btn-default">Submit</button>
-    </div>
-
+  <div class="form-inline">
+    <label id="quick_prob_id">Quick Submit to Problem</label>
+    <input id="quick_prob_id" type="number" class="form-control flat" min="1" max="99999"/> 
+    <button type="submit" id="quick_submit" class="btn btn-success">Submit</button>
+  </div>
 <% end %>
