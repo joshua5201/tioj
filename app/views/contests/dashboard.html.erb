@@ -13,21 +13,32 @@
     <tr>
       <th>Rank</th>
       <th>ID</th>
+      <th>Nickname</th>
       <% @tasks.each_with_index do |task, index| %>
 	<th><%= link_to ('p' + (65+index).chr), contest_problem_path(@contest, task) %></th>
       <% end %>
-      <th>Score</th>
+      <th>Total</th>
     </tr>
   </thead>
   <tbody>
     <% @scores.each_with_index do |s, index| %>
-      <tr>
+      <% case s[2] %>
+      <% when @color[0] %>
+        <tr class="warning">
+      <% when @color[1] %>
+        <tr class="success">
+      <% when @color[2] %>
+        <tr class="info">
+      <% else %>
+        <tr>
+      <% end %>
 	<td><%= index+1 %></td>
+        <td><%= link_to s[0], user_path(s[0]) %></td>
 	<td><%= link_to User.find(s[0]).nickname, user_path(s[0]) %></td>
 	<% s[1].each do |t|%>
 	  <td><%= t %></td>
 	<% end %>
-	<td><%= s[1].sum %></td>
+	<td><%= s[2] %></td>
       </tr>
     <% end %>
   </tbody>

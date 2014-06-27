@@ -9,39 +9,32 @@ class ContestsController < ApplicationController
       end
     end
     @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
-    @c_submissions = @contest.submissions
-    #####
-    
-    
-    
-    
-    
-    
-    #####
-    @c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
+    c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|
-      @submissions << @c_submissions.where("problem_id = ?", task.id)#select{|a| a.problem_id == task.id}
+      @submissions << c_submissions.where("problem_id = ?", task.id)#select{|a| a.problem_id == task.id}
       @participants = @participants | @submissions[index].map{|e| e.user_id}
     end
     @scores = []
     @participants.each do |u|
-      @t = []
+      t = []
       (0..(@tasks.size-1)).each do |index|
 	if @submissions[index].select{|a| a.user_id == u}.empty?
-	  @t << 0
+	  t << 0
 	else
           if @contest.contest_type == 2
-            @t << ( @submissions[index].select{|a| a.user_id == u and a.result == 'AC'}.blank? ? 0 : 100 )
+            t << ( @submissions[index].select{|a| a.user_id == u and a.result == 'AC'}.blank? ? 0 : 100 )
           else
-            @t << @submissions[index].select{|a| a.user_id == u}.max_by{|a| a.score}.score
+            t << @submissions[index].select{|a| a.user_id == u}.max_by{|a| a.score}.score
           end
 	end
       end
-      @scores << [u, @t]
+      @scores << [u, t, t.sum]
     end
-    @scores = @scores.sort_by{|a| -a[1].sum}
+    @scores = @scores.sort_by{|a| -a[2]}
+    @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
+    @color << 0
   end
   
   def index
