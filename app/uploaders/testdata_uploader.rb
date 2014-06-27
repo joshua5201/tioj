@@ -15,7 +15,7 @@ class TestdataUploader < CarrierWave::Uploader::Base
   def store_dir
     #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     #"uploads/td/#{model.problem.id}"
-    "#{Rails.root}/td/#{model.problem.id}"
+    "#{Rails.root}/td/#{model.problem_id}"
   end
   
   def cache_dir
@@ -31,7 +31,7 @@ class TestdataUploader < CarrierWave::Uploader::Base
   end
   
   def filename
-     "#{secure_token}" if original_filename.present?
+     original_filename.to_s + "#{secure_token}"
   end
 
   protected

@@ -1,6 +1,6 @@
 class TestdataController < ApplicationController
   before_action :find_problem
-  before_action :set_testdatum, only: [:show, :edit, :update, :destroy]
+  before_action :set_testdatum, only: [:edit, :update, :destroy]
 
   def index
     authenticate_user!
@@ -9,14 +9,7 @@ class TestdataController < ApplicationController
     end
     @testdata = @problem.testdata
   end
-
-  def show
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
-  end
-
+  
   def new
     authenticate_user!
     if current_user.admin == false 
@@ -46,7 +39,7 @@ class TestdataController < ApplicationController
     respond_to do |format|
       if @testdatum.save
         format.html { redirect_to problem_testdata_path(@problem), notice: 'Testdatum was successfully created.' }
-        format.json { render action: 'show', status: :created, location: prob_td_path(@problem, @testdatum) }
+        #format.json { render action: 'show', status: :created, location: prob_td_path(@problem, @testdatum) }
       else
         format.html { render action: 'new' }
         format.json { render json: @testdatum.errors, status: :unprocessable_entity }

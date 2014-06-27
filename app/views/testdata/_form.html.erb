@@ -7,40 +7,44 @@
             <% @testdatum.errors.full_messages.each do |msg| %>
             <li><%= msg %></li>
            <% end %>
-     </ul>
-</div>
+      </ul>
+      </div>
     <% end %>
 
-<div class="field">
+<div class="form-group">
     <%= f.label :test_input, "input testdata" %><br>
     <%= @testdatum.test_input.to_s.split("/").last(3).join("/") if @testdatum.test_input %><br>
-    <%= f.file_field :test_input %>
+    <%= f.file_field :test_input, :class => 'form-control flat' %>
 </div>
-<div class="field">
+<div class="form-group">
     <%= f.label :test_output, "output testdata" %><br>
     <%= @testdatum.test_output.to_s.split("/").last(3).join("/") if  @testdatum.test_output %><br>
-    <%= f.file_field :test_output %>
+    <%= f.file_field :test_output, :class => 'form-control flat' %>
 </div>
 <br>
 <%= f.fields_for :limit do |t| %>
-  <div class="field">
+  <div class="form-group">
     <%= t.label :time, "Time Limit" %>
-    <%= t.number_field :time %>
+    <%= t.number_field :time, :class => 'form-control flat' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= t.label :memory, "Memory Limit" %>
-    <%= t.number_field :memory %>
+    <%= t.number_field :memory, :class => 'form-control flat' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= t.label :output, "Output Limit" %>
-    <%= t.number_field :output %>
+    <%= t.number_field :output, :class => 'form-control flat' %>
   </div>
 <% end %>
 
 <div class="dummy-placeholder">
     <%= f.hidden_field :problem_id %>
 </div>
+
+<hr>
+
 <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn btn-success btn-lg' %>
 </div>
+
 <% end %>

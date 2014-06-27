@@ -1,6 +1,8 @@
-<h4 class="page-header">Listing testdata of Problem #<%= @problem.id%></h4>
+<h4 class="page-header">Listing testdata of Problem #<%= @problem.id%>. <%= @problem.name %></h4>
 
-<table class = "table">
+<%= link_to 'New Testdatum', new_problem_testdatum_path, :class => 'btn btn-success btn-sm' %> 
+
+<table class = "table table-hover table-striped table-condensed">
   <thead>
       <tr>
           <th>No.</th>
@@ -9,8 +11,6 @@
 	  <th>Time Limit</th>
 	  <th>Memory Limit</th>
 	  <th>Output Limit</th>
-	  <th></th>
-	  <th></th>
 	  <th></th>
     </tr>
   </thead>
@@ -25,15 +25,14 @@
         <td><%= testdatum.limit.time.blank? ? "Nil" : testdatum.limit.time %></td>
         <td><%= testdatum.limit.memory.blank? ? "Nil" : testdatum.limit.memory %></td>
         <td><%= testdatum.limit.output.blank? ? "Nil" : testdatum.limit.output %></td>
-        <td><%= link_to 'Edit', edit_problem_testdatum_path(@problem, testdatum), :class => 'btn btn-info btn-xs' %></td>
-        <td><%= link_to 'Destroy', problem_testdatum_path(@problem, testdatum), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %></td>
+        <td>
+          <%= link_to 'Edit', edit_problem_testdatum_path(@problem, testdatum), :class => 'btn btn-info btn-xs' %>
+          <%= link_to 'Destroy', problem_testdatum_path(@problem, testdatum), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Testdatum', new_problem_testdatum_path %> | 
-<%= link_to 'Back', problem_path(@problem) %>
+<%= link_to 'Back to Problem', problem_path(@problem), :class => 'btn btn-default btn-xs' %>
