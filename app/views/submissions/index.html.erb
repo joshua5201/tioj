@@ -20,7 +20,7 @@
   </div>
 <% end %>
 
-<form class="form-inline" accept-charset="UTF-8" action="/submissions" method="get">
+<form class="form-inline" accept-charset="UTF-8" action="#{request.env['PATH_INFO']}" method="get">
   <label for="filter_user">Quick Filter</label>
   <div class="form-group">
     <input id="filter_user" name="filter_user" class="form-control input-sm flat" type="text" placeholder="Enter Submitter">
