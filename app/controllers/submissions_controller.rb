@@ -20,6 +20,9 @@ class SubmissionsController < ApplicationController
   end
   
   def index
+    @submissions = @submissions.where("user_id = ?", params[:filter_user]) if not params[:filter_user].blank?
+    @submissions = @submissions.where("problem_id = ?", params[:filter_problem]) if not params[:filter_problem].blank?
+    @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
     @submissions = @submissions.order("id DESC").page(params[:page])
   end
 
