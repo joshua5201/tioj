@@ -3,7 +3,7 @@
     <tr>
       <th class="col-md-5"><%= pin_glyph %> Title</th>
       <th class="col-md-3">Time</th>
-      <th class="col-md-3">Arthur</th>
+      <th class="col-md-3">Author</th>
       <th class="col-md-1"></th>
     </tr>
   </thead>
@@ -14,7 +14,7 @@
           <%= pin_glyph if a.pinned? %> <%= link_to a.title, article_path(a) %>
         </td>
         <td><%= a.created_at.to_s(:clean) %></td>
-        <td><%= link_to User.find(a.arthur_id).nickname, user_path(a.arthur_id) %></td>
+        <td><%= link_to User.find(a.author_id).nickname, user_path(a.author_id) %></td>
         <% if user_signed_in? && current_user.admin == true %>
           <td>
             <%= link_to edit_glyph, edit_article_path(a) %>

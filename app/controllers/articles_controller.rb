@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
       redirect_to action:'index', notice: 'Insufficient User Permissions.'    
     end
     @article = Article.new(article_params)
-    @article.arthur_id = current_user.id
+    @article.author_id = current_user.id
     @article.era = get_era
     respond_to do |format|
       if @article.save
@@ -49,7 +49,7 @@ class ArticlesController < ApplicationController
     if current_user.admin == false 
       redirect_to action:'index', notice: 'Insufficient User Permissions.'    
     end
-    @article.arthur_id = current_user.id
+    @article.author_id = current_user.id
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully created.' }

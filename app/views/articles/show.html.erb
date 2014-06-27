@@ -17,7 +17,7 @@
 
 <p>
   <dfn>
-    Last arthured by: <%= link_to User.find(@article.arthur_id).nickname, user_path(@article.arthur_id) %>, <%= @article.updated_at.to_s(:clean) %>
+    Last authored by: <%= link_to User.find(@article.author_id).nickname, user_path(@article.author_id) %>, <%= @article.updated_at.to_s(:clean) %>
   </dfn>
 </p>
 
