@@ -5,10 +5,8 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def create
 		super
-		agent = Mechanize.new
-		agent.pluggable_parser.default = Mechanize::Download
-		f = agent.get('http://avatar.3sd.me/100')
-		f.save("public/images/avatar/#{resource.id}.png")
+                resource.remote_avatar_url = "http://avatar.3sd.me/100"
+                resource.save
 	end
 
 	def update

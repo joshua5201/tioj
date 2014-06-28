@@ -1,10 +1,10 @@
 # encoding: utf-8
 
-class TestdataUploader < CarrierWave::Uploader::Base
+class AvatarUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -13,32 +13,23 @@ class TestdataUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    #"uploads/td/#{model.problem.id}"
-    "#{Rails.root}/td/#{model.problem_id}"
+    "uploads/#{model.class.to_s.underscore}/#{model.id}"
   end
   
-  def cache_dir
-    "#{Rails.root}/td/cache"
+  def extension_white_list
+    %w(jpg jpeg gif png)
   end
   
-  def move_to_cache
-    true
+  process :resize_to_fit => [800,800]
+  
+  version :thumb do
+    process :resize_to_fill => [100,100]
   end
   
-  def move_to_store
-    true
+  version :mini_thumb do
+    process :resize_to_fill => [30,30]
   end
   
-  def filename
-    original_filename.to_s + "-#{secure_token}" if original_filename.present?
-  end
-
-  protected
-  def secure_token
-    var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
-  end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:

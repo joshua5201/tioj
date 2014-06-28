@@ -10,7 +10,7 @@
 <p>
   <strong>Attachments: </strong><br>
   <% @article.attachments.each do |a| %>
-    <%= link_to (a.path.to_s.split("/").last + " (" + number_to_human_size(a.path.file.size).to_s + ")"), a.path.to_s %><br>
+    <%= link_to (a.path_identifier.to_s + " (" + number_to_human_size(a.path.file.size).to_s + ")"), a.path.to_s %><br>
   <% end %>
 </p>
 <% end %>

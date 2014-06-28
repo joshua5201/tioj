@@ -45,12 +45,19 @@
   <div class="col-md-3">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h1 class="panel-title">Topcoder</h1>
+        <h1 class="panel-title">TopCoder</h1>
       </div>
       <div class="panel-body">
         <% tcoder = topcoder(@problem) %>
         <% if tcoder %>
-          <%= tcoder.id %>
+          <div class="row">
+            <div class="col-md-5">
+              <%= link_to image_tag(tcoder.avatar.thumb.to_s, :class => "img-rounded img-responsive"), user_path(tcoder) %>
+            </div>
+            <div class="col-md-7">
+              <%= link_to tcoder.nickname, user_path(tcoder) %>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627090350) do
+ActiveRecord::Schema.define(version: 20140628175154) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20140627090350) do
     t.datetime "updated_at"
     t.integer  "era"
     t.boolean  "pinned"
-    t.integer  "catagory"
+    t.integer  "category"
   end
 
   create_table "attachments", force: true do |t|
@@ -86,11 +86,6 @@ ActiveRecord::Schema.define(version: 20140627090350) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "contest_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "get_submissions", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -196,7 +191,7 @@ ActiveRecord::Schema.define(version: 20140627090350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "nickname"
-    t.string   "avatar_url"
+    t.string   "avatar"
     t.boolean  "admin",                  default: false
   end
 

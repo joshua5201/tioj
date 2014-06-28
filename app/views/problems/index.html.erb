@@ -30,12 +30,12 @@
 </form>
 
 <%= paginate @problems %>
-<table class="table table-hover table-condensed table-striped">
+<table class="table table-hover table-striped">
   <thead>
     <tr>
       <th>#</th>
       <th>Name</th>
-      <th>Top Coder</th>
+      <th>TopCoder</th>
       <th>AC Ratio(user)</th>
       <th>AC Ratio(submission)</th>
       <% if user_signed_in? && current_user.admin == true %>
@@ -54,12 +54,11 @@
             <div style="float:left"><%= link_to problem.name, problem %></div>
             <div style="float:right"><%= raw problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs btn-default' }.join(" ") %></div>
           </td>
-          <td>
+          <td class="text-center">
             <% begin %>
               <% tcoder = topcoder(problem) %>
               <% if tcoder %>
-                <img src ="http://avatar.3sd.me/15" class="img-rounded img-responsive img-thumbnail" width="30" >
-                <%= link_to tcoder.id, user_path(tcoder) %>
+                <%= link_to image_tag(tcoder.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(tcoder) %>
               <% end %>
             <% end %>
           </td>

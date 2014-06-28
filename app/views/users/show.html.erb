@@ -1,7 +1,7 @@
- <h4 class = "page-header">User</h4>
+ <h4 class = "page-header">User <small>#<%= @user.id %></small></h4>
  <div class="row-fluid">
- <div class="col-xs-3">
- 	<%= image_tag("avatar/#{@user.id}.png",:class=>"img-rounded img-responsive ", :size=>"150x150") %><br/>
+ <div class="col-xs-2">
+ 	<%= image_tag(@user.avatar.to_s, :class => "img-rounded img-responsive") %><br/>
  	<h6><%=@user.nickname%></h6>
  	<%=@user.email%><br/>
 
