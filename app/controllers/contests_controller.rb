@@ -4,8 +4,8 @@ class ContestsController < ApplicationController
   def dashboard
     if @contest.contest_type == 1
       authenticate_user!
-      if current_user.admin == false
-	redirect_to action:'index'
+      if not current_user.admin?
+        redirect_to action:'index'
       end
     end
     @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
