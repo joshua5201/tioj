@@ -23,6 +23,7 @@ class ContestsController < ApplicationController
         t = []
         total_attm = 0
         total_solv = 0
+        penalty = 0
         (0..(@tasks.size-1)).each do |index|
           succ = @submissions[index].select{|a| a.user_id == u and a.result == 'AC'}.min_by{|a| a.id}
           if succ
@@ -30,13 +31,14 @@ class ContestsController < ApplicationController
             t << [attm+1, (succ.created_at - @contest.start_time).to_i / 60]
             total_solv += 1
             total_attm += attm+1
+            penalty += attm * 20
           else
             attm = @submissions[index].select{|a| a.user_id == u}.size
             t << [attm, 0]
             total_attm += attm
           end
         end
-        @scores << [u, total_attm, total_solv, t, t.map{|a| a[1]}.sum + (total_attm-total_solv)*20]
+        @scores << [u, total_attm, total_solv, t, t.map{|a| a[1]}.sum + penalty]
       end
       @scores = @scores.sort{|a, b| a[2] != b[2] ? -(a[2] <=> b[2]) : a[4] <=> b[4]}
       @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
