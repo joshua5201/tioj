@@ -19,6 +19,8 @@
 <%= link_to 'Back to Submissions List', submissions_path, :class => 'btn btn-default btn-xs' %>
 <% if user_signed_in? and current_user.admin? %>
   <%= link_to 'Rejudge', { :controller => :submissions, :action => :rejudge, :id => @submission.id }, :class => 'btn btn-xs btn-primary' %>
+  <%= link_to 'Edit', edit_submission_path(@submission), :class => 'btn btn-info btn-xs' %>
+  <%= link_to 'Destroy', @submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %>
 <% end %>
 </p>
 
@@ -104,6 +106,12 @@
     </div>
     <div class="col-md-2">
       <%= @submission.compiler %>
+    </div>
+    <div class="col-md-2">
+      <strong>Code Length:</strong>
+    </div>
+    <div class="col-md-2">
+      <%= number_to_human_size(@submission.code.size) %>
     </div>
   </div>
 </div>

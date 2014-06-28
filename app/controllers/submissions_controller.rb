@@ -29,11 +29,6 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    if (user_signed_in? && current_user.id != @submission.user_id) && 
-	@submission.contest && 
-	Time.now >= @submission.contest.start_time && Time.now <= @submission.contest.end_time
-      redirect_to action:'index'
-    end
     @_result = @submission._result.to_s.split("/")
   end
 
