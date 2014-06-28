@@ -37,9 +37,9 @@
       <th>Name</th>
       <th>TopCoder</th>
       <th>AC Ratio(user)</th>
-      <th>AC Ratio(submission)</th>
+      <th>AC (submission)</th>
       <% if user_signed_in? && current_user.admin == true %>
-	<th>Visible State</th>
+	<th>Visibility</th>
       <% end %>
       <% if user_signed_in? %><th></th><% end %>
     </tr>
@@ -68,7 +68,7 @@
             <% if problem.visible_state == 0 %>
               <td>Public</td>
             <% elsif problem.visible_state == 1 %>
-              <td>Public during contest</td>
+              <td>Contest</td>
             <% else %>
               <td>Invisible</td>
             <% end %>

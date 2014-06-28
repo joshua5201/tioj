@@ -48,16 +48,16 @@ $(".selectpicker").selectpicker({style: "form-control input-lg flat"});
 <table class='table table-hover table-striped'>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Problem ID</th>
+      <th>#</th>
+      <th>PID</th>
       <th>Submitter</th>
-      <th>Time (ms)</th>
-      <th>Memory (KiB)</th>
-      <th>Result</th>
+      <th>Time</th>
+      <th>Memory</th>
+      <th>Verdict</th>
       <th>Compiler</th>
       <th>Code Length</th>
       <th>Score</th>
-      <th>Submit Date</th>
+      <th>Submit Time</th>
       <% if user_signed_in? && current_user.admin == true %>
          <th></th>
       <% end %>
