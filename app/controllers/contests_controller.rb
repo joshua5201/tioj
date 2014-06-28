@@ -17,24 +17,46 @@ class ContestsController < ApplicationController
       @participants = @participants | @submissions[index].map{|e| e.user_id}
     end
     @scores = []
-    @participants.each do |u|
-      t = []
-      (0..(@tasks.size-1)).each do |index|
-	if @submissions[index].select{|a| a.user_id == u}.empty?
-	  t << 0
-	else
-          if @contest.contest_type == 2
-            t << ( @submissions[index].select{|a| a.user_id == u and a.result == 'AC'}.blank? ? 0 : 100 )
+    if @contest.contest_type == 2
+      #penalty
+      @participants.each do |u|
+        t = []
+        total_attm = 0
+        total_solv = 0
+        (0..(@tasks.size-1)).each do |index|
+          succ = @submissions[index].select{|a| a.user_id == u and a.result == 'AC'}.min_by{|a| a.id}
+          if succ
+            attm = @submissions[index].select{|a| a.user_id == u and a.id < succ.id}.size
+            t << [attm+1, (succ.created_at - @contest.start_time).to_i / 60]
+            total_solv += 1
+            total_attm += attm+1
+          else
+            attm = @submissions[index].select{|a| a.user_id == u}.size
+            t << [attm, 0]
+            total_attm += attm
+          end
+        end
+        @scores << [u, total_attm, total_solv, t, t.map{|a| a[1]}.sum + (total_attm-total_solv)*20]
+      end
+      @scores = @scores.sort{|a, b| a[2] != b[2] ? -(a[2] <=> b[2]) : a[4] <=> b[4]}
+      @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
+      @color << 0
+    else
+      @participants.each do |u|
+        t = []
+        (0..(@tasks.size-1)).each do |index|
+          if @submissions[index].select{|a| a.user_id == u}.empty?
+            t << 0
           else
             t << @submissions[index].select{|a| a.user_id == u}.max_by{|a| a.score}.score
           end
-	end
+        end
+        @scores << [u, t, t.sum]
       end
-      @scores << [u, t, t.sum]
+      @scores = @scores.sort_by{|a| -a[2]}
+      @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
+      @color << 0
     end
-    @scores = @scores.sort_by{|a| -a[2]}
-    @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
-    @color << 0
   end
   
   def index

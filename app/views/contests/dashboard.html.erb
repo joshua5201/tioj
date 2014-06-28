@@ -17,7 +17,12 @@
       <% @tasks.each_with_index do |task, index| %>
 	<th><%= link_to ('p' + (65+index).chr), contest_problem_path(@contest, task) %></th>
       <% end %>
-      <th>Total</th>
+      <% if @contest.contest_type == 2 %>
+        <th>Att/Solv</th>
+        <th>Penalty</th>
+      <% else %>
+        <th>Total</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -32,13 +37,21 @@
       <% else %>
         <tr>
       <% end %>
-	<td><%= index+1 %></td>
+        <td><%= index+1 %></td>
         <td><%= link_to s[0], user_path(s[0]) %></td>
-	<td><%= link_to User.find(s[0]).nickname, user_path(s[0]) %></td>
-	<% s[1].each do |t|%>
-	  <td><%= t %></td>
-	<% end %>
-	<td><%= s[2] %></td>
+        <td><%= link_to User.find(s[0]).nickname, user_path(s[0]) %></td>
+        <% if @contest.contest_type == 2 %>
+          <% s[3].each do |t|%>
+            <td><%= t[0].to_s + "/" + t[1].to_s %></td>
+          <% end %>
+          <td><%= s[1].to_s + "/" + s[2].to_s %></td>
+          <td><%= s[4] %></td>
+        <% else %>
+          <% s[1].each do |t|%>
+            <td><%= t %></td>
+          <% end %>
+          <td><%= s[2] %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
