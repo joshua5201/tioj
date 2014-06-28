@@ -14,6 +14,21 @@
 <% if user_signed_in? && current_user.admin == true %>
   <%= link_to 'New Problem', new_problem_path, :class => 'btn btn-primary btn-sm' %><br>
 <% end %>
+
+<form class="form-inline" accept-charset="UTF-8" method="get">
+  <label for="search_id">Search Problems</label>
+  <div class="form-group">
+    <input id="search_id" name="search_id" class="form-control input-sm flat" type="number" min="1" placeholder="Enter Problem ID">
+  </div>
+  <div class="form-group">
+    <input id="search_name" name="search_name" class="form-control input-sm flat" type="text" placeholder="Enter Problem Name">
+  </div>
+  <div class="form-group">
+    <input id="tag" name="tag" class="form-control input-sm flat" type="text" placeholder="Enter tag">
+  </div>
+  <button type="submit" id="quick_search" class="btn btn-inverse btn-xs">Search</button>
+</form>
+
 <%= paginate @problems %>
 <table class="table table-hover table-condensed table-striped">
   <thead>

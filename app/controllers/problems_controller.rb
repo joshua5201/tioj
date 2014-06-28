@@ -10,7 +10,15 @@ class ProblemsController < ApplicationController
   end
   
   def index
-    if params[:tag]
+    if not params[:search_id].blank?
+      redirect_to problem_path(params[:search_id])
+      return
+    end
+    if not params[:search_name].blank?
+      @problems = Problem.where("name LIKE ?", "%%%s%%"%params[:search_name]).page(params[:page]).per(100)
+      return
+    end
+    if not params[:tag].blank?
       @problems = Problem.tagged_with(params[:tag]).order("id ASC").page(params[:page]).per(100)
     else
       @problems = Problem.all.order("id ASC").page(params[:page]).per(100)
