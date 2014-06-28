@@ -21,7 +21,7 @@ module ProblemsHelper
     all = all.size
     ac = ac.size
     ratio = "%.1f%%" % (100.0 * ac / all)
-    ac_page = link_to ac, :controller => :submissions, :action => :index, :problem_id => problem.id, :qresult => "AC"
+    ac_page = link_to ac, :controller => :submissions, :action => :index, :problem_id => problem.id, :filter_status => "AC"
     all_page = link_to all, problem_submissions_path(problem.id)
     return raw ( ratio + " (" + ac_page + "/" + all_page + ")" )
   end

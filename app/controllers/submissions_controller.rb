@@ -2,6 +2,11 @@ class SubmissionsController < ApplicationController
   before_action :set_submissions
   before_action :set_submission, only: [:rejudge, :show, :edit, :update, :destroy]
   
+  def rejudge_problem
+    Submission.where("problem_id = ?", params[:problem_id]).update_all(:result => "queued", :score => 0, :_result => "", :total_time => nil, :total_memory => nil)
+    redirect_to problem_path(params[:problem_id])
+  end
+  
   def rejudge
     authenticate_user!
     if current_user.admin == false 
@@ -20,9 +25,6 @@ class SubmissionsController < ApplicationController
   end
   
   def index
-    @submissions = @submissions.where("user_id = ?", params[:filter_user]) if not params[:filter_user].blank?
-    @submissions = @submissions.where("problem_id = ?", params[:filter_problem]) if not params[:filter_problem].blank?
-    @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
     @submissions = @submissions.order("id DESC").page(params[:page])
   end
 
@@ -127,7 +129,9 @@ class SubmissionsController < ApplicationController
       @submissions = Submission.all
       @submissions = @submissions.where("problem_id = ?", params[:problem_id]) if params[:problem_id]
       @submissions = @submissions.where("contest_id = ?", params[:contest_id]) if params[:contest_id]
-      @submissions = @submissions.where("result = ?", params[:qresult]) if params[:qresult]
+      @submissions = @submissions.where("user_id = ?", params[:filter_user]) if not params[:filter_user].blank?
+      @submissions = @submissions.where("problem_id = ?", params[:filter_problem]) if not params[:filter_problem].blank?
+      @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
       #if @problem
 	#@submissions = @problem.submissions
       #elsif @contest
