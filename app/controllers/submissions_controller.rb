@@ -67,7 +67,8 @@ class SubmissionsController < ApplicationController
 
   def create
     authenticate_user!
-    if (Time.now - Submission.where("user_id = ?", current_user.id).order("id Desc").first.created_at) < 15
+    last_submission = Submission.where("user_id = ?", current_user.id).order("id Desc").first
+    if not last_submission.blank? and (Time.now - last_submission.created_at) < 15
       redirect_to submissions_path, alert: 'CD time 15 seconds.'
       return
     end
