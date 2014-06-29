@@ -16,7 +16,7 @@
     <tr>
       <th>Rank</th>
       <th>ID</th>
-      <th>Nickname</th>
+      <th>Participant</th>
       <% @tasks.each_with_index do |task, index| %>
 	<th><%= link_to ('p' + (65+index).chr), contest_problem_path(@contest, task) %></th>
       <% end %>
@@ -42,7 +42,7 @@
       <% end %>
         <td><%= index+1 %></td>
         <td><%= link_to s[0], user_path(s[0]) %></td>
-        <td><%= link_to User.find(s[0]).nickname, user_path(s[0]) %></td>
+        <td><%= link_to image_tag(User.find(s[0]).avatar.mini_thumb.to_s) + User.find(s[0]).nickname, user_path(s[0]) %></td>
         <% if @contest.contest_type == 2 %>
           <% s[3].each do |t|%>
             <td><%= t[0].to_s + "/" + t[1].to_s %></td>

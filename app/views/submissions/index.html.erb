@@ -83,7 +83,20 @@ $(".selectpicker").selectpicker({style: "form-control input-lg flat"});
         <td><%= link_to submission.user.nickname, user_path(submission.user) %></td>
         <td><%= submission.total_time %></td>
         <td><%= submission.total_memory %></td>
-        <td><%= submission.result %></td>
+        <% case submission.result %>
+          <% when "WA" %>
+            <td class="text-danger">WA</td>
+          <% when "TLE" %>
+            <td class="text-info">TLE</td>
+          <% when "MLE" %>
+            <td class="text-warning">MLE</td>
+          <% when "RE" %>
+            <td class="text-warning">RE</td>
+          <% when "AC" %>
+            <td class="text-success">AC</td>
+          <% else %>
+            <td><%= submission.result %></td>
+        <% end %>
         <td><%= submission.compiler %></td>
         <td><%= number_to_human_size(submission.code.size) %></td>
         <td><%= submission.score %></td>
