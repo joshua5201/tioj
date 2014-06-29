@@ -67,6 +67,11 @@ class SubmissionsController < ApplicationController
 
   def create
     authenticate_user!
+    if (Time.now - Submission.where("user_id = ?", current_user.id).order("id Desc").first.created_at) < 15
+      redirect_to submissions_path, alert: 'CD time 15 seconds.'
+      return
+    end
+    
     #@submission = @submissions.build(submission_params)
     @submission = Submission.new(submission_params)
     @submission.user_id = current_user.id
@@ -124,7 +129,7 @@ class SubmissionsController < ApplicationController
       @submissions = Submission.all
       @submissions = @submissions.where("problem_id = ?", params[:problem_id]) if params[:problem_id]
       @submissions = @submissions.where("contest_id = ?", params[:contest_id]) if params[:contest_id]
-      @submissions = @submissions.where("user_id = ?", params[:filter_user]) if not params[:filter_user].blank?
+      @submissions = @submissions.joins("INNER JOIN users ON submissions.user_id = users.id").where("users.nickname LIKE ?", params[:filter_user]) if not params[:filter_user].blank?
       @submissions = @submissions.where("problem_id = ?", params[:filter_problem]) if not params[:filter_problem].blank?
       @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
       #if @problem

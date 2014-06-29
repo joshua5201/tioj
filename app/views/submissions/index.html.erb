@@ -1,3 +1,11 @@
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+
+
 <h4 class="page-header">
   Submissions 
   <% if @problem %>
