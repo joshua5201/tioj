@@ -13,8 +13,8 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def update
 		super
-                resource.avatar = params[:avatar]
-                resource.save
+                #resource.avatar = params[:avatar]
+                #resource.save
 	end
 
   protected
