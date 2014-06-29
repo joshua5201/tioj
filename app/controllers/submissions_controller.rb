@@ -41,16 +41,17 @@ class SubmissionsController < ApplicationController
     if current_user.admin == false 
       if @problem.visible_state == 2
         redirect_to action:'index'
+        return
       elsif @problem.visible_state == 1
-	@during_contest = false
-	@problem.contests.each do |c|
-	  if Time.now >= c.start_time && Time.now <= c.end_time
-	    @during_contest = true
-	  end
-	end
-	if @during_contest == false
-	  redirect_to action:'index'
-	end
+        if params[:contest_id].blank?
+          redirect_to action:'index'
+          return
+        end
+	contest = Contest.find(params[:contest_id])
+        unless contest.problem_ids.include?(@problem.id) and Time.now >= contest.start_time and Time.now <= contest.end_time
+          redirect_to problem_path(@problem), notice: 'Contest ended, cannot submit.'
+          return
+        end
       end
     end
     #@submission = @submissions.build
@@ -78,7 +79,6 @@ class SubmissionsController < ApplicationController
     @submission.user_id = current_user.id
     @submission.problem_id = params[:problem_id]
     if params[:contest_id]
-      @contest = Contest.find(params[:contest_id]) 
       if @contest.problem_ids.include?(@submission.problem_id) and Time.now >= @contest.start_time and Time.now <= @contest.end_time
         @submission.contest_id = @contest.id
       end
@@ -129,7 +129,23 @@ class SubmissionsController < ApplicationController
       @contest = Contest.find(params[:contest_id]) if params[:contest_id]
       @submissions = Submission.all
       @submissions = @submissions.where("problem_id = ?", params[:problem_id]) if params[:problem_id]
-      @submissions = @submissions.where("contest_id = ?", params[:contest_id]) if params[:contest_id]
+      if params[:contest_id]
+        @submissions = @submissions.where("contest_id = ?", params[:contest_id])
+        unless user_signed_in? and current_user.admin?
+          if Time.now >= @contest.start_time and Time.now <= @contest.end_time
+            #only self submission
+            if user_signed_in?
+              @submissions = @submissions.where("user_id = ?", current_user.id)
+            else
+              @submissions = @submissions.where("user_id = 0")
+            end
+          end
+        end
+      else
+        unless user_signed_in? and current_user.admin?
+          @submissions = @submissions.where("contest_id is NULL")
+        end
+      end
       @submissions = @submissions.joins("INNER JOIN users ON submissions.user_id = users.id").where("users.nickname LIKE ?", params[:filter_user]) if not params[:filter_user].blank?
       @submissions = @submissions.where("problem_id = ?", params[:filter_problem]) if not params[:filter_problem].blank?
       @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?

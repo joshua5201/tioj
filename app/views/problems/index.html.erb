@@ -47,7 +47,7 @@
 
   <tbody>
     <% @problems.each do |problem| %>
-      <% if (user_signed_in? and current_user.admin == true) or (problem.visible_state == 0) %>
+      <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
           <td><%= link_to problem.id, problem %></td>
           <td>

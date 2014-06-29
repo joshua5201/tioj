@@ -102,6 +102,8 @@ $(".selectpicker").selectpicker({style: "form-control input-lg flat"});
             <td class="text-warning">RE</td>
           <% when "AC" %>
             <td class="text-success">AC</td>
+          <% when "queued" %>
+            <td class="text-muted">queued</td>
           <% else %>
             <td><%= submission.result %></td>
         <% end %>

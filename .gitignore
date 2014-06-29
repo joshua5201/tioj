@@ -20,3 +20,4 @@
 
 # Ignore all the testdata
 /td
+/public/uploads

@@ -29,18 +29,18 @@ class ProblemsController < ApplicationController
     if user_signed_in? && current_user.admin == true
     elsif @problem.visible_state == 0 
     elsif @problem.visible_state == 1 
-      @contests = @problem.contests.all
-      @during_contest = false
-      @contests.each do |c|
-	if Time.now >= c.start_time && Time.now <= c.end_time
-	  @during_contest = true
-	end
+      if params[:contest_id].blank?
+        redirect_to action:'index'
+        return
       end
-      if @during_contest == false
-	redirect_to action:'index'
+      contest = Contest.find(params[:contest_id])
+      unless contest.problem_ids.include?(@problem.id) and Time.now >= contest.start_time and Time.now <= contest.end_time
+        redirect_to action:'index'
+        return
       end
     else
       redirect_to action:'index'
+      return
     end
     @contest_id = params[:contest_id]
   end

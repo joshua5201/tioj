@@ -2,10 +2,15 @@ class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
   
   def dashboard
+    if Time.now < @contest.start_time
+      redirect_to action:'index'
+      return
+    end
     if @contest.contest_type == 1
       authenticate_user!
       if not current_user.admin?
         redirect_to action:'index'
+        return
       end
     end
     @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
@@ -66,7 +71,10 @@ class ContestsController < ApplicationController
   end
 
   def show
-    
+    if Time.now < @contest.start_time
+      redirect_to action:'index'
+      return
+    end
   end
 
   def new
