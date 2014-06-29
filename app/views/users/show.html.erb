@@ -8,6 +8,19 @@
  </div>
  <div class="col-xs-9">
  	<table class="table">
+ 		<thead>
+ 			<tr>
+ 				<th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+ 			</tr>
+ 		</thead>
+ 			
+ 		<tbody>
+ 			<tr>
+ 			<% @problems.each do |prob| %>
+ 				<td><%= prob.id %></td>
+ 			<% end %>
+ 			</tr>
+ 		</tbody>
  	</table>
  </div>
  </div>

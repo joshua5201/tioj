@@ -46,7 +46,7 @@
             <li><%= link_to "Users", users_path %></li>
             <% if current_user %>
               <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
-              <li><%= link_to('Edit password', edit_registration_path(:user)) %></li>
+              <li><%= link_to('Edit account', edit_registration_path(:user)) %></li>
               <% if current_user.admin? %>
                 <li><%= link_to 'Admin', admin_root_path, :target => "_blank" %></li>
               <% end %>

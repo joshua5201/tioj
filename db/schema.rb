@@ -119,7 +119,6 @@ ActiveRecord::Schema.define(version: 20140628175154) do
     t.text     "example_input"
     t.text     "example_output"
     t.text     "hint"
-    t.string   "created_by"
     t.integer  "visible_state",  default: 0
     t.integer  "problem_type"
     t.text     "sjcode"
