@@ -146,8 +146,9 @@ class SubmissionsController < ApplicationController
           @submissions = @submissions.where("contest_id is NULL")
         end
       end
-      @submissions = @submissions.joins("INNER JOIN users ON submissions.user_id = users.id").where("users.nickname LIKE ?", params[:filter_user]) if not params[:filter_user].blank?
       @submissions = @submissions.where("problem_id = ?", params[:filter_problem]) if not params[:filter_problem].blank?
+      @submissions = @submissions.joins("INNER JOIN users ON submissions.user_id = users.id").where("users.nickname LIKE ?", params[:filter_user]) if not params[:filter_user].blank?
+      @submissions = @submissions.where("user_id = ?", params[:filter_user_id]) if not params[:filter_user_id].blank?
       @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
       #if @problem
 	#@submissions = @problem.submissions
