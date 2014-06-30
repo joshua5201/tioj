@@ -17,7 +17,7 @@
  		<tbody>
  			<tr>
  			<% @problems.each do |prob| %>
- 				<td><%= prob.id %></td>
+ 			 	<td><%= link_to "#{prob.id}", :controller=>"problems" ,:action => :show, :id=>prob.id %></td>
  			<% end %>
  			</tr>
  		</tbody>
