@@ -13,13 +13,5 @@
  *= require_self
  *= require bootstrap
  *= require flat-ui
+ *= require custom_styles
  */
-
-/*
-#container {
-    padding: 20px;
-}
-td{
-	font-size: 15px;
-}
-/*
