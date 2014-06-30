@@ -3,8 +3,10 @@ class ContestsController < ApplicationController
   
   def dashboard
     if Time.now < @contest.start_time
-      redirect_to action:'index'
-      return
+      unless user_signed_in? and current_user.admin?
+        redirect_to action:'index'
+        return
+      end
     end
     if @contest.contest_type == 1
       authenticate_user!
@@ -72,8 +74,10 @@ class ContestsController < ApplicationController
 
   def show
     if Time.now < @contest.start_time
-      redirect_to action:'index'
-      return
+      unless user_signed_in? and current_user.admin?
+        redirect_to action:'index'
+        return
+      end
     end
   end
 
