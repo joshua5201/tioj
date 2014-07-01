@@ -122,49 +122,49 @@ class SubmissionsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
-    def set_submissions
-      @problem = Problem.find(params[:problem_id]) if params[:problem_id]
-      @contest = Contest.find(params[:contest_id]) if params[:contest_id]
-      @submissions = Submission.all
-      @submissions = @submissions.where("problem_id = ?", params[:problem_id]) if params[:problem_id]
-      if params[:contest_id]
-        @submissions = @submissions.where("contest_id = ?", params[:contest_id])
-        unless user_signed_in? and current_user.admin?
-          if Time.now >= @contest.start_time and Time.now <= @contest.end_time
-            #only self submission
-            if user_signed_in?
-              @submissions = @submissions.where("user_id = ?", current_user.id)
-            else
-              @submissions = @submissions.where("user_id = 0")
-            end
+  def set_submissions
+    @problem = Problem.find(params[:problem_id]) if params[:problem_id]
+    @contest = Contest.find(params[:contest_id]) if params[:contest_id]
+    @submissions = Submission.all
+    @submissions = @submissions.where("problem_id = ?", params[:problem_id]) if params[:problem_id]
+    if params[:contest_id]
+      @submissions = @submissions.where("contest_id = ?", params[:contest_id])
+      unless user_signed_in? and current_user.admin?
+        if Time.now >= @contest.start_time and Time.now <= @contest.end_time
+          #only self submission
+          if user_signed_in?
+            @submissions = @submissions.where("user_id = ?", current_user.id)
+          else
+            @submissions = @submissions.where("user_id = 0")
           end
         end
-      else
-        unless user_signed_in? and current_user.admin?
-          @submissions = @submissions.where("contest_id is NULL")
-        end
       end
-      @submissions = @submissions.where("problem_id = ?", params[:filter_problem]) if not params[:filter_problem].blank?
-      @submissions = @submissions.joins("INNER JOIN users ON submissions.user_id = users.id").where("users.nickname LIKE ?", params[:filter_user]) if not params[:filter_user].blank?
-      @submissions = @submissions.where("user_id = ?", params[:filter_user_id]) if not params[:filter_user_id].blank?
-      @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
-      #if @problem
-	#@submissions = @problem.submissions
-      #elsif @contest
-	#@submissions = @contest.submissions
-      #else
-	#@submissions = Submission.all
+    else
+      #unless user_signed_in? and current_user.admin?
+        @submissions = @submissions.where("contest_id is NULL")
       #end
     end
-    
-    def set_submission
-      @submission = @submissions.find(params[:id])
-    end
+    @submissions = @submissions.where("problem_id = ?", params[:filter_problem]) if not params[:filter_problem].blank?
+    @submissions = @submissions.joins("INNER JOIN users ON submissions.user_id = users.id").where("users.nickname LIKE ?", params[:filter_user]) if not params[:filter_user].blank?
+    @submissions = @submissions.where("user_id = ?", params[:filter_user_id]) if not params[:filter_user_id].blank?
+    @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
+    #if @problem
+      #@submissions = @problem.submissions
+    #elsif @contest
+      #@submissions = @contest.submissions
+    #else
+      #@submissions = Submission.all
+    #end
+  end
+  
+  def set_submission
+    @submission = Submission.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def submission_params
-      params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id, :page)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def submission_params
+    params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id, :page)
+  end
 end

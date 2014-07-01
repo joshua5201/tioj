@@ -1,12 +1,12 @@
 module ProblemsHelper
   def topcoder(problem)
-    submission = problem.submissions.select("user_id").where("result = ? ", "AC").order("total_time DESC").first
+    submission = problem.submissions.select("user_id").where("contest_id is NULL AND result = ? ", "AC").order("total_time DESC").first
     return User.find_by_id(submission.user_id) if submission
-    return nil if not submission
+    return nil if submission.blank?
   end
   
   def users_ac_ratio(problem)
-    all = User.joins(:submissions).uniq.where("submissions.problem_id = ?", problem.id)
+    all = User.joins(:submissions).uniq.where("submissions.contest_id is NULL AND submissions.problem_id = ?", problem.id)
     ac = all.where("submissions.result = ?", "AC")
     all = all.size
     ac = ac.size
@@ -16,7 +16,7 @@ module ProblemsHelper
   end
   
   def submissions_ac_ratio(problem)
-    all = Submission.where("problem_id = ?", problem.id)
+    all = Submission.where("contest_id is NULL AND problem_id = ?", problem.id)
     ac = all.where("result = ?", "AC")
     all = all.size
     ac = ac.size
