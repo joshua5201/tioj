@@ -4,12 +4,6 @@
     <small>tagged with <%= params[:tag] %></small>
   <% end %>
 </h4>
-<% if notice %>
-  <p class="notice"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert"><%= alert %></p>
-<% end %>
 
 <% if user_signed_in? && current_user.admin == true %>
   <%= link_to 'New Problem', new_problem_path, :class => 'btn btn-primary btn-sm' %><br>

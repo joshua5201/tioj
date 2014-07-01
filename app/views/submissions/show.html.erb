@@ -1,13 +1,6 @@
 <%= javascript_include_tag 	"/stylesheets/prism.js" %>
 <%= stylesheet_link_tag 	"/stylesheets/prism.css" %>
 
-<% if notice %>
-  <p class="notice"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert"><%= alert %></p>
-<% end %>
-
 <% if censored(@submission) %>
   <h4 class="page-header">Results of submission #<code>censored</code></h4>
   <code>censored</code>

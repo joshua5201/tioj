@@ -62,6 +62,18 @@
 </nav><!-- /navbar -->
 
 <div class="container-fluid" id="page-content">
+  <!--alert and notice-->
+  <% if notice %>
+    <div class="alert alert-success alert-dismissable" role="alert">
+      <strong>Oh Geez! </strong> <%= notice %>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <strong>Oh No! </strong> <%= alert %>
+    </div>
+  <% end %>
+  
   <%= yield %>
 </div>
 </body>
