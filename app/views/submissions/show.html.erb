@@ -53,7 +53,11 @@
   <div class="panel-body">
   <div class="row">
     <div class="col-md-3">
-      <%= link_to @submission.problem.id.to_s + ". " + @submission.problem.name, problem_path(@submission.problem) %>
+      <% if @submission.contest_id.blank? %>
+        <%= link_to @submission.problem.id.to_s + ". " + @submission.problem.name, problem_path(@submission.problem) %>
+      <% else %>
+        <%= link_to @submission.problem.id.to_s + ". " + @submission.problem.name, contest_problem_path(@submission.contest_id, @submission.problem) %>
+      <% end %>
     </div>
     <div class="col-md-2">
       <%= @submission.total_time %>

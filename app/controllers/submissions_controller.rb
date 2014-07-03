@@ -132,7 +132,7 @@ class SubmissionsController < ApplicationController
     if params[:contest_id]
       @submissions = @submissions.where("contest_id = ?", params[:contest_id])
       unless user_signed_in? and current_user.admin?
-        if Time.now >= @contest.start_time and Time.now <= @contest.end_time
+        if Time.now <= @contest.end_time #and Time.now >= @contest.start_time
           #only self submission
           if user_signed_in?
             @submissions = @submissions.where("user_id = ?", current_user.id)

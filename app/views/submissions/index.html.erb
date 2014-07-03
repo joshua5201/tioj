@@ -79,7 +79,13 @@ $(".selectpicker").selectpicker({style: "form-control input-lg flat"});
         <td></td>
       <% else %>
         <td><%= link_to submission.id, submission_path(submission) %></td>
-        <td><%= link_to submission.problem_id, problem_path(submission.problem) %></td>
+        <td>
+          <% if submission.contest_id.blank? %>
+            <%= link_to submission.problem_id, problem_path(submission.problem) %>
+          <% else %>
+            <%= link_to submission.problem_id, contest_problem_path(submission.contest_id, submission.problem) %>
+          <% end %>
+        </td>
         <td><%= link_to submission.user.nickname, user_path(submission.user) %></td>
         <td><%= submission.total_time %></td>
         <td><%= submission.total_memory %></td>
