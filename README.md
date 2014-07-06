@@ -31,3 +31,11 @@ $ mysqldump tioj_dev -u root -p --opt > tioj_dev00.sql
 ```bash
 $ mysql -u root -p tioj_dev < tioj_dev.sql
 ```
+## Seed data
+
+```
+# initializing
+$ bundle exec db:setup
+# updata
+$ bundle exec db:seed
+
