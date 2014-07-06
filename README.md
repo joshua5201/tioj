@@ -36,6 +36,6 @@ $ mysql -u root -p tioj_dev < tioj_dev.sql
 ```bash
 # initializing
 $ bundle exec db:setup
-# updata
+# update
 $ bundle exec db:seed
 ```
