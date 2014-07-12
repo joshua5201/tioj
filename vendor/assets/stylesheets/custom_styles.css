@@ -1,9 +1,15 @@
-/*.well {
-	color: #FFFFFF;
+.well {
+	color: #D5DED9;
 	background-color: #003365;
 	box-shadow: 0px 0px 3px rgba(0,61,121,1);
 	border: 0px;
-}*/
+}
 .page-header small{
 	color: #30617C;
+}
+body{
+	background-color: #D5DED9;
+}
+h1 h2 h3 h4 h5 h6{
+	color: #948C75;
 }
