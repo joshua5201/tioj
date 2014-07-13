@@ -3,7 +3,7 @@
         <div class = "col-xs-12">
 		<div class="col-xs-3">
 			<div class = "col-xs-12 well well-lg">
-			<h5 ><%=  link_to "Latest Problem",:controller =>"problems",:action => :show, :id => @problem_last.id %></h5>
+			<h5 ><%=  link_to "Latest Problem", problem_path(@problem_last) %></h5>
 			<table>
 			<tbody>
 			<tr> <td>Problem id: </td>		<td><%=@problem_last.id%></td> </tr>
@@ -15,8 +15,8 @@
 			</table>
 			</div>
 			<div class = "col-xs-12 well well-lg">
-			<h5><%=  link_to "Latest Submission",:controller =>"submissions",:action => :show, :id => @submission_last.id %></h5>
-			<table>
+			<h5><%=  link_to "Latest Submission", submission_path(@submission_last) %></h5>
+            <table>
 			<tbody>
 			<tr> <td>Problem id: </td>		<td><%=@submission_last.problem_id%></td> </tr>
 			<tr> <td>Status: </td>			<td><%=@submission_last.result %></td> </tr>
