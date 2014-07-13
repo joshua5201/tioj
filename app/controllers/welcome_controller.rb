@@ -1,7 +1,6 @@
 class WelcomeController < ApplicationController
 	def index
-	end
-	def last_problem
-		@problem = Problem.last
+		@problem_last = Problem.last
+		@submission_last = Submission.last
 	end
 end

@@ -3,12 +3,27 @@
         <div class = "col-xs-12">
 		<div class="col-xs-3">
 			<div class = "col-xs-12 well well-lg">
-			<h5 >Latest Problem</h5>
-			Jizzz
+			<h5 ><%=  link_to "Latest Problem",:controller =>"problems",:action => :show, :id => @problem_last.id %></h5>
+			<table>
+			<tbody>
+			<tr> <td>Problem id: </td>		<td><%=@problem_last.id%></td> </tr>
+			<tr> <td>Problem name: </td>	<td><%=@problem_last.name%></td> </tr>
+			<tr> <td>Tags: </td>			<td>JIZZ</td> </tr>
+			<tr> <td>Top coder: </td>		<td>JIZZ</td> </tr>
+			<tr> <td>AC ratio(user): </td>	<td>NaN%</td> </tr>
+			</tbody>
+			</table>
 			</div>
 			<div class = "col-xs-12 well well-lg">
-			<h5>Latest Submissions</h5>
-			Jizz again with silverneko
+			<h5><%=  link_to "Latest Submission",:controller =>"submissions",:action => :show, :id => @submission_last.id %></h5>
+			<table>
+			<tbody>
+			<tr> <td>Problem id: </td>		<td><%=@submission_last.problem_id%></td> </tr>
+			<tr> <td>Status: </td>			<td><%=@submission_last.result %></td> </tr>
+			<tr> <td>Score: </td>			<td><%=@submission_last.score %></td> </tr>
+			<tr> <td>Submitter id: </td>	<td><%=@submission_last.user_id%></td> </tr> 
+			</tbody>
+			</table>
 			</div>
 		</div> 
 		<div class = "col-xs-6">
