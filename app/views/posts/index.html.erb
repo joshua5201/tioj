@@ -17,7 +17,7 @@
 <%= paginate @posts %>
 <div class="posts">
   <% @posts.each do |post| %>
-    <div class="post">
+    <div class="post well">
     <div class="post_title">
       <h3 class="post_title"><%= post.title %></h3>
       <% if post.problem_id != nil %>
@@ -37,7 +37,7 @@
       <% count = 0;%>
       <% comments.each do |comment| %>
         <% count += 1 %>
-      <div class="comment">
+      <div class="comment well well-lg">
         <h4 class="comment_title">
           #<%=count %> <%= comment.title %>
       </h4>
