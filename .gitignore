@@ -16,7 +16,7 @@
 /tmp
 
 # Ignore secret token file
-#/config/initializers/secret_token.rb
+/config/initializers/secret_token.rb
 
 # Ignore all the testdata
 /td
@@ -26,3 +26,4 @@
 /bin
 
 /config/database.yml
+/public/assets
