@@ -24,3 +24,5 @@
 
 # Ignore binaries
 /bin
+
+/config/database.yml
