@@ -1,5 +1,5 @@
 ActiveAdmin.register Article do
-
+  permit_params :title, :content, :era, :pinned, :category
   preserve_default_filters!
   filter :id
   # See permitted parameters documentation:
