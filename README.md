@@ -35,8 +35,5 @@ $ mysql -u root -p tioj_dev < tioj_dev.sql
 ## Seed data
 
 ```bash
-# initializing
-$ bundle exec db:setup
-# update
-$ bundle exec db:seed
+$ bundle exec rake db:seed
 ```
