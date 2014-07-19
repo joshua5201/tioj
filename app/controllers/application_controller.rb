@@ -4,53 +4,64 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   after_filter :store_location
   before_action :set_verdict_hash
-  
+
   def set_verdict_hash
     @verdict = {"AC" => "Accepted",
-               "WA" => "Wrong Answer",
-               "TLE" => "Time Limit Exceeded",
-               "MLE" => "Segmentation Fault",
-               "OLE" => "Output Limit Exceeded",
-               "RE" => "Runtime Error (exited with nonzero status)",
-               "SIG" => "Runtime Error (exited with signal)",
-               "CE" => "Compile Error",
-               "CO" => "Compilation Timed Out",
-               "ER" => "WTF!"
-               }
+                "WA" => "Wrong Answer",
+                "TLE" => "Time Limit Exceeded",
+                "MLE" => "Segmentation Fault",
+                "OLE" => "Output Limit Exceeded",
+                "RE" => "Runtime Error (exited with nonzero status)",
+                "SIG" => "Runtime Error (exited with signal)",
+                "CE" => "Compile Error",
+                "CO" => "Compilation Timed Out",
+                "ER" => "WTF!"
+    }
     @v2i = {"AC" => 0,
-               "WA" => 1,
-               "TLE" => 2,
-               "MLE" => 3,
-               "OLE" => 4,
-               "RE" => 5,
-               "SIG" => 6,
-               "CE" => 7,
-               "CO" => 8,
-               "ER" => 9
-               }
+            "WA" => 1,
+            "TLE" => 2,
+            "MLE" => 3,
+            "OLE" => 4,
+            "RE" => 5,
+            "SIG" => 6,
+            "CE" => 7,
+            "CO" => 8,
+            "ER" => 9
+    }
     @i2v = {0 => "AC",
-              1 => "WA",
-              2 => "TLE",
-              3 => "MLE",
-              4 => "OLE",
-              5 => "RE",
-              6 => "SIG",
-              7 => "CE",
-              8 => "CO",
-              9 => "ER"
-               }
+            1 => "WA",
+            2 => "TLE",
+            3 => "MLE",
+            4 => "OLE",
+            5 => "RE",
+            6 => "SIG",
+            7 => "CE",
+            8 => "CO",
+            9 => "ER"
+    }
   end
-  
-  	def store_location
-  		if (request.fullpath != "/users/sign_in" &&
-  			request.fullpath != "/users/sign_out"&&
-  			request.fullpath != "/users/password"&&
-  			request.fullpath != "/users/sign_up" &&
-  			!request.xhr?)
-  			session[:previous_url] = request.fullpath
-  		end
-  	end
-  	def after_sign_in_path_for(resource)
-  		session[:previous_url] || root_path
-  	end
+
+  def store_location
+    if (request.fullpath != "/users/sign_in" &&
+        request.fullpath != "/users/sign_out"&&
+        request.fullpath != "/users/password"&&
+        request.fullpath != "/users/sign_up" &&
+        !request.xhr?)
+      session[:previous_url] = request.fullpath
+    end
+  end
+  def after_sign_in_path_for(resource)
+    session[:previous_url] || root_path
+  end
+  class ApplicationController < ActionController::Base
+    before_filter :configure_permitted_parameters, if: :devise_controller?
+
+    protected
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
+      devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
+      devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
+    end
+  end
 end
