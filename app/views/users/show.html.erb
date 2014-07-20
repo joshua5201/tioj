@@ -1,32 +1,42 @@
- <h4 class = "page-header">User <small>#<%= @user.id %></small></h4>
- <div class="row-fluid">
- <div class="col-xs-2">
- 	<%= image_tag(@user.avatar.to_s, :class => "img-rounded img-responsive") %><br/>
- 	<h6><%=@user.nickname%></h6>
- 	<%=@user.email%><br/>
+<h4 class="page-header"><%= @user.username %></h4>
 
- </div>
- <div class="col-xs-9">
- 	<table class="table">
- 		<thead>
- 			<tr>
- 				<th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
- 			</tr>
- 		</thead>
- 			
- 		<tbody>
- 			<tr>
- 			<% @problems.each_with_index do |prob, idx| %>
- 			 	<% if idx%10 == 0%>
- 			 	<tr>
- 			 	<% end %>
- 			 	<td><%= link_to "#{prob.id}", :controller=>"problems" ,:action => :show, :id=>prob.id %></td>
- 			 	<% if idx%10 == 9%>
- 			 	</tr>
- 			 	<% end %>
- 			<% end %>
- 			</tr>
- 		</tbody>
- 	</table>
- </div>
- </div>
+<div class="row">
+  <div class="col-md-3">
+    <%= image_tag(@user.avatar.to_s, :class => "img-rounded img-responsive") %><br/>
+    <h6><%= @user.nickname %></h6>
+    <%= @user.email %><br/>
+
+  </div>
+  
+  <div class="col-md-9">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+        </tr>
+      </thead>
+              
+      <tbody>
+        <% @problems.each_with_index do |prob, idx| %>
+          <% if idx%10 == 0 %>
+            <tr>
+          <% end %>
+          
+          <td>
+            <% if user_problem_ac(@user, prob) %>
+              <%= link_to prob.id.to_s, problem_path(prob), :class => "text-success" %>
+            <% elsif user_problem_tried(@user, prob) %>
+              <%= link_to prob.id.to_s, problem_path(prob), :class => "text-warning" %>
+            <% else %>
+              <%= link_to prob.id.to_s, problem_path(prob), :class => "text-muted" %>
+            <% end %>
+          </td>
+          
+          <% if idx%10 == 9 %>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
