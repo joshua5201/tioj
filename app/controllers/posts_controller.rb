@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_posts
+  before_action :check_contest, :set_posts
 
   # GET /posts
   # GET /posts.json
@@ -78,6 +78,16 @@ class PostsController < ApplicationController
   end
 
   private
+  def check_contest
+    unless user_signed_in? and current_user.admin?
+      Contest.all.each do |f|
+        if Time.now >= f.start_time and Time.now <= f.end_time
+          redirect_to root_path, :alert => "No discussion during contest."
+        end
+      end
+    end
+  end
+  
   # Use callbacks to share common setup or constraints between actions.
   def set_posts 
     @problem = Problem.find(params[:problem_id]) if params[:problem_id]
