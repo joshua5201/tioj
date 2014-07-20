@@ -16,10 +16,10 @@
   
   <div class="form-group">
     <%= f.label :code %>
-    <%= f.text_area :code, :class => 'form-control flat', :rows => "15" %>
+    <%= f.text_area :code, :class => 'form-control flat', :rows => "15", :id => "code-input" %>
   </div>
   
-  <% if current_user.admin? %>
+  <!--<% if current_user.admin? %>
     <div class="form-group">
       <%= f.label :result %>
       <%= f.text_field :result, :class => 'form-control flat' %>
@@ -28,7 +28,7 @@
       <%= f.label :score %>
       <%= f.number_field :score, :class => 'form-control flat' %>
     </div>
-  <% end %>
+  <% end %>-->
   
   <% if @contest_id %>
     <div class="field">
