@@ -19,8 +19,8 @@
 		<tr>
                         <td><%= user.id %></td>
 			<td><%= link_to image_tag(user.avatar.mini_thumb.to_s, :class => "img-rounded"), {:controller => 'users', :action => :show, :id => user.id} %></td>
-                        <td><%= link_to user.nickname, user_path(user) %></td>
-                        <td>Nickname placeholder</td>
+                        <td><%= link_to user.username, user_path(user) %></td>
+                        <td><%= user.nickname %></td>
 			<td><%= user.email %></td>
 			<td><%= user_ac_count(user) %></td>
 		</tr>
