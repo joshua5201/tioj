@@ -42,7 +42,7 @@
           <%= t.label :task %>
          </div>
          <div class="col-md-2">
-          <%= t.number_field :problem_id, :class => 'form-control flat' %>
+          <%= t.number_field :problem_id, :class => 'form-control flat', :autocomplete => false %>
          </div>
          <div class="col-md-3">
           <%= t.link_to_remove "Remove this task", :class => "btn btn-danger" %>
