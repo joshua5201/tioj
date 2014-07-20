@@ -4,15 +4,18 @@ development:
  host: localhost
  username: root
  password: iloveinfor
+ encoding: utf8
 test:
  adapter: mysql2
  database: tioj_test
  host: localhost
  username: root
  password: iloveinfor
+ encoding: utf8
 production:
  adapter: mysql2
  database: tioj_production
  host: localhost
  username: root
  password: iloveinfor
+ encoding: utf8
