@@ -20,9 +20,15 @@ $ git clone https://github.com/joshua5201/tioj.git
 $ bundle install
 $ rake rails:update:bin
 $ bundle exec rake db:create
-$ bundle exec rake db:migrate
+$ bundle exec rake db:schema:load
 $ rails s
 ```
+
+## Seed data
+```bash
+$ bundle exec rake db:seed
+```
+
 ## Dump SQL
 ```bash
 $ mysqldump tioj_dev -u root -p --opt > tioj_dev00.sql
@@ -32,8 +38,4 @@ $ mysqldump tioj_dev -u root -p --opt > tioj_dev00.sql
 ```bash
 $ mysql -u root -p tioj_dev < tioj_dev.sql
 ```
-## Seed data
 
-```bash
-$ bundle exec rake db:seed
-```
