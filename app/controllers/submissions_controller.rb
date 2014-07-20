@@ -15,13 +15,9 @@ class SubmissionsController < ApplicationController
     end
     @submission.update(:result => "queued", :score => 0, :_result => "", :total_time => nil, :total_memory => nil)
     
-    if params[:page]
-      redirect_to :action => :index, :page => params[:page]
-      return
-    else
-      redirect_to :action => :show
-      return
-    end
+    redirect_to :back
+    return
+    
   end
   
   def index

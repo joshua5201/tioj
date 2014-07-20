@@ -111,7 +111,7 @@ $(".selectpicker").selectpicker({style: "form-control input-sm flat"});
         <td><%= submission.created_at.to_s(:clean) %></td>
         <% if user_signed_in? && current_user.admin == true %>
 	  <td>
-            <%= link_to 'Rejudge', {:controller => :submissions, :action => :rejudge, :id => submission.id, :page => @submissions.current_page} , :class => 'btn btn-xs btn-primary' %>
+            <%= link_to 'Rejudge', {:controller => :submissions, :action => :rejudge, :id => submission.id} , :class => 'btn btn-xs btn-primary' %>
           </td>
         <% end %>
       <% end %>
