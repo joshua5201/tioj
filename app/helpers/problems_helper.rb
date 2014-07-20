@@ -1,5 +1,6 @@
 module ProblemsHelper
   def topcoder(problem)
+    return nil if problem.visible_state == 1
     submission = problem.submissions.select("user_id").where("contest_id is NULL AND result = ? ", "AC").order("total_time DESC").first
     return User.find_by_id(submission.user_id) if submission
     return nil if submission.blank?

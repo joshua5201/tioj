@@ -113,7 +113,9 @@
   </div>
 </div>
 
-<pre class="line-numbers"><code class="language-c-like"><%= @submission.code %></code></pre>
+<% if user_signed_in? and ( current_user.admin? or current_user.id == @submission.user_id ) %>
+  <pre class="line-numbers"><code class="language-c-like"><%= @submission.code %></code></pre>
+<% end %>
 
 <%= link_to 'Back to Top', '#', :class => 'btn btn-default btn-xs' %>
 
