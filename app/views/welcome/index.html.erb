@@ -38,6 +38,7 @@
       <table class="table table-hover table-condensed table-striped">
         <thead>
           <tr>
+            <th>Rank</th>
             <th></th>
             <th>Username</th>
             <th>Accepted</th>
@@ -45,8 +46,9 @@
           </tr>
         </thead>
         <tbody>
-          <% @users.each do |f| %>
+          <% @users.each_with_index do |f, idx| %>
             <tr>
+              <td><%= idx + 1 %></td>
               <td><%= link_to image_tag(f.avatar.mini_thumb.to_s, :class => "img-rounded"), {:controller => 'users', :action => :show, :id => f.id} %></td>
               <td><%= link_to f.username, user_path(f) %></td>
               <td><%= user_ac_count(f) %></td>
