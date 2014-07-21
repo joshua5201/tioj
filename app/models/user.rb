@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
-  validate_presence_of :username, :nickname
+  validates_presence_of :username, :nickname
   validates :username,
     :uniqueness => {
     :case_sensitive => false
