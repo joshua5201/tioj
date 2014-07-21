@@ -5,6 +5,13 @@
     <%= image_tag(@user.avatar.to_s, :class => "img-rounded img-responsive") %><br/>
     <h6><%= @user.nickname %></h6>
     <%= @user.email %><br/>
+    Accepted: <%= @user.prob_by_res('AC').count%> <br>
+    Wrong Answer: <%= @user.prob_by_res('WA').count %> <br>
+    Time Limit Exceed: <%= @user.prob_by_res('TLE').count %> <br>
+    Segmentation Fault: <%= @user.prob_by_res('MLE').count %> <br>
+    Runtime Error (exited with nonzero status): <%= @user.prob_by_res('RE').count %> <br>
+    Runtime Error (exited with signal): <%= @user.prob_by_res('SIG').count %> <br>
+    Compile Error: <%= @user.prob_by_res('CE').count %><br>
 
   </div>
   
