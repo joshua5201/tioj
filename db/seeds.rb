@@ -6,26 +6,26 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-admin = AdminUser.new
-admin.email = 'admin@jizz.jiz'
-admin.username = 'seedadmin'
-admin.password = 'iloveinfor'
-admin.password_confirmation = 'iloveinfor'
-admin.save
+#admin = AdminUser.new
+#admin.email = 'admin@jizz.jiz'
+#admin.username = 'seedadmin'
+#admin.password = 'iloveinfor'
+#admin.password_confirmation = 'iloveinfor'
+#admin.save
 
-admin = User.new
-admin.email = 'admin@jizz.jiz'
-admin.username = 'seedadmin'
-admin.password = 'iloveinfor'
-admin.password_confirmation = 'iloveinfor'
-admin.nickname = 'seedadmin'
-admin.admin = true
-admin.save
+#admin = User.new
+#admin.email = 'admin@jizz.jiz'
+#admin.username = 'seedadmin'
+#admin.password = 'iloveinfor'
+#admin.password_confirmation = 'iloveinfor'
+#admin.nickname = 'seedadmin'
+#admin.admin = true
+#admin.save
 
-user = User.new
-user.email = 'user@jizz.jiz'
-user.username = 'seed'
-user.password = 'iloveinfor'
-user.password_confirmation = 'iloveinfor'
-user.nickname = 'seed'
-user.save
+#user = User.new
+#user.email = 'user@jizz.jiz'
+#user.username = 'seed'
+#user.password = 'iloveinfor'
+#user.password_confirmation = 'iloveinfor'
+#user.nickname = 'seed'
+##user.save
