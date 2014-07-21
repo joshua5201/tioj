@@ -38,6 +38,7 @@
       <table class="table table-hover table-condensed table-striped">
         <thead>
           <tr>
+            <th></th>
             <th>Username</th>
             <th>Accepted</th>
             <th>AC Ratio</th>
@@ -46,6 +47,7 @@
         <tbody>
           <% @users.each do |f| %>
             <tr>
+              <td><%= link_to image_tag(f.avatar.mini_thumb.to_s, :class => "img-rounded"), {:controller => 'users', :action => :show, :id => f.id} %></td>
               <td><%= link_to f.username, user_path(f) %></td>
               <td><%= user_ac_count(f) %></td>
               <td><%= ac_ratio_by_user(f) %></td>
