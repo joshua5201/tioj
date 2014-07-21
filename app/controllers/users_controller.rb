@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
+    @problems = @problems = Problem.all.order("id ASC")
   end
   def uniq_submits_by_res(res="AC")
     @submits = @user.submissions.select do |s|
