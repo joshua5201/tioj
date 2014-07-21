@@ -96,26 +96,26 @@ class ContestsController < ApplicationController
   end
 
   def new
-		authenticate_user!
-		if current_user.admin == false 
-			redirect_to action:'index'
-		end
-		@contest = Contest.new
-		3.times { @contest.contest_problem_joints.build }
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'
+    end
+    @contest = Contest.new
+    3.times { @contest.contest_problem_joints.build }
   end
 
   def edit
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
   end
 
   def create
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @contest = Contest.new(contest_params)
     respond_to do |format|
       if @contest.save
