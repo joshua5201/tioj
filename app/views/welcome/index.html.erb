@@ -18,10 +18,13 @@
               <% end %>
               <% if Time.now > f.end_time %>
                 <td>Ended</td>
+                <td><%= distance_of_time_in_words_to_now(f.end_time) %></td>
               <% elsif Time.now > f.start_time %>
                 <td>Ready</td>
+                <td>Now</td>
               <% else %>
                 <td>Not yet</td>
+                <td><%= distance_of_time_in_words_to_now(f.start_time) %></td>
               <% end %>
             </tr>
           <% end %>
@@ -36,10 +39,9 @@
         <tbody>
           <% @users.each do |f| %>
             <tr>
-              <td><%= f.id %><td>
               <td><%= f.username %><td>
-              <td><%= f.id %><td>
-              <td><%= f.id %><td>
+              <td>AC problem count place holder<td>
+              <td>AC ratio place holder<td>
             </tr>
           <% end %>
         </tbody>
