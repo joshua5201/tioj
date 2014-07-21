@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   }
   def uniq_submits_by_res(res="AC")
     submits = self.submissions.select do |s|
-      s.result == res && contest_id == nil
+      s.result == res && s.contest_id == nil
     end
     submits.uniq do |s|
       s.problem
