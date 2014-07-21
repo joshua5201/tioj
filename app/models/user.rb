@@ -21,8 +21,12 @@ class User < ActiveRecord::Base
     :case_sensitive => false
   }
   validates_uniqueness_of :nickname
-
-
+  
+  
+  def ac_count
+    self.uniq_submits_by_res("AC").count
+  end
+  
   def uniq_submits_by_res(res="AC")
     submits = self.submissions.select do |s|
       s.result == res && s.contest_id == nil
@@ -31,6 +35,7 @@ class User < ActiveRecord::Base
       s.problem
     end
   end
+  
   def prob_by_res(res="AC")
     submits = self.uniq_submits_by_res(res)
     submits.collect do |s|
