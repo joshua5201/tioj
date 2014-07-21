@@ -46,9 +46,9 @@
         <tbody>
           <% @users.each do |f| %>
             <tr>
-              <td><%= link_to f.username, user_path(f) %><td>
-              <td><%= user_ac_count(f) %><td>
-              <td><%= ac_ratio_by_user(f) %><td>
+              <td><%= link_to f.username, user_path(f) %></td>
+              <td><%= user_ac_count(f) %></td>
+              <td><%= ac_ratio_by_user(f) %></td>
             </tr>
           <% end %>
         </tbody>
