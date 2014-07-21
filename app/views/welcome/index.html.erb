@@ -39,7 +39,7 @@
         <tbody>
           <% @users.each do |f| %>
             <tr>
-              <td><%= f.username %><td>
+              <td><%= link_to f.username, user_path(f) %><td>
               <td>AC problem count place holder<td>
               <td>AC ratio place holder<td>
             </tr>
