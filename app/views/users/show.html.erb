@@ -31,11 +31,11 @@
           
           <td>
             <% if user_problem_ac(@user, prob) %>
-              <%= link_to prob.id.to_s, problem_path(prob), :class => "text-success" %>
+              <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-success" %>
             <% elsif user_problem_tried(@user, prob) %>
-              <%= link_to prob.id.to_s, problem_path(prob), :class => "text-warning" %>
+              <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-warning" %>
             <% else %>
-              <%= link_to prob.id.to_s, problem_path(prob), :class => "text-muted" %>
+              <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-muted" %>
             <% end %>
           </td>
           
