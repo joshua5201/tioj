@@ -15,10 +15,14 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+  validates_presence_of :username, :nickname
   validates :username,
     :uniqueness => {
     :case_sensitive => false
   }
+  validates_uniqueness_of :nickname
+
+
   def uniq_submits_by_res(res="AC")
     submits = self.submissions.select do |s|
       s.result == res && s.contest_id == nil
