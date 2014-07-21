@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @bulletins = Article.all.order("id DESC").limit(7)
+    @bulletins = Article.all.order("id DESC").limit(5)
     @contests = Contest.all.order("id DESC").limit(3)
     @users = User.all.order("id DESC").limit(10)
     # @problem_last = Problem.last

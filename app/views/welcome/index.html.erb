@@ -36,12 +36,19 @@
     <div class="well well-lg">
       <h5>Ranked Coders<small class="pull-right"><%= link_to "Show all", users_path %></small></h5>
       <table class="table table-hover table-condensed table-striped">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Accepted</th>
+            <th>AC Ratio</th>
+          </tr>
+        </thead>
         <tbody>
           <% @users.each do |f| %>
             <tr>
-              <td><%= link_to f.username, user_path(f) %><td>
-              <td>AC problem count place holder<td>
-              <td>AC ratio place holder<td>
+              <td><%= link_to f.username, user_path(f) %></td>
+              <td><%= user_ac_count(f) %></td>
+              <td><%= ac_ratio_by_user(f) %></td>
             </tr>
           <% end %>
         </tbody>
