@@ -4,7 +4,7 @@ module UsersHelper
   end
   
   def user_problem_ac(user, problem)
-    if Submission.where("user_id = ? AND problem_id = ? AND result = ?", user.id, problem.id, "AC").count == 0
+    if Submission.where("contest_id is NULL AND user_id = ? AND problem_id = ? AND result = ?", user.id, problem.id, "AC").count == 0
       return false
     else
       return true
@@ -12,7 +12,7 @@ module UsersHelper
   end
   
   def user_problem_tried(user, problem)
-    if Submission.where("user_id = ? AND problem_id = ?", user.id, problem.id).count == 0
+    if Submission.where("contest_id is NULL AND user_id = ? AND problem_id = ?", user.id, problem.id).count == 0
       return false
     else
       return true
