@@ -1,5 +1,9 @@
-<div class="alert alert-danger alert-dismissable" role="alert">
-  <strong>Oh No! </strong> <%= "Make sure contest's tasks are set to `visible during contest` !" %>
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert">
+    <span aria-hidden="true">&times;</span>
+    <span class="sr-only">Close</span>
+  </button>
+  <strong>Oh Peach! </strong> <%= "Make sure contest's tasks are set to `visible during contest`." %>
 </div>
 <%= nested_form_for(@contest) do |f| %>
    <% if @contest.errors.any? %>

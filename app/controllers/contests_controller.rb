@@ -14,7 +14,7 @@ class ContestsController < ApplicationController
       authenticate_user!
       if not current_user.admin?
         c_submissions = @contest.submissions.where("user_id = ?", current_user.id)
-        flash[:notice] = "You can only see your own score !"
+        flash[:notice] = "You can only see your own score."
       else
         c_submissions = @contest.submissions
       end
