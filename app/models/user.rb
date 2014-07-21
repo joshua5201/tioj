@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
     all = self.submissions.select do |s|
       s.contest_id == nil
     end
-    ac = ac.select do |s|
+    ac = all.select do |s|
       s.result == "AC"
     end
     all = all.count
