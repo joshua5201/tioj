@@ -37,6 +37,9 @@ class User < ActiveRecord::Base
     all = all.count
     ac = ac.count
     ratio = (100.0 * ac / all)
+    if ratio.nan?
+      ratio = 0.0
+    end
   end
   
   def uniq_submits_by_res(res="AC")
