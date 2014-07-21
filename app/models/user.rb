@@ -15,10 +15,13 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+  validates_presence_of :username, :nickname
   validates :username,
     :uniqueness => {
     :case_sensitive => false
   }
+  validates_uniqueness_of :nickname
+  
   
   def ac_count
     self.uniq_submits_by_res("AC").count
