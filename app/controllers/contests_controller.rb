@@ -8,15 +8,29 @@ class ContestsController < ApplicationController
         return
       end
     end
+    
+    c_submissions
     if @contest.contest_type == 1
       authenticate_user!
       if not current_user.admin?
-        redirect_to action:'index'
-        return
+        c_submissions = @contest.submissions.where("user_id = ?", current_user.id)
+        format.html{ :notice => "You can only see your own score !" }
+      else
+        c_submissions = @contest.submissions
       end
+    else
+      c_submissions = @contest.submissions
     end
+    
+    #if @contest.contest_type == 1
+    #  authenticate_user!
+    #  if not current_user.admin?
+    #    redirect_to action:'index'
+    #    return
+    #  end
+    #end
     @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
-    c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
+    #c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|
