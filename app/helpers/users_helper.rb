@@ -9,8 +9,9 @@ module UsersHelper
     all = all.count
     ac = ac.count
     ratio = "%.1f%%" % (100.0 * ac / all)
-    
-    return raw ( ratio + " (" + ac.to_s + "/" + all.to_s + ")" )
+    ac_page = link_to ac, submissions_path(:filter_user_id => user.id, :'filter_status[]' => "AC")
+    all_page = link_to ac, submissions_path(:filter_user_id => user.id)
+    return raw ( ratio + " (" + ac_page + "/" + all_page + ")" )
   end
   
   def user_problem_ac(user, problem)
