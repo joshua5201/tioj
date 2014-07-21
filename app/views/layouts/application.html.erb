@@ -70,12 +70,20 @@ MathJax.Hub.Config({
 <div class="container-fluid" id="page-content">
   <!--alert and notice-->
   <% if notice %>
-    <div class="alert alert-success alert-dismissable" role="alert">
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
       <strong>Oh Geez! </strong> <%= notice %>
     </div>
   <% end %>
   <% if alert %>
-    <div class="alert alert-danger alert-dismissable" role="alert">
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
       <strong>Oh No! </strong> <%= alert %>
     </div>
   <% end %>
