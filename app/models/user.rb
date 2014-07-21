@@ -27,6 +27,18 @@ class User < ActiveRecord::Base
     self.uniq_submits_by_res("AC").count
   end
   
+  def ac_ratio
+    all = self.submissions.select do |s|
+      s.contest_id == nil
+    end
+    ac = ac.select do |s|
+      s.result == "AC"
+    end
+    all = all.count
+    ac = ac.count
+    ratio = (100.0 * ac / all)
+  end
+  
   def uniq_submits_by_res(res="AC")
     submits = self.submissions.select do |s|
       s.result == res && s.contest_id == nil
