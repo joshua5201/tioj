@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
-    @users = @users.sort_by{|a| -a.ac_count}
+    @users = User.all.sort_by{|a| -a.ac_count}
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(25)
   end
   def show
