@@ -9,7 +9,7 @@ class ContestsController < ApplicationController
       end
     end
     
-    c_submissions
+    c_submissions = nil
     if @contest.contest_type == 1
       authenticate_user!
       if not current_user.admin?
