@@ -1,3 +1,6 @@
+<div class="alert alert-danger alert-dismissable" role="alert">
+  <strong>Oh No! </strong> <%= "Make sure contest's tasks are set to `visible during contest` !" %>
+</div>
 <%= nested_form_for(@contest) do |f| %>
    <% if @contest.errors.any? %>
        <div id="error_explanation">
