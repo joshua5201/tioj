@@ -1,6 +1,6 @@
 module UsersHelper
   def user_ac_count(user)
-    return Submission.select("problem_id").distinct.where("user_id = ? AND result = ?", user.id, "AC").count
+    return Submission.select("problem_id").distinct.where("contest_id is NULL AND user_id = ? AND result = ?", user.id, "AC").count
   end
   
   def user_problem_ac(user, problem)
