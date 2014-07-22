@@ -44,8 +44,8 @@ class User < ActiveRecord::Base
     :username_convention => true
 
   validates_uniqueness_of :nickname
-  validates_length_of :nickname, maximum: 12
-  validates_length_of :nickname, minimum: 1
+  validates_length_of :nickname, :in => 1..12
+  validates_length_of :username, :in => 3..20
   
   def ac_count
     submits = self.submissions.select do |s|
