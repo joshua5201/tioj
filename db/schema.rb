@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722130912) do
+ActiveRecord::Schema.define(version: 20140722173540) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -129,21 +129,21 @@ ActiveRecord::Schema.define(version: 20140722130912) do
     t.text     "example_input"
     t.text     "example_output"
     t.text     "hint"
-    t.integer  "visible_state",  default: 0
+    t.integer  "visible_state",                   default: 0
     t.integer  "problem_type"
-    t.text     "sjcode"
-    t.text     "interlib"
+    t.text     "sjcode",         limit: 16777215
+    t.text     "interlib",       limit: 16777215
   end
 
   create_table "submissions", force: true do |t|
-    t.text     "code"
-    t.string   "compiler",     default: ""
-    t.string   "result",       default: "queued"
-    t.integer  "score",        default: 0
+    t.text     "code",         limit: 16777215
+    t.string   "compiler",                      default: ""
+    t.string   "result",                        default: "queued"
+    t.integer  "score",                         default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "problem_id",   default: 0
-    t.integer  "user_id",      default: 0
+    t.integer  "problem_id",                    default: 0
+    t.integer  "user_id",                       default: 0
     t.integer  "contest_id"
     t.string   "_result"
     t.integer  "total_time"
