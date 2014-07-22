@@ -74,4 +74,8 @@ end
 
 gem 'mechanize'
 
+# friendly id for SEO
 gem 'friendly_id', github: 'norman/friendly_id'
+
+# annotate (showing model info in model.rb)
+gem 'annotate', github: 'ctran/annotate_models'
