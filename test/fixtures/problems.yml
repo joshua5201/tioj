@@ -15,8 +15,8 @@
 #  hint           :text
 #  visible_state  :integer          default(0)
 #  problem_type   :integer
-#  sjcode         :text
-#  interlib       :text
+#  sjcode         :text(16777215)
+#  interlib       :text(16777215)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

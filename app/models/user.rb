@@ -19,6 +19,7 @@
 #  avatar                 :string(255)
 #  admin                  :boolean          default(FALSE)
 #  username               :string(255)
+#  motto                  :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -46,6 +47,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :nickname
   validates_length_of :nickname, :in => 1..12
   validates_length_of :username, :in => 3..20
+  validates_length_of :motto, :in => 0..100
   
   def ac_count
     submits = self.submissions.select do |s|

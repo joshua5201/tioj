@@ -19,6 +19,7 @@
 #  avatar                 :string(255)
 #  admin                  :boolean          default(FALSE)
 #  username               :string(255)
+#  motto                  :string(255)
 #
 
 require 'test_helper'

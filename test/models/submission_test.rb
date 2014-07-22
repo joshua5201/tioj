@@ -3,7 +3,7 @@
 # Table name: submissions
 #
 #  id           :integer          not null, primary key
-#  code         :text
+#  code         :text(16777215)
 #  compiler     :string(255)      default("")
 #  result       :string(255)      default("queued")
 #  score        :integer          default(0)
