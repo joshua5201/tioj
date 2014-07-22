@@ -23,7 +23,7 @@
     Signed up at: <%= @user.created_at.to_s(:clean) %><br>
     Last sign in: <%= @user.last_sign_in_at.to_s(:clean) %><br>
     <br>
-    <%= link_to('Edit account', edit_registration_path(:user), :class => 'btn btn-info btn-xs') %>
+    <%= link_to('Edit Account', edit_registration_path(:user), :class => 'btn btn-info btn-xs') %>
   </div>
   
   <div class="col-md-7">

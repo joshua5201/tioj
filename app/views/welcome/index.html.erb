@@ -12,7 +12,7 @@
         <tbody>
           <% @contests.each do |f| %>
             <tr>
-              <td><%= f.title %></td>
+              <td><%= link_to f.title, contest_path(f) %></td>
               <% if user_signed_in? %>
                 <td><%= link_to 'Particapate', f, :class => 'btn btn-xs btn-primary' %></td>
               <% end %>
