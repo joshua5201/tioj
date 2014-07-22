@@ -6,9 +6,7 @@ class UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:id])
     @problems = Problem.all.order("id ASC")
-    rescue ActiveRecord::RecordNotFound => e
-      redirect_to :back, :alert => "Username '#{params[:id]}' not found."
-      return
-    end
+  rescue ActiveRecord::RecordNotFound => e
+    redirect_to :back, :alert => "Username '#{params[:id]}' not found."
   end
 end
