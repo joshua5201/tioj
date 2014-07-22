@@ -40,9 +40,9 @@ class User < ActiveRecord::Base
   end
   validates_presence_of :username, :nickname
   validates :username,
-    :uniqueness => {
-    :case_sensitive => false
-  }
+    :uniqueness => {:case_sensitive => false}, 
+    :username_convention => true
+
   validates_uniqueness_of :nickname
   
   
