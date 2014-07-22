@@ -1,0 +1,28 @@
+<h4 class="page-header" >Judge Servers</h4>
+<%= link_to 'New Judge Server', new_judge_server_path, :class => "btn btn-success btn-sm" %>
+<table class = "table table-hover table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>No. </th>
+      <th>Name</th>
+      <th>IP Address</th>
+      <th>Key</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @judge_servers.each_with_index do |judge_server, index| %>
+      <tr>
+        <td>#<%= index%></td>
+        <td><%= judge_server.name %></td>
+        <td><%= judge_server.ip %></td>
+        <td><%= judge_server.key %></td>
+        <th>
+          <%= link_to 'Edit', edit_judge_server_path(judge_server), :class => 'btn btn-info btn-xs' %>
+          <%= link_to 'Destroy', judge_server_path(judge_server), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %>
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

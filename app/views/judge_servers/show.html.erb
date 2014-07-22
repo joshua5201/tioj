@@ -1,0 +1,6 @@
+<h4>Judge Server <%= @judge_server.name %>
+<p>
+  <strong>IP Address: </strong><%= @judge_server.ip %> <br>
+  <strong>Secure Key: </strong><%= @judge_server.key %> <br>
+  <%= link_to 'Back', judge_servers_path, :class => 'btn btn-default' %>
+</p>
