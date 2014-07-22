@@ -1,19 +1,19 @@
-<h4 class="page-header">Bulletin <small>#<%= school_year(@era)%></small></h4>
+<h4 class="page-header">Bulletin <small>#<%= @era %></small></h4>
 
 
 <p>
   <%= select_tag :era_select, options_for_select([[2014,2014],[2013,2013],[2012,2012],[2011,2011],[2010,2010],
-  [2009,2009],[2008,2008],[2007,2007],[2006,2006],[2005,2005]], school_year(@era)), :class => "form-control" %>
+  [2009,2009],[2008,2008],[2007,2007],[2006,2006],[2005,2005]], @era), :class => "form-control" %>
 </p>
 
 <% if user_signed_in? && current_user.admin == true %>
   <p>
   <div class="row">
     <div class="col-md-6">
-      <%= link_to 'New Announcement', new_article_path(:era => school_year(@era), :category => 0), :class => "btn btn-success btn-sm btn-block" %>
+      <%= link_to 'New Announcement', new_article_path(:era => @era, :category => 0), :class => "btn btn-success btn-sm btn-block" %>
     </div>
     <div class="col-md-6">
-      <%= link_to 'New Course Material', new_article_path(:era => school_year(@era), :category => 1), :class => "btn btn-danger btn-sm btn-block" %>
+      <%= link_to 'New Course Material', new_article_path(:era => @era, :category => 1), :class => "btn btn-danger btn-sm btn-block" %>
     </div>
   </div>
   </p>

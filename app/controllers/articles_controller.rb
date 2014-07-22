@@ -6,7 +6,16 @@ class ArticlesController < ApplicationController
     @articles += Article.where("category = 0 AND pinned != true AND era = ?", get_era).order("id DESC")
     @courses = Article.where("category = 1 AND pinned = true AND era = ?", get_era).order("id DESC")
     @courses += Article.where("category = 1 AND pinned != true AND era = ?", get_era).order("id DESC")
-    @era = params[:era]
+    @era = params[:era].to_i
+    if @era.blank?
+      t = Time.now
+      if t.month < 7 
+        @era = t.year - 1
+      else
+        @era = t.year
+      end
+    end
+    set_page_title "Bulletin - " + @era
   end
   
   def create
