@@ -57,5 +57,6 @@ class User < ActiveRecord::Base
       s.problem
     end
   end
-  
+  extend FriendlyId
+  friendly_id :username
 end
