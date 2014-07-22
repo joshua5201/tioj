@@ -4,23 +4,28 @@
   <div class="col-md-5">
     <%= image_tag(@user.avatar.to_s, :class => "img-rounded img-responsive") %><br/>
     <h6><%= @user.nickname %></h6>
-    <%= @user.email %><br/>
-    <br>
     <div class="row">
       <div class="col-md-6">
+      E-mail:<br>
+      <br>
       Tried and accepted:<br>
       Tried but in vain:<br>
-      AC Ratio:
+      AC Ratio:<br>
+      <br>
+      Signed up at:<br>
+      Last sign in:
       </div>
       <div class="col-md-6">
+        <%= @user.email %><br>
+        <br>
         <%= @user.ac_count %><br>
         <%= @user.in_vain_count %><br>
-        <%= ac_ratio_by_user(@user) %>
+        <%= ac_ratio_by_user(@user) %><br>
+        <br>
+        <%= @user.created_at.to_s(:clean) %><br>
+        <%= @user.last_sign_in_at.to_s(:clean) %>
       </div>
     </div>
-    <br>
-    Signed up at: <%= @user.created_at.to_s(:clean) %><br>
-    Last sign in: <%= @user.last_sign_in_at.to_s(:clean) %><br>
     <br>
     <%= link_to('Edit account', edit_registration_path(:user), :class => 'btn btn-info btn-xs') %>
   </div>
