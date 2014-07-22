@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
-  
+
   def dashboard
     if Time.now < @contest.start_time
       unless user_signed_in? and current_user.admin?
@@ -8,7 +8,7 @@ class ContestsController < ApplicationController
         return
       end
     end
-    
+
     c_submissions = nil
     if @contest.contest_type == 1 and Time.now >= @contest.start_time and Time.now <= @contest.end_time
       authenticate_user!
@@ -21,7 +21,7 @@ class ContestsController < ApplicationController
     else
       c_submissions = @contest.submissions
     end
-    
+
     #if @contest.contest_type == 1
     #  authenticate_user!
     #  if not current_user.admin?
@@ -80,10 +80,10 @@ class ContestsController < ApplicationController
       @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
       @color << 0
     end
-    
+
     set_page_title ("Dashboard - " + @contest.title)
   end
-  
+
   def index
     @contests = Contest.all.order("id DESC").page(params[:page])
     set_page_title "Contests"
@@ -135,10 +135,10 @@ class ContestsController < ApplicationController
   end
 
   def update
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index', notice: 'Insufficient User Permissions.'	
-	end
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index', notice: 'Insufficient User Permissions.'	
+    end
     respond_to do |format|
       if @contest.update(contest_params)
         format.html { redirect_to @contest, notice: 'Contest was successfully updated.' }
@@ -151,10 +151,10 @@ class ContestsController < ApplicationController
   end
 
   def destroy
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @contest.destroy
     respond_to do |format|
       format.html { redirect_to contests_url }
@@ -163,26 +163,26 @@ class ContestsController < ApplicationController
   end
 
   private
-    def set_contest
-      @contest = Contest.find(params[:id])
-    end
+  def set_contest
+    @contest = Contest.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contest_params
-      params.require(:contest).permit(
-	:id,
-	:title,
-	:description,
-      	:start_time,
-	:end_time,
-	:contest_type,
-        :page,
-	contest_problem_joints_attributes: 
-        [
-	    :id,
-            :problem_id,
-	    :_destroy
-        ]
-      )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contest_params
+    params.require(:contest).permit(
+      :id,
+      :title,
+      :description,
+      :start_time,
+      :end_time,
+      :contest_type,
+      :page,
+      contest_problem_joints_attributes: 
+      [
+        :id,
+        :problem_id,
+        :_destroy
+      ]
+    )
+  end
 end
