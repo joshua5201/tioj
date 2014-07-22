@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
       s.result == "AC" && s.contest_id == nil
     end
     submits.uniq do |s|
-      s.problem
+      s.problem_id
     end
     submits.count
   end
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
       s.contest_id == nil
     end
     submits.uniq do |s|
-      s.problem
+      s.problem_id
     end
     submits = submits.count - self.ac_count
   end
@@ -86,14 +86,14 @@ class User < ActiveRecord::Base
       s.result == res && s.contest_id == nil
     end
     submits.uniq do |s|
-      s.problem
+      s.problem_id
     end
   end
   
   def prob_by_res(res="AC")
     submits = self.uniq_submits_by_res(res)
     submits.collect do |s|
-      s.problem
+      s.problem_id
     end
   end
   extend FriendlyId
