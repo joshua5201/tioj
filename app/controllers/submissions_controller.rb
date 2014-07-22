@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
   
   def rejudge_problem
     Submission.where("problem_id = ?", params[:problem_id]).update_all(:result => "queued", :score => 0, :_result => "", :total_time => nil, :total_memory => nil)
-    redirect_to problem_path(params[:problem_id])
+    redirect_to :back
   end
   
   def rejudge
@@ -14,18 +14,17 @@ class SubmissionsController < ApplicationController
       return
     end
     @submission.update(:result => "queued", :score => 0, :_result => "", :total_time => nil, :total_memory => nil)
-    
     redirect_to :back
-    return
-    
   end
   
   def index
     @submissions = @submissions.order("id DESC").page(params[:page])
+    set_page_title "Submissions"
   end
 
   def show
     @_result = @submission._result.to_s.split("/")
+    set_page_title "Submission - " + @submission.id.to_s
   end
 
   def new
@@ -53,6 +52,7 @@ class SubmissionsController < ApplicationController
     #@submission = @submissions.build
     @submission = Submission.new
     @contest_id = params[:contest_id]
+    set_page_title "New Submission"
   end
 
   def edit
@@ -60,6 +60,7 @@ class SubmissionsController < ApplicationController
     if current_user.admin == false 
       redirect_to action:'index'	
     end
+    set_page_title "Edit submission - " + @submission.id.to_s
   end
 
   def create
