@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
     @articles += Article.where("category = 0 AND pinned != true AND era = ?", get_era).order("id DESC")
     @courses = Article.where("category = 1 AND pinned = true AND era = ?", get_era).order("id DESC")
     @courses += Article.where("category = 1 AND pinned != true AND era = ?", get_era).order("id DESC")
-    @era = params[:era].to_i
+    @era = params[:era]
     if @era.blank?
       t = Time.now
       if t.month < 7 
@@ -15,6 +15,7 @@ class ArticlesController < ApplicationController
         @era = t.year
       end
     end
+    @era = @era.to_s
     set_page_title "Bulletin - " + @era
   end
   
