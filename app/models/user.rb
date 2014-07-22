@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
     submits = self.submissions.select do |s|
       s.result == "AC" && s.contest_id == nil
     end
-    submits.uniq do |s|
+    submits = submits.uniq do |s|
       s.problem_id
     end
     submits.count
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
     submits = self.submissions.select do |s|
       s.contest_id == nil
     end
-    submits.uniq do |s|
+    submits = submits.uniq do |s|
       s.problem_id
     end
     submits = submits.count - self.ac_count
@@ -85,14 +85,14 @@ class User < ActiveRecord::Base
     submits = self.submissions.select do |s|
       s.result == res && s.contest_id == nil
     end
-    submits.uniq do |s|
+    submits = submits.uniq do |s|
       s.problem_id
     end
   end
   
   def prob_by_res(res="AC")
     submits = self.uniq_submits_by_res(res)
-    submits.collect do |s|
+    submits = submits.collect do |s|
       s.problem_id
     end
   end
