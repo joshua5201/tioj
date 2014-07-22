@@ -8,7 +8,7 @@
   <div class="col-md-6">
     <div class="well well-lg">
       <h5>Recent Contests<small class="pull-right"><%= link_to "Show all", contests_path %></small></h5>
-      <table class="table table-hover table-condensed table-striped">
+      <table class="table table-hover table-striped">
         <tbody>
           <% @contests.each do |f| %>
             <tr>
@@ -35,7 +35,7 @@
   <div class="col-md-6">
     <div class="well well-lg">
       <h5>Ranked Coders<small class="pull-right"><%= link_to "Show all", users_path %></small></h5>
-      <table class="table table-hover table-condensed table-striped">
+      <table class="table table-hover table-striped">
         <thead>
           <tr>
             <th>Rank</th>
@@ -61,68 +61,3 @@
   </div>
 </div>
 
-<!--
-<div class="row">
-  <div class="col-xs-3">
-    <% if @problem_last %>
-      <div class="row">
-        <div class = "well well-lg">
-          <h5 ><%=  link_to "Latest Problem", problem_path(@problem_last) %></h5>
-          <table>
-            <tbody>
-              <tr>
-                <td>Problem id: </td>
-                <td><%=@problem_last.id%></td>
-              </tr>
-              <tr>
-                <td>Problem name: </td>
-                <td><%=@problem_last.name%></td>
-              </tr>
-              <tr>
-                <td>Tags: </td>
-                <td>JIZZ</td>
-              </tr>
-              <tr>
-                <td>Top coder: </td>
-                <td>JIZZ</td>
-              </tr>
-              <tr>
-                <td>AC ratio(user): </td>      
-                <td><%= "NaN%" %></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    <% end %>
-    <% if @submission_last %>
-      <div class="row">
-        <div class = "well well-lg">
-          <h5><%=  link_to "Latest Submission", submission_path(@submission_last) %></h5>
-          <table>
-            <tbody>
-              <tr> <td>Problem id: </td>		<td><%=@submission_last.problem_id%></td> </tr>
-              <tr> <td>Status: </td>			<td><%=@submission_last.result %></td> </tr>
-              <tr> <td>Score: </td>			<td><%=@submission_last.score %></td> </tr>
-              <tr> <td>Submitter id: </td>	<td><%=@submission_last.user_id%></td> </tr> 
-            </tbody>
-          </table>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class = "col-xs-6">
-    <div class = "well well-lg">
-      <h3>Bulletin Board</h3>
-      Jizz
-    </div>
-  </div>
-  <div class = "col-xs-3 last">
-    <div class = "well well-lg">
-      <h5>Top Ranker</h5>
-      Jizz</br>
-      jizzs
-    </div>
-  </div>
-</div>
--->

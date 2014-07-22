@@ -5,6 +5,6 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.friendly.find(params[:id])
-    @problems = @problems = Problem.all.order("id ASC")
+    @problems = Problem.all.order("id ASC")
   end
 end
