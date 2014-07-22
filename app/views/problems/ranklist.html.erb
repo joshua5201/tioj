@@ -10,11 +10,13 @@
   <thead>
     <tr>
       <th>Rank</th>
+      <th>#</th>
       <th></th>
       <th>Submitter</th>
-      <th>Compiler</th>
       <th>Time (ms)</th>
       <th>Memory (KiB)</th>
+      <th>Compiler</th>
+      <th>Code Length</th>
       <th>Achieved Time</th>
     </tr>
   </thead>
@@ -31,11 +33,13 @@
           <tr>
       <% end %>
         <td><%= link_to index+1, submission_path(submission) %></td>
+        <td><%= link_to submission.id, submission_path(submission) %></td>
         <td><%= link_to image_tag(submission.user.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(submission.user_id) %></td>
         <td><%= link_to submission.user.nickname, user_path(submission.user_id) %></td>
-        <td><%= submission.compiler %></td>
         <td><%= submission.total_time %></td>
         <td><%= submission.total_memory %></td>
+        <td><%= submission.compiler %></td>
+        <td><%= number_to_human_size(submission.code.size) %></td>
         <td><%= submission.created_at.to_s(:clean) %></td>
       </tr>
     <% end %>
