@@ -20,22 +20,24 @@ class User < ActiveRecord::Base
     :uniqueness => {
     :case_sensitive => false
   }
-  validates_uniqueness_of :nickname
+    validates_uniqueness_of :nickname
 
 
-  def uniq_submits_by_res(res="AC")
-    submits = self.submissions.select do |s|
-      s.result == res && s.contest_id == nil
+    def uniq_submits_by_res(res="AC")
+      submits = self.submissions.select do |s|
+        s.result == res && s.contest_id == nil
+      end
+      submits.uniq do |s|
+        s.problem
+      end
     end
-    submits.uniq do |s|
-      s.problem
+    def prob_by_res(res="AC")
+      submits = self.uniq_submits_by_res(res)
+      submits.collect do |s|
+        s.problem
+      end
     end
-  end
-  def prob_by_res(res="AC")
-    submits = self.uniq_submits_by_res(res)
-    submits.collect do |s|
-      s.problem
-    end
-  end
-  
+
+    extend FriendlyId
+    friendly_id :username
 end

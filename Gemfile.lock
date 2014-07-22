@@ -15,6 +15,13 @@ GIT
       ransack (~> 1.0)
       sass-rails
 
+GIT
+  remote: git://github.com/norman/friendly_id.git
+  revision: 97ed06e4d4c4c9a57117c1e1c3c85eba94682844
+  specs:
+    friendly_id (5.0.4)
+      activerecord (>= 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -239,6 +246,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   devise (~> 3.2.4)
+  friendly_id!
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
