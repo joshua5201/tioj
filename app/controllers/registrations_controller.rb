@@ -1,21 +1,25 @@
 class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
   
-	def new
-		super
-	end
+  def new
+    super
+    set_page_title "Register"
+  end
+        
+  def edit
+    super
+    set_page_title "Edit Account"
+  end
+    
+  def create
+    super
+    resource.remote_avatar_url = "http://avatar.3sd.me/100"
+    resource.save
+  end
 
-	def create
-		super
-                resource.remote_avatar_url = "http://avatar.3sd.me/100"
-                resource.save
-	end
-
-	def update
-		super
-                #resource.avatar = params[:avatar]
-                #resource.save
-	end
+  def update
+    super
+  end
 
   protected
  
