@@ -52,7 +52,7 @@ class SubmissionsController < ApplicationController
     #@submission = @submissions.build
     @submission = Submission.new
     @contest_id = params[:contest_id]
-    set_page_title "New Submission"
+    set_page_title "New Submission - " + @problem.id.to_s + " - " + @problem.name
   end
 
   def edit
