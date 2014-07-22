@@ -3,7 +3,7 @@ ActiveAdmin.register User do
 
   controller do
     def find_resource
-      scoped_collection.where(slug: params[:id]).first!
+      scoped_collection.friendly.find(params[:id])
     end
   end
   preserve_default_filters!
