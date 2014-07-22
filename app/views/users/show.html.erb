@@ -1,10 +1,16 @@
 <h4 class="page-header"><%= @user.username %></h4>
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-5">
     <%= image_tag(@user.avatar.to_s, :class => "img-rounded img-responsive") %><br/>
     <h6><%= @user.nickname %></h6>
     <%= @user.email %><br/>
+    Signed up at: <%= @user.created_at.to_s(:clean) %><br>
+    Last sign in: <%= @user.last_sign_in_at.to_s(:clean) %><br>
+    
+    Tried and accepted: <%= @user.ac_count %><br>
+    Tried but in vain: <%= @user.in_vain_count %><br>
+    
     Accepted: <%= @user.prob_by_res('AC').count%> <br>
     Wrong Answer: <%= @user.prob_by_res('WA').count %> <br>
     Time Limit Exceed: <%= @user.prob_by_res('TLE').count %> <br>
@@ -15,7 +21,7 @@
 
   </div>
   
-  <div class="col-md-9">
+  <div class="col-md-7">
     <table class="table">
       <thead>
         <tr>

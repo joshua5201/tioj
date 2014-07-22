@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  nickname               :string(255)
+#  avatar                 :string(255)
+#  admin                  :boolean          default(FALSE)
+#  username               :string(255)
+#
+
 class User < ActiveRecord::Base
   has_many :submissions, :dependent => :destroy
   # Include default devise modules. Others available are:
@@ -24,7 +47,23 @@ class User < ActiveRecord::Base
   
   
   def ac_count
-    self.uniq_submits_by_res("AC").count
+    submits = self.submissions.select do |s|
+      s.result == "AC" && s.contest_id == nil
+    end
+    submits.uniq do |s|
+      s.problem
+    end
+    submits.count
+  end
+  
+  def in_vain_count
+    submits = self.submissions.select do |s|
+      s.result != "AC" && s.contest_id == nil
+    end
+    submits.uniq do |s|
+      s.problem
+    end
+    submits.count
   end
   
   def ac_ratio
