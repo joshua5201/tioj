@@ -5,30 +5,33 @@
     <%= image_tag(@user.avatar.to_s, :class => "img-rounded img-responsive") %><br/>
     <h6><%= @user.nickname %></h6>
     <%= @user.email %><br/>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+      Tried and accepted:<br>
+      Tried but in vain:<br>
+      AC Ratio:
+      </div>
+      <div class="col-md-6">
+        <%= @user.ac_count %><br>
+        <%= @user.in_vain_count %><br>
+        <%= ac_ratio_by_user(@user) %>
+      </div>
+    </div>
+    <br>
     Signed up at: <%= @user.created_at.to_s(:clean) %><br>
     Last sign in: <%= @user.last_sign_in_at.to_s(:clean) %><br>
-    
-    Tried and accepted: <%= @user.ac_count %><br>
-    Tried but in vain: <%= @user.in_vain_count %><br>
-    <!--
-    Accepted: <%= @user.prob_by_res('AC').count%> <br>
-    Wrong Answer: <%= @user.prob_by_res('WA').count %> <br>
-    Time Limit Exceed: <%= @user.prob_by_res('TLE').count %> <br>
-    Segmentation Fault: <%= @user.prob_by_res('MLE').count %> <br>
-    Runtime Error (exited with nonzero status): <%= @user.prob_by_res('RE').count %> <br>
-    Runtime Error (exited with signal): <%= @user.prob_by_res('SIG').count %> <br>
-    Compile Error: <%= @user.prob_by_res('CE').count %><br>
-    -->
+    <br>
+    <%= link_to('Edit account', edit_registration_path(:user), :class => 'btn btn-info btn-xs') %>
   </div>
   
   <div class="col-md-7">
-    <table class="table">
+    <table class="table table-condensed">
       <thead>
         <tr>
           <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
         </tr>
       </thead>
-              
       <tbody>
         <% @problems.each_with_index do |prob, idx| %>
           <% if idx%10 == 0 %>

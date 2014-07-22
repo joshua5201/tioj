@@ -43,7 +43,6 @@ MathJax.Hub.Config({
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse-01">
         <ul class="nav navbar-nav navbar-left">           
-          <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Bulletin", articles_path %></li>
           <li><%= link_to "Problems", problems_path %></li>
           <li><%= link_to "Submissions", submissions_path %></li>
@@ -52,7 +51,8 @@ MathJax.Hub.Config({
           <li><%= link_to "About", about_url %></li>
           <li><%= link_to "Rank", users_path %></li>
           <% if current_user %>
-            <li><%= link_to('Edit account', edit_registration_path(:user)) %></li>
+            <!--<li><%= link_to('Edit account', edit_registration_path(:user)) %></li>-->
+            <li><%= link_to(current_user.username, user_path(current_user)) %></li>
             <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
             <% if current_user.admin? %>
               <li><%= link_to 'Admin', admin_root_path, :target => "_blank" %></li>

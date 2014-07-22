@@ -4,7 +4,11 @@ class UsersController < ApplicationController
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(25)
   end
   def show
-    @user = User.friendly.find(params[:id])
-    @problems = @problems = Problem.all.order("id ASC")
+    begin
+      @user = User.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      redirect_to :back, :alert => "Username '#{params[:id]}' not found."
+    end
+    @problems = Problem.all.order("id ASC")
   end
 end

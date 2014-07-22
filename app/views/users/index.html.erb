@@ -1,7 +1,14 @@
 <h4 class = "page-header">Users</h4>
 
-<%= paginate(@users) %>
+<div class="form-inline">
+  <div class="form-group">
+    <label for="quick_user_id">Find User</label>
+    <input id="quick_user_id" type="text" class="form-control input-sm flat" placeholder="Enter Username"/>
+  </div>
+  <button type="submit" id="find_user" class="btn btn-inverse btn-xs">Search</button>
+</div>
 
+<%= paginate(@users) %>
 <table class ="table table-hover table-striped">
   <thead>
     <tr>
