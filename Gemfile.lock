@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: 9634ea6e67851d4a9a4d0b89597a6a9d3fc4d1f4
+  specs:
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
+
+GIT
   remote: git://github.com/gregbell/active_admin.git
   revision: 4f445b51c22b12af2cdde57fe2ce9835c32ef88e
   specs:
@@ -243,6 +251,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   acts-as-taggable-on
+  annotate!
   carrierwave
   coffee-rails (~> 4.0.0)
   devise (~> 3.2.4)
