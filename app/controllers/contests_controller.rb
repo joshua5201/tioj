@@ -10,7 +10,7 @@ class ContestsController < ApplicationController
     end
     
     c_submissions = nil
-    if @contest.contest_type == 1
+    if @contest.contest_type == 1 and Time.now >= @contest.start_time and Time.now <= @contest.end_time
       authenticate_user!
       if not current_user.admin?
         c_submissions = @contest.submissions.where("user_id = ?", current_user.id)
@@ -80,6 +80,9 @@ class ContestsController < ApplicationController
       @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
       @color << 0
     end
+    
+    set_page_title ("Dashboard - " + @contest.title)
+    
   end
   
   def index
