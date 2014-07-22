@@ -82,11 +82,11 @@ class ContestsController < ApplicationController
     end
     
     set_page_title ("Dashboard - " + @contest.title)
-    
   end
   
   def index
     @contests = Contest.all.order("id DESC").page(params[:page])
+    set_page_title "Contests"
   end
 
   def show
