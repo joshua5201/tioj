@@ -20,24 +20,43 @@ class User < ActiveRecord::Base
     :uniqueness => {
     :case_sensitive => false
   }
-    validates_uniqueness_of :nickname
-
-
-    def uniq_submits_by_res(res="AC")
-      submits = self.submissions.select do |s|
-        s.result == res && s.contest_id == nil
-      end
-      submits.uniq do |s|
-        s.problem
-      end
+  validates_uniqueness_of :nickname
+  
+  
+  def ac_count
+    self.uniq_submits_by_res("AC").count
+  end
+  
+  def ac_ratio
+    all = self.submissions.select do |s|
+      s.contest_id == nil
     end
-    def prob_by_res(res="AC")
-      submits = self.uniq_submits_by_res(res)
-      submits.collect do |s|
-        s.problem
-      end
+    ac = all.select do |s|
+      s.result == "AC"
     end
-
-    extend FriendlyId
-    friendly_id :username
+    all = all.count
+    ac = ac.count
+    ratio = (100.0 * ac / all)
+    if ratio.nan?
+      ratio = 0.0
+    end
+  end
+  
+  def uniq_submits_by_res(res="AC")
+    submits = self.submissions.select do |s|
+      s.result == res && s.contest_id == nil
+    end
+    submits.uniq do |s|
+      s.problem
+    end
+  end
+  
+  def prob_by_res(res="AC")
+    submits = self.uniq_submits_by_res(res)
+    submits.collect do |s|
+      s.problem
+    end
+  end
+  extend FriendlyId
+  friendly_id :username
 end

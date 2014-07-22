@@ -8,15 +8,29 @@ class ContestsController < ApplicationController
         return
       end
     end
+    
+    c_submissions = nil
     if @contest.contest_type == 1
       authenticate_user!
       if not current_user.admin?
-        redirect_to action:'index'
-        return
+        c_submissions = @contest.submissions.where("user_id = ?", current_user.id)
+        flash[:notice] = "You can only see your own score."
+      else
+        c_submissions = @contest.submissions
       end
+    else
+      c_submissions = @contest.submissions
     end
+    
+    #if @contest.contest_type == 1
+    #  authenticate_user!
+    #  if not current_user.admin?
+    #    redirect_to action:'index'
+    #    return
+    #  end
+    #end
     @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
-    c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
+    #c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|
@@ -82,26 +96,26 @@ class ContestsController < ApplicationController
   end
 
   def new
-		authenticate_user!
-		if current_user.admin == false 
-			redirect_to action:'index'
-		end
-		@contest = Contest.new
-		3.times { @contest.contest_problem_joints.build }
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'
+    end
+    @contest = Contest.new
+    3.times { @contest.contest_problem_joints.build }
   end
 
   def edit
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
   end
 
   def create
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
     @contest = Contest.new(contest_params)
     respond_to do |format|
       if @contest.save

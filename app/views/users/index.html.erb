@@ -1,29 +1,31 @@
- <h4 class = "page-header">Users</h4>
- 
- <%= paginate(@users) %>
- 
- <table class ="table table-hover table-striped">
-	<thead>
-		<tr>
-			<th>ID</th>
-                        <th></th>
-			<th>Username</th>
-                        <th>Nickname</th>
-			<th>Email</th>
-			<th>Accepted</th>
-                </tr>
-	</thead>
-	
-	<tbody>
-		<% @users.each do |user| %>
-		<tr>
-                        <td><%= link_to user.id, user_path(user) %></td>
-			<td><%= link_to image_tag(user.avatar.mini_thumb.to_s, :class => "img-rounded"), {:controller => 'users', :action => :show, :id => user.id} %></td>
-                        <td><%= link_to user.username, user_path(user) %></td>
-                        <td><%= user.nickname %></td>
-			<td><%= user.email %></td>
-			<td><%= user_ac_count(user) %></td>
-		</tr>
-		<%end%>
-	</tbody>
+<h4 class = "page-header">Users</h4>
+
+<%= paginate(@users) %>
+
+<table class ="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th></th>
+      <th>Username</th>
+      <th>Nickname</th>
+      <th>Email</th>
+      <th>Accepted</th>
+      <th>AC Ratio</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @users.each_with_index do |user, idx| %>
+      <tr>
+        <td><% offset = [params[:page].to_i, 0].max %><%= offset * 25 + idx + 1 %></td>
+        <td><%= link_to image_tag(user.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(user) %></td>
+        <td><%= link_to user.username, user_path(user) %></td>
+        <td><%= user.nickname %></td>
+        <td><%= user.email %></td>
+        <td><%= user_ac_count(user) %></td>
+        <td><%= ac_ratio_by_user(user) %></td>
+      </tr>
+    <%end%>
+  </tbody>
 </table>

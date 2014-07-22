@@ -66,9 +66,10 @@
 </div>
 
 <p>
-  <% if @contest.contest_type != 1 or (user_signed_in? and current_user.admin?) %>
+  <!--<% if @contest.contest_type != 1 or (user_signed_in? and current_user.admin?) %>
     <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-warning'} %>
-  <% end %>
+  <% end %>-->
+  <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-warning'} %>
   <%= link_to 'Submissions', contest_submissions_path(@contest), :class => 'btn btn-info btn-xs' %>
   <% if user_signed_in? and current_user.admin? %>
     <%= link_to 'Edit', edit_contest_path(@contest), :class => 'btn btn-info btn-xs' %>

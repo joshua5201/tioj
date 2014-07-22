@@ -33,7 +33,7 @@ MathJax.Hub.Config({
   <nav class="navbar navbar-inverse navbar-embossed" role="navigation" style="background-color:#003365">    
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to image_tag("banner_" + (Time.now.min % 3).to_s + ".jpg"), root_path %>
+        <%= link_to image_tag("banner_0.jpg"), root_path %>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -50,7 +50,7 @@ MathJax.Hub.Config({
           <li><%= link_to "Contests", contests_path %></li>
           <li><%= link_to "Discuss", posts_path %></li>     
           <li><%= link_to "About", about_url %></li>
-          <li><%= link_to "Users", users_path %></li>
+          <li><%= link_to "Rank", users_path %></li>
           <% if current_user %>
             <li><%= link_to('Edit account', edit_registration_path(:user)) %></li>
             <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
@@ -70,17 +70,26 @@ MathJax.Hub.Config({
 <div class="container-fluid" id="page-content">
   <!--alert and notice-->
   <% if notice %>
-    <div class="alert alert-success alert-dismissable" role="alert">
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
       <strong>Oh Geez! </strong> <%= notice %>
-  </div>
-<% end %>
-<% if alert %>
-  <div class="alert alert-danger alert-dismissable" role="alert">
-    <strong>Oh No! </strong> <%= alert %>
-</div>
+    </div>
   <% end %>
-
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <strong>Oh No! </strong> <%= alert %>
+    </div>
+  <% end %>
   <%= yield %>
+  
 </div>
+
 </body>
 </html>
