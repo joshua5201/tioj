@@ -5,17 +5,20 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = @posts.order("updated_at DESC").page(params[:page])
+    set_page_title "Discuss"
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
     @post = @posts.find(params[:id])
+    set_page_title "Discuss - " + @post.id.to_s
   end
 
   # GET /posts/new
   def new
     @post = @posts.build
+    set_page_title "New post"
   end
 
   # GET /posts/1/edit
@@ -25,6 +28,7 @@ class PostsController < ApplicationController
       redirect_to action:'index'	
     end
     @post = @posts.find(params[:id])
+    set_page_title "Edit post - " + @post.id.to_s
   end
 
   # POST /posts

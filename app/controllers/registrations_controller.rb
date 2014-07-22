@@ -2,13 +2,13 @@ class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
   
   def new
-    super
     set_page_title "Register"
+    super
   end
         
   def edit
-    super
     set_page_title "Edit Account"
+    super
   end
     
   def create
