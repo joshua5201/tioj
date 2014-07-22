@@ -58,12 +58,12 @@ class User < ActiveRecord::Base
   
   def in_vain_count
     submits = self.submissions.select do |s|
-      s.result != "AC" && s.contest_id == nil
+      s.contest_id == nil
     end
     submits.uniq do |s|
       s.problem
     end
-    submits.count
+    submits = submits.count - self.ac_count
   end
   
   def ac_ratio
