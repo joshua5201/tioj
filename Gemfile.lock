@@ -30,6 +30,12 @@ GIT
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
 
+GIT
+  remote: git://github.com/techbang/seo_helper.git
+  revision: 5a479c8a3213128a4c95c3068b7075a70f635969
+  specs:
+    seo_helper (1.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -273,5 +279,6 @@ DEPENDENCIES
   redcarpet
   sass-rails (~> 4.0.0)
   sdoc
+  seo_helper (~> 1.0)!
   therubyracer
   uglifier (>= 1.3.0)
