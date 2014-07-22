@@ -2,8 +2,8 @@ TIOJ INFOR Online Judge
 ==
 
 ###Remember to change secret token in production!!!
-###NOTE: This project is under heavy development and not usable!!!
-
+## Testing
+[TIOJ INFOR Online Judge](http://tioj.ck.tp.edu.tw)
 ## Resources
 
 [Ruby on Rails Guides](http://guides.rubyonrails.org/)
@@ -23,19 +23,3 @@ $ bundle exec rake db:create
 $ bundle exec rake db:schema:load
 $ rails s
 ```
-
-## Seed data
-```bash
-$ bundle exec rake db:seed
-```
-
-## Dump SQL
-```bash
-$ mysqldump tioj_dev -u root -p --opt > tioj_dev00.sql
-```
-
-## Restore SQL
-```bash
-$ mysql -u root -p tioj_dev < tioj_dev.sql
-```
-
