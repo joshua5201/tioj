@@ -24,7 +24,23 @@ class User < ActiveRecord::Base
   
   
   def ac_count
-    self.uniq_submits_by_res("AC").count
+    submits = self.submissions.select do |s|
+      s.result == "AC" && s.contest_id == nil
+    end
+    submits.uniq do |s|
+      s.problem
+    end
+    submits.count
+  end
+  
+  def in_vain_count
+    submits = self.submissions.select do |s|
+      s.result != "AC" && s.contest_id == nil
+    end
+    submits.uniq do |s|
+      s.problem
+    end
+    submits.count
   end
   
   def ac_ratio
