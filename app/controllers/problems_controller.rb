@@ -6,6 +6,7 @@ class ProblemsController < ApplicationController
     #  .where("problem_id = ? AND result = ?", @problem.id, "AC").group("user_id")
     #@submissions = Submission.find(submissions_id.map{|a| a.id}).sort_by{|a| a.total_time}
     @submissions = @problem.submissions.where("contest_id is NULL AND result = ?", "AC").order("total_time ASC").order("total_memory ASC")
+    set_page_title "Ranklist - " + @problem.id.to_s + " - " + @problem.name
   end
   
   def index
@@ -15,13 +16,12 @@ class ProblemsController < ApplicationController
     end
     if not params[:search_name].blank?
       @problems = Problem.where("name LIKE ?", "%%%s%%"%params[:search_name]).page(params[:page]).per(100)
-      return
-    end
-    if not params[:tag].blank?
+    elsif not params[:tag].blank?
       @problems = Problem.tagged_with(params[:tag]).order("id ASC").page(params[:page]).per(100)
     else
       @problems = Problem.all.order("id ASC").page(params[:page]).per(100)
     end
+    set_page_title "Problems"
   end
 
   def show
@@ -42,6 +42,7 @@ class ProblemsController < ApplicationController
       return
     end
     @contest_id = params[:contest_id]
+    set_page_title @problem.id.to_s + " - " + @problem.name
   end
 
   def new
@@ -50,6 +51,7 @@ class ProblemsController < ApplicationController
 			redirect_to action:'index'
 		end
 		@problem = Problem.new
+                set_page_title "New problem"
   end
 
   def edit
@@ -57,6 +59,7 @@ class ProblemsController < ApplicationController
 	if current_user.admin == false 
 		redirect_to action:'index'	
 	end
+        set_page_title "Edit " + @problem.id.to_s + " - " + @problem.name
   end
 
   def create

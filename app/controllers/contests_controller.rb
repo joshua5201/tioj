@@ -114,7 +114,7 @@ class ContestsController < ApplicationController
     if current_user.admin == false 
       redirect_to action:'index'	
     end
-    set_page_title ("Edit " + @contest.title)
+    set_page_title ("Edit contest - " + @contest.title)
   end
 
   def create
