@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     :case_sensitive => false
   }
   validates_uniqueness_of :nickname
-  
+  validates_length_of :nickname, maximum: 12, minimum: 1
   
   def ac_count
     submits = self.submissions.select do |s|
