@@ -18,13 +18,11 @@
     <%= f.text_field :motto, :class => "form-control flat" %>
   </div>
   
-  <% if user_signed_in? and current_user.admin? %>
-    <div class="form-group">
+  <div class="form-group">
       <%= f.label :avatar %>
       <%= f.file_field :avatar, :class => "form-control flat" %>
       <%= f.hidden_field :avatar_cache %>
-    </div>
-  <% end %>
+  </div>
   
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_username %></div>
