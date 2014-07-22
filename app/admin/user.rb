@@ -1,6 +1,11 @@
 ActiveAdmin.register User do
   permit_params :email, :nickname, :admin, :avatar_url
-  
+
+  controller do
+    def find_resource
+      scoped_collection.where(slug: params[:id]).first!
+    end
+  end
   preserve_default_filters!
   filter :id
   # See permitted parameters documentation:
@@ -15,5 +20,5 @@ ActiveAdmin.register User do
   #  permitted << :other if resource.something?
   #  permitted
   # end
-  
+
 end
