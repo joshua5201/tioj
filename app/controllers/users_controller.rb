@@ -11,6 +11,6 @@ class UsersController < ApplicationController
       redirect_to :back, :alert => "Username '#{params[:id]}' not found."
     end
     @problems = Problem.all.order("id ASC")
-    set_page_title @user.username
+    #set_page_title @user.username
   end
 end
