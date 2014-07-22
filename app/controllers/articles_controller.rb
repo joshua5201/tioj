@@ -6,23 +6,14 @@ class ArticlesController < ApplicationController
     @articles += Article.where("category = 0 AND pinned != true AND era = ?", get_era).order("id DESC")
     @courses = Article.where("category = 1 AND pinned = true AND era = ?", get_era).order("id DESC")
     @courses += Article.where("category = 1 AND pinned != true AND era = ?", get_era).order("id DESC")
-    @era = params[:era]
-    if @era.blank?
-      t = Time.now
-      if t.month < 7 
-        @era = t.year - 1
-      else
-        @era = t.year
-      end
-    end
-    @era = @era.to_s
+    @era = get_era.to_s
     set_page_title "Bulletin - " + @era
   end
   
   def create
     authenticate_user!
     if current_user.admin == false 
-      redirect_to action:'index', notice: 'Insufficient User Permissions.'    
+      redirect_to action:'index', alert: 'Insufficient User Permissions.'
     end
     @article = Article.new(article_params)
     @article.author_id = current_user.id
@@ -39,16 +30,19 @@ class ArticlesController < ApplicationController
   def new
     authenticate_user!
     if current_user.admin == false 
-      redirect_to action:'index', notice: 'Insufficient User Permissions.'    
+      redirect_to action:'index', alert: 'Insufficient User Permissions.'   
+      return
     end
     @article = Article.new
+    set_page_title "New article"
   end
   
   def edit
     authenticate_user!
     if current_user.admin == false 
-      redirect_to action:'index', notice: 'Insufficient User Permissions.'    
+      redirect_to action:'index', alert: 'Insufficient User Permissions.'    
     end
+    set_page_title "Edit - " + @article.title
   end
   
   def show
@@ -58,7 +52,7 @@ class ArticlesController < ApplicationController
   def update
     authenticate_user!
     if current_user.admin == false 
-      redirect_to action:'index', notice: 'Insufficient User Permissions.'    
+      redirect_to action:'index', alert: 'Insufficient User Permissions.'    
     end
     @article.author_id = current_user.id
     respond_to do |format|
@@ -73,7 +67,7 @@ class ArticlesController < ApplicationController
   def destroy
     authenticate_user!
     if current_user.admin == false 
-      redirect_to action:'index', notice: 'Insufficient User Permissions.'    
+      redirect_to action:'index', alert: 'Insufficient User Permissions.'    
     end
     @article.destroy
     redirect_to articles_path
@@ -82,7 +76,16 @@ class ArticlesController < ApplicationController
 private
 
   def get_era
-     params[:era] ? params[:era] : 2014
+    if params[:era].blank?
+      t = Time.now
+      if t.month < 7 
+        return t.year - 1
+      else
+        return t.year
+      end
+    else
+      return params[:era].to_i
+    end
   end
   
   def set_article
