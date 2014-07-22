@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(25)
   end
   def show
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     @problems = @problems = Problem.all.order("id ASC")
   end
 end

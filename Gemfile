@@ -73,3 +73,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'mechanize'
+
+gem 'friendly_id', github: 'norman/friendly_id'
