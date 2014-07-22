@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722105624) do
+ActiveRecord::Schema.define(version: 20140722130912) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(version: 20140722105624) do
     t.string   "avatar"
     t.boolean  "admin",                  default: false
     t.string   "username"
+    t.string   "motto"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
