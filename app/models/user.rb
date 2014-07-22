@@ -47,7 +47,23 @@ class User < ActiveRecord::Base
   
   
   def ac_count
-    self.uniq_submits_by_res("AC").count
+    submits = self.submissions.select do |s|
+      s.result == "AC" && s.contest_id == nil
+    end
+    submits = submits.uniq do |s|
+      s.problem_id
+    end
+    submits.count
+  end
+  
+  def in_vain_count
+    submits = self.submissions.select do |s|
+      s.contest_id == nil
+    end
+    submits = submits.uniq do |s|
+      s.problem_id
+    end
+    submits = submits.count - self.ac_count
   end
   
   def ac_ratio
@@ -69,15 +85,15 @@ class User < ActiveRecord::Base
     submits = self.submissions.select do |s|
       s.result == res && s.contest_id == nil
     end
-    submits.uniq do |s|
-      s.problem
+    submits = submits.uniq do |s|
+      s.problem_id
     end
   end
   
   def prob_by_res(res="AC")
     submits = self.uniq_submits_by_res(res)
-    submits.collect do |s|
-      s.problem
+    submits = submits.collect do |s|
+      s.problem_id
     end
   end
   extend FriendlyId
