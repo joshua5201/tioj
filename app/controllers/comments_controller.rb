@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_admin!, only: [:edit, :update, :destroy]
+
   before_action :find_post
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
@@ -20,10 +23,6 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
   end
 
   # POST /comments
@@ -45,10 +44,6 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to posts_path, notice: 'Comment was successfully updated.' }
@@ -63,10 +58,6 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to posts_path }
@@ -75,17 +66,24 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    def find_post
-      @post = Post.find(params[:post_id])
-    end
+  def find_post
+    @post = Post.find(params[:post_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:title, :content, :user_id, :post_id)
+  def authenticate_admin!
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
     end
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:title, :content, :user_id, :post_id)
+  end
 end

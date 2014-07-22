@@ -1,4 +1,5 @@
 class ContestsController < ApplicationController
+  before_action :authenticate_admin!, except: [:dashboard, :index, :show]
   before_action :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
 
   def dashboard
@@ -100,28 +101,16 @@ class ContestsController < ApplicationController
   end
 
   def new
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'
-    end
     @contest = Contest.new
     3.times { @contest.contest_problem_joints.build }
     set_page_title "New contest"
   end
 
   def edit
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     set_page_title ("Edit contest - " + @contest.title)
   end
 
   def create
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     @contest = Contest.new(contest_params)
     respond_to do |format|
       if @contest.save
@@ -135,10 +124,6 @@ class ContestsController < ApplicationController
   end
 
   def update
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index', notice: 'Insufficient User Permissions.'	
-    end
     respond_to do |format|
       if @contest.update(contest_params)
         format.html { redirect_to @contest, notice: 'Contest was successfully updated.' }
@@ -151,10 +136,6 @@ class ContestsController < ApplicationController
   end
 
   def destroy
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     @contest.destroy
     respond_to do |format|
       format.html { redirect_to contests_url }
@@ -165,6 +146,13 @@ class ContestsController < ApplicationController
   private
   def set_contest
     @contest = Contest.find(params[:id])
+  end
+  
+  def authenticate_admin!
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
