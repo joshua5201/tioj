@@ -80,6 +80,9 @@ class ContestsController < ApplicationController
       @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
       @color << 0
     end
+    
+    set_page_title ("Dashboard - " + @contest.title)
+    
   end
   
   def index
