@@ -14,7 +14,7 @@
   <div class="form-inline">
     <div class="form-group">
       <label for="quick_prob_id">Quick Submit</label>
-      <input id="quick_prob_id" type="number" class="form-control input-sm flat" min="1" placeholder="Enter Problem ID"/>
+      <input style="width:150px" id="quick_prob_id" type="number" class="form-control input-sm flat" min="1" max="<%= Problem.count %>" placeholder="Enter Problem ID"/>
     </div>
     <button type="submit" id="quick_submit" class="btn btn-success btn-xs">Submit</button>
   </div>
@@ -23,7 +23,7 @@
 <form class="form-inline" accept-charset="UTF-8" method="get">
   <label for="filter_user">Quick Filter</label>
   <div class="form-group">
-    <input id="filter_user" name="filter_user" class="form-control input-sm flat" type="text" placeholder="Enter Submitter">
+    <input id="filter_username" name="filter_username" class="form-control input-sm flat" type="text" placeholder="Enter Username">
   </div>
   <div class="form-group">
     <input id="filter_problem" name="filter_problem" class="form-control input-sm flat" type="number" min="1" placeholder="Enter Problem ID">
