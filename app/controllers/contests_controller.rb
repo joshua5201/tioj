@@ -96,6 +96,7 @@ class ContestsController < ApplicationController
         return
       end
     end
+    set_page_title @contest.title
   end
 
   def new
@@ -105,6 +106,7 @@ class ContestsController < ApplicationController
     end
     @contest = Contest.new
     3.times { @contest.contest_problem_joints.build }
+    set_page_title "New contest"
   end
 
   def edit
@@ -112,6 +114,7 @@ class ContestsController < ApplicationController
     if current_user.admin == false 
       redirect_to action:'index'	
     end
+    set_page_title "Edit contest"
   end
 
   def create
