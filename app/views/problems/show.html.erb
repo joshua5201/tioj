@@ -48,7 +48,8 @@
               <%= link_to image_tag(tcoder.avatar.thumb.to_s, :class => "img-thumbnail img-responsive"), user_path(tcoder) %>
             </div>
             <div class="col-md-7">
-              <%= link_to tcoder.nickname, user_path(tcoder) %>
+              <%= link_to tcoder.nickname, user_path(tcoder) %><br>
+              <%= tcoder.motto %>
             </div>
           </div>
         <% end %>
