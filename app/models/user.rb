@@ -79,6 +79,7 @@ class User < ActiveRecord::Base
     if ratio.nan?
       ratio = 0.0
     end
+    ratio
   end
   
   def uniq_submits_by_res(res="AC")
