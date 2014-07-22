@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       @user = User.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
       redirect_to users_path, :alert => "Username '#{params[:id]}' not found."
-      return
+      #return
     end
     @problems = Problem.all.order("id ASC")
     set_page_title @user.username
