@@ -1,4 +1,6 @@
 class SubmissionsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_admin!, except: [:index, :show, :create, :new]
   before_action :set_submissions
   before_action :set_submission, only: [:rejudge, :show, :edit, :update, :destroy]
   
@@ -8,11 +10,6 @@ class SubmissionsController < ApplicationController
   end
   
   def rejudge
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'
-      return
-    end
     @submission.update(:result => "queued", :score => 0, :_result => "", :total_time => nil, :total_memory => nil)
     redirect_to :back
   end
@@ -28,11 +25,9 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    authenticate_user!
     if not params[:problem_id]
       redirect_to action:'index'
     end
-    authenticate_user!
     if current_user.admin == false 
       if @problem.visible_state == 2
         redirect_to action:'index'
@@ -56,15 +51,10 @@ class SubmissionsController < ApplicationController
   end
 
   def edit
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     set_page_title "Edit submission - " + @submission.id.to_s
   end
 
   def create
-    authenticate_user!
     last_submission = Submission.where("user_id = ?", current_user.id).order("id Desc").first
     if not last_submission.blank? and (Time.now - last_submission.created_at) < 15
       redirect_to submissions_path, alert: 'CD time 15 seconds.'
@@ -92,11 +82,6 @@ class SubmissionsController < ApplicationController
   end
 
   def update
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'
-      return
-    end
     respond_to do |format|
       if @submission.update(submission_params)
         format.html { redirect_to @submission, notice: 'Submission was successfully updated.' }
@@ -109,10 +94,6 @@ class SubmissionsController < ApplicationController
   end
 
   def destroy
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     @submission.destroy
     respond_to do |format|
       format.html { redirect_to submissions_url }
@@ -158,6 +139,12 @@ class SubmissionsController < ApplicationController
   
   def set_submission
     @submission = Submission.find(params[:id])
+  end
+  def authenticate_admin!
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

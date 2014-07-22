@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_admin!, only: [:edit, :update, :destroy]
   before_action :check_contest, :set_posts
 
   # GET /posts
@@ -23,10 +25,6 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     @post = @posts.find(params[:id])
     set_page_title "Edit post - " + @post.id.to_s
   end
@@ -50,10 +48,6 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     @post = @posts.find(params[:id])
     respond_to do |format|
       if @post.update(post_params)
@@ -69,10 +63,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
     @post = @posts.find(params[:id])
     @post.destroy
     respond_to do |format|
@@ -89,6 +79,12 @@ class PostsController < ApplicationController
           redirect_to root_path, :alert => "No discussion during contest."
         end
       end
+    end
+  end
+  def authenticate_admin!
+    authenticate_user!
+    if current_user.admin == false 
+      redirect_to action:'index'	
     end
   end
   
