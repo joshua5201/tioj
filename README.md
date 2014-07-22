@@ -3,8 +3,7 @@ TIOJ INFOR Online Judge
 
 ###Remember to change secret token in production!!!
 ## Testing
-[TIOJ INFOR Online Judge](http://tioj.infor.org)
-
+[TIOJ INFOR Online Judge](http://tioj.ck.tp.edu.tw)
 ## Resources
 
 [Ruby on Rails Guides](http://guides.rubyonrails.org/)
