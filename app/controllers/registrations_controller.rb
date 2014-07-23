@@ -1,5 +1,4 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :configure_permitted_parameters
   
   def new
     set_page_title "Register"
@@ -20,18 +19,5 @@ class RegistrationsController < Devise::RegistrationsController
   def update
     super
   end
-
-  protected
- 
-  # my custom fields are :name, :heard_how
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(
-        :email, :nickname, :username, :password, :password_confirmation)
-    end
-    devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:avatar, :avatar_cache, :motto,
-        :email, :nickname, :password, :password_confirmation, :current_password)
-    end
-  end
+  
 end 
