@@ -22,6 +22,7 @@
 #  motto                  :string(255)
 #
 
+require 'file_size_validator'
 class User < ActiveRecord::Base
   has_many :submissions, :dependent => :destroy
   # Include default devise modules. Others available are:
@@ -30,6 +31,12 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :avatar, AvatarUploader
+  validates :avatar,
+    :presence => true,
+    :file_size => {
+      :maximum => 5.megabytes.to_i
+    }
+  
   attr_accessor :login
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
