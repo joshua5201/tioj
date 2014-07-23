@@ -66,13 +66,13 @@
     <div class="col-md-6">
       <div class="form-group">
         <%= f.label :example_input, "Sample Input" %>
-        <%= f.text_area :example_input, :class => 'form-control flat', :rows => '7' %>
+        <%= f.text_area :example_input, :class => 'form-control flat', :rows => '7', :id => "code-input" %>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <%= f.label :example_output, "Sample Output" %>
-        <%= f.text_area :example_output, :class => 'form-control flat', :rows => '7' %>
+        <%= f.text_area :example_output, :class => 'form-control flat', :rows => '7', :id => "code-input" %>
       </div>
     </div>
   </div>
@@ -94,13 +94,13 @@
   
   <% if @problem.problem_type == 1 %>
     <div class="form-group">
-      <%= f.label :sjcode, raw('Special Judge Code ( <code>argv[1]: testee output, argv[2]: testdata input, argv[3]: testdata output</code> )') %>
-      <%= f.text_area :sjcode, :class => 'form-control flat', :rows => '7' %>
+      <%= f.label :sjcode, raw('Special Judge Code ( <code>argv[1]: testee output, argv[2]: testdata input, argv[3]: testdata output, output 0 for AC otherwise WA</code> )') %>
+      <%= f.text_area :sjcode, :class => 'form-control flat', :rows => '7', :id => "code-input" %>
     </div>
   <% elsif @problem.problem_type == 2 %>
     <div class="form-group">
       <%= f.label :interlib, raw('Interactive Library ( <code>#include "lib' + @problem.id.to_s.rjust(4, '0') + '.h"</code> )') %>
-      <%= f.text_area :interlib, :class => 'form-control flat', :rows => '7' %>
+      <%= f.text_area :interlib, :class => 'form-control flat', :rows => '7', :id => "code-input" %>
     </div>
   <% end %>
   
