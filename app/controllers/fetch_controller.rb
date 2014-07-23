@@ -136,7 +136,7 @@ private
       redirect_to root_path
       return
     end
-    if params[:key] != '31415926'
+    if params[:key] != Tioj::Application.config.fetch_key
       redirect_to root_path
       return
     end
