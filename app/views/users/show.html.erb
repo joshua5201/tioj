@@ -4,20 +4,20 @@
     <%= image_tag(@user.avatar.square.to_s, :class => "img-rounded img-responsive") %><br/>
     <h6><%= @user.nickname %></h6>
 -->
-  <div class="col-md-3">
-    <%= image_tag(@user.avatar.square.to_s, :class => "img-rounded img-responsive", :size => "200x200") %><br/>
+  <div class="col-md-4">
+    <%= image_tag(@user.avatar.square.to_s, :class => "img-rounded img-responsive") %><br/>
     <h5><%= @user.nickname %></h5>
     <h6><%= @user.username %></h6>
     <%= @user.email %><br/>
     <br>
-    <blockquote><dfn><%= @user.motto %></dfn></blockquote>
+    <% if not @user.motto.blank? %><blockquote><dfn><%= @user.motto %></dfn></blockquote><% end %>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-7">
       Tried and accepted:<br>
       Tried but in vain:<br>
       AC Ratio:
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <%= @user.ac_count %><br>
         <%= @user.in_vain_count %><br>
         <%= ac_ratio_by_user(@user) %>
@@ -30,7 +30,7 @@
     <%= link_to('Edit Account', edit_registration_path(:user), :class => 'btn btn-info btn-xs') %>
   </div>
   
-  <div class="col-md-9">
+  <div class="col-md-8">
     <table class="table table-condensed">
       <thead>
         <tr>
