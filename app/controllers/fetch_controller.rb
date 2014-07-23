@@ -1,5 +1,5 @@
 class FetchController < ApplicationController
-  before_action :authenticate
+  before_filter :authenticate
   layout false
   
   def interlib
@@ -132,12 +132,8 @@ class FetchController < ApplicationController
   
 private
   def authenticate
-    if not params[:key]
-      redirect_to root_path
-      return
-    end
-    if params[:key] != Tioj::Application.config.fetch_key
-      redirect_to root_path
+    if (not params[:key]) or params[:key] != Tioj::Application.config.fetch_key
+      render :nothing => true
       return
     end
   end
