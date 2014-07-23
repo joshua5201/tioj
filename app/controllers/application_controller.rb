@@ -60,7 +60,7 @@ protected
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:email, :nickname, :username, :password, :password_confirmation, :remember_me)
     end
-    defise_parameter_sanitizer.for(:sign_in) do |u|
+    devise_parameter_sanitizer.for(:sign_in) do |u|
       u.permit(:login, :username, :email, :password, :remember_me)
     end
     devise_parameter_sanitizer.for(:account_update) do |u|
