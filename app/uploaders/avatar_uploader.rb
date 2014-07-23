@@ -20,13 +20,15 @@ class AvatarUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
   
-  process :resize_to_fit => [500,500]
+  version :square do
+    process :resize_to_fit => [500,500]
+  end
   
-  version :thumb do
+  version :thumb, :from_version => :square do
     process :resize_to_fill => [100,100]
   end
   
-  version :mini_thumb do
+  version :mini_thumb, :from_version => :thumb do
     process :resize_to_fill => [30,30]
   end
   
