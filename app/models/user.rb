@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
   validates :avatar,
-    :presence => true,
+    #:presence => true,
     :file_size => {
       :maximum => 5.megabytes.to_i
     }
