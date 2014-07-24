@@ -108,7 +108,7 @@
       <strong>Code Length:</strong>
     </div>
     <div class="col-md-2">
-      <%= number_to_human_size(@submission.code.size) %>
+      <%= number_to_human_size(@submission.code.to_s.size) %>
     </div>
   </div>
 </div>
