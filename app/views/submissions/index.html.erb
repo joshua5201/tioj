@@ -87,8 +87,8 @@ $(".selectpicker").selectpicker({style: "form-control input-sm flat"});
           <% end %>
         </td>
         <td><%= link_to submission.user.nickname, user_path(submission.user) %></td>
-        <td><%= submission.total_time %></td>
-        <td><%= submission.total_memory %></td>
+        <td><%= submission.total_time.blank? ? "-" : submission.total_time %></td>
+        <td><%= submission.total_memory.blank? ? "-" : submission.total_memory %></td>
         <% case submission.result %>
           <% when "WA" %>
             <td class="text-danger">WA</td>
