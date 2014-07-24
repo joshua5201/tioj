@@ -106,7 +106,7 @@ $(".selectpicker").selectpicker({style: "form-control input-sm flat"});
             <td><%= submission.result %></td>
         <% end %>
         <td><%= submission.compiler %></td>
-        <td><%= number_to_human_size(submission.code.size) %></td>
+        <td><%= number_to_human_size(submission.code.to_s.size) %></td>
         <td><%= submission.score %></td>
         <td><%= submission.created_at.to_s(:clean) %></td>
         <% if user_signed_in? && current_user.admin == true %>
