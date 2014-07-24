@@ -60,10 +60,10 @@
       <% end %>
     </div>
     <div class="col-md-2">
-      <%= @submission.total_time %>
+      <%= @submission.total_time.to_i %>
     </div>
     <div class="col-md-2">
-      <%= @submission.total_memory %>
+      <%= @submission.total_memory.to_i %>
     </div>
     <div class="col-md-3">
       <%= @verdict[@submission.result] %>
@@ -87,8 +87,8 @@
       <% Range.new(0, @submission.problem.testdata.size - 1).each do |i| %>
         <tr>
           <td><%= i %></td>
-          <td><%= @_result[i*3+1] %></td>
-          <td><%= @_result[i*3+2] %></td>
+          <td><%= @_result[i*3+1].to_i %></td>
+          <td><%= @_result[i*3+2].to_i %></td>
           <td><%= @verdict[@_result[i*3]] %></td>
         </tr>
       <% end %>
