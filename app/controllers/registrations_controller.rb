@@ -11,9 +11,9 @@ class RegistrationsController < Devise::RegistrationsController
   end
     
   def create
-    super
     resource.remote_avatar_url = "http://avatar.3sd.me/100"
-    resource.save
+    #resource.save
+    super
   end
 
   def update
