@@ -8,10 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_tree .
- * require twitter/bootstrap
- *= require_self
  *= require bootstrap
  *= require flat-ui
+ *= require_tree .
+ *= require_self
  *= require custom_styles
  */
