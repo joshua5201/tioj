@@ -61,6 +61,26 @@ class SubmissionsController < ApplicationController
       return
     end
     
+    if not params[:problem_id]
+      redirect_to action:'index'
+    end
+    if current_user.admin == false 
+      if @problem.visible_state == 2
+        redirect_to action:'index'
+        return
+      elsif @problem.visible_state == 1
+        if params[:contest_id].blank?
+          redirect_to action:'index'
+          return
+        end
+        contest = Contest.find(params[:contest_id])
+        unless contest.problem_ids.include?(@problem.id) and Time.now >= contest.start_time and Time.now <= contest.end_time
+          redirect_to problem_path(@problem), notice: 'Contest ended, cannot submit.'
+          return
+        end
+      end
+    end
+    
     #@submission = @submissions.build(submission_params)
     @submission = Submission.new(submission_params)
     @submission.user_id = current_user.id
