@@ -88,10 +88,4 @@ private
       ]
     )
   end
-  def authenticate_admin!
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index', alert: 'Insufficient User Permissions.'    
-    end
-  end
 end

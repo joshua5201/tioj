@@ -1,5 +1,5 @@
 class FetchController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate_key
   layout false
   
   def interlib
@@ -131,7 +131,7 @@ class FetchController < ApplicationController
   end
   
 private
-  def authenticate
+  def authenticate_key
     if (not params[:key]) or params[:key] != Tioj::Application.config.fetch_key
       render :nothing => true
       return
