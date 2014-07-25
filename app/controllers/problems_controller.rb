@@ -1,7 +1,9 @@
 class ProblemsController < ApplicationController
   before_filter :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
   before_filter :set_problem, only: [:show, :edit, :update, :destroy, :ranklist]
-
+  before_filter :set_contest, only: [:show]
+  layout :set_contest_layout, only: [:show]
+  
   def ranklist
     @submissions = @problem.submissions.where("contest_id is NULL AND result = ?", "AC").order("total_time ASC").order("total_memory ASC").order("LENGTH(code) ASC")
     set_page_title "Ranklist - " + @problem.id.to_s + " - " + @problem.name
@@ -29,8 +31,7 @@ class ProblemsController < ApplicationController
           redirect_to action:'index'
           return
         end
-        contest = Contest.find(params[:contest_id])
-        unless contest.problem_ids.include?(@problem.id) and Time.now >= contest.start_time and Time.now <= contest.end_time
+        unless @contest.problem_ids.include?(@problem.id) and Time.now >= @contest.start_time and Time.now <= @contest.end_time
           redirect_to action:'index'
           return
         end
@@ -39,7 +40,7 @@ class ProblemsController < ApplicationController
         return
       end
     end
-    @contest_id = params[:contest_id]
+    #@contest_id = params[:contest_id]
     set_page_title @problem.id.to_s + " - " + @problem.name
   end
 
@@ -94,6 +95,9 @@ class ProblemsController < ApplicationController
       @problem = Problem.find(params[:id])
     end
     
+    def set_contest
+      @contest = Contest.find(params[:contest_id]) if not params[:contest_id].blank?
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def problem_params
       params.require(:problem).permit(

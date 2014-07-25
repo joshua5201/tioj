@@ -9,12 +9,21 @@
     <div class="well well-lg">
       <h5>Recent Contests<small class="pull-right"><%= link_to "Show all", contests_path %></small></h5>
       <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th></th>
+            <th>Status</th>
+            <% if user_signed_in? %>
+            <% end %>
+          </tr>
+        </thead>
         <tbody>
           <% @contests.each do |f| %>
             <tr>
               <td><%= f.title %></td>
               <% if user_signed_in? %>
-                <td><%= link_to 'Particapate', f, :class => 'btn btn-xs btn-primary' %></td>
+                <td><%= link_to 'Particapate', f, :class => 'btn btn-xs btn-primary', :target => '_blank' %></td>
               <% end %>
               <% if Time.now > f.end_time %>
                 <td>Ended</td>

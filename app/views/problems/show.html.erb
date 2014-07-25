@@ -5,7 +5,7 @@
 <p>
 <div class="row">
   <div class="col-md-2">
-    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-success btn-xs btn-block' } %>
+    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest}, { :class => 'btn btn-success btn-xs btn-block' } %>
   </div>
   <div class="col-md-2">
     <%= link_to 'Status', problem_submissions_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>
@@ -29,7 +29,7 @@
     </div>
   <% end %>
   <div class="col-md-2">
-    <%= link_to 'Back to Problems List', problems_path, :class => 'btn btn-default btn-xs btn-block' %>
+    <%= link_to 'Back to Problems List', @contest.blank? ? problems_path : contest_path(@contest), :class => 'btn btn-default btn-xs btn-block' %>
   </div>
 </div>
 </p>
@@ -203,7 +203,7 @@
 
 <div class="row">
   <div class="col-md-2">
-    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-success btn-xs btn-block' } %>
+    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest}, { :class => 'btn btn-success btn-xs btn-block' } %>
   </div>
   <div class="col-md-2">
     <%= link_to 'Status', problem_submissions_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>

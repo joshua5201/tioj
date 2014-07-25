@@ -59,14 +59,14 @@
   </div>
   <div class="panel-body">
     <% @contest.contest_problem_joints.each_with_index do |task, index| %>
-      <%= link_to ('p' + (65+index).chr + ' ' + task.problem_id.to_s + '. ' + Problem.find(task.problem_id).name), contest_problem_path(@contest, task.problem_id), :target => '_blank' %>
+      <%= link_to ('p' + (65+index).chr + ' ' + task.problem_id.to_s + '. ' + Problem.find(task.problem_id).name), contest_problem_path(@contest, task.problem_id) %>
       <br>
     <% end %>
   </div>
 </div>
 
 <p>
-  <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard}, {:class => 'btn btn-xs btn-warning'} %>
+  <%= link_to 'Dashboard', {:controller => :contests, :action => :dashboard, :id => @contest.id}, {:class => 'btn btn-xs btn-warning'} %>
   <%= link_to 'Submissions', contest_submissions_path(@contest), :class => 'btn btn-info btn-xs' %>
   <% if user_signed_in? and current_user.admin? %>
     <%= link_to 'Edit', edit_contest_path(@contest), :class => 'btn btn-info btn-xs' %>
