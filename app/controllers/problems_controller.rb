@@ -113,6 +113,7 @@ class ProblemsController < ApplicationController
         :problem_type,
         :sjcode,
         :interlib,
+        :old_pid,
 	testdata_sets_attributes:
 	[
 	  :id,
