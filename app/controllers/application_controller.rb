@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   before_filter :set_verdict_hash
   before_filter :configure_permitted_parameters, if: :devise_controller?
-
+  
   def set_verdict_hash
     @verdict = {"AC" => "Accepted",
                 "WA" => "Wrong Answer",
@@ -76,5 +76,13 @@ protected
       u.permit(:avatar, :avatar_cache, :motto, :email, :nickname, :password, :password_confirmation, :current_password)
     end
   end
-
+  
+  def set_contest_layout
+    if @contest.blank?
+      "application"
+    else
+      "contest"
+    end
+  end
+  
 end
