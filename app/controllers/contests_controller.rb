@@ -82,7 +82,8 @@ class ContestsController < ApplicationController
   def show
     if Time.now < @contest.start_time
       unless user_signed_in? and current_user.admin?
-        redirect_to action:'index', :notice => 'Contest has not yet started.'
+        flash[:notice] = 'Contest has not yet started.'
+        redirect_to action:'index'
         return
       end
     end
