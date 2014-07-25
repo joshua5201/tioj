@@ -131,7 +131,7 @@
         <h1 class="panel-title">Sample Input</h1>
       </div>
       <div class="panel-body" id="code-input">
-        <%= @problem.example_input %>
+        <%= markdown(@problem.example_input) %>
       </div>
     </div>
   </div>
@@ -141,7 +141,7 @@
         <h1 class="panel-title">Sample Output</h1>
       </div>
       <div class="panel-body" id="code-input">
-        <%= @problem.example_output %>
+        <%= markdown(@problem.example_output) %>
       </div>
     </div>
   </div>
