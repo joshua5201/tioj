@@ -3,7 +3,7 @@ class ProblemsController < ApplicationController
   before_filter :set_problem, only: [:show, :edit, :update, :destroy, :ranklist]
 
   def ranklist
-    @submissions = @problem.submissions.where("contest_id is NULL AND result = ?", "AC").order("total_time ASC").order("total_memory ASC")
+    @submissions = @problem.submissions.where("contest_id is NULL AND result = ?", "AC").order("total_time ASC").order("total_memory ASC").order("LENGTH(code) ASC")
     set_page_title "Ranklist - " + @problem.id.to_s + " - " + @problem.name
   end
   
