@@ -68,13 +68,7 @@ class TestdataController < ApplicationController
   def prob_td_path(prob, td)
     problem_testdatum_path(prob, td)
   end
-
-  def authenticate_admin!
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
-  end
+  
   # Never trust parameters from the scary internet, only allow the white list through.
   def testdatum_params
     params.require(:testdatum).permit(:problem_id, :test_input, :test_output, 

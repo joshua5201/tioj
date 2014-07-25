@@ -60,11 +60,5 @@ class JudgeServersController < ApplicationController
   def judge_server_params
     params.require(:judge_server).permit(:id, :name, :key, :ip)
   end
-
-  def authenticate_admin!
-    authenticate_user!
-    if current_user.admin == false
-      redirect_to root_path
-    end
-  end
+  
 end
