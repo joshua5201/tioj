@@ -4,10 +4,7 @@ class ContestsController < ApplicationController
 
   def dashboard
     if Time.now < @contest.start_time
-      unless user_signed_in? and current_user.admin?
-        redirect_to action:'index'
-        return
-      end
+      authenticate_admin!
     end
 
     c_submissions = nil
@@ -22,20 +19,12 @@ class ContestsController < ApplicationController
     else
       c_submissions = @contest.submissions
     end
-
-    #if @contest.contest_type == 1
-    #  authenticate_user!
-    #  if not current_user.admin?
-    #    redirect_to action:'index'
-    #    return
-    #  end
-    #end
+    
     @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
-    #c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|
-      @submissions << c_submissions.where("problem_id = ?", task.id)#select{|a| a.problem_id == task.id}
+      @submissions << c_submissions.where("problem_id = ?", task.id)
       @participants = @participants | @submissions[index].map{|e| e.user_id}
     end
     @scores = []
@@ -93,7 +82,7 @@ class ContestsController < ApplicationController
   def show
     if Time.now < @contest.start_time
       unless user_signed_in? and current_user.admin?
-        redirect_to action:'index'
+        redirect_to action:'index', :notice => 'Contest has not yet started.'
         return
       end
     end
@@ -157,7 +146,6 @@ class ContestsController < ApplicationController
       :start_time,
       :end_time,
       :contest_type,
-      :page,
       contest_problem_joints_attributes: 
       [
         :id,

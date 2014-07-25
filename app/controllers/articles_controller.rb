@@ -11,6 +11,10 @@ class ArticlesController < ApplicationController
     set_page_title "Bulletin - " + @era
   end
   
+  def show
+    set_page_title @article.title
+  end
+  
   def create
     @article = Article.new(article_params)
     @article.author_id = current_user.id
@@ -33,15 +37,11 @@ class ArticlesController < ApplicationController
     set_page_title "Edit - " + @article.title
   end
   
-  def show
-    
-  end
-  
   def update
     @article.author_id = current_user.id
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
+        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
       else
         format.html { render action: 'new' }
       end

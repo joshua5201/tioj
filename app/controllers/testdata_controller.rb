@@ -1,6 +1,6 @@
 class TestdataController < ApplicationController
   before_action :authenticate_admin!
-  before_action :find_problem
+  before_action :set_problem
   before_action :set_testdatum, only: [:edit, :update, :destroy]
 
   def index
@@ -24,7 +24,7 @@ class TestdataController < ApplicationController
     respond_to do |format|
       if @testdatum.save
         format.html { redirect_to problem_testdata_path(@problem), notice: 'Testdatum was successfully created.' }
-        #format.json { render action: 'show', status: :created, location: prob_td_path(@problem, @testdatum) }
+        #format.json { render action: 'show', status: :created, location: prob_testdata_path(@problem, @testdatum) }
       else
         format.html { render action: 'new' }
         format.json { render json: @testdatum.errors, status: :unprocessable_entity }
@@ -61,12 +61,8 @@ class TestdataController < ApplicationController
     @testdatum = Testdatum.find(params[:id])
   end
 
-  def find_problem
+  def set_problem
     @problem = Problem.find(params[:problem_id])
-  end
-
-  def prob_td_path(prob, td)
-    problem_testdatum_path(prob, td)
   end
   
   # Never trust parameters from the scary internet, only allow the white list through.
