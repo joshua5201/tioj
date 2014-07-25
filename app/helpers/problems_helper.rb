@@ -1,6 +1,6 @@
 module ProblemsHelper
   def topcoder(problem)
-    submission = problem.submissions.select("user_id").where("contest_id is NULL AND result = ? ", "AC").order("total_time ASC").order("total_memory ASC").first
+    submission = problem.submissions.select("user_id").where("contest_id is NULL AND result = ? ", "AC").order("total_time ASC").order("total_memory ASC").order("LENGTH(code) ASC").first
     return User.find_by_id(submission.user_id) if submission
     return nil if submission.blank?
   end
