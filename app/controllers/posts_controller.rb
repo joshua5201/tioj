@@ -81,12 +81,6 @@ class PostsController < ApplicationController
       end
     end
   end
-  def authenticate_admin!
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
-  end
   
   # Use callbacks to share common setup or constraints between actions.
   def set_posts 

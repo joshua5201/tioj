@@ -4,7 +4,7 @@ module ApplicationHelper
     if text == nil
       return 
     end
-    renderer = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: false)
+    renderer = Redcarpet::Render::HTML.new(hard_wrap: true, escape_html: true)
     options = {
       autolink: true,
       no_intra_emphasis: true,

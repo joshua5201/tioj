@@ -130,8 +130,8 @@
       <div class="panel-heading">
         <h1 class="panel-title">Sample Input</h1>
       </div>
-      <div class="panel-body">
-        <%= markdown(@problem.example_input) %>
+      <div class="panel-body" id="code-input">
+        <%= @problem.example_input %>
       </div>
     </div>
   </div>
@@ -140,8 +140,8 @@
       <div class="panel-heading">
         <h1 class="panel-title">Sample Output</h1>
       </div>
-      <div class="panel-body">
-        <%= markdown(@problem.example_output) %>
+      <div class="panel-body" id="code-input">
+        <%= @problem.example_output %>
       </div>
     </div>
   </div>

@@ -75,13 +75,6 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
   end
 
-  def authenticate_admin!
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
-  end
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
     params.require(:comment).permit(:title, :content, :user_id, :post_id)

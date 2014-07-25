@@ -56,6 +56,15 @@ class ApplicationController < ActionController::Base
   end
   
 protected
+  def authenticate_admin!
+    authenticate_user!
+    if not current_user.admin?
+      flash[:alert] = 'Insufficient User Permissions.'
+      redirect_to action:'index' 
+      return
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:email, :nickname, :username, :password, :password_confirmation, :remember_me)

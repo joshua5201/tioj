@@ -27,7 +27,7 @@
           <tr class="warning">
         <% when 2..3 %>
           <tr class="success">
-        <% when 6..7 %>
+        <% when 4..7 %>
           <tr class="info">
         <% else %>
           <tr>
@@ -39,7 +39,7 @@
         <td><%= submission.total_time %></td>
         <td><%= submission.total_memory %></td>
         <td><%= submission.compiler %></td>
-        <td><%= number_to_human_size(submission.code.size) %></td>
+        <td><%= number_to_human_size(submission.code.to_s.size) %></td>
         <td><%= submission.created_at.to_s(:clean) %></td>
       </tr>
     <% end %>
