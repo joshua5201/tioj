@@ -1,10 +1,8 @@
 class ProblemsController < ApplicationController
-  before_action :set_problem, only: [:show, :edit, :update, :destroy, :ranklist]
+  before_filter :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :set_problem, only: [:show, :edit, :update, :destroy, :ranklist]
 
   def ranklist
-    #submissions_id = Submission.select("id, MIN(submissions.total_time)")
-    #  .where("problem_id = ? AND result = ?", @problem.id, "AC").group("user_id")
-    #@submissions = Submission.find(submissions_id.map{|a| a.id}).sort_by{|a| a.total_time}
     @submissions = @problem.submissions.where("contest_id is NULL AND result = ?", "AC").order("total_time ASC").order("total_memory ASC")
     set_page_title "Ranklist - " + @problem.id.to_s + " - " + @problem.name
   end
@@ -25,48 +23,36 @@ class ProblemsController < ApplicationController
   end
 
   def show
-    if user_signed_in? && current_user.admin == true
-    elsif @problem.visible_state == 0 
-    elsif @problem.visible_state == 1 
-      if params[:contest_id].blank?
+    unless user_signed_in? && current_user.admin == true
+      if @problem.visible_state == 1 
+        if params[:contest_id].blank?
+          redirect_to action:'index'
+          return
+        end
+        contest = Contest.find(params[:contest_id])
+        unless contest.problem_ids.include?(@problem.id) and Time.now >= contest.start_time and Time.now <= contest.end_time
+          redirect_to action:'index'
+          return
+        end
+      elsif @problem.visible_state == 2
         redirect_to action:'index'
         return
       end
-      contest = Contest.find(params[:contest_id])
-      unless contest.problem_ids.include?(@problem.id) and Time.now >= contest.start_time and Time.now <= contest.end_time
-        redirect_to action:'index'
-        return
-      end
-    else
-      redirect_to action:'index'
-      return
     end
     @contest_id = params[:contest_id]
     set_page_title @problem.id.to_s + " - " + @problem.name
   end
 
   def new
-		authenticate_user!
-		if current_user.admin == false 
-			redirect_to action:'index'
-		end
-		@problem = Problem.new
-                set_page_title "New problem"
+    @problem = Problem.new
+    set_page_title "New problem"
   end
 
   def edit
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
-        set_page_title "Edit " + @problem.id.to_s + " - " + @problem.name
+    set_page_title "Edit " + @problem.id.to_s + " - " + @problem.name
   end
 
   def create
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
     @problem = Problem.new(problem_params)
     respond_to do |format|
       if @problem.save
@@ -80,10 +66,6 @@ class ProblemsController < ApplicationController
   end
 
   def update
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index', notice: 'Insufficient User Permissions.'	
-	end
     respond_to do |format|
       if @problem.update(problem_params)
         format.html { redirect_to @problem, notice: 'Problem was successfully updated.' }
@@ -97,12 +79,9 @@ class ProblemsController < ApplicationController
 
   def destroy
     redirect_to action:'index'
+    return
     # 'Deletion of problem may cause unwanted paginate behavior.'
     
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
     #@problem.destroy
     respond_to do |format|
       format.html { redirect_to problems_url, notice: 'Deletion of problem may cause unwanted paginate behavior.' }
