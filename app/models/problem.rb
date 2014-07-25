@@ -17,6 +17,7 @@
 #  problem_type   :integer
 #  sjcode         :text(16777215)
 #  interlib       :text(16777215)
+#  old_pid        :integer
 #
 
 class Problem < ActiveRecord::Base
