@@ -59,7 +59,8 @@ protected
   def authenticate_admin!
     authenticate_user!
     if not current_user.admin?
-      redirect_to action:'index', :alert => 'Insufficient User Permissions.'
+      flash[:alert] = 'Insufficient User Permissions.'
+      redirect_to action:'index' 
       return
     end
   end
