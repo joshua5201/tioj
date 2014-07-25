@@ -27,6 +27,7 @@ class SubmissionsController < ApplicationController
   def new
     if not params[:problem_id]
       redirect_to action:'index'
+      return
     end
     if current_user.admin == false 
       if @problem.visible_state == 2
@@ -63,6 +64,7 @@ class SubmissionsController < ApplicationController
     
     if not params[:problem_id]
       redirect_to action:'index'
+      return
     end
     if current_user.admin == false 
       if @problem.visible_state == 2
