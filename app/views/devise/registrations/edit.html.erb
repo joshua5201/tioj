@@ -48,6 +48,7 @@
   <%= f.submit "Update", :class => "btn btn-success" %>
 <% end %>
 
+<br>
 <h6 class="page-header">Unhappy? <small>Delete Account<small></h6>
 <%= button_to "Delete My Account", registration_path(resource_name), data: { confirm: "Are you sure ?\nIf this is because you don't like your avatar, you should know that in account settings you can always change it whatsoever." }, method: :delete, :class => 'btn btn-xs btn-warning' %>
 
