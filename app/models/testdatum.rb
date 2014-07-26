@@ -19,4 +19,7 @@ class Testdatum < ActiveRecord::Base
   
   mount_uploader :test_input, TestdataUploader
   mount_uploader :test_output, TestdataUploader
+  
+  validates :test_input, :presence => true
+  validates :test_output, :presence => true
 end
