@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
                 "OLE" => "Output Limit Exceeded",
                 "RE" => "Runtime Error",
                 "SIG" => "Runtime Error (exited with signal)",
-                "CE" => "Compile Error",
+                "CE" => "Compilation Error",
                 "CO" => "Compilation Timed Out",
                 "ER" => "WTF!"
     }
