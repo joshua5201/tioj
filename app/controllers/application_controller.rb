@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
                 "TLE" => "Time Limit Exceeded",
                 "MLE" => "Segmentation Fault",
                 "OLE" => "Output Limit Exceeded",
-                "RE" => "Runtime Error (exited with nonzero status)",
+                "RE" => "Runtime Error",
                 "SIG" => "Runtime Error (exited with signal)",
                 "CE" => "Compile Error",
                 "CO" => "Compilation Timed Out",
