@@ -42,7 +42,7 @@ module TempIOJ
       end
       p.hint = prob["hint"]
       p.old_pid = prob["old_pid"]
-      p.visible_state = 2
+#      p.visible_state = 2
       p.problem_type = 0
       if self.test?
         p p
