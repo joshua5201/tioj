@@ -81,3 +81,4 @@ gem 'friendly_id', github: 'norman/friendly_id'
 gem 'annotate', github: 'ctran/annotate_models'
 
 gem 'seo_helper', '~> 1.0', :git => 'git://github.com/techbang/seo_helper.git'
+gem 'nokogiri' #getting old tioj probs
