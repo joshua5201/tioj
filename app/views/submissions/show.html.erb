@@ -9,7 +9,11 @@
 <h4 class="page-header">Results of submission #<%= @submission.id %></h4>
 
 <p>
-<%= link_to 'Back to Submissions List', submissions_path, :class => 'btn btn-default btn-xs' %>
+<% if @contest.blank? %>
+  <%= link_to 'Back to Submissions List', submissions_path, :class => 'btn btn-default btn-xs' %>
+<% else %>
+  <%= link_to 'Back to Submissions List', contest_submissions_path(@contest), :class => 'btn btn-default btn-xs' %>
+<% end %>
 <% if user_signed_in? and current_user.admin? %>
   <%= link_to 'Rejudge', { :controller => :submissions, :action => :rejudge, :id => @submission.id }, :class => 'btn btn-xs btn-primary' %>
   <%= link_to 'Edit', edit_submission_path(@submission), :class => 'btn btn-info btn-xs' %>

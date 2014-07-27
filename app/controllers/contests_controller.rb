@@ -1,6 +1,7 @@
 class ContestsController < ApplicationController
-  before_action :authenticate_admin!, except: [:dashboard, :index, :show]
-  before_action :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
+  before_filter :authenticate_admin!, except: [:dashboard, :index, :show]
+  before_filter :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
+  layout :set_contest_layout, only: [:show, :dashboard]
 
   def dashboard
     if Time.now < @contest.start_time

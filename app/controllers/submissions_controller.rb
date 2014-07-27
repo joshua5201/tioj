@@ -3,6 +3,8 @@ class SubmissionsController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show, :create, :new]
   before_action :set_submissions
   before_action :set_submission, only: [:rejudge, :show, :edit, :update, :destroy]
+  before_filter :set_contest, only: [:show]
+  layout :set_contest_layout, only: [:show, :index, :new]
   
   def rejudge_problem
     Submission.where("problem_id = ?", params[:problem_id]).update_all(:result => "queued", :score => 0, :_result => "", :total_time => nil, :total_memory => nil)
@@ -163,7 +165,11 @@ class SubmissionsController < ApplicationController
   def set_submission
     @submission = Submission.find(params[:id])
   end
-
+  
+  def set_contest
+    @contest = @submission.contest
+  end
+  
   # Never trust parameters from the scary internet, only allow the white list through.
   def submission_params
     params.require(:submission).permit(:code, :compiler, :problem_id)

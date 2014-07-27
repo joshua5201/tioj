@@ -15,7 +15,7 @@ MathJax.Hub.Config({
     });
 </script>
 <%= mathjax_tag %>
-<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="shortcut icon" href="/images/favicon_co.ico">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 #page-content{ padding-left: 40px; padding-right: 40px; padding-bottom: 40px; }
@@ -29,11 +29,11 @@ MathJax.Hub.Config({
 </head>
 
 <body>
-<div style="background-color:#003365">
-  <nav class="navbar navbar-inverse navbar-embossed" role="navigation" style="background-color:#003365">    
+<div style="background-color:#32CD32">
+  <nav class="navbar navbar-inverse navbar-embossed" role="navigation" style="background-color:#32CD32">    
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to image_tag("banner_0.png", :alt => "TIOJ", :style => "padding-left: 15px;"), root_path, :class => "nav-brand" %>
+        <%= link_to image_tag("banner_0_green.png", :alt => ('TIOJ #contest %s' % @contest.title), :style => "padding-left: 15px;"), contest_path(@contest), :class => "nav-brand" %>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -43,13 +43,9 @@ MathJax.Hub.Config({
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse-01">
         <ul class="nav navbar-nav navbar-left">           
-          <li><%= link_to "Bulletin", articles_path %></li>
-          <li><%= link_to "Problems", problems_path %></li>
-          <li><%= link_to "Submissions", submissions_path %></li>
-          <li><%= link_to "Contests", contests_path %></li>
-          <li><%= link_to "Discuss", posts_path %></li>     
-          <li><%= link_to "About", about_url %></li>
-          <li><%= link_to "Rank", users_path %></li>
+          <li><%= link_to "Contest Tasks", contest_path(@contest) %></li>
+          <li><%= link_to "Submissions", contest_submissions_path(@contest) %></li>
+          <li><%= link_to "Dashboard", {:controller => :contests, :action => :dashboard, :id => @contest.id} %></li>
           <% if current_user %>
             <li><%= link_to(current_user.username, user_path(current_user)) %></li>
             <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
