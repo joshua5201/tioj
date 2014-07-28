@@ -27,7 +27,7 @@ en:
       first: "&lt;&lt;"
       next: "&gt;"
       last: "&gt;&gt;"
-      truncate: "..."
+      truncate: "........."
   errors:
     messages:
       wrong_size: "is the wrong size (should be %{file_size})"
