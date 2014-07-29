@@ -13,9 +13,9 @@
     <% if not @user.motto.blank? %><blockquote><dfn><%= @user.motto %></dfn></blockquote><% end %>
     <div class="row">
       <div class="col-md-7">
-      Tried and accepted:<br>
-      Tried but in vain:<br>
-      AC Ratio:
+        Tried and accepted:<br>
+        Tried but in vain:<br>
+        AC Ratio:
       </div>
       <div class="col-md-5">
         <%= @user.ac_count %><br>
@@ -24,6 +24,23 @@
       </div>
     </div>
     <br>
+    <% if user_signed_in? and current_user.admin? %>
+      <div class="row">
+        <div class="col-md-7">
+          Admin:<br>
+          Name:<br>
+          School:<br>
+          Gradyear:
+        </div>
+        <div class="col-md-5">
+          <%= @user.admin %><br>
+          <%= @user.name %><br>
+          <%= @user.school %><br>
+          <%= @user.gradyear %>
+        </div>
+      </div>
+      <br>
+    <% end %>
     Signed up at: <%= @user.created_at.to_s(:clean) %><br>
     Last sign in: <%= @user.last_sign_in_at.to_s(:clean) %><br>
     <br>

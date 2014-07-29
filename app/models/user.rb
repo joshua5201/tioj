@@ -50,7 +50,11 @@ class User < ActiveRecord::Base
   validates :username,
     :uniqueness => {:case_sensitive => false}, 
     :username_convention => true
-
+  
+  validates :school, :presence => true, :length => {:minimum => 1}
+  validates :gradyear, :presence => true, :inclusion => 1..1000
+  validates :name, :presence => true, :length => {:in => 1..12}
+  
   validates_uniqueness_of :nickname
   validates_length_of :nickname, :in => 1..12
   validates_length_of :username, :in => 3..20

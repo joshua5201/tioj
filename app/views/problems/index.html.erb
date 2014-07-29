@@ -27,6 +27,7 @@
 <table class="table table-hover table-striped">
   <thead>
     <tr>
+      <th></th>
       <th>#</th>
       <th>Name</th>
       <th>TopCoder</th>
@@ -43,6 +44,15 @@
     <% @problems.each do |problem| %>
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
+          <td>
+            <% if user_problem_ac(current_user, problem) %>
+              <span class="text-success glyphicon glyphicon-ok"></span>
+            <% elsif user_problem_tried(current_user, problem) %>
+              <span class="text-danger glyphicon glyphicon-thumbs-down"></span>
+            <% else %>
+              <span class="text-muted glyphicon glyphicon-minus"></span>
+            <% end %>
+          </td>
           <td><%= link_to problem.id, problem %></td>
           <td>
             <div style="float:left"><%= link_to problem.name, problem %></div>
@@ -76,7 +86,7 @@
             </td>
           <% end %>
         </tr>
-      <%end%>
+      <% end %>
     <% end %>
   </tbody>
 </table>
