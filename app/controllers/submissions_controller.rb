@@ -61,8 +61,11 @@ class SubmissionsController < ApplicationController
   end
   
   def create
-    last_submission = Submission.where("user_id = ?", current_user.id).order("id Desc").first
-    if not last_submission.blank? and (Time.now - last_submission.created_at) < 15
+    if not current_user.last_submit_time.blank? and Time.now - current_user.last_submit_time < 15
+      redirect_to submissions_path, alert: 'CD time 15 seconds.'
+      return
+    end
+    if not current_user.update(:last_submit_time => Time.now)
       redirect_to submissions_path, alert: 'CD time 15 seconds.'
       return
     end
