@@ -1,5 +1,5 @@
 <h4 class="page-header">
-  <%= @problem.id %> : <%= @problem.name %>
+  <%= user_problem_status(current_user, @problem) if user_signed_in? %> <%= @problem.id %> . <%= @problem.name %>
 </h4>
 
 <p>

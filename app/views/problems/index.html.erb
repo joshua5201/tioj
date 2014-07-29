@@ -44,15 +44,7 @@
     <% @problems.each do |problem| %>
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
-          <td>
-            <% if user_problem_ac(current_user, problem) %>
-              <span class="text-success glyphicon glyphicon-ok"></span>
-            <% elsif user_problem_tried(current_user, problem) %>
-              <span class="text-danger glyphicon glyphicon-thumbs-down"></span>
-            <% else %>
-              <span class="text-muted glyphicon glyphicon-minus"></span>
-            <% end %>
-          </td>
+          <td><%= user_problem_status(current_user, problem) if user_signed_in? %></td>
           <td><%= link_to problem.id, problem %></td>
           <td>
             <div style="float:left"><%= link_to problem.name, problem %></div>
