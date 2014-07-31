@@ -102,7 +102,13 @@
 
 <div class="well well-sm">
   <div class="row">
-    <div class="col-md-1">
+    <div class="col-md-2">
+      <strong>Submitter:</strong>
+    </div>
+    <div class="col-md-2">
+      <%= link_to @submission.user.username, user_path(@submission.user_id) %>
+    </div>
+    <div class="col-md-2">
       <strong>Compiler:</strong>
     </div>
     <div class="col-md-2">
