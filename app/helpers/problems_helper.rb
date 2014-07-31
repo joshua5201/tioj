@@ -6,10 +6,12 @@ module ProblemsHelper
   end
   
   def users_ac_ratio(problem)
-    all = User.joins(:submissions).uniq.where("submissions.contest_id is NULL AND submissions.problem_id = ?", problem.id).select("submissions.result")
-    ac = all.where("submissions.result = ?", "AC")
+#    all = User.joins(:submissions).uniq.where("submissions.contest_id is NULL AND submissions.problem_id = ?", problem.id).select("submissions.result")
+    all = problem.submissions.where("contest_id is NULL").select("MIN(result) as result").group("user_id").map{|a| a.result}
+#    ac = all.where("result = ?", "AC")
+    ac = all.count{|a| a == "AC"}
     all = all.count
-    ac = ac.count
+#    ac = ac.count
     ratio = "%.1f%%" % (100.0 * ac / all)
     ranklist_page = link_to ac.to_s + "/" + all.to_s, problem_ranklist_path(problem.id)
     return raw ( ratio + " (" + ranklist_page + ")" )
