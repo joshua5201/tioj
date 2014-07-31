@@ -15,7 +15,7 @@ module UsersHelper
   end
   
   def user_problem_ac(user, problem)
-    return Submission.exists?("contest_id is NULL AND user_id = ? AND problem_id = ? AND result = ?", user.id, problem.id, "AC")
+    return Submission.exists?(["contest_id is NULL AND user_id = ? AND problem_id = ? AND result = ?", user.id, problem.id, "AC"])
     if Submission.where("contest_id is NULL AND user_id = ? AND problem_id = ? AND result = ?", user.id, problem.id, "AC").count == 0
       return false
     else
@@ -24,7 +24,7 @@ module UsersHelper
   end
   
   def user_problem_tried(user, problem)
-    return Submission.exists?("contest_id is NULL AND user_id = ? AND problem_id = ?", user.id, problem.id)
+    return Submission.exists?(["contest_id is NULL AND user_id = ? AND problem_id = ?", user.id, problem.id])
     if Submission.where("contest_id is NULL AND user_id = ? AND problem_id = ?", user.id, problem.id).count == 0
       return false
     else

@@ -51,7 +51,9 @@
     <table class="table table-condensed">
       <thead>
         <tr>
-          <th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+          <% 10.times do |a| %>
+            <th></th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -61,12 +63,13 @@
           <% end %>
           
           <td>
-            <% if user_problem_ac(@user, prob) %>
-              <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-success" %>
-            <% elsif user_problem_tried(@user, prob) %>
-              <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-warning" %>
-            <% else %>
-              <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-muted" %>
+            <% case @tried[prob.id] %>
+              <% when 1 %>
+                 <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-success" %>
+              <% when 2 %>
+                 <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-warning" %>
+              <% else %>
+                 <%= link_to prob.id.to_s, problem_submissions_path(prob, :filter_user_id => @user.id), :class => "text-muted" %>
             <% end %>
           </td>
           

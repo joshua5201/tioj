@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
     submits = submits.uniq do |s|
       s.problem_id
     end
-    submits = submits.count - self.ac_count
+    submits.count - self.ac_count
   end
   
   def ac_ratio
