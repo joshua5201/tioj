@@ -76,7 +76,7 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @contests = Contest.all.order("id DESC").page(params[:page])
+    @contests = Contest.order("id DESC").page(params[:page])
     set_page_title "Contests"
   end
 

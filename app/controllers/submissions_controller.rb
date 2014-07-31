@@ -139,7 +139,7 @@ class SubmissionsController < ApplicationController
   def set_submissions
     @problem = Problem.find(params[:problem_id]) if params[:problem_id]
     @contest = Contest.find(params[:contest_id]) if params[:contest_id]
-    @submissions = Submission.all
+    @submissions = Submission
     @submissions = @submissions.where("problem_id = ?", params[:problem_id]) if params[:problem_id]
     if params[:contest_id]
       @submissions = @submissions.where("contest_id = ?", params[:contest_id])
