@@ -14,13 +14,14 @@ class ProblemsController < ApplicationController
       redirect_to problem_path(params[:search_id])
       return
     end
+    @problems = Problem.select("problems.id, name, visible_state")
     if not params[:search_name].blank?
-      @problems = Problem.where("name LIKE ?", "%%%s%%"%params[:search_name]).page(params[:page]).per(100)
-    elsif not params[:tag].blank?
-      @problems = Problem.tagged_with(params[:tag]).order("id ASC").page(params[:page]).per(100)
-    else
-      @problems = Problem.all.order("id ASC").page(params[:page]).per(100)
+      @problems = @problems.where("name LIKE ?", "%%%s%%"%params[:search_name])
     end
+    if not params[:tag].blank?
+      @problems = @problems.tagged_with(params[:tag])
+    end
+    @problems = @problems.order("problems.id ASC").page(params[:page]).per(100)
     set_page_title "Problems"
   end
 

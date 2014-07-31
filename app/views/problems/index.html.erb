@@ -45,9 +45,9 @@
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
           <td><%= user_problem_status(current_user, problem) if user_signed_in? %></td>
-          <td><%= link_to problem.id, problem %></td>
+          <td><%= link_to problem.id, problem_path(problem.id) %></td>
           <td>
-            <div style="float:left"><%= link_to problem.name, problem %></div>
+            <div style="float:left"><%= link_to problem.name, problem_path(problem.id) %></div>
             <div style="float:right"><%= raw problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs btn-default' }.join(" ") %></div>
           </td>
           <td class="text-center">

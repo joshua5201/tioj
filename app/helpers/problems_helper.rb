@@ -6,7 +6,7 @@ module ProblemsHelper
   end
   
   def users_ac_ratio(problem)
-    all = User.joins(:submissions).uniq.where("submissions.contest_id is NULL AND submissions.problem_id = ?", problem.id)
+    all = User.joins(:submissions).uniq.where("submissions.contest_id is NULL AND submissions.problem_id = ?", problem.id).select("submissions.result")
     ac = all.where("submissions.result = ?", "AC")
     all = all.count
     ac = ac.count
@@ -16,7 +16,8 @@ module ProblemsHelper
   end
   
   def submissions_ac_ratio(problem)
-    all = Submission.where("contest_id is NULL AND problem_id = ?", problem.id)
+#    all = Submission.where("contest_id is NULL AND problem_id = ?", problem.id)
+    all = problem.submissions.where("contest_id is NULL").select("result")
     ac = all.where("result = ?", "AC")
     all = all.count
     ac = ac.count
