@@ -59,7 +59,7 @@
   </div>
   <div class="panel-body">
     <% @tasks.each_with_index do |task, index| %>
-      <%= link_to ('p' + (65+index).chr + ' ' + task.problem_id.to_s + '. ' + Problem.find(task.problem_id).name), contest_problem_path(@contest, task.problem_id) %>
+      <%= link_to ('p' + (65+index).chr + ' ' + task.id.to_s + '. ' + Problem.find(task.id).name), contest_problem_path(@contest, task.id) %>
       <br>
     <% end %>
   </div>
