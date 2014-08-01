@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140801045826) do
+ActiveRecord::Schema.define(version: 20140801140235) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -169,8 +169,11 @@ ActiveRecord::Schema.define(version: 20140801045826) do
     t.integer  "total_memory"
   end
 
-  add_index "submissions", ["result", "user_id", "problem_id", "contest_id"], name: "submissions_index", using: :btree
+  add_index "submissions", ["contest_id"], name: "index_submissions_on_contest_id", using: :btree
+  add_index "submissions", ["problem_id"], name: "index_submissions_on_problem_id", using: :btree
+  add_index "submissions", ["result"], name: "index_submissions_on_result", using: :btree
   add_index "submissions", ["total_time", "total_memory"], name: "submissions_sort_ix", using: :btree
+  add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
