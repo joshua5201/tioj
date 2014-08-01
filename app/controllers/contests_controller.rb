@@ -1,6 +1,7 @@
 class ContestsController < ApplicationController
   before_filter :authenticate_admin!, except: [:dashboard, :index, :show]
   before_filter :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
+  before_filter :set_tasks, only: [:show, :dashboard]
   layout :set_contest_layout, only: [:show, :dashboard]
 
   def dashboard
@@ -21,7 +22,6 @@ class ContestsController < ApplicationController
       c_submissions = @contest.submissions
     end
     
-    @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|
@@ -137,6 +137,10 @@ class ContestsController < ApplicationController
   private
   def set_contest
     @contest = Contest.find(params[:id])
+  end
+  
+  def set_tasks
+    @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

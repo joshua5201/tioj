@@ -65,9 +65,12 @@ class SubmissionsController < ApplicationController
       redirect_to submissions_path, alert: 'CD time 15 seconds.'
       return
     end
-    if not current_user.update(:last_submit_time => Time.now)
-      redirect_to submissions_path, alert: 'CD time 15 seconds.'
-      return
+    User.transaction do
+      user = User.lock("LOCK IN SHARE MODE").find(current_user.id)
+      if not user.update(:last_submit_time => Time.now)
+        redirect_to submissions_path, alert: 'CD time 15 seconds.'
+        return
+      end
     end
     
     if params[:problem_id].blank?

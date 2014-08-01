@@ -77,7 +77,6 @@ private
       :id,
       :title,
       :content,
-      :page,
       :pinned,
       :category,
       attachments_attributes:

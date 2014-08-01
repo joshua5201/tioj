@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729140247) do
+ActiveRecord::Schema.define(version: 20140801045826) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -59,12 +59,16 @@ ActiveRecord::Schema.define(version: 20140729140247) do
     t.integer  "category"
   end
 
+  add_index "articles", ["category", "pinned", "era"], name: "index_articles_on_category_and_pinned_and_era", using: :btree
+
   create_table "attachments", force: true do |t|
     t.integer  "article_id"
     t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "attachments", ["article_id"], name: "index_attachments_on_article_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.string   "title"
@@ -75,12 +79,17 @@ ActiveRecord::Schema.define(version: 20140729140247) do
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "contest_problem_joints", force: true do |t|
     t.integer  "contest_id"
     t.integer  "problem_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "contest_problem_joints", ["contest_id", "problem_id"], name: "contest_task_ix", unique: true, using: :btree
 
   create_table "contests", force: true do |t|
     t.string   "title"
@@ -91,6 +100,8 @@ ActiveRecord::Schema.define(version: 20140729140247) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "contests", ["start_time", "end_time"], name: "index_contests_on_start_time_and_end_time", using: :btree
 
   create_table "judge_servers", force: true do |t|
     t.string   "name"
@@ -109,6 +120,8 @@ ActiveRecord::Schema.define(version: 20140729140247) do
     t.integer  "testdatum_id"
   end
 
+  add_index "limits", ["testdatum_id"], name: "index_limits_on_testdatum_id", using: :btree
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
@@ -117,6 +130,9 @@ ActiveRecord::Schema.define(version: 20140729140247) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "posts", ["updated_at"], name: "index_posts_on_updated_at", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "problems", force: true do |t|
     t.string   "name"
@@ -136,6 +152,8 @@ ActiveRecord::Schema.define(version: 20140729140247) do
     t.integer  "old_pid"
   end
 
+  add_index "problems", ["name"], name: "index_problems_on_name", using: :btree
+
   create_table "submissions", force: true do |t|
     t.text     "code",         limit: 16777215
     t.string   "compiler",                      default: ""
@@ -150,6 +168,9 @@ ActiveRecord::Schema.define(version: 20140729140247) do
     t.integer  "total_time"
     t.integer  "total_memory"
   end
+
+  add_index "submissions", ["result", "user_id", "problem_id", "contest_id"], name: "submissions_index", using: :btree
+  add_index "submissions", ["total_time", "total_memory"], name: "submissions_sort_ix", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -186,6 +207,8 @@ ActiveRecord::Schema.define(version: 20140729140247) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "testdata_sets", ["problem_id"], name: "index_testdata_sets_on_problem_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
