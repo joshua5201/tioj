@@ -22,8 +22,8 @@ class FetchController < ApplicationController
   
   def testdata_meta
     @problem = Problem.find(params[:pid])
-    @result = @problem.testdata.size.to_s + " "
-    @problem.testdata.each do |t|
+    @result = @problem.testdata.count.to_s + " "
+    @problem.testdata.order("id ASC").each do |t|
       @result += t.id.to_s + " "
       @result += t.updated_at.to_i.to_s + "\n"
     end
@@ -33,7 +33,7 @@ class FetchController < ApplicationController
   def testdata_limit
     @problem = Problem.find(params[:pid])
     @result = ""
-    @problem.testdata.each do |t|
+    @problem.testdata.order("id ASC").each do |t|
       @result += t.limit.time.to_s + " "
       @result += t.limit.memory.to_s + "\n"
     end
@@ -74,7 +74,7 @@ class FetchController < ApplicationController
     
     #verdict
     if params[:status] == "OK"
-      @tdcount = @problem.testdata.size
+      @tdcount = @problem.testdata.count
       @result = 0
       ttime = 0
       tmem = 0
