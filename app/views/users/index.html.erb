@@ -31,7 +31,11 @@
         <td><%= link_to user.username, user_path(user) %></td>
         <td><%= user.nickname %></td>
         <!--<td><% user.email %></td>-->
-        <td><%= user.motto if user.motto %><td>
+        <% unless user.motto.blank? %>
+          <td><%= user.motto %><td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td><%= user.ac_count %></td>
         <td><%= ac_ratio_by_user(user) %></td>
       </tr>
