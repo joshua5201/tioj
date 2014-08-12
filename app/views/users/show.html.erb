@@ -8,7 +8,7 @@
     <%= image_tag(@user.avatar.square.to_s, :class => "img-rounded img-responsive") %><br/>
     <h5><%= @user.nickname %></h5>
     <h6><%= @user.username %></h6>
-    <!--<%= @user.email %><br/>-->
+    <!--<% @user.email %><br/>-->
     <br>
     <% if not @user.motto.blank? %><blockquote><dfn><%= @user.motto %></dfn></blockquote><% end %>
     <div class="row">
