@@ -12,7 +12,7 @@
 <form class="form-inline" accept-charset="UTF-8" method="get">
   <label for="search_id">Search Problems</label>
   <div class="form-group">
-    <input style="width:150px" id="search_id" name="search_id" class="form-control input-sm flat" type="number" min="1" max="<%= Problem.count %>" placeholder="Enter Problem ID">
+    <input style="width:150px" id="search_id" name="search_id" class="form-control input-sm flat" type="number" min="1001" max="<%= 1000 + Problem.count %>" placeholder="Enter Problem ID">
   </div>
   <div class="form-group">
     <input id="search_name" name="search_name" class="form-control input-sm flat" type="text" placeholder="Enter Problem Name">
