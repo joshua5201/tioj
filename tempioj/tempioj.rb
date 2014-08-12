@@ -29,7 +29,7 @@ module TempIOJ
 
     def set_prob(prob)
       p = Problem.new
-      p.name = "#{prob['old_pid']} - #{prob['title']}"
+      p.name = "#{prob['title']}"#"#{prob['old_pid']} - #{prob['title']}"
       p.tag_list.add "TIOJ"
       p.description = prob["description"]
       p.input = prob["input"]
@@ -44,6 +44,7 @@ module TempIOJ
       p.old_pid = prob["old_pid"]
 #      p.visible_state = 2
       p.problem_type = 0
+      p.visible_state = (prob["defunct"] == "Y" ? 2 : 0)
       if self.test?
         p p
       else
