@@ -16,7 +16,7 @@
       <th></th>
       <th>Username</th>
       <th>Nickname</th>
-      <th>Email</th>
+      <!--<th>Email</th>-->
       <th>Accepted</th>
       <th>AC Ratio</th>
     </tr>
@@ -29,7 +29,8 @@
         <td><%= link_to image_tag(user.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(user) %></td>
         <td><%= link_to user.username, user_path(user) %></td>
         <td><%= user.nickname %></td>
-        <td><%= user.email %></td>
+        <!--<td><%= user.email %></td>-->
+        <td><%= user.motto %><td>
         <td><%= user.ac_count %></td>
         <td><%= ac_ratio_by_user(user) %></td>
       </tr>
