@@ -44,6 +44,8 @@ Tioj::Application.routes.draw do
   
   mathjax 'mathjax'
   
+  get 'edit_announcement' => 'welcome#edit_announcement', as: :edit_announcement
+  post 'alter_announcement' => 'welcome#alter_announcement', as: :alter_announcement
   get 'about' => 'about#index', as: :about
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

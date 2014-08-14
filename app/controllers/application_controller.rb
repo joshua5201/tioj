@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   before_filter :set_verdict_hash
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :set_anno
   
   def set_verdict_hash
     @verdict = {"AC" => "Accepted",
@@ -83,6 +84,11 @@ protected
     else
       "contest"
     end
+  end
+  
+  def set_anno
+    require "json"
+    @anno = JSON.parse(File.read("public/announcement/anno"))
   end
   
 end
