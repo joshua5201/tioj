@@ -53,6 +53,12 @@
   </div>
 </div>
 
+<% if user_signed_in? and current_user.admin? %>
+  <%= link_to "Set contest tasks to public", set_contest_task_path(@contest, "0"), :class => "btn btn-xs btn-inverse" %>
+  <%= link_to "Set contest tasks to only visible during contest", set_contest_task_path(@contest, "1"), :class => "btn btn-xs btn-inverse" %>
+  <%= link_to "Set contest tasks to invisible", set_contest_task_path(@contest, "2"), :class => "btn btn-xs btn-inverse" %>
+<% end %>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h1 class="panel-title">Tasks</h1>

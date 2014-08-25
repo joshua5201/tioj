@@ -1,9 +1,24 @@
 class ContestsController < ApplicationController
   before_filter :authenticate_admin!, except: [:dashboard, :index, :show]
-  before_filter :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
-  before_filter :set_tasks, only: [:show, :dashboard]
+  before_filter :set_contest, only: [:show, :edit, :update, :destroy, :dashboard, :set_contest_task]
+  before_filter :set_tasks, only: [:show, :dashboard, :set_contest_task]
   layout :set_contest_layout, only: [:show, :dashboard]
 
+  def set_contest_task
+    redirect_to contest_path(@contest)
+    case params[:alter_to].to_i
+      when 0
+        flash[:notice] = "Contest tasks set to public."
+      when 1
+        flash[:notice] = "Contest tasks set to only visible during contest."
+      when 2
+        flash[:notice] = "Contest tasks set to invisible."
+      else
+        return
+    end
+    @tasks.map{|a| a.update(:visible_state => params[:alter_to].to_i)}
+  end
+  
   def dashboard
     if Time.now < @contest.start_time
       authenticate_admin!
