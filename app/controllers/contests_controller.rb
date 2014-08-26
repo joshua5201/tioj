@@ -68,7 +68,7 @@ class ContestsController < ApplicationController
         @scores << [u, total_attm, total_solv, t, t.map{|a| a[1]}.sum + penalty]
       end
       @scores = @scores.sort{|a, b| a[2] != b[2] ? -(a[2] <=> b[2]) : a[4] <=> b[4]}
-      @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
+      @color = @scores.map{|a| a[2]}.uniq.sort_by{|a| -a}
       @color << 0
     else
       @participants.each do |u|
@@ -83,7 +83,7 @@ class ContestsController < ApplicationController
         @scores << [u, t, t.sum]
       end
       @scores = @scores.sort_by{|a| -a[2]}
-      @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
+      @color = @scores.map{|a| a[2]}.uniq.sort_by{|a| -a}
       @color << 0
     end
 
