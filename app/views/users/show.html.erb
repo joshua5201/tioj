@@ -24,16 +24,16 @@
       </div>
     </div>
     <br>
-    <% if user_signed_in? and current_user.admin? %>
+    <% if user_signed_in? and (current_user.id == @user.id or current_user.admin?) %>
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-5">
           Admin:<br>
           Name:<br>
           School:<br>
           Gradyear:<br>
           Email:
         </div>
-        <div class="col-md-5">
+        <div class="col-md-7">
           <%= @user.admin %><br>
           <%= @user.name %><br>
           <%= @user.school %><br>
