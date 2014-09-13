@@ -24,6 +24,8 @@
 # Ignore all the testdata
 /td
 /public/uploads
+/public/pmisc
+/public/pimgs
 
 # Ignore binaries
 /bin
