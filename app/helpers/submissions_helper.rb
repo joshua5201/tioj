@@ -8,4 +8,17 @@ module SubmissionsHelper
     end
     return false
   end
+
+  def language_class(lang)
+    case lang
+    when "c++11", "c++"
+      return "language-cpp"
+    when "c"
+      return "language-c"
+    when "haskell"
+      return "language-haskell"
+    else
+      return "language-clike"
+    end
+  end
 end
