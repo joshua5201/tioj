@@ -28,6 +28,7 @@ Tioj::Application.routes.draw do
   get 'problems/tag/:tag' => 'problems#index', as: :problems_tag
   get 'problems/:id/ranklist' => 'problems#ranklist', as: :problem_ranklist
   
+  get 'contests/:id/set_contest_task/:alter_to' => 'contests#set_contest_task', as: :set_contest_task
   get 'contests/:id/dashboard' => 'contests#dashboard'
   get 'submissions/:id/rejudge' => 'submissions#rejudge'
   get 'problems/:problem_id/rejudge' => 'submissions#rejudge_problem', as: :problem_rejudge
@@ -44,6 +45,8 @@ Tioj::Application.routes.draw do
   
   mathjax 'mathjax'
   
+  get 'edit_announcement' => 'welcome#edit_announcement', as: :edit_announcement
+  post 'alter_announcement' => 'welcome#alter_announcement', as: :alter_announcement
   get 'about' => 'about#index', as: :about
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

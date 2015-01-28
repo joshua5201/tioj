@@ -3,6 +3,8 @@ class SubmissionsController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show, :create, :new]
   before_action :set_submissions
   before_action :set_submission, only: [:rejudge, :show, :edit, :update, :destroy]
+  before_filter :set_contest, only: [:show]
+  layout :set_contest_layout, only: [:show, :index, :new]
   
   def rejudge_problem
     Submission.where("problem_id = ?", params[:problem_id]).update_all(:result => "queued", :score => 0, :_result => "", :total_time => nil, :total_memory => nil)
@@ -20,15 +22,24 @@ class SubmissionsController < ApplicationController
   end
 
   def show
+    unless (user_signed_in? and current_user.admin?) or (user_signed_in? and current_user.id == @submission.user_id)
+      if @submission.contest && Time.now >= @submission.contest.start_time && Time.now <= @submission.contest.end_time
+        if (not user_signed_in?) or (user_signed_in? and current_user.id != @submission.contest.user_id)
+          redirect_to contest_path(@submission.contest), :notice => 'Submission is censored during contest.'
+          return
+        end
+      end
+    end
     @_result = @submission._result.to_s.split("/")
     set_page_title "Submission - " + @submission.id.to_s
   end
 
   def new
-    if not params[:problem_id]
+    if params[:problem_id].blank?
       redirect_to action:'index'
+      return
     end
-    if current_user.admin == false 
+    unless current_user.admin?
       if @problem.visible_state == 2
         redirect_to action:'index'
         return
@@ -44,21 +55,43 @@ class SubmissionsController < ApplicationController
         end
       end
     end
-    #@submission = @submissions.build
     @submission = Submission.new
     @contest_id = params[:contest_id]
     set_page_title "New Submission - " + @problem.id.to_s + " - " + @problem.name
   end
-
-  def edit
-    set_page_title "Edit submission - " + @submission.id.to_s
-  end
-
+  
   def create
-    last_submission = Submission.where("user_id = ?", current_user.id).order("id Desc").first
-    if not last_submission.blank? and (Time.now - last_submission.created_at) < 15
+    if not current_user.last_submit_time.blank? and Time.now - current_user.last_submit_time < 15
       redirect_to submissions_path, alert: 'CD time 15 seconds.'
       return
+    end
+    User.transaction do
+      user = User.lock("LOCK IN SHARE MODE").find(current_user.id)
+      if not user.update(:last_submit_time => Time.now)
+        redirect_to submissions_path, alert: 'CD time 15 seconds.'
+        return
+      end
+    end
+    
+    if params[:problem_id].blank?
+      redirect_to action:'index'
+      return
+    end
+    unless current_user.admin?
+      if @problem.visible_state == 2
+        redirect_to action:'index'
+        return
+      elsif @problem.visible_state == 1
+        if params[:contest_id].blank?
+          redirect_to action:'index'
+          return
+        end
+        contest = Contest.find(params[:contest_id])
+        unless contest.problem_ids.include?(@problem.id) and Time.now >= contest.start_time and Time.now <= contest.end_time
+          redirect_to problem_path(@problem), notice: 'Contest ended, cannot submit.'
+          return
+        end
+      end
     end
     
     #@submission = @submissions.build(submission_params)
@@ -81,6 +114,10 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def edit
+    set_page_title "Edit submission - " + @submission.id.to_s
+  end
+  
   def update
     respond_to do |format|
       if @submission.update(submission_params)
@@ -105,7 +142,7 @@ class SubmissionsController < ApplicationController
   def set_submissions
     @problem = Problem.find(params[:problem_id]) if params[:problem_id]
     @contest = Contest.find(params[:contest_id]) if params[:contest_id]
-    @submissions = Submission.all
+    @submissions = Submission
     @submissions = @submissions.where("problem_id = ?", params[:problem_id]) if params[:problem_id]
     if params[:contest_id]
       @submissions = @submissions.where("contest_id = ?", params[:contest_id])
@@ -115,7 +152,8 @@ class SubmissionsController < ApplicationController
           if user_signed_in?
             @submissions = @submissions.where("user_id = ?", current_user.id)
           else
-            @submissions = @submissions.where("user_id = 0")
+            @submissions = @submissions.where("id = 0") #just make it a empty set whatsoever
+            return
           end
         end
       end
@@ -128,27 +166,18 @@ class SubmissionsController < ApplicationController
     @submissions = @submissions.joins("INNER JOIN users ON submissions.user_id = users.id").where("users.username LIKE ?", params[:filter_username]) if not params[:filter_username].blank?
     @submissions = @submissions.where("user_id = ?", params[:filter_user_id]) if not params[:filter_user_id].blank?
     @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
-    #if @problem
-      #@submissions = @problem.submissions
-    #elsif @contest
-      #@submissions = @contest.submissions
-    #else
-      #@submissions = Submission.all
-    #end
   end
   
   def set_submission
     @submission = Submission.find(params[:id])
   end
-  def authenticate_admin!
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'
-    end
+  
+  def set_contest
+    @contest = @submission.contest
   end
-
+  
   # Never trust parameters from the scary internet, only allow the white list through.
   def submission_params
-    params.require(:submission).permit(:code, :compiler, :result, :score, :problem_id, :page)
+    params.require(:submission).permit(:code, :compiler, :problem_id)
   end
 end

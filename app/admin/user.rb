@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :nickname, :admin, :avatar_url, :motto
+  permit_params :email, :nickname, :admin, :avatar_url, :motto, :school, :gradyear, :name
 
   controller do
     def find_resource

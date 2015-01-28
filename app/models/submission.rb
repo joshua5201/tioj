@@ -22,6 +22,6 @@ class Submission < ActiveRecord::Base
   belongs_to :user
   belongs_to :contest
   
-  validates_length_of :code, maximum: 5000000
-  validates_inclusion_of :compiler, :in => %w(c++11 c++ c)
+  validates_length_of :code, :in => 0..5000000
+  validates_inclusion_of :compiler, :in => %w(c++11 c++ c haskell)
 end

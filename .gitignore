@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+/tempioj
+/sql\ dump
+
 # Ignore bundler config.
 /.bundle
 
@@ -22,9 +25,16 @@
 # Ignore all the testdata
 /td
 /public/uploads
+/public/pmisc
+/public/pimgs
 
 # Ignore binaries
 /bin
 
 /config/database.yml
 /public/assets
+/app/views/problems/._form.html.erb.swp
+/config/config.yml
+/config/database.yml.example
+/config/secret.yml
+

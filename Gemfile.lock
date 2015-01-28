@@ -273,6 +273,7 @@ DEPENDENCIES
   mini_magick
   mysql2
   nested_form
+  nokogiri
   omniauth
   omniauth-facebook
   rails (= 4.0.2)

@@ -21,10 +21,7 @@
   
   <div class="form-group">
     <%= f.label :category %>
-    <%= f.select :category, options_for_select([
-    ["Announcements", 0], 
-    ["Course Materials", 1]
-    ], params[:category]), {}, {:class => 'form-control flat'} %>
+    <%= f.select :category, [["Announcements", 0], ["Course Materials", 1]], {}, {:class => 'form-control flat'} %>
   </div>
   
   <div class="form-group">

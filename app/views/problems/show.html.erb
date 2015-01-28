@@ -1,11 +1,11 @@
 <h4 class="page-header">
-  <%= @problem.id %> : <%= @problem.name %>
+  <%= user_problem_status(current_user, @problem) if user_signed_in? %> <%= @problem.id %> . <%= @problem.name %>
 </h4>
 
 <p>
 <div class="row">
   <div class="col-md-2">
-    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-success btn-xs btn-block' } %>
+    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest}, { :class => 'btn btn-success btn-xs btn-block' } %>
   </div>
   <div class="col-md-2">
     <%= link_to 'Status', problem_submissions_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>
@@ -29,7 +29,7 @@
     </div>
   <% end %>
   <div class="col-md-2">
-    <%= link_to 'Back to Problems List', problems_path, :class => 'btn btn-default btn-xs btn-block' %>
+    <%= link_to 'Back to Problems List', @contest.blank? ? problems_path : contest_path(@contest), :class => 'btn btn-default btn-xs btn-block' %>
   </div>
 </div>
 </p>
@@ -131,7 +131,7 @@
         <h1 class="panel-title">Sample Input</h1>
       </div>
       <div class="panel-body" id="code-input">
-        <%= @problem.example_input %>
+        <%= raw @problem.example_input.gsub(/\n/, '<br/>') %>
       </div>
     </div>
   </div>
@@ -141,7 +141,7 @@
         <h1 class="panel-title">Sample Output</h1>
       </div>
       <div class="panel-body" id="code-input">
-        <%= @problem.example_output %>
+        <%= raw @problem.example_output.gsub(/\n/, '<br/>') %>
       </div>
     </div>
   </div>
@@ -203,7 +203,7 @@
 
 <div class="row">
   <div class="col-md-2">
-    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest_id}, { :class => 'btn btn-success btn-xs btn-block' } %>
+    <%= link_to 'Submit', {:controller => :submissions, :action => :new, :problem_id => @problem.id, :contest_id => @contest}, { :class => 'btn btn-success btn-xs btn-block' } %>
   </div>
   <div class="col-md-2">
     <%= link_to 'Status', problem_submissions_path(@problem), :class => 'btn btn-info btn-xs btn-block' %>

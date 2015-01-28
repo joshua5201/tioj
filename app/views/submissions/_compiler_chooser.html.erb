@@ -1,6 +1,7 @@
 <%= f.label :compiler %>
 <%= f.select :compiler, [
-["c++11/gnu g++", "c++11"], 
-["c++/gnu g++", "c++"], 
-["c/gnu gcc", "c"]
+["c++11/gnu c++ compiler 4.8.2 | options: -O2 -std=c++11", "c++11"], 
+["c++/gnu c++ compiler 4.8.2 | options: -O2", "c++"], 
+["c/gnu c compiler 4.8.2 | options: -O2 -ansi -lm", "c"],
+["haskell/glasgow haskell compiler 7.8.3 with haskell platform | options: -O", "haskell"]
 ] , {}, {:class => 'form-control flat'} %>

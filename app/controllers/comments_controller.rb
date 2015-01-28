@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
 
   before_action :find_post
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_contest
+  
   # GET /comments
   # GET /comments.json
   def index
@@ -66,6 +67,16 @@ class CommentsController < ApplicationController
   end
 
   private
+  def check_contest
+    unless user_signed_in? and current_user.admin?
+      Contest.all.each do |f|
+        if Time.now >= f.start_time and Time.now <= f.end_time
+          redirect_to root_path, :alert => "No discussion during contest."
+        end
+      end
+    end
+  end
+  
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = Comment.find(params[:id])
@@ -73,13 +84,6 @@ class CommentsController < ApplicationController
 
   def find_post
     @post = Post.find(params[:post_id])
-  end
-
-  def authenticate_admin!
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

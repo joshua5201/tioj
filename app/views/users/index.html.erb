@@ -16,7 +16,8 @@
       <th></th>
       <th>Username</th>
       <th>Nickname</th>
-      <th>Email</th>
+      <!--<th>Email</th>-->
+      <th>Motto</th>
       <th>Accepted</th>
       <th>AC Ratio</th>
     </tr>
@@ -25,14 +26,20 @@
   <tbody>
     <% @users.each_with_index do |user, idx| %>
       <tr>
-        <td><% offset = [params[:page].to_i, 0].max %><%= offset * 25 + idx + 1 %></td>
+        <td><% offset = [params[:page].to_i, 1].max %><%= (offset-1) * 25 + idx + 1 %></td>
         <td><%= link_to image_tag(user.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(user) %></td>
         <td><%= link_to user.username, user_path(user) %></td>
         <td><%= user.nickname %></td>
-        <td><%= user.email %></td>
-        <td><%= user_ac_count(user) %></td>
+        <!--<td><% user.email %></td>-->
+        <% unless user.motto.blank? %>
+          <td><%= user.motto %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= user.ac_count %></td>
         <td><%= ac_ratio_by_user(user) %></td>
       </tr>
     <%end%>
   </tbody>
 </table>
+<%= paginate(@users) %>

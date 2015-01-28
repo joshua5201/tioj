@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<%= render_page_title_tag %>
+<%= stylesheet_link_tag    "application", media: "all" %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+        processEscapes: true
+      }
+    });
+</script>
+<%= mathjax_tag %>
+<link rel="shortcut icon" href="/images/favicon_co.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+#page-content{ padding-left: 40px; padding-right: 40px; padding-bottom: 40px; }
+.page-header{ margin: 10px 0 15px; }
+@font-face{
+  font-family: "monofont";
+  src: url("/fonts/DejaVuSansMono.ttf");
+}
+#code-input{ font-family: "monofont"; }
+</style>
+</head>
+
+<body>
+<div style="background-color:#32CD32">
+  <nav class="navbar navbar-inverse navbar-embossed" role="navigation" style="background-color:#32CD32">    
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to image_tag("banner_0_green.png", :alt => ('TIOJ #contest %s' % @contest.title), :style => "padding-left: 15px;"), contest_path(@contest), :class => "nav-brand" %>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav navbar-left">           
+          <li><%= link_to "Contest Tasks", contest_path(@contest) %></li>
+          <li><%= link_to "Submissions", contest_submissions_path(@contest) %></li>
+          <li><%= link_to "Dashboard", {:controller => :contests, :action => :dashboard, :id => @contest.id} %></li>
+          <% if current_user %>
+            <li><%= link_to(current_user.username, user_path(current_user)) %></li>
+            <li><%= link_to('Sign out', destroy_user_session_path, :method => :delete) %></li>
+            <% if current_user.admin? %>
+              <!--<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Admin<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= link_to 'Admin', admin_root_path, :target => "_blank" %></li>
+                  <li><%= link_to 'Judge Servers', judge_servers_path %></li>
+                </ul>
+              </li>-->
+            <% end %>
+          <% else %>
+            <li><%= link_to('Sign in', new_session_path(:user)) %> </li>
+            <li><%= link_to('Sign up', new_registration_path(:user)) %></li>
+          <% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav><!-- /navbar -->
+</div>
+  
+<div class="container-fluid" id="page-content">
+  <!--alert and notice-->
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <strong>Oh Geez! </strong> <%= notice %>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <strong>Oh No! </strong> <%= alert %>
+    </div>
+  <% end %>
+  <%= yield %>
+  
+</div>
+
+</body>
+</html>

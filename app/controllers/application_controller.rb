@@ -5,16 +5,17 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   before_filter :set_verdict_hash
   before_filter :configure_permitted_parameters, if: :devise_controller?
-
+  before_filter :set_anno
+  
   def set_verdict_hash
     @verdict = {"AC" => "Accepted",
                 "WA" => "Wrong Answer",
                 "TLE" => "Time Limit Exceeded",
                 "MLE" => "Segmentation Fault",
                 "OLE" => "Output Limit Exceeded",
-                "RE" => "Runtime Error (exited with nonzero status)",
+                "RE" => "Runtime Error",
                 "SIG" => "Runtime Error (exited with signal)",
-                "CE" => "Compile Error",
+                "CE" => "Compilation Error",
                 "CO" => "Compilation Timed Out",
                 "ER" => "WTF!"
     }
@@ -56,16 +57,38 @@ class ApplicationController < ActionController::Base
   end
   
 protected
+  def authenticate_admin!
+    authenticate_user!
+    if not current_user.admin?
+      flash[:alert] = 'Insufficient User Permissions.'
+      redirect_to action:'index' 
+      return
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:email, :nickname, :username, :password, :password_confirmation, :remember_me)
+      u.permit(:school, :gradyear, :name, :email, :nickname, :username, :password, :password_confirmation, :remember_me)
     end
     devise_parameter_sanitizer.for(:sign_in) do |u|
       u.permit(:login, :username, :email, :password, :remember_me)
     end
     devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:avatar, :avatar_cache, :motto, :email, :nickname, :password, :password_confirmation, :current_password)
+      u.permit(:school, :gradyear, :name, :avatar, :avatar_cache, :motto, :email, :nickname, :password, :password_confirmation, :current_password)
     end
   end
-
+  
+  def set_contest_layout
+    if @contest.blank?
+      "application"
+    else
+      "contest"
+    end
+  end
+  
+  def set_anno
+    require "json"
+    @anno = JSON.parse(File.read("public/announcement/anno"))
+  end
+  
 end

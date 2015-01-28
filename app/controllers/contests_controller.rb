@@ -1,13 +1,27 @@
 class ContestsController < ApplicationController
-  before_action :authenticate_admin!, except: [:dashboard, :index, :show]
-  before_action :set_contest, only: [:show, :edit, :update, :destroy, :dashboard]
+  before_filter :authenticate_admin!, except: [:dashboard, :index, :show]
+  before_filter :set_contest, only: [:show, :edit, :update, :destroy, :dashboard, :set_contest_task]
+  before_filter :set_tasks, only: [:show, :dashboard, :set_contest_task]
+  layout :set_contest_layout, only: [:show, :dashboard]
 
+  def set_contest_task
+    redirect_to contest_path(@contest)
+    case params[:alter_to].to_i
+      when 0
+        flash[:notice] = "Contest tasks set to public."
+      when 1
+        flash[:notice] = "Contest tasks set to only visible during contest."
+      when 2
+        flash[:notice] = "Contest tasks set to invisible."
+      else
+        return
+    end
+    @tasks.map{|a| a.update(:visible_state => params[:alter_to].to_i)}
+  end
+  
   def dashboard
     if Time.now < @contest.start_time
-      unless user_signed_in? and current_user.admin?
-        redirect_to action:'index'
-        return
-      end
+      authenticate_admin!
     end
 
     c_submissions = nil
@@ -22,20 +36,11 @@ class ContestsController < ApplicationController
     else
       c_submissions = @contest.submissions
     end
-
-    #if @contest.contest_type == 1
-    #  authenticate_user!
-    #  if not current_user.admin?
-    #    redirect_to action:'index'
-    #    return
-    #  end
-    #end
-    @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
-    #c_submissions = @contest.submissions#Submission.where("created_at >= ? AND created_at <= ? AND contest_id = ?", @contest.start_time, @contest.end_time, @contest.id)
+    
     @submissions = []
     @participants = []
     @tasks.each_with_index do |task, index|
-      @submissions << c_submissions.where("problem_id = ?", task.id)#select{|a| a.problem_id == task.id}
+      @submissions << c_submissions.where("problem_id = ?", task.id)
       @participants = @participants | @submissions[index].map{|e| e.user_id}
     end
     @scores = []
@@ -63,7 +68,7 @@ class ContestsController < ApplicationController
         @scores << [u, total_attm, total_solv, t, t.map{|a| a[1]}.sum + penalty]
       end
       @scores = @scores.sort{|a, b| a[2] != b[2] ? -(a[2] <=> b[2]) : a[4] <=> b[4]}
-      @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
+      @color = @scores.map{|a| a[2]}.uniq.sort_by{|a| -a}
       @color << 0
     else
       @participants.each do |u|
@@ -78,7 +83,7 @@ class ContestsController < ApplicationController
         @scores << [u, t, t.sum]
       end
       @scores = @scores.sort_by{|a| -a[2]}
-      @color = @scores.map{|a| a[2]}.uniq.sort{|a| -a}
+      @color = @scores.map{|a| a[2]}.uniq.sort_by{|a| -a}
       @color << 0
     end
 
@@ -86,13 +91,14 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @contests = Contest.all.order("id DESC").page(params[:page])
+    @contests = Contest.order("id DESC").page(params[:page])
     set_page_title "Contests"
   end
 
   def show
     if Time.now < @contest.start_time
       unless user_signed_in? and current_user.admin?
+        flash[:notice] = 'Contest has not yet started.'
         redirect_to action:'index'
         return
       end
@@ -148,11 +154,8 @@ class ContestsController < ApplicationController
     @contest = Contest.find(params[:id])
   end
   
-  def authenticate_admin!
-    authenticate_user!
-    if current_user.admin == false 
-      redirect_to action:'index'	
-    end
+  def set_tasks
+    @tasks = @contest.contest_problem_joints.order("id ASC").map{|e| e.problem}
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -164,7 +167,6 @@ class ContestsController < ApplicationController
       :start_time,
       :end_time,
       :contest_type,
-      :page,
       contest_problem_joints_attributes: 
       [
         :id,

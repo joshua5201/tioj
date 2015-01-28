@@ -1,6 +1,3 @@
-<%= javascript_include_tag 	"/stylesheets/prism.js" %>
-<%= stylesheet_link_tag 	"/stylesheets/prism.css" %>
-
 <% if censored(@submission) %>
   <h4 class="page-header">Results of submission #<code>censored</code></h4>
   <code>censored</code>
@@ -9,7 +6,11 @@
 <h4 class="page-header">Results of submission #<%= @submission.id %></h4>
 
 <p>
-<%= link_to 'Back to Submissions List', submissions_path, :class => 'btn btn-default btn-xs' %>
+<% if @contest.blank? %>
+  <%= link_to 'Back to Submissions List', submissions_path, :class => 'btn btn-default btn-xs' %>
+<% else %>
+  <%= link_to 'Back to Submissions List', contest_submissions_path(@contest), :class => 'btn btn-default btn-xs' %>
+<% end %>
 <% if user_signed_in? and current_user.admin? %>
   <%= link_to 'Rejudge', { :controller => :submissions, :action => :rejudge, :id => @submission.id }, :class => 'btn btn-xs btn-primary' %>
   <%= link_to 'Edit', edit_submission_path(@submission), :class => 'btn btn-info btn-xs' %>
@@ -98,7 +99,13 @@
 
 <div class="well well-sm">
   <div class="row">
-    <div class="col-md-1">
+    <div class="col-md-2">
+      <strong>Submitter:</strong>
+    </div>
+    <div class="col-md-2">
+      <%= link_to @submission.user.username, user_path(@submission.user_id) %>
+    </div>
+    <div class="col-md-2">
       <strong>Compiler:</strong>
     </div>
     <div class="col-md-2">
@@ -108,15 +115,19 @@
       <strong>Code Length:</strong>
     </div>
     <div class="col-md-2">
-      <%= number_to_human_size(@submission.code.size) %>
+      <%= number_to_human_size(@submission.code.to_s.size) %>
     </div>
   </div>
 </div>
 
 <% if user_signed_in? and ( current_user.admin? or current_user.id == @submission.user_id ) %>
-  <pre class="line-numbers"><code class="language-c-like"><%= @submission.code %></code></pre>
+  <pre class="line-numbers"><code class="<%= language_class(@submission.compiler) %>"><%= @submission.code %></code></pre>
 <% end %>
 
 <%= link_to 'Back to Top', '#', :class => 'btn btn-default btn-xs' %>
 
 <% end %>
+
+<%= javascript_include_tag 	"/codehighlighter/prism.js" %>
+<%= stylesheet_link_tag 	"/codehighlighter/prism.css" %>
+

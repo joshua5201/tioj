@@ -1,11 +1,11 @@
 class ProblemsController < ApplicationController
-  before_action :set_problem, only: [:show, :edit, :update, :destroy, :ranklist]
-
+  before_filter :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :set_problem, only: [:show, :edit, :update, :destroy, :ranklist]
+  before_filter :set_contest, only: [:show]
+  layout :set_contest_layout, only: [:show]
+  
   def ranklist
-    #submissions_id = Submission.select("id, MIN(submissions.total_time)")
-    #  .where("problem_id = ? AND result = ?", @problem.id, "AC").group("user_id")
-    #@submissions = Submission.find(submissions_id.map{|a| a.id}).sort_by{|a| a.total_time}
-    @submissions = @problem.submissions.where("contest_id is NULL AND result = ?", "AC").order("total_time ASC").order("total_memory ASC")
+    @submissions = @problem.submissions.where("contest_id is NULL AND result = ?", "AC").order("total_time ASC").order("total_memory ASC").order("LENGTH(code) ASC")
     set_page_title "Ranklist - " + @problem.id.to_s + " - " + @problem.name
   end
   
@@ -14,59 +14,47 @@ class ProblemsController < ApplicationController
       redirect_to problem_path(params[:search_id])
       return
     end
+    @problems = Problem.select("problems.id, name, visible_state")
     if not params[:search_name].blank?
-      @problems = Problem.where("name LIKE ?", "%%%s%%"%params[:search_name]).page(params[:page]).per(100)
-    elsif not params[:tag].blank?
-      @problems = Problem.tagged_with(params[:tag]).order("id ASC").page(params[:page]).per(100)
-    else
-      @problems = Problem.all.order("id ASC").page(params[:page]).per(100)
+      @problems = @problems.where("name LIKE ?", "%%%s%%"%params[:search_name])
     end
+    if not params[:tag].blank?
+      @problems = @problems.tagged_with(params[:tag])
+    end
+    @problems = @problems.order("problems.id ASC").page(params[:page]).per(100)
     set_page_title "Problems"
   end
 
   def show
-    if user_signed_in? && current_user.admin == true
-    elsif @problem.visible_state == 0 
-    elsif @problem.visible_state == 1 
-      if params[:contest_id].blank?
-        redirect_to action:'index'
+    unless user_signed_in? && current_user.admin == true
+      if @problem.visible_state == 1 
+        if params[:contest_id].blank?
+          redirect_to :back, :notice => 'Insufficient User Permissions.'
+          return
+        end
+        unless @contest.problem_ids.include?(@problem.id) and Time.now >= @contest.start_time and Time.now <= @contest.end_time
+          redirect_to :back, :notice => 'Insufficient User Permissions.'
+          return
+        end
+      elsif @problem.visible_state == 2
+        redirect_to :back, :notice => 'Insufficient User Permissions.'
         return
       end
-      contest = Contest.find(params[:contest_id])
-      unless contest.problem_ids.include?(@problem.id) and Time.now >= contest.start_time and Time.now <= contest.end_time
-        redirect_to action:'index'
-        return
-      end
-    else
-      redirect_to action:'index'
-      return
     end
-    @contest_id = params[:contest_id]
+    #@contest_id = params[:contest_id]
     set_page_title @problem.id.to_s + " - " + @problem.name
   end
 
   def new
-		authenticate_user!
-		if current_user.admin == false 
-			redirect_to action:'index'
-		end
-		@problem = Problem.new
-                set_page_title "New problem"
+    @problem = Problem.new
+    set_page_title "New problem"
   end
 
   def edit
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
-        set_page_title "Edit " + @problem.id.to_s + " - " + @problem.name
+    set_page_title "Edit " + @problem.id.to_s + " - " + @problem.name
   end
 
   def create
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
     @problem = Problem.new(problem_params)
     respond_to do |format|
       if @problem.save
@@ -80,10 +68,6 @@ class ProblemsController < ApplicationController
   end
 
   def update
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index', notice: 'Insufficient User Permissions.'	
-	end
     respond_to do |format|
       if @problem.update(problem_params)
         format.html { redirect_to @problem, notice: 'Problem was successfully updated.' }
@@ -97,12 +81,9 @@ class ProblemsController < ApplicationController
 
   def destroy
     redirect_to action:'index'
+    return
     # 'Deletion of problem may cause unwanted paginate behavior.'
     
-	authenticate_user!
-	if current_user.admin == false 
-		redirect_to action:'index'	
-	end
     #@problem.destroy
     respond_to do |format|
       format.html { redirect_to problems_url, notice: 'Deletion of problem may cause unwanted paginate behavior.' }
@@ -115,6 +96,9 @@ class ProblemsController < ApplicationController
       @problem = Problem.find(params[:id])
     end
     
+    def set_contest
+      @contest = Contest.find(params[:contest_id]) if not params[:contest_id].blank?
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def problem_params
       params.require(:problem).permit(
@@ -134,6 +118,7 @@ class ProblemsController < ApplicationController
         :problem_type,
         :sjcode,
         :interlib,
+        :old_pid,
 	testdata_sets_attributes:
 	[
 	  :id,
