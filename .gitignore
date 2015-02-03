@@ -27,6 +27,7 @@
 /public/uploads
 /public/pmisc
 /public/pimgs
+/public/pcontest
 
 # Ignore binaries
 /bin
