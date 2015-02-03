@@ -1,0 +1,33 @@
+<link href="../../../../w.csie.org/_b96120/vcprob.html" rel="stylesheet">
+<title>Dark Horse Escape</title>
+
+<div class=Title>Dark Horse Escape</div>
+<div class=Info>Time limit: 1 sec</textarea></div>
+Dark Kingdom 中的一片草原上，DarkKnight 養了很多隻王國最珍貴的黑馬。
+<p>
+有一天，Dark Kingdom 發生地震，於是馬兒開始四處逃竄，為了防止王國珍貴的黑馬消失，DarkKnight 派他底下的士兵來擋住這些馬。
+<p>
+首先 DarkKnight 先用他的原力暫時讓這些馬停下來，但是馬實在太多了，不能維持很久，士兵們必須趁這段時間去卡住適當的位置，讓這些馬完全無法移動。
+<p>
+為了減輕士兵們的負擔，DarkKnight 在東北方放很多黑馬最喜歡的飼料，於是聞到飼料的馬就只會往東北方移動，這樣大大的減輕了士兵的負擔。
+<p>
+最後最重要的是，這些黑馬既然是 DarkKnight 飼養的，想必只會走馬步。<br>
+例如如果有一隻黑馬在(1,1)的位置, 有另一隻黑馬在(1,2)的位置(這在(1,1)的北方)，然後另外有一個士兵在(3,2)的位置(這在(1,1)的東北方)，那麼位在(1,1)的黑馬就不會移動了，因為(1,2)拐到馬腳，(3,2)又擋到路。
+<p>
+現在給你所有黑馬的位置，請問 DarkKnight 要讓所有黑馬無法移動，需要幾名士兵?
+<div class=Title1>Input</div>
+輸入包含多組測試資料。第一行是一個正整數 n(1≦n≦100000), 表示黑馬的個數, 接下來有 2n 個正整數，x<sub>1</sub>,y<sub>1</sub>,x<sub>2</sub>,y<sub>2</sub>,...,x<sub>n</sub>,y<sub>n</sub>，每個(x<sub>i</sub>,y<sub>i</sub>)表示第 i 隻馬的座標，所有座標都位在 1~1000 之間。
+<div class=Title1>Output</div>
+輸出一行正整數，表示至少需要幾個士兵。
+<table border=0 width=100%>
+<tbody><tr>
+  <td class=Title2 width=50%>Sample Input</td>
+  <td class=Title2>Sample Output</td></tr>
+  <tr valign=top><td>
+    <pre class=SampleIO>8
+1 1 2 2 3 3 4 4 1 3 3 1 2 4 4 2</pre>
+  </td><td>
+    <pre class=SampleIO>6</pre>
+  </td></tr>
+</tbody></table>
+

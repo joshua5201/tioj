@@ -1,0 +1,45 @@
+<link href="../../../../w.csie.org/_b96120/vcprob.html" rel="stylesheet">
+<title>Dark Teleport Field</title>
+
+<div class=Title>Dark Teleport Field</div>
+<div class=Info>Time limit: 5 sec</textarea></div>
+在 Darkseer 的暗黑傳送完成之後 DarkKnight 也開始研發 Dark Teleport Field 法術。
+<br><img src=dtf.png><br>
+這個法術可以在平地上建立魔法陣，使得魔法陣中的人可以在影響範圍內任意的瞬間移動(進入魔法陣並使用傳送算一步)。不過這不是免費的，每次使用都要支付一些法力；而且由於 DarkKnight 對魔法的認識，只能建立矩形的魔法陣，兩個魔法陣不能重疊；如圖，魔法陣的四邊也要和營地的四邊平行。
+<p>
+圖中是可能的移動方式。你的任務是幫 DarkKnight 計算兩點間的移動需要走多少步。
+<div class=Title1>Input</div>
+輸入包含多組測試資料。
+第一行有兩個整數，n (n≦50000) 表示營地的長度和寬度，m (m≦150)
+表示有幾個魔法陣。<br>
+接下來有 m 行，每行有 4 個整數(X1<sub>i</sub>,Y1<sub>i</sub>,X2<sub>i</sub>,Y2<sub>i</sub>)，表示魔法陣的左上角和右下角，座標範圍是 0~n-1。<br>
+接著有一個整數 t (t≦5)，表示有 t 個問題，每個問題一行，五個整數，第一個是可以使用傳送的次數 k (k≦5)，接下來 4 個數表示起點和終點的座標。
+<div class=Title1>Output</div>
+對每個問題輸出從起點到終點需要幾步。
+<table border=0 width=100%>
+<tbody><tr>
+  <td class=Title2 width=50%>Sample Input</td>
+  <td class=Title2>Sample Output</td></tr>
+  <tr valign=top><td>
+    <pre class=SampleIO>5 1
+2 1 4 2
+3
+1 0 0 4 4
+1 3 1 2 2
+0 1 1 4 2
+
+8 4
+1 1 3 2
+5 2 6 5
+1 5 2 6
+5 7 7 7
+1
+3 0 0 7 7</pre>
+  </td><td>
+    <pre class=SampleIO>5
+0
+4
+6</pre>
+  </td></tr>
+</tbody></table>
+

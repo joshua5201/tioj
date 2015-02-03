@@ -1,0 +1,30 @@
+<link href="../../../../w.csie.org/_b96120/vcprob.html" rel="stylesheet">
+<title>Dark Kingdom II</title>
+
+<div class=Title>Dark Kingdom II</div>
+<div class=Info>Time limit: 1 sec</textarea></div>
+Dark Kingdom 決定以有瞬間傳送效果的黑暗傳送路徑建立新的運輸系統。這個法術有破壞地表的副作用，所以 Dark Kingdom 的法術工程師要把所有 n 個城市用環狀的路徑串接起來。<br>
+<img src=dk2.png width="342" height="350">
+如圖，在這個傳送系統完成之後，彼得要從 3 到 2(藍色的線)，雖然要傳送 5 次，但是還是比騎馬直接過去快多了，不過彼得覺得走這樣一趟就要付 5 元實在是很貴。有一天彼得在傳送的時候睡著了，他醒過來的時候剛好在 2，只是不知道已經環遊 Dark Kingdom 多少次了；但是當他要付錢離開傳送站的時候發現還是只要付 5 元！
+<p>
+聰明的彼得發現，進傳送站時拿的水晶，不是紀錄傳送了幾次，而是從哪個城進站。另一天彼得進入 3 的傳送站時，遇到了一個要從 1 到 4(紅線)的朋友，他就提議兩個人交換水晶，結果兩個人竟然都只要付 1 元(綠線)！
+<p>
+印證了自己的想法之後，彼得就開始號召了 m 個人參加這個行動，你的工作是寫一個程式，幫彼得計算他可以幫大家省多少錢。
+<div class=Title1>Input</div>
+輸入包含多組測試資料。
+第一行有兩個整數 n,m(n,m&lt;=30000)，表示有 n 個城市，城市的編號是 0~n-1，i 號城市可以傳送到 i+1 號城市(n-1 例外，傳送到 0)，接下來有 m 行，每行有兩個數字，表示每個參加計畫的人的起點城市和終點城市。
+<div class=Title1>Output</div>
+輸出彼得可以幫大家省多少錢。
+<table border=0 width=100%>
+<tbody><tr>
+  <td class=Title2 width=50%>Sample Input</td>
+  <td class=Title2>Sample Output</td></tr>
+  <tr valign=top><td>
+    <pre class=SampleIO>8 3
+7 3
+2 5
+4 0</pre>
+  </td><td>
+    <pre class=SampleIO>8</pre>
+  </td></tr>
+</tbody></table>
