@@ -29,13 +29,21 @@
     <input id="filter_problem" name="filter_problem" class="form-control input-sm flat" type="number" min="1" placeholder="Enter Problem ID">
   </div>
   <div class="form-group">
-    <select id="filter_status" name='filter_status[]' class="selectpicker" multiple="multiple" title="Select Result">
+    <select id="filter_status" name="filter_status[]" class="selectpicker" multiple="multiple" title="Select Result">
       <option value="AC">Accepted</option>
       <option value="WA">Wrong Answer</option>
       <option value="TLE">Time Limit Exceeded</option>
       <option value="MLE">Segmentation Fault</option>
       <option value="RE">Runtime Error</option>
       <option value="CE">Compilation Error</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <select id="filter_compiler" name="filter_compiler[]" class="selectpicker" multiple="multiple" title="Select Compiler">
+      <option value="c++11">c++11</option>
+      <option value="c++">c++</option>
+      <option value="c">c</option>
+      <option value="haskell">haskell</option>
     </select>
   </div>
   <button type="submit" id="quick_filter" class="btn btn-inverse btn-xs">Filter</button>
