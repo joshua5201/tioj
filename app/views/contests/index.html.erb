@@ -28,6 +28,8 @@
         <td><%= contest.title %></td>
         <% if user_signed_in? %>
           <td><%= link_to 'Particapate', contest, :class => 'btn btn-xs btn-primary', :target => '_blank' %></td>
+        <% else %>
+          <td></td>
         <% end %>
         <% if Time.now > contest.end_time %>
 	  <td>Ended</td>

@@ -24,4 +24,12 @@ class Submission < ActiveRecord::Base
   
   validates_length_of :code, :in => 0..5000000
   validates_inclusion_of :compiler, :in => %w(c++11 c++ c haskell)
+  validates_inclusion_of :compiler, :in => %w(c++11 c++ c), 
+    :message => "only c++11 c++ c are allowed during contest",
+    :if => :contest?
+
+  def contest?
+    contest_id != nil
+  end
+
 end

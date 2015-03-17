@@ -166,6 +166,7 @@ class SubmissionsController < ApplicationController
     @submissions = @submissions.joins("INNER JOIN users ON submissions.user_id = users.id").where("users.username LIKE ?", params[:filter_username]) if not params[:filter_username].blank?
     @submissions = @submissions.where("user_id = ?", params[:filter_user_id]) if not params[:filter_user_id].blank?
     @submissions = @submissions.where(result: params[:filter_status]) if not params[:filter_status].blank?
+    @submissions = @submissions.where(compiler: params[:filter_compiler]) if not params[:filter_compiler].blank?
   end
   
   def set_submission
