@@ -16,7 +16,7 @@ class ProblemsController < ApplicationController
     end
     @problems = Problem.select("problems.id, name, visible_state")
     if not params[:search_name].blank?
-      @problems = @problems.where("name LIKE ?", "%%%s%%"%params[:search_name])
+      @problems = @problems.where("name LIKE ?", "%%%s%%"%params[:search_name]).page(params[:page]).per(100)
     end
     if not params[:tag].blank?
       @problems = @problems.tagged_with(params[:tag])
