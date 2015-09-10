@@ -37,5 +37,6 @@
 /app/views/problems/._form.html.erb.swp
 /config/config.yml
 /config/database.yml.example
-/config/secret.yml
+/config/secrets.yml
+
 
