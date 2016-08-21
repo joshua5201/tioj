@@ -1,0 +1,34 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: your_mysql_username
+  password: your_nysql_password
+  socket: /var/run/mysqld/mysqld.sock
+
+development:
+  <<: *default
+    database: tioj_development
+
+
+test:
+  <<: *default
+   database: tioj_test
+
+
+ # On Heroku and other platform providers, you may have a full connection URL
+ # available as an environment variable. For example:
+ #
+ #   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
+ #
+ # You can use this database configuration with:
+ #
+ #   production:
+ #      url: <%= ENV['DATABASE_URL'] %>
+ #
+
+ production:
+   <<: *default
+     database: tioj_production
+     username: production_mysql_username
+     password: <%= ENV['MY_APP_DATABASE_PASSWORD'] %>
