@@ -1,18 +1,18 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '4.2.6'
 
 # Use mysql2 as the database for Active Record
 gem 'mysql2'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0'
 gem 'less'
-gem 'less-rails'
+gem 'less-rails', '~> 2.7.0'
 gem 'less-rails-bootstrap'
 # user
-gem 'devise', '~> 3.2.4'
+gem 'devise', '~> 4.2'
 gem 'omniauth'
 gem 'omniauth-facebook'
 # Use Redcarpet to render Markdown
@@ -22,7 +22,7 @@ gem 'redcarpet'
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.2'
 gem 'therubyracer'
 
 # use Kaminari to paginate
@@ -37,7 +37,7 @@ gem 'jquery-rails'
 #gem 'turbolinks'
 #gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0'
 
 # nested form: https://github.com/ryanb/nested_form
 gem "nested_form"
@@ -53,12 +53,7 @@ gem "mathjax-rails"
 gem 'acts-as-taggable-on'
 
 # Active Admin, db admin tool: https://github.com/gregbell/active_admin
-gem 'activeadmin', github: 'gregbell/active_admin'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
+gem 'activeadmin', github: 'activeadmin'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
@@ -72,13 +67,10 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'mechanize'
-
 # friendly id for SEO
-gem 'friendly_id', github: 'norman/friendly_id'
+gem 'friendly_id'
 
 # annotate (showing model info in model.rb)
-gem 'annotate', github: 'ctran/annotate_models'
-
-gem 'seo_helper', '~> 1.0', :git => 'git://github.com/techbang/seo_helper.git'
+gem 'annotate'
 gem 'nokogiri' #getting old tioj probs
+gem 'seo_helper'

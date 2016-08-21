@@ -67,13 +67,13 @@ protected
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) do |u|
+    devise_parameter_sanitizer.permit(:sign_up) do |u|
       u.permit(:school, :gradyear, :name, :email, :nickname, :username, :password, :password_confirmation, :remember_me)
     end
-    devise_parameter_sanitizer.for(:sign_in) do |u|
+    devise_parameter_sanitizer.permit(:sign_in) do |u|
       u.permit(:login, :username, :email, :password, :remember_me)
     end
-    devise_parameter_sanitizer.for(:account_update) do |u|
+    devise_parameter_sanitizer.permit(:account_update) do |u|
       u.permit(:school, :gradyear, :name, :avatar, :avatar_cache, :motto, :email, :nickname, :password, :password_confirmation, :current_password)
     end
   end
