@@ -67,7 +67,7 @@ class PostsController < ApplicationController
     @post.destroy
     respond_to do |format|
       format.json { head :no_content }
-      redirect_to posts_url
+      format.html { redirect_to posts_url }
     end
   end
 

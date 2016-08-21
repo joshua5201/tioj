@@ -30,7 +30,7 @@
     </div>
     <%= link_to "Edit Post", edit_post_path(post), :class=>'btn btn-primary btn-xs'%>
     <%= link_to "Delete Post", post, method: :delete, data:{confirm:"Sure?"}, :class=>'btn btn-danger btn-xs' %>
-    <% if post.comments.size > 0 %>
+    <% if post.comments.present? %>
       <div class="comments">
       <h5>Comments: </h5>
       <% comments = post.comments %>
