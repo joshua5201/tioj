@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   def index
-    ac_count = users.map{|tmp_user| [tmp_user.id,tmp_user.ac_count]}.to_h
-    ac_ratio = users.map{|tmp_user| [tmp_user.id,tmp_user.ac_ratio]}.to_h
     @users = User.sorted
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(25)
     set_page_title "Users"
