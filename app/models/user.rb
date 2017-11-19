@@ -60,6 +60,24 @@ class User < ActiveRecord::Base
   validates_length_of :username, :in => 3..20
   validates_length_of :motto, :maximum => 75
   
+  def self.ac_counts
+    User.all.map{|u| [u.id, u.ac_count]}.to_h
+  end
+
+  def self.ac_ratios
+    User.all.map{|u| [u.id, u.ac_ratio]}.to_h
+  end
+
+  def self.sorted
+    User.all.sort do |a, b|
+      if ac_counts[a.id] == ac_counts[b.id]
+        ac_ratios[b.id] <=> ac_ratios[a.id]
+      else
+        ac_counts[b.id] <=> ac_counts[a.id]
+      end
+    end
+  end
+  
   def ac_count
     submits = self.submissions.select do |s|
       s.result == "AC" && s.contest_id == nil

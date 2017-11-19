@@ -28,4 +28,24 @@ class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  test ".ac_counts" do
+    a = User.ac_counts
+    p a
+    assert_equal(a.size, User.count)
+    a.each {|elem| assert_equal(elem[1], User.find(elem[0]).ac_count)}
+  end
+  test ".ac_ratios" do
+    a = User.ac_ratios
+    assert_equal(a.size, User.count)
+    a.each {|elem| assert_equal(elem[1], User.find(elem[0]).ac_ratio)}
+  end
+  test ".sorted" do
+    a = User.sorted
+    assert_equal(a.size, User.count)
+    a.each_cons(2).each do |i, j|
+      better = i.ac_ratio > j.ac_ratio
+      more = i.ac_ratio == j.ac_ratio && i.ac_count > j.ac_count
+      assert (better or more)
+    end
+  end
 end

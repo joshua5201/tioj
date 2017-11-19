@@ -1,0 +1,9 @@
+user1:
+  id: 1
+  email: "a@test.com"
+user2:
+  id: 2
+  email: "b@test.com"
+user3:
+  id: 3
+  email: "c@test.com"

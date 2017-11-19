@@ -1,0 +1,48 @@
+submission1:
+        id: 1
+        result: "AC"
+        contest_id: ~
+        problem_id: 1
+        user_id: 1
+submission2:
+        id: 2
+        result: "AC"
+        contest_id: ~
+        problem_id: 2
+        user_id: 1
+submission3:
+        id: 3
+        result: "WA"
+        contest_id: ~
+        problem_id: 2
+        user_id: 1
+submission4:
+        id: 4
+        result: "AC"
+        contest_id: ~
+        problem_id: 1
+        user_id: 2
+submission5:
+        id: 5
+        result: "WA"
+        contest_id: ~
+        problem_id: 2
+        user_id: 2
+submission6:
+        id: 6
+        result: "AC"
+        contest_id: ~
+        problem_id: 1
+        user_id: 3
+submission7:
+        id: 7
+        result: "AC"
+        contest_id: ~
+        problem_id: 2
+        user_id: 3
+submission8:
+        id: 8
+        result: "AC"
+        contest_id: ~
+        problem_id: 3
+        user_id: 3

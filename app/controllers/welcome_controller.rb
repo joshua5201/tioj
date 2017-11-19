@@ -2,9 +2,7 @@ class WelcomeController < ApplicationController
   def index
     @bulletins = Article.order("id DESC").limit(5)
     @contests = Contest.order("id DESC").limit(3)
-    ac_count = users.map{|tmp_user| [tmp_user.id,tmp_user.ac_count]}.to_h
-    ac_ratio = users.map{|tmp_user| [tmp_user.id,tmp_user.ac_ratio]}.to_h
-    @users = User.all.sort{|a, b| (ac_count[a.id] == ac_count[b.id] ? ac_ratio[b.id] <=> ac_ratio[a.id] : ac_count[b.id] <=> ac_count[a.id]) }
+    @users = User.sorted
     @users = @users.take(10)
   end
   
