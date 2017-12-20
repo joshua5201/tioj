@@ -24,7 +24,11 @@
   </thead>
   
   <tbody>
-    <% @users.each_with_index do |user, idx| %>
+    <% @users.each_with_index do |f, idx| %>
+		<%
+			id,ac,acsub,sub,acratio = f
+			user = User.where(id: id).first
+		%>
       <tr>
         <td><% offset = [params[:page].to_i, 1].max %><%= (offset-1) * 25 + idx + 1 %></td>
         <td><%= link_to image_tag(user.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(user) %></td>
@@ -36,8 +40,8 @@
         <% else %>
           <td></td>
         <% end %>
-        <td><%= user.ac_count %></td>
-        <td><%= ac_ratio_by_user(user) %></td>
+        <td><%= ac %></td>
+        <td><%= ac_ratio_by_user_sub_acsub(user, sub, acsub) %></td>
       </tr>
     <%end%>
   </tbody>
