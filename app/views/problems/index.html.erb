@@ -42,6 +42,9 @@
 
   <tbody>
     <% @problems.each do |problem| %>
+	    <%
+            user_ac,user_cnt,sub_ac,sub_cnt = @problem_stats[problem.id]
+		%>
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
           <td><%= user_problem_status(current_user, problem) if user_signed_in? %></td>
@@ -58,8 +61,8 @@
               <% end %>
             <% end %>
           </td>
-          <td><%= users_ac_ratio(problem) %></td>
-          <td><%= submissions_ac_ratio(problem) %></td>
+          <td><%= users_ac_ratio_by_cnt_accnt(problem,user_cnt,user_ac) %></td>
+          <td><%= submissions_ac_ratio_by_cnt_accnt(problem, sub_cnt, sub_ac) %></td>
           <% if user_signed_in? && current_user.admin? %>
             <% if problem.visible_state == 0 %>
               <td>Public</td>

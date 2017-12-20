@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all.sort{|a, b| (a.ac_count == b.ac_count ? b.ac_ratio <=> a.ac_ratio : b.ac_count <=> a.ac_count) }
+    # Array of [user_id,ac_cnt,acsub_cnt,sub_cnt,acratio]
+    @users = ActiveRecord::Base.connection.execute("select user_id, count(distinct case when result='AC' then problem_id end) ac, sum(result='AC') acsub, count(*) sub, sum(result='AC') / count(*) acratio from submissions where contest_id <=> NULL group by user_id union select id, 0, 0, 0, NULL from users where id not in (select distinct user_id from submissions where contest_id <=> NULL) order by ac desc, acratio desc, sub desc, user_id;").to_a
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(25)
     set_page_title "Users"
   end

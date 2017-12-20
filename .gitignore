@@ -42,3 +42,6 @@ public/announcement/anno
 /config/database.yml.example
 /config/secret.yml
 
+# Ignore Docker stuffs
+Dockerfile
+docker-compose.yml
