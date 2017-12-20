@@ -21,6 +21,10 @@ class ProblemsController < ApplicationController
     if not params[:tag].blank?
       @problems = @problems.tagged_with(params[:tag])
     end
+	# Array of [problem_id,user_ac,user_cnt,sub_ac,sub_cnt]
+	problem_stats = ActiveRecord::Base.connection.execute("select problem_id, count(distinct case when result = 'AC' then user_id end) user_ac, count(distinct user_id) user_cnt, count(case when result = 'AC' then 1 end) sub_ac, count(*) sub_cnt from submissions where contest_id <=> NULL group by problem_id union select id, 0, 0, 0, 0 from problems where id not in (select distinct problem_id from submissions where contest_id <=> NULL) order by problem_id;").to_a
+	@problem_stats = problem_stats.map{ |x| [x[0] , x.from(1)] }.to_h
+
     @problems = @problems.order("problems.id ASC").page(params[:page]).per(100)
     set_page_title "Problems"
   end
