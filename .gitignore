@@ -7,6 +7,9 @@
 /tempioj
 /sql\ dump
 
+# Ignore announcements.
+public/announcement/anno
+
 # Ignore bundler config.
 /.bundle
 
