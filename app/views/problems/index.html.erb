@@ -41,10 +41,10 @@
   </thead>
 
   <tbody>
-    <% @problems.zip(@user_status).each do |problem, status| %>
+    <% @problems.each do |problem| %>
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
-          <td><%= user_problem_status_by_stat(status) if user_signed_in? %></td>
+          <td><%= user_problem_status_with_infor(problem) if user_signed_in? %></td>
           <td><%= link_to problem.id, problem_path(problem.id) %></td>
           <td>
             <div style="float:left"><%= link_to problem.name, problem_path(problem.id) %></div>

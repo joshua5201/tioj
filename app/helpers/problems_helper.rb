@@ -52,10 +52,10 @@ module ProblemsHelper
     end
   end
 
-  def user_problem_status_by_stat(stat)
-    if stat.cur_user_ac > 0
+  def user_problem_status_with_infor(problem)
+    if problem.cur_user_ac > 0
       raw '<span class="text-success glyphicon glyphicon-ok"></span>'
-    elsif stat.cur_user_tried > 0
+    elsif problem.cur_user_tried > 0
       raw '<span class="text-danger glyphicon glyphicon-thumbs-down"></span>'
     else
       raw '<span class="text-muted glyphicon glyphicon-minus"></span>'
