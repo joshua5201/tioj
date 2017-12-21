@@ -25,13 +25,17 @@ module ProblemsHelper
     return raw ( ratio + " (" + ac_page + "/" + all_page + ")" )
   end
 
-  def users_ac_ratio_by_cnt_accnt(problem, all, ac)
+  def users_ac_ratio_with_infor(problem)
+    all = problem.user_cnt
+    ac = problem.user_ac
     ratio = "%.1f%%" % (100.0 * ac / all)
     ranklist_page = link_to ac.to_s + "/" + all.to_s, problem_ranklist_path(problem.id)
     return raw ( ratio + " (" + ranklist_page + ")" )
   end
-  
-  def submissions_ac_ratio_by_cnt_accnt(problem, all, ac)
+
+  def submissions_ac_ratio_with_infor(problem)
+    all = problem.sub_cnt
+    ac = problem.sub_ac
     ratio = "%.1f%%" % (100.0 * ac / all)
     ac_page = link_to ac, :controller => :submissions, :action => :index, :problem_id => problem.id, :filter_status => "AC"
     all_page = link_to all, problem_submissions_path(problem.id)
@@ -48,10 +52,10 @@ module ProblemsHelper
     end
   end
 
-  def user_problem_status_by_sql(problem)
-    if user_problem_ac_by_sql(problem)
+  def user_problem_status_by_stat(stat)
+    if stat.cur_user_ac > 0
       raw '<span class="text-success glyphicon glyphicon-ok"></span>'
-    elsif user_problem_tried_by_sql(problem)
+    elsif stat.cur_user_tried > 0
       raw '<span class="text-danger glyphicon glyphicon-thumbs-down"></span>'
     else
       raw '<span class="text-muted glyphicon glyphicon-minus"></span>'

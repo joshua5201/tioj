@@ -14,25 +14,17 @@ class ProblemsController < ApplicationController
       redirect_to problem_path(params[:search_id])
       return
     end
-    @problems = Problem.select("problems.id, name, visible_state")
+    @problems = Problem.select("problems.*, count(distinct case when s.result = 'AC' then s.user_id end) user_ac, count(distinct s.user_id) user_cnt, count(case when s.result = 'AC' then 1 end) sub_ac, count(s.id) sub_cnt").joins("left join submissions s on s.problem_id = problems.id and s.contest_id is NULL").group("problems.id")
     if not params[:search_name].blank?
       @problems = @problems.where("name LIKE ?", "%%%s%%"%params[:search_name]).page(params[:page]).per(100)
     end
     if not params[:tag].blank?
       @problems = @problems.tagged_with(params[:tag])
     end
-	# Array of [problem_id,user_ac,user_cnt,sub_ac,sub_cnt]
-	problem_stats = ActiveRecord::Base.connection.execute("select p.id problem_id, count(distinct case when s.result = 'AC' then s.user_id end) user_ac, count(distinct s.user_id) user_cnt, count(case when s.result = 'AC' then 1 end) sub_ac, count(s.id) sub_cnt from problems p left join submissions s on s.problem_id = p.id and s.contest_id is NULL group by p.id order by p.id;").to_a
-	@problem_stats = problem_stats.map{ |x| [x[0] , x.from(1)] }.to_h
 
-    @user_ac = Hash.new;
-    @user_tried = Hash.new;
+    @user_status = Problem.none;
     if user_signed_in?
-	user_ac = ActiveRecord::Base.connection.execute("select problem_id, 1 from submissions where contest_id <=> NULL and result = 'AC' and user_id = %d group by problem_id;" % current_user.id);
-	user_tried = ActiveRecord::Base.connection.execute("select problem_id, 1 from submissions where contest_id <=> NULL and user_id = %d group by problem_id;" % current_user.id);
-
-	@user_ac = user_ac.map{ |x| [x[0] , x.from(1)] }.to_h
-	@user_tried = user_tried.map{ |x| [x[0] , x.from(1)] }.to_h
+	@user_status = Problem.select("problems.id, count(s.id) cur_user_tried, ifnull(sum(s.result = 'AC'), 0) cur_user_ac").joins("left join submissions s on s.problem_id = problems.id and s.contest_id is NULL and s.user_id = %d" % current_user.id).group("problems.id").order("problems.id").page(params[:page]).per(100).to_a
     end
 
     @problems = @problems.order("problems.id ASC").page(params[:page]).per(100)

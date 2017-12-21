@@ -41,13 +41,10 @@
   </thead>
 
   <tbody>
-    <% @problems.each do |problem| %>
-	    <%
-            user_ac,user_cnt,sub_ac,sub_cnt = @problem_stats[problem.id]
-		%>
+    <% @problems.zip(@user_status).each do |problem, status| %>
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
-          <td><%= user_problem_status_by_sql(problem) if user_signed_in? %></td>
+          <td><%= user_problem_status_by_stat(status) if user_signed_in? %></td>
           <td><%= link_to problem.id, problem_path(problem.id) %></td>
           <td>
             <div style="float:left"><%= link_to problem.name, problem_path(problem.id) %></div>
@@ -61,8 +58,8 @@
               <% end %>
             <% end %>
           </td>
-          <td><%= users_ac_ratio_by_cnt_accnt(problem,user_cnt,user_ac) %></td>
-          <td><%= submissions_ac_ratio_by_cnt_accnt(problem, sub_cnt, sub_ac) %></td>
+          <td><%= users_ac_ratio_with_infor(problem) %></td>
+          <td><%= submissions_ac_ratio_with_infor(problem) %></td>
           <% if user_signed_in? && current_user.admin? %>
             <% if problem.visible_state == 0 %>
               <td>Public</td>

@@ -61,16 +61,12 @@
         </thead>
         <tbody>
           <% @users.each_with_index do |f, idx| %>
-            <%
-			    id,ac,acsub,sub,acratio = f
-				user = User.where(id: id).first
-			%>
-			<tr>
+	      <tr>
               <td><%= idx + 1 %></td>
-              <td><%= link_to image_tag(user.avatar.mini_thumb.to_s, :class => "img-rounded"), {:controller => 'users', :action => :show, :id => id} %></td>
-              <td><%= link_to user.username, user_path(user) %></td>
-              <td><%= ac %></td>
-              <td><%= ac_ratio_by_user_sub_acsub(user,sub,acsub) %></td>
+              <td><%= link_to image_tag(f.avatar.mini_thumb.to_s, :class => "img-rounded"), {:controller => 'users', :action => :show, :id => f.id} %></td>
+              <td><%= link_to f.username, user_path(f) %></td>
+              <td><%= f.ac %></td>
+              <td><%= ac_ratio_by_user_with_infor(f) %></td>
             </tr>
           <% end %>
         </tbody>
