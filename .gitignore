@@ -8,7 +8,7 @@
 /sql\ dump
 
 # Ignore announcements.
-public/announcement/anno
+/public/announcement/anno
 
 # Ignore bundler config.
 /.bundle
@@ -31,6 +31,7 @@ public/announcement/anno
 /public/pmisc
 /public/pimgs
 /public/pcontest
+/public/STL
 
 # Ignore binaries
 /bin

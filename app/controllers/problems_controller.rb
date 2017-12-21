@@ -22,7 +22,7 @@ class ProblemsController < ApplicationController
       @problems = @problems.tagged_with(params[:tag])
     end
 	# Array of [problem_id,user_ac,user_cnt,sub_ac,sub_cnt]
-	problem_stats = ActiveRecord::Base.connection.execute("select problem_id, count(distinct case when result = 'AC' then user_id end) user_ac, count(distinct user_id) user_cnt, count(case when result = 'AC' then 1 end) sub_ac, count(*) sub_cnt from submissions where contest_id <=> NULL group by problem_id union select id, 0, 0, 0, 0 from problems where id not in (select distinct problem_id from submissions where contest_id <=> NULL) order by problem_id;").to_a
+	problem_stats = ActiveRecord::Base.connection.execute("select p.id problem_id, count(distinct case when s.result = 'AC' then s.user_id end) user_ac, count(distinct s.user_id) user_cnt, count(case when s.result = 'AC' then 1 end) sub_ac, count(s.id) sub_cnt from problems p left join submissions s on s.problem_id = p.id and s.contest_id is NULL group by p.id order by p.id;").to_a
 	@problem_stats = problem_stats.map{ |x| [x[0] , x.from(1)] }.to_h
 
     @user_ac = Hash.new;
