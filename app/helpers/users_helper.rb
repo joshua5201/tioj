@@ -34,5 +34,14 @@ module UsersHelper
       return true
     end
   end
+
+  def user_problem_ac_by_sql(problem)
+    return @user_ac[problem.id]
+  end
+
+  def user_problem_tried_by_sql(problem)
+    return @user_tried[problem.id]
+  end
+
   
 end

@@ -4,17 +4,11 @@ module ProblemsHelper
     return User.find_by_id(submission.user_id) if submission
     return nil if submission.blank?
   end
-  
+
   def users_ac_ratio(problem)
     all = problem.submissions.where("contest_id is NULL").select("MIN(result) as result").group("user_id").map{|a| a.result}
     ac = all.count{|a| a == "AC"}
     all = all.count
-    ratio = "%.1f%%" % (100.0 * ac / all)
-    ranklist_page = link_to ac.to_s + "/" + all.to_s, problem_ranklist_path(problem.id)
-    return raw ( ratio + " (" + ranklist_page + ")" )
-  end
-  
-  def users_ac_ratio_by_cnt_accnt(problem, all, ac)
     ratio = "%.1f%%" % (100.0 * ac / all)
     ranklist_page = link_to ac.to_s + "/" + all.to_s, problem_ranklist_path(problem.id)
     return raw ( ratio + " (" + ranklist_page + ")" )
@@ -30,6 +24,12 @@ module ProblemsHelper
     all_page = link_to all, problem_submissions_path(problem.id)
     return raw ( ratio + " (" + ac_page + "/" + all_page + ")" )
   end
+
+  def users_ac_ratio_by_cnt_accnt(problem, all, ac)
+    ratio = "%.1f%%" % (100.0 * ac / all)
+    ranklist_page = link_to ac.to_s + "/" + all.to_s, problem_ranklist_path(problem.id)
+    return raw ( ratio + " (" + ranklist_page + ")" )
+  end
   
   def submissions_ac_ratio_by_cnt_accnt(problem, all, ac)
     ratio = "%.1f%%" % (100.0 * ac / all)
@@ -42,6 +42,16 @@ module ProblemsHelper
     if user_problem_ac(user, problem)
       raw '<span class="text-success glyphicon glyphicon-ok"></span>'
     elsif user_problem_tried(user, problem)
+      raw '<span class="text-danger glyphicon glyphicon-thumbs-down"></span>'
+    else
+      raw '<span class="text-muted glyphicon glyphicon-minus"></span>'
+    end
+  end
+
+  def user_problem_status_by_sql(problem)
+    if user_problem_ac_by_sql(problem)
+      raw '<span class="text-success glyphicon glyphicon-ok"></span>'
+    elsif user_problem_tried_by_sql(problem)
       raw '<span class="text-danger glyphicon glyphicon-thumbs-down"></span>'
     else
       raw '<span class="text-muted glyphicon glyphicon-minus"></span>'
