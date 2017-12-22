@@ -48,6 +48,8 @@ Tioj::Application.routes.draw do
   get 'edit_announcement' => 'welcome#edit_announcement', as: :edit_announcement
   post 'alter_announcement' => 'welcome#alter_announcement', as: :alter_announcement
   get 'about' => 'about#index', as: :about
+
+  get 'problems/:id/*file' => redirect{ |path, req| "/#{path[:file]}"}, :format => false, :id => /[0-9]+/
   get 'problems/*file' => redirect{ |path, req| "/#{path[:file]}"}, :format => false
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

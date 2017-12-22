@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all.sort{|a, b| (a.ac_count == b.ac_count ? b.ac_ratio <=> a.ac_ratio : b.ac_count <=> a.ac_count) }
-    @users = Kaminari.paginate_array(@users).page(params[:page]).per(25)
+    @users = Kaminari.paginate_array(get_sorted_user).page(params[:page]).per(25)
     set_page_title "Users"
   end
   def show

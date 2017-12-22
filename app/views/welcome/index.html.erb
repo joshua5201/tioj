@@ -61,12 +61,12 @@
         </thead>
         <tbody>
           <% @users.each_with_index do |f, idx| %>
-            <tr>
+	      <tr>
               <td><%= idx + 1 %></td>
               <td><%= link_to image_tag(f.avatar.mini_thumb.to_s, :class => "img-rounded"), {:controller => 'users', :action => :show, :id => f.id} %></td>
               <td><%= link_to f.username, user_path(f) %></td>
-              <td><%= f.ac_count %></td>
-              <td><%= ac_ratio_by_user(f) %></td>
+              <td><%= f.ac %></td>
+              <td><%= ac_ratio_by_user_with_infor(f) %></td>
             </tr>
           <% end %>
         </tbody>
