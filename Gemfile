@@ -11,8 +11,9 @@ gem 'sass-rails'
 gem 'less'
 gem 'less-rails'
 gem 'less-rails-bootstrap'
+gem 'sprockets', '3.6.3'
 # user
-gem 'devise'
+gem 'devise', '3.5.10'
 gem 'omniauth'
 gem 'omniauth-facebook'
 # Use Redcarpet to render Markdown
@@ -83,3 +84,6 @@ gem 'annotate', github: 'ctran/annotate_models'
 
 gem 'seo_helper', '~> 1.0', :git => 'git://github.com/techbang/seo_helper.git'
 gem 'nokogiri' #getting old tioj probs
+
+# Timezone data
+gem 'tzinfo-data'
