@@ -20,7 +20,7 @@
     <div class="col-md-3">
       <div class="form-group">
         <%= f.label :tag_list, "Tags" %>
-        <%= f.text_field :tag_list, :class => 'tagsinput ', :id => 'tagsinput' %>
+        <%= f.text_field :tag_list, value: @problem.tag_list.to_s,:class => 'tagsinput ', :id => 'tagsinput' %>
         <script>
           $('.tagsinput').tagsInput();
         </script>
