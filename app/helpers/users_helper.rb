@@ -9,7 +9,14 @@ module UsersHelper
     all_page = link_to all, submissions_path(:filter_user_id => user.id)
     return raw ( ratio + " (" + ac_page + "/" + all_page + ")" )
   end
-  
+
+  def ac_ratio_by_user_with_infor(user)
+    ratio = "%.1f%%" % (100.0 * user.acsub / user.sub)
+    ac_page = link_to user.acsub, submissions_path(:filter_user_id => user.id, :'filter_status[]' => "AC")
+    all_page = link_to user.sub, submissions_path(:filter_user_id => user.id)
+    return raw ( ratio + " (" + ac_page + "/" + all_page + ")" )
+  end
+
   def user_problem_ac(user, problem)
     return Submission.exists?(["contest_id is NULL AND user_id = ? AND problem_id = ? AND result = ?", user.id, problem.id, "AC"])
     if Submission.where("contest_id is NULL AND user_id = ? AND problem_id = ? AND result = ?", user.id, problem.id, "AC").count == 0
@@ -27,5 +34,4 @@ module UsersHelper
       return true
     end
   end
-  
 end

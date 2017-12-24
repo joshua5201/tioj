@@ -44,7 +44,7 @@
     <% @problems.each do |problem| %>
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
-          <td><%= user_problem_status(current_user, problem) if user_signed_in? %></td>
+          <td><%= user_problem_status_with_infor(problem) if user_signed_in? %></td>
           <td><%= link_to problem.id, problem_path(problem.id) %></td>
           <td>
             <div style="float:left"><%= link_to problem.name, problem_path(problem.id) %></div>
@@ -58,8 +58,8 @@
               <% end %>
             <% end %>
           </td>
-          <td><%= users_ac_ratio(problem) %></td>
-          <td><%= submissions_ac_ratio(problem) %></td>
+          <td><%= users_ac_ratio_with_infor(problem) %></td>
+          <td><%= submissions_ac_ratio_with_infor(problem) %></td>
           <% if user_signed_in? && current_user.admin? %>
             <% if problem.visible_state == 0 %>
               <td>Public</td>

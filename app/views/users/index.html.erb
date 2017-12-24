@@ -36,8 +36,8 @@
         <% else %>
           <td></td>
         <% end %>
-        <td><%= user.ac_count %></td>
-        <td><%= ac_ratio_by_user(user) %></td>
+        <td><%= user.ac %></td>
+        <td><%= ac_ratio_by_user_with_infor(user) %></td>
       </tr>
     <%end%>
   </tbody>

@@ -7,6 +7,9 @@
 /tempioj
 /sql\ dump
 
+# Ignore announcements.
+/public/announcement/anno
+
 # Ignore bundler config.
 /.bundle
 
@@ -28,6 +31,7 @@
 /public/pmisc
 /public/pimgs
 /public/pcontest
+/public/STL
 
 # Ignore binaries
 /bin
@@ -39,3 +43,6 @@
 /config/database.yml.example
 /config/secret.yml
 
+# Ignore Docker stuffs
+Dockerfile
+docker-compose.yml
