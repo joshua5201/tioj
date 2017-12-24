@@ -10,21 +10,22 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery-1.8.3.min
 //= require jquery
+//= require_tree .
 //= require jquery_ujs
 // require twitter/bootstrap
-//= require jquery-1.8.3.min
+//= require jquery.tagsinput
+
 //= require jquery-ui-1.10.3.custom.min
 //= require jquery.ui.touch-punch.min
 //= require bootstrap.min
-//= require bootstrap-select
-//= require bootstrap-switch
 //= require flatui-checkbox
 //= require flatui-radio
-//= require jquery.tagsinput
 //= require jquery.placeholder
 // require jquery.turbolinks
 // require turbolinks
-//= require_tree .
-//= require  jquery_nested_form
+//= require bootstrap-select
+//= require bootstrap-switch
+//= require jquery_nested_form
 //= require_self

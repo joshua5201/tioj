@@ -91,4 +91,8 @@ protected
     @anno = JSON.parse(File.read("public/announcement/anno"))
   end
   
+  def get_sorted_user
+    User.select("users.*, count(distinct case when s.result='AC' then s.problem_id end) ac, ifnull(sum(s.result='AC'), 0) acsub,  count(s.id) sub, sum(s.result='AC') / count(s.id) acratio").joins("left join submissions s on s.user_id = users.id and s.contest_id is NULL").group("users.id").order('ac desc, acratio desc, sub desc, users.id').to_a
+  end
+
 end
