@@ -9,7 +9,7 @@
   <%= link_to 'New Problem', new_problem_path, :class => 'btn btn-success btn-sm' %><br>
 <% end %>
 
-<form class="form-inline" accept-charset="UTF-8" method="get">
+<form class="form-inline search-form" accept-charset="UTF-8" method="get">
   <label for="search_id">Search Problems</label>
   <div class="form-group">
     <input style="width:150px" id="search_id" name="search_id" class="form-control input-sm flat" type="number" min="1001" max="<%= 1000 + Problem.count %>" placeholder="Enter Problem ID">
@@ -22,6 +22,18 @@
   </div>
   <button type="submit" id="quick_search" class="btn btn-inverse btn-xs">Search</button>
 </form>
+
+<script> <!-- remove empty fields -->
+$(function() {
+   $("form.search-form").submit(function() {
+      $(this).find(":input").filter(function(){ return !this.value; }).attr("disabled", "disabled");
+      return true; 
+    });
+});
+window.onpageshow = function(e){
+   $("form.search-form [disabled=\"disabled\"]").removeAttr("disabled");
+}
+</script>
 
 <%= paginate @problems %>
 <table class="table table-hover table-striped">
