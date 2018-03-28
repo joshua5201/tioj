@@ -2,9 +2,9 @@
 
 
 <p>
-  <%= select_tag :era_select, options_for_select([[2014,2014],[2013,2013],[2012,2012],[2011,2011],[2010,2010],
-  [2009,2009],[2008,2008],[2007,2007],[2006,2006],[2005,2005]], @era), :class => "form-control" %>
+  <%= select_tag :era_select, options_for_select(Article.distinct.order(era: :desc).pluck(:era).map{ |x| [x,x]}, @era), :class => "form-control" %>
 </p>
+
 
 <% if user_signed_in? && current_user.admin == true %>
   <p>
