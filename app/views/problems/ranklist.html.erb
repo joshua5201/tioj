@@ -6,6 +6,33 @@
   </div>
 </div>
 
+<style type="text/css">
+th span{
+  padding-left: 3px;
+}
+th span.icon-asc{
+  display: None;
+}
+th span.icon-dsc{
+  display: None;
+}
+th.headerSortDown span.icon-asc{
+  display: inline;
+}
+th.headerSortUp span.icon-dsc{
+  display: inline;
+}
+th.headerSortUp span.icon-non, th.headerSortDown span.icon-non {
+  display: None;
+}
+th span{
+  font-size: 12px;
+}
+th {
+  white-space: nowrap;
+}
+</style>
+
 <table class="table table-hover tablesorter">
   <thead>
     <tr>
@@ -111,27 +138,6 @@ $(document).ready(function()
 ); 
 </script>
 
-<style type="text/css">
-th > span{
-  padding-left: 5px;
-}
-th > span.icon-asc{
-  display: None;
-}
-th > span.icon-dsc{
-  display: None;
-}
-th.headerSortDown > span.icon-asc{
-  display: inline;
-}
-th.headerSortUp > span.icon-dsc{
-  display: inline;
-}
-th.headerSortUp > span.icon-non, th.headerSortDown > span.icon-non {
-  display: None;
-}
-th.headerSort
-</style>
 
 <div class="row">
   <div class="col-md-2">
