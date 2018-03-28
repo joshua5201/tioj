@@ -60,7 +60,7 @@ window.onpageshow = function(e){
           <td><%= link_to problem.id, problem_path(problem.id) %></td>
           <td>
             <div style="float:left"><%= link_to problem.name, problem_path(problem.id) %></div>
-            <div style="float:right"><%= raw problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs btn-default' }.join(" ") %></div>
+            <div style="float:right"><%= raw problem.tags.map{ |a| link_to a, problems_tag_path(a.name), :class => 'btn btn-xs btn-default' }.join(" ") %></div>
           </td>
           <td class="text-center">
             <% begin %>
