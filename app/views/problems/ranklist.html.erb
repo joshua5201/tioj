@@ -136,6 +136,14 @@ $(document).ready(function()
         }); 
     } 
 ); 
+$("table").bind("sortEnd",function() {
+    $('tbody > tr').removeClass();
+    $('tbody > tr:nth-of-type(1)').addClass('warning');
+    $('tbody > tr:nth-of-type(2),tbody > tr:nth-of-type(3)').addClass('success');
+    $('tbody > tr:nth-of-type(4),tbody > tr:nth-of-type(5)').addClass('info');
+    $('tbody > tr:nth-of-type(6),tbody > tr:nth-of-type(7)').addClass('info');
+
+})
 </script>
 
 
