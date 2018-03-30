@@ -18,8 +18,12 @@ module ProblemsHelper
     problem_ids = problems.map(&:id)
     lst = Problem.select("problems.id, (select user_id from submissions where problem_id = problems.id and (contest_id is null and result = 'AC') order by total_time asc, total_memory asc, length(code) asc limit 1) topcoder").where(id: problem_ids).to_a
     topcoders = Hash[User.where(id: lst.map(&:topcoder).compact.uniq).to_a.collect { |user| [user.id, user] }]
-    topcoders_lst = Hash[lst.collect { |prob| [prob.id, prob.topcoder ? topcoders[prob.topcoder] : nil] }]
-    return topcoders_lst
+    topcoders_mp = Hash[lst.collect { |prob| [prob.id, prob.topcoder ? topcoders[prob.topcoder] : nil] }]
+    return topcoders_mp
+  end
+
+  def get_submissions_user(subs)
+    return Hash[User.where(id: subs.map(&:user_id).uniq).to_a.collect { |user| [user.id, user] }]
   end
 
   def submissions_ac_ratio(problem)
