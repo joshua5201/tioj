@@ -53,7 +53,9 @@ window.onpageshow = function(e){
   </thead>
 
   <tbody>
-    <% @problems.each do |problem| %>
+    <% problem_a = @problems.to_a %>
+    <% topcoders = topcoders(problem_a) %>
+    <% problem_a.each do |problem| %>
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
           <td><%= user_problem_status_with_infor(problem) if user_signed_in? %></td>
@@ -64,7 +66,7 @@ window.onpageshow = function(e){
           </td>
           <td class="text-center">
             <% begin %>
-              <% tcoder = topcoder(problem) %>
+              <% tcoder = topcoders[problem.id] %>
               <% if tcoder %>
                 <%= link_to image_tag(tcoder.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(tcoder) %>
               <% end %>
