@@ -243,3 +243,10 @@ ActiveAdmin.setup do |config|
   # config.filters = true
 
 end
+
+class ActiveAdmin::Devise::SessionsController
+   include ::ActiveAdmin::Devise::Controller
+   def after_sign_in_path_for(resource)
+       '/admin'
+   end
+end
