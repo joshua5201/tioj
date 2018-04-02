@@ -11,9 +11,9 @@ module SubmissionsHelper
 
   def language_class(lang)
     case lang
-    when "c++11", "c++"
+    when "c++17", "c++14", "c++11", "c++98", "c++"
       return "language-cpp"
-    when "c"
+    when "c11", "c99", "c90", "c"
       return "language-c"
     when "haskell"
       return "language-haskell"
