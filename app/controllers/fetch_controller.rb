@@ -1,4 +1,5 @@
 class FetchController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   before_filter :authenticate_key
   layout false
   
@@ -51,6 +52,14 @@ class FetchController < ApplicationController
     else
       update_verdict
     end
+    render :nothing => true
+  end
+
+  def write_message
+    @_message = params[:message]
+    @submission = Submission.find(params[:sid])
+    @submission.update(:message => @_message)
+    logger.info @_message
     render :nothing => true
   end
   

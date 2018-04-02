@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222041539) do
+ActiveRecord::Schema.define(version: 20180402045004) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20171222041539) do
     t.text     "_result",      limit: 65535
     t.integer  "total_time",   limit: 4
     t.integer  "total_memory", limit: 4
+    t.text     "message",      limit: 65535
   end
 
   add_index "submissions", ["compiler"], name: "index_submissions_on_compiler", using: :btree
