@@ -17,6 +17,8 @@ module SubmissionsHelper
       return "language-c"
     when "haskell"
       return "language-haskell"
+    when "python2"
+      return "language-python"
     else
       return "language-clike"
     end
