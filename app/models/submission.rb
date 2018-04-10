@@ -25,7 +25,7 @@ class Submission < ActiveRecord::Base
   
   validates_length_of :code, :in => 0..5000000
   validates_length_of :message, :in => 0..65000, :allow_nil => true
-  validates_inclusion_of :compiler, :in => %w(c++17 c++14 c++11 c++98 c11 c99 c90 haskell python2)
+  validates_inclusion_of :compiler, :in => %w(c++17 c++14 c++11 c++98 c11 c99 c90 haskell python2 python3)
   validates_inclusion_of :compiler, :in => %w(c++17 c++14 c++11 c++98 c11 c99 c90), 
     :message => "only c/c++ are allowed during contest",
     :if => :contest?
