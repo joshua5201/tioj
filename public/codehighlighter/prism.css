@@ -12,6 +12,7 @@ pre[class*="language-"] {
 	background: none;
 	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 13px;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
@@ -150,6 +151,9 @@ pre.line-numbers > code {
 
 }
 
+.line-numbers-rows{
+	margin-top: -0.12em;
+}
 	.line-numbers-rows > span {
 		pointer-events: none;
 		display: block;
