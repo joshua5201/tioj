@@ -112,19 +112,19 @@
           <%= t.label :from, "From:" %>
           </div>
         <div class="col-md-1">
-          <%= t.number_field :from, :min => 0, :max => @problem.testdata.size - 1, :class => 'form-control flat' %>
+          <%= t.number_field :from, :min => 0, :max => @problem.testdata.size - 1, :class => 'form-control flat', :required => true %>
         </div>
         <div class="col-md-1">
           <%= t.label :to, "To:" %>
         </div>
         <div class="col-md-1">
-          <%= t.number_field :to, :min => 0, :max => @problem.testdata.size - 1, :class => 'form-control flat' %>
+          <%= t.number_field :to, :min => 0, :max => @problem.testdata.size - 1, :class => 'form-control flat', :required => true %>
         </div>
         <div class="col-md-1">
           <%= t.label :score, "Score:" %>
         </div>
         <div class="col-md-1">
-          <%= t.number_field :score, :in => 0..100, :class => 'form-control flat' %>
+          <%= t.number_field :score, :in => 0..100, :class => 'form-control flat', :required => true %>
         </div>
         <div class="col-md-1">
           <%= t.link_to_remove "Remove this range", :class => 'btn btn-danger' %>
@@ -138,3 +138,9 @@
     <%= f.submit :class => 'btn btn-success btn-lg' %>
   </div>
 <% end %>
+
+<script>
+    $(document).on('nested:fieldRemoved',function(event){
+        event.field.remove();
+    });
+</script>
