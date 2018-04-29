@@ -4,7 +4,6 @@
 #
 #  id           :integer          not null, primary key
 #  code         :text(16777215)
-#  message      :text
 #  compiler     :string(255)      default("")
 #  result       :string(255)      default("queued")
 #  score        :integer          default(0)
@@ -13,9 +12,10 @@
 #  problem_id   :integer          default(0)
 #  user_id      :integer          default(0)
 #  contest_id   :integer
-#  _result      :string(255)
+#  _result      :text(65535)
 #  total_time   :integer
 #  total_memory :integer
+#  message      :text(65535)
 #
 
 class Submission < ActiveRecord::Base
