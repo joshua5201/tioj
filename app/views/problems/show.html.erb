@@ -189,7 +189,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @problem.testdata.each_with_index do |testdatum, index| %>
+      <% @problem.testdata.order(position: :asc).each_with_index do |testdatum, index| %>
         <tr>
           <td><%= index %></td>
           <td><%= testdatum.limit.time.blank? ? "Nil" : testdatum.limit.time %></td>

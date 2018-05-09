@@ -75,6 +75,8 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (5.0.0)
       activerecord (>= 4.2.8)
+    acts_as_list (0.9.11)
+      activerecord (>= 3.0)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (6.0.4)
@@ -304,6 +306,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   acts-as-taggable-on
+  acts_as_list
   annotate!
   carrierwave
   coffee-rails
