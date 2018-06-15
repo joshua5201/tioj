@@ -141,6 +141,6 @@
 
 <script>
     $(document).on('nested:fieldRemoved',function(event){
-        event.field.remove();
+        event.field.find("input[type=number]").removeAttr("min max required");
     });
 </script>
