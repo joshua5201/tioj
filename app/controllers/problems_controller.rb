@@ -14,7 +14,7 @@ class ProblemsController < ApplicationController
       redirect_to problem_path(params[:search_id])
       return
     end
-    @problems = Problem.select("problems.*, count(distinct case when s.result = 'AC' then s.user_id end) user_ac, count(distinct s.user_id) user_cnt, count(case when s.result = 'AC' then 1 end) sub_ac, count(s.id) sub_cnt, bit_or(s.result = 'AC' and s.user_id = %d) cur_user_ac, bit_or(s.user_id = %d) cur_user_tried" % ([current_user ? current_user.id : 0]*2)).joins("left join submissions s on s.problem_id = problems.id and s.contest_id is NULL").group("problems.id")
+    @problems = Problem.select("problems.*, count(distinct case when s.result = 'AC' then s.user_id end) user_ac, count(distinct s.user_id) user_cnt, count(case when s.result = 'AC' then 1 end) sub_ac, count(s.id) sub_cnt, bit_or(s.result = 'AC' and s.user_id = %d) cur_user_ac, bit_or(s.user_id = %d) cur_user_tried" % ([current_user ? current_user.id : 0]*2)).joins("left join submissions s on s.problem_id = problems.id and s.contest_id is NULL").group("problems.id").includes(:tags)
     if not params[:search_name].blank?
       @problems = @problems.where("name LIKE ?", "%%%s%%"%params[:search_name])
     end

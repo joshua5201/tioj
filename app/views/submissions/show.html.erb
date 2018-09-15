@@ -17,7 +17,6 @@
   <%= link_to 'Destroy', @submission, method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-xs btn-danger' %>
 <% end %>
 </p>
-
 <% case @submission.result %>
   <% when "WA" %>
     <div class="panel panel-danger">
@@ -121,6 +120,20 @@
 </div>
 
 <% if user_signed_in? and ( current_user.admin? or current_user.id == @submission.user_id ) %>
+  <% if @submission.result == "CE" %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+         <h1 class="panel-title">Compilation Error Message</h1>
+      </div>
+      <div class="panel-body">
+        <% if @submission.message.present? %>
+          <pre class="pre-scrollable"><code class=""><%= @submission.message %></code></pre>   
+        <% else %>
+          Sorry, no compilation error message available.
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   <pre class="line-numbers"><code class="<%= language_class(@submission.compiler) %>"><%= @submission.code %></code></pre>
 <% end %>
 

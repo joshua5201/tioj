@@ -17,11 +17,11 @@
 
   <tbody >
   <% if @testdata.present? %>
-    <% @testdata.each_with_index do |testdatum, index| %>
+    <% @testdata.order(position: :asc).each_with_index do |testdatum, index| %>
       <tr>
         <td><%= index %></td>
-        <td><%= testdatum.test_input.blank? ? "Nil" : "Uploaded" %></td>
-        <td><%= testdatum.test_output.blank? ? "Nil" : "Uploaded" %></td>
+        <td><%= testdatum.test_input.blank? ? "Nil" : truncate(testdatum.test_input_identifier,length: 30) %></td>
+        <td><%= testdatum.test_output.blank? ? "Nil" : truncate(testdatum.test_output_identifier,length: 30) %></td>
         <td><%= testdatum.limit.time.blank? ? "Nil" : testdatum.limit.time %></td>
         <td><%= testdatum.limit.memory.blank? ? "Nil" : testdatum.limit.memory %></td>
         <td><%= testdatum.limit.output.blank? ? "Nil" : testdatum.limit.output %></td>

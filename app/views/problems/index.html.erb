@@ -9,7 +9,7 @@
   <%= link_to 'New Problem', new_problem_path, :class => 'btn btn-success btn-sm' %><br>
 <% end %>
 
-<form class="form-inline" accept-charset="UTF-8" method="get">
+<form class="form-inline search-form" accept-charset="UTF-8" method="get">
   <label for="search_id">Search Problems</label>
   <div class="form-group">
     <input style="width:150px" id="search_id" name="search_id" class="form-control input-sm flat" type="number" min="1001" max="<%= 1000 + Problem.count %>" placeholder="Enter Problem ID">
@@ -22,6 +22,18 @@
   </div>
   <button type="submit" id="quick_search" class="btn btn-inverse btn-xs">Search</button>
 </form>
+
+<script> <!-- remove empty fields -->
+$(function() {
+   $("form.search-form").submit(function() {
+      $(this).find(":input").filter(function(){ return !this.value; }).attr("disabled", "disabled");
+      return true; 
+    });
+});
+window.onpageshow = function(e){
+   $("form.search-form [disabled=\"disabled\"]").removeAttr("disabled");
+}
+</script>
 
 <%= paginate @problems %>
 <table class="table table-hover table-striped">
@@ -41,18 +53,20 @@
   </thead>
 
   <tbody>
-    <% @problems.each do |problem| %>
+    <% problem_a = @problems.to_a %>
+    <% topcoders = topcoders(problem_a) %>
+    <% problem_a.each do |problem| %>
       <% if (user_signed_in? and current_user.admin?) or (problem.visible_state == 0) %>
         <tr>
           <td><%= user_problem_status_with_infor(problem) if user_signed_in? %></td>
           <td><%= link_to problem.id, problem_path(problem.id) %></td>
           <td>
             <div style="float:left"><%= link_to problem.name, problem_path(problem.id) %></div>
-            <div style="float:right"><%= raw problem.tag_list.map{ |a| link_to a, problems_tag_path(a), :class => 'btn btn-xs btn-default' }.join(" ") %></div>
+            <div style="float:right"><%= raw problem.tags.map{ |a| link_to a, problems_tag_path(a.name), :class => 'btn btn-xs btn-default' }.join(" ") %></div>
           </td>
           <td class="text-center">
             <% begin %>
-              <% tcoder = topcoder(problem) %>
+              <% tcoder = topcoders[problem.id] %>
               <% if tcoder %>
                 <%= link_to image_tag(tcoder.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(tcoder) %>
               <% end %>

@@ -8,10 +8,12 @@
 #  test_output :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  position    :integer
 #
 
 class Testdatum < ActiveRecord::Base
   belongs_to :problem
+  acts_as_list scope: :problem
   has_one :limit, dependent: :destroy
   accepts_nested_attributes_for :limit, :allow_destroy => true
   

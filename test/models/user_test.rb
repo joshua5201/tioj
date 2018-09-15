@@ -20,6 +20,10 @@
 #  admin                  :boolean          default(FALSE)
 #  username               :string(255)
 #  motto                  :string(255)
+#  school                 :string(255)
+#  gradyear               :integer
+#  name                   :string(255)
+#  last_submit_time       :datetime
 #
 
 require 'test_helper'

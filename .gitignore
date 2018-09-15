@@ -18,7 +18,7 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
+/log/*
 /tmp
 
 # Ignore secret token file
@@ -32,6 +32,9 @@
 /public/pimgs
 /public/pcontest
 /public/STL
+/public/cppref
+/public/INFOR
+/public/test
 
 # Ignore binaries
 /bin

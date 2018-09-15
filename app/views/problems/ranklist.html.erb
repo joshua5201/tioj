@@ -6,21 +6,79 @@
   </div>
 </div>
 
-<table class="table table-hover">
+<style type="text/css">
+th span{
+  padding-left: 3px;
+}
+th span.icon-asc{
+  display: None;
+}
+th span.icon-dsc{
+  display: None;
+}
+th.headerSortDown span.icon-asc{
+  display: inline;
+}
+th.headerSortUp span.icon-dsc{
+  display: inline;
+}
+th.headerSortUp span.icon-non, th.headerSortDown span.icon-non {
+  display: None;
+}
+th span{
+  font-size: 12px;
+}
+th {
+  white-space: nowrap;
+}
+</style>
+
+<table class="table table-hover tablesorter">
   <thead>
     <tr>
-      <th>Rank</th>
+      <th>
+        Rank
+        <span class="glyphicon glyphicon-sort icon-non"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes icon-asc"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes-alt icon-dsc"></span>
+      </th>
       <th>#</th>
       <th></th>
       <th>Submitter</th>
-      <th>Time (ms)</th>
-      <th>Memory (KiB)</th>
-      <th>Compiler</th>
-      <th>Code Length</th>
-      <th>Achieved Time</th>
+      <th>
+        Time (ms)
+        <span class="glyphicon glyphicon-sort icon-non"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes icon-asc"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes-alt icon-dsc"></span>
+      </th>
+      <th>
+        Memory (KiB)
+        <span class="glyphicon glyphicon-sort icon-non"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes icon-asc"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes-alt icon-dsc"></span>
+      </th>
+      <th>
+        Compiler
+        <span class="glyphicon glyphicon-sort icon-non"></span>
+        <span class="glyphicon glyphicon-sort-by-alphabet icon-asc"></span>
+        <span class="glyphicon glyphicon-sort-by-alphabet-alt icon-dsc"></span>
+      </th>
+      <th>
+        Code Length
+        <span class="glyphicon glyphicon-sort icon-non"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes icon-asc"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes-alt icon-dsc"></span>
+      </th>
+      <th>
+        Achieved Time
+        <span class="glyphicon glyphicon-sort icon-non"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes icon-asc"></span>
+        <span class="glyphicon glyphicon-sort-by-attributes-alt icon-dsc"></span>
+      </th>
     </tr>
   </thead>
   <tbody>
+    <% user_mp = get_submissions_user(@submissions) %>
     <% @submissions.each_with_index do |submission, index| %>
       <% case index+1 %>
         <% when 1 %>
@@ -32,10 +90,11 @@
         <% else %>
           <tr>
       <% end %>
+      <% now_user = user_mp[submission.user_id] %>
         <td><%= link_to index+1, submission_path(submission) %></td>
         <td><%= link_to submission.id, submission_path(submission) %></td>
-        <td><%= link_to image_tag(submission.user.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(submission.user_id) %></td>
-        <td><%= link_to submission.user.nickname, user_path(submission.user_id) %></td>
+        <td><%= link_to image_tag(now_user.avatar.mini_thumb.to_s, :class => "img-rounded"), user_path(submission.user_id) %></td>
+        <td><%= link_to now_user.nickname, user_path(submission.user_id) %></td>
         <td><%= submission.total_time %></td>
         <td><%= submission.total_memory %></td>
         <td><%= submission.compiler %></td>
@@ -45,6 +104,50 @@
     <% end %>
   </tbody>
 </table>
+<script>
+$.tablesorter.addParser({
+    id: 'file-size',
+    is: function(s){
+        return false;
+    },
+    format: function(s){
+        var token = s.split(" ");
+        if(token.length != 2){
+            return -1;
+        }
+        var suffix = {Bytes: 1,KB: 1024,MB: 1048576};
+        var sz = parseFloat(token[0]);
+        if(!(token[1] in suffix)){
+            return -1;
+        }
+        return sz * suffix[token[1]];
+    },
+    type: 'numeric'
+})
+$(document).ready(function() 
+    { 
+        $(".tablesorter").tablesorter({
+            cancelSelection: true,
+            sortList: [[0,0]],
+            headers: {
+                1: { sorter: false},
+                2: { sorter: false},
+                3: { sorter: false},
+                7: { sorter: 'file-size'}
+            }
+        }); 
+    } 
+); 
+$("table").bind("sortEnd",function() {
+    $('tbody > tr').removeClass();
+    $('tbody > tr:nth-of-type(1)').addClass('warning');
+    $('tbody > tr:nth-of-type(2),tbody > tr:nth-of-type(3)').addClass('success');
+    $('tbody > tr:nth-of-type(4),tbody > tr:nth-of-type(5)').addClass('info');
+    $('tbody > tr:nth-of-type(6),tbody > tr:nth-of-type(7)').addClass('info');
+
+})
+</script>
+
 
 <div class="row">
   <div class="col-md-2">

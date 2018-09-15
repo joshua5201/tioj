@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  title      :string(255)
-#  content    :text
+#  content    :text(65535)
 #  user_id    :integer
 #  problem_id :integer
 #  created_at :datetime

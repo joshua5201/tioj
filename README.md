@@ -4,5 +4,5 @@
 ### Remember to change secret token in production!!!
 
 ## Current Development Environment 
-Ruby: 2.3.1
+Ruby: 2.4.3
 Rails: 4.2.10

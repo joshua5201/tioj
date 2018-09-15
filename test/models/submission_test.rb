@@ -12,9 +12,10 @@
 #  problem_id   :integer          default(0)
 #  user_id      :integer          default(0)
 #  contest_id   :integer
-#  _result      :string(255)
+#  _result      :text(65535)
 #  total_time   :integer
 #  total_memory :integer
+#  message      :text(65535)
 #
 
 require 'test_helper'

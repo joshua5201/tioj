@@ -1,4 +1,5 @@
 class FetchController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   before_filter :authenticate_key
   layout false
   
@@ -23,7 +24,7 @@ class FetchController < ApplicationController
   def testdata_meta
     @problem = Problem.find(params[:pid])
     @result = @problem.testdata.count.to_s + " "
-    @problem.testdata.order("id ASC").each do |t|
+    @problem.testdata.order(position: :asc).each do |t|
       @result += t.id.to_s + " "
       @result += t.updated_at.to_i.to_s + "\n"
     end
@@ -33,7 +34,7 @@ class FetchController < ApplicationController
   def testdata_limit
     @problem = Problem.find(params[:pid])
     @result = ""
-    @problem.testdata.order("id ASC").each do |t|
+    @problem.testdata.order(position: :asc).each do |t|
       @result += t.limit.time.to_s + " "
       @result += t.limit.memory.to_s + "\n"
     end
@@ -51,6 +52,14 @@ class FetchController < ApplicationController
     else
       update_verdict
     end
+    render :nothing => true
+  end
+
+  def write_message
+    @_message = params[:message]
+    @submission = Submission.find(params[:sid])
+    @submission.update(:message => @_message)
+    logger.info @_message
     render :nothing => true
   end
   

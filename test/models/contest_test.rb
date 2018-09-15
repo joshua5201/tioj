@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  title        :string(255)
-#  description  :text
+#  description  :text(65535)
 #  start_time   :datetime
 #  end_time     :datetime
 #  contest_type :integer

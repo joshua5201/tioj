@@ -1,7 +1,13 @@
 <%= f.label :compiler %>
 <%= f.select :compiler, [
-["c++11/gnu c++ compiler 4.8.4 | options: -O2 -std=c++11", "c++11"], 
-["c++/gnu c++ compiler 4.8.4 | options: -O2", "c++"], 
-["c/gnu c compiler 4.8.4 | options: -O2 -ansi -lm", "c"],
+["c++14/gnu c++ compiler 7.2.0 | options: -O2 -std=c++14", "c++14"], 
+["c++17/gnu c++ compiler 7.2.0 | options: -O2 -std=c++17", "c++17"], 
+["c++11/gnu c++ compiler 7.2.0 | options: -O2 -std=c++11", "c++11"], 
+["c++98/gnu c++ compiler 7.2.0 | options: -O2 -std=c++98", "c++98"], 
+["c11/gnu c compiler 7.2.0 | options: -O2 -std=c11 -lm", "c11"],
+["c99/gnu c compiler 7.2.0 | options: -O2 -std=c99 -lm", "c99"],
+["c90/gnu c compiler 7.2.0 | options: -O2 -ansi -lm", "c90"],
+["python2/CPython 2.7.6 | options: -m py_compile", "python2"],
+["python3/CPython 3.6.4 | options: -m py_compile", "python3"],
 ["haskell/glasgow haskell compiler 7.8.3 with haskell platform | options: -O", "haskell"]
 ] , {}, {:class => 'form-control flat'} %>

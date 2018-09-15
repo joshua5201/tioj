@@ -88,3 +88,6 @@ gem 'nokogiri' #getting old tioj probs
 
 # Timezone data
 gem 'tzinfo-data'
+
+# Ordered list management: https://github.com/swanandp/acts_as_list
+gem 'acts_as_list'
